@@ -92,7 +92,7 @@ const Menus = [
     {
         title: "Blog",
         src: "dashborad",
-        link: 'category',
+        link: 'blog',
         subMenus: [
             {
                 title: 'Categories',
@@ -155,7 +155,7 @@ const Menus = [
     {
         title: "Email Settings",
         src: "dashborad",
-        link: '',
+        link: 'email',
         subMenus: [
             {
                 title: 'Email Template',
@@ -179,7 +179,7 @@ const Menus = [
     {
         title: "Social Settings",
         src: "dashborad",
-        link: 'category',
+        link: 'social',
         subMenus: [
             {
                 title: 'Social Links',
@@ -203,7 +203,7 @@ const Menus = [
     {
         title: "Manage User",
         src: "dashborad",
-        link: '/category',
+        link: 'user',
         subMenus: [
             {
                 title: 'Manage Staff',
@@ -221,7 +221,7 @@ const Menus = [
     {
         title: "Homepage Settings",
         src: "dashborad",
-        link: 'category',
+        link: 'homepage',
         subMenus: [
             {
                 title: 'Templates',

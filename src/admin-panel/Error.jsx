@@ -4,10 +4,10 @@ const Error = () => {
   return (
     <div className="max-w-full mx-auto">
       <div className="flex justify-around items-center">
-        <div className="flex flex-col gap-4 justify-start items-start">
+        <div className="max-w-xs flex flex-col gap-4 justify-start items-start">
           <p className="text-5xl font-bold">Oops.... </p>
           <p className="text-xl font-normal">Page Not Found</p>
-          <p>This Page doesn`t exist or was removed! <br/> We suggest you back to home.</p>
+          <p className="text-start">This Page doesn`t exist or was removed! We suggest you back to home.</p>
           <button className="px-6 py-3 bg-blue-600 text-white rounded">Back To Home</button>
         </div>
         <div className="">
