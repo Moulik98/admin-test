@@ -49,7 +49,7 @@ const SideBar = () => {
                                     } `}
                             >
                                 <Link to={`/${Menu.link}`} className="flex gap-x-4">
-                                    <img src={`./assets/admin-panel/${Menu.src}.png`} />
+                                    <img className="w-5 h-5" src={Menu.src} alt={Menu.title} />
                                     <span className={`${!open && "hidden"} origin-left duration-200`}>
                                         {Menu.title}
                                     </span>
@@ -72,7 +72,7 @@ const SideBar = () => {
                                             className="flex  px-5 cursor-pointer text-center text-sm text-gray-200 py-1"
                                         >
                                             <Link to={`${subMenuItem.link}`} className={`flex gap-x-2 ${!open && "hidden"} origin-left duration-200`}>
-                                                <img src={`../assets/admin-panel/${subMenuItem.src}.png`} />
+                                                {/* <img src={`../assets/admin-panel/${subMenuItem.src}.png`} /> */}
                                                 <span>
                                                     {subMenuItem.title}
                                                 </span>
