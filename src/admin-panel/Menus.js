@@ -105,7 +105,7 @@ const Menus = [
     },
     {
         title: "Blog",
-        src: "dashborad",
+        src: blog,
         link: 'blog',
         subMenus: [
             {
@@ -130,7 +130,7 @@ const Menus = [
     {
         title: "General Settings",
         src: generalSetting,
-        link: 'dashboard',
+        link: 'general-setting',
         subMenus: [
             {
                 title: 'Logo',
@@ -168,8 +168,8 @@ const Menus = [
     },
     {
         title: "Email Settings",
-        src: "dashborad",
-        link: 'email',
+        src: emailSetting,
+        link: 'email-setting',
         subMenus: [
             {
                 title: 'Email Template',
@@ -192,8 +192,8 @@ const Menus = [
     },
     {
         title: "Social Settings",
-        src: "dashborad",
-        link: 'social',
+        src: socialSetting,
+        link: 'social-setting',
         subMenus: [
             {
                 title: 'Social Links',
@@ -216,8 +216,8 @@ const Menus = [
     },
     {
         title: "Manage User",
-        src: "dashborad",
-        link: 'user',
+        src: manageUser,
+        link: 'manage-user',
         subMenus: [
             {
                 title: 'Manage Staff',
@@ -234,8 +234,8 @@ const Menus = [
     },
     {
         title: "Homepage Settings",
-        src: "dashborad",
-        link: 'homepage',
+        src: homepageSetting,
+        link: 'homepage-setting',
         subMenus: [
             {
                 title: 'Templates',
@@ -253,12 +253,12 @@ const Menus = [
     {
         title: "Country List",
         src: countryList,
-        link: 'countrylist',
+        link: 'country-list',
     },
     {
         title: "Award List",
         src: awardList,
-        link: 'awardlist',
+        link: 'award-list',
     },
 
 
