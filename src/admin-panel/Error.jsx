@@ -8,7 +8,8 @@ const Error = () => {
           <p className="text-5xl font-bold">Oops.... </p>
           <p className="text-xl font-normal">Page Not Found</p>
           <p className="text-start">This Page doesn`t exist or was removed! We suggest you back to home.</p>
-          <button className="px-6 py-3 bg-blue-600 text-white rounded">Back To Home</button>
+          <button className="px-6 py-3 bg-blue-600 text-white rounded">
+            <a href="/category">Back To Home</a></button>
         </div>
         <div className="">
           <svg
