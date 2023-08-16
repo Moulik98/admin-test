@@ -1,18 +1,32 @@
+import dashboard from '../assets/dashboard.png'
+import orders from '../assets/orders.png'
+import product from '../assets/products.png'
+import categories from '../assets/categories.png'
+import seller from '../assets/seller.png'
+import coupons from '../assets/coupons.png'
+import blog from '../assets/blog.png'
+import generalSetting from '../assets/general-setting.png'
+import emailSetting from '../assets/email-settings.png'
+import socialSetting from '../assets/social-settings.png'
+import manageUser from '../assets/manage-user.png'
+import homepageSetting from '../assets/homepage-setting.png'
+import countryList from '../assets/country-list.png'
+import awardList from '../assets/award-list.png'
 const Menus = [
     {
         title: "Dashboard",
-        src: "dashborad",
+        src: dashboard,
         link: 'category',
     },
     {
         title: "Orders",
-        src: "dashborad",
+        src: orders,
         link: 'orders',
     },
     {
         title: "Products",
-        src: "dashborad",
-       link: 'allproduct',
+        src: product,
+        link: 'allproduct',
         subMenus: [
             {
                 title: 'All Product list',
@@ -39,7 +53,7 @@ const Menus = [
     },
     {
         title: "Categories",
-        src: "Categories",
+        src: categories,
         link: 'category',
         subMenus: [
             {
@@ -67,7 +81,7 @@ const Menus = [
     },
     {
         title: "Seller",
-        src: "Categories",
+        src: seller,
         link: 'seller/sellerlist',
         subMenus: [
             {
@@ -86,12 +100,12 @@ const Menus = [
     },
     {
         title: "Set Coupons",
-        src: "dashborad",
+        src: coupons,
         link: 'coupons',
     },
     {
         title: "Blog",
-        src: "dashborad",
+        src: blog,
         link: 'category',
         subMenus: [
             {
@@ -115,7 +129,7 @@ const Menus = [
     },
     {
         title: "General Settings",
-        src: "dashborad",
+        src: generalSetting,
         link: 'dashboard',
         subMenus: [
             {
@@ -154,7 +168,7 @@ const Menus = [
     },
     {
         title: "Email Settings",
-        src: "dashborad",
+        src: emailSetting,
         link: '',
         subMenus: [
             {
@@ -178,7 +192,7 @@ const Menus = [
     },
     {
         title: "Social Settings",
-        src: "dashborad",
+        src: socialSetting,
         link: 'category',
         subMenus: [
             {
@@ -202,7 +216,7 @@ const Menus = [
     },
     {
         title: "Manage User",
-        src: "dashborad",
+        src: manageUser,
         link: '/category',
         subMenus: [
             {
@@ -220,7 +234,7 @@ const Menus = [
     },
     {
         title: "Homepage Settings",
-        src: "dashborad",
+        src: homepageSetting,
         link: 'category',
         subMenus: [
             {
@@ -238,12 +252,12 @@ const Menus = [
     },
     {
         title: "Country List",
-        src: "parent",
+        src: countryList,
         link: 'countrylist',
     },
     {
         title: "Award List",
-        src: "parent",
+        src: awardList,
         link: 'awardlist',
     },
 
