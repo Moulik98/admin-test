@@ -253,12 +253,12 @@ const Menus = [
     {
         title: "Country List",
         src: countryList,
-        link: 'country-list',
+        link: 'countrylist',
     },
     {
         title: "Award List",
         src: awardList,
-        link: 'award-list',
+        link: 'awardlist',
     },
 
 
