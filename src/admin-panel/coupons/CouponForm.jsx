@@ -1,25 +1,43 @@
 import React, { useEffect, useState } from 'react'
 const CouponForm = (props) => {
     const { handleClose, id } = props
-    console.log(id);
+    const [message, setMessage] = useState('')
+    // Initialize state for form fields
+    const [formData, setFormData] = useState({
+        coupon_code: '',
+        category_type: '',
+        category: '',
+        discount_type: '',
+        discount: '',
+        quantity_type: '',
+        quantity: '',
+        start_date: '',
+        end_date: '',
+        description: '',
+        minPurchase: ''
+    });
+
+    // Handle form field changes
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        if (formData.quantity_type === "unlimited") {
+            setFormData((preValue) => ({
+                ...preValue, quantity: ''
+            }))
+        }
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            [name]: value,
+        }));
+    };
+
     useEffect(() => {
         if (id) {
             try {
                 fetch(`${process.env.REACT_APP_URL}/v1/coupon/get-coupon/${id}`)
                     .then(res => res.json())
                     .then(data => {
-                        setFormData({
-                            coupon_code: data?.data?.coupon_code,
-                           category_type: data?.data?.category_type,
-                            category: data?.data?.category,
-                            discount_type: data?.data?.discount_type,
-                            discount: data?.data?.discount,
-                            quantity_type: data?.data?.quantity_type,
-                            quantity: data?.data?.quantity,
-                            start_date: data?.data?.start_date,
-                            end_date: data?.data?.end_date,
-                            description: data?.data?.description
-                        });
+                        setFormData(data.data);
                         console.log(data);
                     })
                     .catch(err => {
@@ -31,8 +49,10 @@ const CouponForm = (props) => {
 
         }
     }, [id])
+
     async function AddCoupon(url) {
-        const access_token=localStorage.getItem('access_token')
+        console.log('url', url);
+        const access_token = localStorage.getItem('access_token')
         try {
             const requestBody = {
                 coupon_code: formData.coupon_code.toUpperCase(),
@@ -44,7 +64,8 @@ const CouponForm = (props) => {
                 quantity: formData.quantity,
                 start_date: formData.start_date,
                 end_date: formData.end_date,
-                description: formData.description
+                description: formData.description,
+                minPurchase: formData.minPurchase
             };
 
             const requestOptions = {
@@ -57,61 +78,37 @@ const CouponForm = (props) => {
             };
             console.log(JSON.stringify(requestBody))
             const response = await fetch(url, requestOptions);
-
-
             const data = await response.json();
-            console.log(data);
+            setMessage(data.message)
+            console.log('response data', data);
+            return response;
         } catch (error) {
             console.error(error);
         }
     }
 
-    // Initialize state for form fields
-    const [formData, setFormData] = useState({
-        coupon_code: '',
-       category_type: '',
-        category: '',
-        discount_type: '',
-        discount: '',
-        quantity_type: '',
-        quantity: '',
-        start_date: '',
-        end_date: '',
-        description: ''
-    });
-
-    // Handle form field changes
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            [name]: value,
-        }));
-    };
 
     // Handle form submission
     const handleSubmit = (e) => {
-       
         e.preventDefault();
-        
+
         if (id) {
-            AddCoupon(`${process.env.REACT_APP_URL}/v1/coupon/update-coupon/admin/${id}`);
+            AddCoupon(`${process.env.REACT_APP_URL}/v1/coupon/update-coupon/admin/${id}`).then(res => {
+                if (res.ok) {
+                    setMessage('')
+                    alert('Coupon Updated Successfully')
+                }
+            })
         } else {
-            AddCoupon(`${process.env.REACT_APP_URL}/v1/coupon/add-coupon/admin`);
+            AddCoupon(`${process.env.REACT_APP_URL}/v1/coupon/add-coupon/admin`).then(res => {
+                if (res.ok) {
+                    setMessage('')
+                    alert('Coupon Added Successfully')
+                }
+            })
         }
         console.log(formData);
-        setFormData({
-            coupon_code: '',
-           category_type: '',
-            category: '',
-            discount_type: '',
-            discount: '',
-            quantity_type: '',
-            quantity: '',
-            start_date: '',
-            end_date: '',
-            description: ''
-        })
+
     }
     // geting select category list
     const [categoryList, setCategoryList] = useState([])
@@ -211,8 +208,6 @@ const CouponForm = (props) => {
                         </select>
                     </div>
                     <div className=' w-5/6 flex items-center gap-4 my-2'>
-
-
                         <label className=' w-1/3 flex justify-end text-xs text-indigo-900 font-bold '>{`${formData.discount_type === 'percentage' ? 'Percentage *' : 'Amount *'}`} </label>
 
                         <input
@@ -226,6 +221,24 @@ const CouponForm = (props) => {
                         />
                         {`${formData.discount_type === 'percentage' ? '%' : ''}`}
                     </div>
+                    {/* // Minimum amount */}
+                    {
+                        formData.discount_type === 'amount' ?
+                            <div className=' w-5/6 flex items-center gap-4 my-2'>
+                                <label className=' w-1/3 flex justify-end text-xs text-indigo-900 font-bold '>Minimum Purchage Amount </label>
+
+                                <input
+                                    required
+                                    className='py-1 px-3 border border-solid border-gray-200 rounded-md'
+                                    type="text"
+                                    name='minPurchase'
+                                    value={formData.minPurchase}
+                                    onChange={handleChange}
+
+                                />
+                            </div>
+                            : null
+                    }
                     <div className=' w-5/6 flex items-center gap-4 my-2'>
                         <label className=' w-1/3 flex justify-end text-xs text-indigo-900 font-bold '>Quantity *</label>
                         <select
@@ -242,20 +255,21 @@ const CouponForm = (props) => {
                     </div>
                     {/* // dynamic field */}
                     {
-                        formData.quantity_type === 'limited' &&
-                        <div className=' w-5/6 flex items-center gap-4 my-2'>
-                            <label className=' w-1/3 flex justify-end text-xs text-indigo-900 font-bold '></label>
-                            <input
-                                required
-                                className='grow py-1 px-3 border border-solid border-gray-200 rounded-md'
-                                type="text"
-                                name='quantity'
-                                value={formData.quantity}
-                                onChange={handleChange}
+                        formData.quantity_type === 'limited' ?
+                            <div className=' w-5/6 flex items-center gap-4 my-2'>
+                                <label className=' w-1/3 flex justify-end text-xs text-indigo-900 font-bold '></label>
+                                <input
+                                    required
+                                    className='grow py-1 px-3 border border-solid border-gray-200 rounded-md'
+                                    type="text"
+                                    name='quantity'
+                                    value={formData.quantity}
+                                    onChange={handleChange}
 
-                            />
+                                />
 
-                        </div>
+                            </div>
+                            : null
                     }
                     <div className=' w-5/6 flex items-center gap-4 my-2'>
                         <label className=' w-1/3 flex justify-end text-xs text-indigo-900 font-bold '>Start Date *</label>
@@ -300,6 +314,9 @@ const CouponForm = (props) => {
                         type='button' className='py-1 px-6 text-red-600 '>Cancel</button>
                     <button type='Submit' className='py-1 px-14 bg-blue-900 text-white' >Save</button>
                 </div>
+                {
+                    message ? <p className='text-red-500'>{message}</p> : null
+                }
             </form>
         </div>
     )
