@@ -43,7 +43,7 @@ const SideBar = () => {
                     {Menu.map((Menu, index) => (
                         <>
                             <li
-                                key={index}
+                                key={index + index + index * 3}
                                 className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center justify-between mt-2
                                  ${index === 0 && "bg-light-white"
                                     } `}
@@ -66,9 +66,9 @@ const SideBar = () => {
                             </li>
                             {Menu.subMenus && Menu.isOpen && open && (
                                 <ul>
-                                    {Menu.subMenus.map((subMenuItem, idx) => (
+                                    {Menu.subMenus.map((subMenuItem, index) => (
                                         <li
-                                            key={idx}
+                                            key={index + index + index * 5}
                                             className="flex  px-5 cursor-pointer text-center text-sm text-gray-200 py-1"
                                         >
                                             <Link to={`${subMenuItem.link}`} className={`flex gap-x-2 ${!open && "hidden"} origin-left duration-200`}>

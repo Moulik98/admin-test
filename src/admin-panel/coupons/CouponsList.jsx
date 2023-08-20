@@ -61,7 +61,7 @@ const CouponsList = (props) => {
         return (
             <div className='flex justify-end'>
                 <div className='flex items-center border border-solid border-[#EEEEEE] rounded-md '>
-                    <button
+                    {pageNumbers.length ? <button
                         className='flex justify-center items-center w-9 h-9 border-r border-solid border-[#EEEEEE]'
                         onClick={handlePreviousPage}
                         disabled={currentPage === 1}
@@ -70,7 +70,7 @@ const CouponsList = (props) => {
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                         </svg>
 
-                    </button>
+                    </button> : null}
 
                     {pageNumbers.map((page) => (
                         <button
@@ -83,7 +83,7 @@ const CouponsList = (props) => {
                         </button>
                     ))}
 
-                    <button
+                    {pageNumbers.length ? <button
                         className='flex justify-center items-center w-9 h-9 border-r border-solid border-[#EEEEEE]'
                         onClick={handleNextPage}
                         disabled={currentPage === totalPages}
@@ -92,7 +92,7 @@ const CouponsList = (props) => {
                             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                         </svg>
 
-                    </button>
+                    </button> : null}
                 </div>
             </div>
         );
@@ -149,7 +149,6 @@ const CouponsList = (props) => {
                 </table>
             </div>
             <div className='py-5'>
-
                 {renderPagination()}
             </div>
         </section>
