@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, useSearchParams, useNavigate } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import AdminCategories from '../admin-panel/categories/AdminCategories';
 import { Login } from '../admin-panel/login/AdminLogin';
 import ParentCategories from '../admin-panel/categories/ParentCategories';
@@ -21,6 +20,7 @@ import Orders from '../admin-panel/orders/Orders';
 import Coupons from '../admin-panel/coupons/Coupons';
 import Sellerdetails from '../admin-panel/approve-sellerlist/Sellerdetails';
 import Error from '../admin-panel/Error';
+import { Dashboard } from '../admin-panel/dashboard/Dashboard';
 
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
@@ -28,14 +28,6 @@ const PreserveLocation = ({ children }) => {
 };
 
 const MainRoutes = () => {
-  // const [isLogin, setIsLogin] = useState(false);
-  
-  // useEffect(() => {
-  //   let storedIsLogin = localStorage.getItem('isLogin');
-  //   setIsLogin(storedIsLogin);
-  // }, []);
-
-  // Clear authentication status from local storage on logout
   const handleLogout = () => {
     localStorage.setItem('isLogin', false);
     window.location.href = '/';
@@ -49,7 +41,7 @@ const MainRoutes = () => {
         navigate("/")
       }
       setIsLogin(storedIsLogin);
-    }, []);
+    }, [navigate]);
     return isLogin && (
       <Layout sidebar={<SideBar />} content={<Element />} handleLogout={handleLogout} />
     ) 
@@ -61,6 +53,7 @@ const MainRoutes = () => {
         {(location) => (
           <Routes location={location}>
             <Route path="/" element={<Login />} />
+            <Route path="/dashboard" element={<ProtectedRoute element={Dashboard} />} />
             <Route path="/category" element={<ProtectedRoute element={AdminCategories} />} />
             <Route path="/category/parentcategory" element={<ProtectedRoute element={ParentCategories} />} />
             <Route path="/category/subcategory" element={<ProtectedRoute element={SubCategories} />} />
