@@ -13,7 +13,7 @@ export const Dashboard = () => {
   return (
     <div>
       <div className='flex justify-between px-16 pt-8'>
-        <p className=' text-2xl'>Dashboard</p>
+        <p className=' text-2xl font-semibold'>Dashboard</p>
         <div><User/></div>
       </div>
         <div className='pt-8 px-16'>
