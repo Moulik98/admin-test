@@ -7,10 +7,15 @@ import { OrderBlock} from './OrdersBlock'
 import { UserBlock } from './UserBlock'
 import { SalesBlock } from './SalesBlock'
 import { Blocks } from './Blocks'
+import { User } from '../user/User'
 
 export const Dashboard = () => {
   return (
     <div>
+      <div className='flex justify-between px-16 pt-8'>
+        <p className=' text-2xl'>Dashboard</p>
+        <div><User/></div>
+      </div>
         <div className='pt-8 px-16'>
           <div className='pb-4'>
           <ProductBlock/>
