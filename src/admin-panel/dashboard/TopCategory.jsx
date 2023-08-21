@@ -9,7 +9,7 @@ const TopCategoriesTable = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('https://two1genx.onrender.com/v1/admin/top-categories?page=1&limit=5');
+      const response = await fetch(`${process.env.REACT_APP_URL}/v1/admin/top-categories?page=1&limit=5`);
       const responseData = await response.json();
       const apiData = responseData.topCategories.slice(0,5);
       setData(apiData);
