@@ -9,7 +9,7 @@ export const UserBlock = () => {
       .then(response => response.json())
       .then(data => {
         // Set the user count from the API response
-        setUserCount(data.b2c_active_count);
+        setUserCount(data?.total_active_count);
       })
       .catch(error => {
         console.error('Error fetching user count:', error);
@@ -17,7 +17,7 @@ export const UserBlock = () => {
   }, []); // Empty dependency array means this effect runs once after the initial render
 
   return (
-    <div className='w-1/5 bg-[#feedec] p-6 rounded-lg'>
+    <div className='w-1/2 bg-[#feedec] p-6 rounded-lg'>
       
       <div>
         <p className='text-xl text-left pb-2'>Total Users</p>

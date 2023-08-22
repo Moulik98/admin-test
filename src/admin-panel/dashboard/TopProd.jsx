@@ -19,14 +19,14 @@ const TopProdTable = () => {
   };
 
   return (
-    <div className=''> 
-      <h1 className='text-left py-2'>Top Products</h1>
+    <div className=' pb-8'> 
+      <h1 className='text-left p-2 bg-slate-200'>Top Products</h1>
       <table className='border'>
         <thead className='border'>
           <tr>
-            <th className='border py-2' >Title</th>
-            <th className='px-2 border py-2'>Quantity Sold</th>
-            <th className='px-2 border py-2'>Amount</th>
+            <th className='border px-20 py-2' >Title</th>
+            <th className='border px-8 py-2'>Quantity Sold</th>
+            <th className='border px-8 py-2'>Amount</th>
           </tr>
         </thead>
         <tbody>
