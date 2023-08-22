@@ -26,6 +26,7 @@ const ReviewProduct = () => {
         }
     }
     useEffect(() => {
+        console.log(`${process.env.REACT_APP_URL}/v1/products/get-products-list/id?page=${currentPage}&limit=${pageSize}`);
         fetchProductList(`${process.env.REACT_APP_URL}/v1/products/get-products-list/id?page=${currentPage}&limit=${pageSize}`)
             .then(data => {
                 setProductList(data.productList)

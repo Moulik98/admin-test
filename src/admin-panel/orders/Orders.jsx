@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import OrdersTableRow from './OrdersTableRow';
 import { User } from '../user/User';
-
+import Pagination from '../../Pagination';
 const status = [
     {
         fieldName: 'order_status',
@@ -26,7 +26,10 @@ const status = [
 
 ];
 const Orders = () => {
-    // when delete updata data 
+    // when delete updata data
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
+    const [totalItems, setTotalItems] = useState(0);
     const [isClicked, setIsClicked] = useState(false)
     const handleDelete = () => {
         setIsClicked((preValue) => !preValue)
@@ -34,10 +37,10 @@ const Orders = () => {
     async function fetchOrderData(data) {
         // const access_token = localStorage.getItem('access_')
         let filterValues = data;
-        console.log('filter-data',filterValues)
+        console.log('filter-data', filterValues)
         const token = localStorage.getItem('access_token')
         try {
-            const response = await fetch(`${process.env.REACT_APP_URL}/v1/order/getAllOrders/admin`, {
+            const response = await fetch(`${process.env.REACT_APP_URL}/v1/order/getAllOrders/admin?page=${currentPage}&limit=${pageSize}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -45,16 +48,17 @@ const Orders = () => {
                 },
                 body: JSON.stringify(filterValues)
             });
-            
+
             const data = await response.json();
-            console.log('response',data)
+            console.log('response', data)
             setOrderList(data.data);
-            console.log(data.data);
+            setTotalItems(data.totalOrder)
+            console.log('order-list-data', data);
         } catch (error) {
             console.log(error);
         }
     }
-    
+
 
 
     // state for sorting 
@@ -97,12 +101,9 @@ const Orders = () => {
     const [orderList, setOrderList] = useState([])
     useEffect(() => {
         // Call the function to make the POST request
-
         fetchOrderData(filterValues);
 
-    }, [isClicked, filterValues])
-
-
+    }, [isClicked, filterValues, currentPage, pageSize])
 
     console.log(filterValues);
     return (
@@ -139,7 +140,7 @@ const Orders = () => {
 
                                 </div>
                             </form>
-                            <User/>
+                            <User />
                         </div>
                     </div>
                 </section>
@@ -226,7 +227,14 @@ const Orders = () => {
                             </tbody>
                         </table>
                     </div>
-
+                    <div className='flex justify-end items-center py-5'>
+                        <Pagination
+                            currentPage={currentPage}
+                            totalItems={totalItems}
+                            pageSize={pageSize}
+                            setCurrentPage={setCurrentPage}
+                        />
+                    </div>
                 </section>
 
             </div>
