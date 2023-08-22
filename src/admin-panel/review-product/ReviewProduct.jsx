@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import TableRow from './TableRow';
-import {User} from '../user/User'
+import { User } from '../user/User'
+import Pagination from '../../Pagination';
 const ReviewProduct = () => {
-
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
+    const [totalItems, setTotalItems] = useState(0);
     const [isReviewed, setIReviewed] = useState(false)
     const handleRefresh = () => {
         setIReviewed((preValue) => !preValue)
@@ -14,7 +17,7 @@ const ReviewProduct = () => {
             if (response.ok) {
                 const data = await response.json()
                 console.log(data);
-                return data.productList;
+                return data;
             } else {
                 throw new Error('Failed to fetch data');
             }
@@ -23,16 +26,20 @@ const ReviewProduct = () => {
         }
     }
     useEffect(() => {
-        fetchProductList(`${process.env.REACT_APP_URL}/v1/products/get-products-list/id?page=1&limit=500`)
-            .then(data => setProductList(data))
+        console.log(`${process.env.REACT_APP_URL}/v1/products/get-products-list/id?page=${currentPage}&limit=${pageSize}`);
+        fetchProductList(`${process.env.REACT_APP_URL}/v1/products/get-products-list/id?page=${currentPage}&limit=${pageSize}`)
+            .then(data => {
+                setProductList(data.productList)
+                setTotalItems(data.totalCount)
+            })
             .catch(error => console.log(error))
-    }, [isReviewed])
+    }, [isReviewed, currentPage, pageSize])
     return (
         <main>
             <div className='pr-7'>
                 <section>
                     <div className='max-w-5xl mx-auto flex justify-between py-5'>
-                        <a href='/' className='text-2xl text-gray-900 font-semibold'>Review Product List</a>
+                        <a href='/reviewproduct' className='text-2xl text-gray-900 font-semibold'>Review Product List</a>
                         <div className='flex gap-x-10'>
                             <form className="flex items-center">
                                 <div className="flex items-center px-2 py-1 gap-x-1 bg-gray-100 rounded-2xl ">
@@ -61,7 +68,7 @@ const ReviewProduct = () => {
 
                                 </div>
                             </form>
-                            <User/>
+                            <User />
                         </div>
                     </div>
                 </section>
@@ -96,6 +103,14 @@ const ReviewProduct = () => {
                                 }
                             </tbody>
                         </table>
+                        <div className='flex justify-end items-center py-5'>
+                            <Pagination
+                                currentPage={currentPage}
+                                totalItems={totalItems}
+                                pageSize={pageSize}
+                                setCurrentPage={setCurrentPage}
+                            />
+                        </div>
                     </div>
                 </section>
             </div>
