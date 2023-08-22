@@ -16,8 +16,8 @@ export const Dashboard = () => {
         <p className=' text-2xl font-semibold'>Dashboard</p>
         <div><User/></div>
       </div>
-        <div className='pt-8 px-16'>
-          <div className='pb-4'>
+        <div className='pt-8 flex px-16'>
+          <div className='w-1/3'><div className='pb-4'>
           <ProductBlock/>
           </div>
           
@@ -25,7 +25,10 @@ export const Dashboard = () => {
           <OrderBlock/>
           </div>
           <div className='pb-4'><UserBlock/></div>
-          <div className='pb-4'><SalesBlock/></div>
+          <div className='pb-4'><SalesBlock/></div></div>
+          <div className='w-2/3'>
+            <img src="https://matheusfacure.github.io/python-causality-handbook/_images/06-Grouped-and-Dummy-Regression_2_0.png" alt=''/>
+          </div>
         </div>
         <div className='px-16 pt-8'>
           <Blocks/>

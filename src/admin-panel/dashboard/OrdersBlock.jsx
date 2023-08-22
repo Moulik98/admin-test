@@ -18,7 +18,7 @@ export const OrderBlock = () => {
   }, []); // Empty dependency array means this effect runs once after the initial render
 
   return (
-    <div className='w-1/5 bg-[#e8fcfb] p-6 rounded-lg'>
+    <div className='w-1/2 bg-[#e8fcfb] p-6 rounded-lg'>
       <div>
         <p className='text-xl text-left pb-2'>Total Orders</p>
         <p className='text-2xl text-left font-bold'>{OrderCount}</p>
