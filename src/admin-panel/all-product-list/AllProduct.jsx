@@ -2,9 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import AllProductRow from "./AllProductRow";
 import "./products.css";
 import { User } from "../user/User";
-
+import Pagination from "../../Pagination";
 const AllProduct = () => {
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const [totalItems, setTotalItems] = useState(0);
+
   const [products, setProducts] = useState([]);
   const parentListRef = useRef(null);
   const subCategoryListRef = useRef(null);
@@ -151,8 +155,8 @@ const AllProduct = () => {
 
 
   useEffect(() => {
-    const baseUrl = `${process.env.REACT_APP_URL}/v1/products/get-products-list/name?page=1&limit=500`;
-
+    const baseUrl = `${process.env.REACT_APP_URL}/v1/products/get-products-list/name?page=${currentPage}&limit=${pageSize}`;
+    // console.log(baseUrl);
     const handleApiError = (error) => {
       console.error('API Error:', error);
       // Perform any necessary error handling, such as showing an error message to the user
@@ -168,6 +172,7 @@ const AllProduct = () => {
         return res.json();
       })
       .then((data) => {
+        setTotalItems(data.totalCount)
         setProducts(data?.productList);
       })
       .catch((error) => {
@@ -176,7 +181,7 @@ const AllProduct = () => {
       .finally(() => {
         setIsLoading(false); // Set loading state to false
       });
-  }, []); // Empty dependency array to fetch the initial product list only once
+  }, [currentPage, pageSize]); // Empty dependency array to fetch the initial product list only once
 
   useEffect(() => {
     const filterParams = {
@@ -236,7 +241,7 @@ const AllProduct = () => {
 
       <div className="flex items-center justify-between py-3">
         <p className="text-2xl">All Products List</p>
-        <User/>
+        <User />
       </div>
       <div className="py-3 flex items-center">
         <div className="mr-3 text-sm">Filter By:</div>
@@ -662,6 +667,14 @@ const AllProduct = () => {
               ))}
             </tbody>
           </table>
+        </div>
+        <div className='flex justify-end items-center py-5'>
+          <Pagination
+            currentPage={currentPage}
+            totalItems={totalItems}
+            pageSize={pageSize}
+            setCurrentPage={setCurrentPage}
+          />
         </div>
       </section>
     </div>
