@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react'
 import TableRow from './TableRow';
 import { Link } from 'react-router-dom';
 import { User } from '../user/User';
-
+import Pagination from '../../Pagination';
 const ApproveProduct = () => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
+    const [totalItems, setTotalItems] = useState(0);
     const [isApproved, setIsApproved] = useState(false)
     const handleRefresh = () => {
         setIsApproved((preValue) => !preValue)
@@ -17,7 +20,7 @@ const ApproveProduct = () => {
             if (response.ok) {
                 const data = await response.json()
                 console.log(data);
-                return data.productList;
+                return data;
             } else {
                 throw new Error('Failed to fetch data');
             }
@@ -26,10 +29,13 @@ const ApproveProduct = () => {
         }
     }
     useEffect(() => {
-        fetchProductList(`${process.env.REACT_APP_URL}/v1/products/get-products-list/id?filter[review_status][$eq]=reviewed&page=1&limit=500`)
-            .then(data => setProductList(data))
+        fetchProductList(`${process.env.REACT_APP_URL}/v1/products/get-products-list/id?filter[review_status][$eq]=reviewed&page=${currentPage}&limit=${pageSize}`)
+            .then(data => {
+                setTotalItems(data.totalCount)
+                setProductList(data.productList)
+            })
             .catch(error => console.log(error))
-    }, [isApproved])
+    }, [isApproved, currentPage, pageSize])
     return (
         <main>
             <div className='pr-7'>
@@ -64,7 +70,7 @@ const ApproveProduct = () => {
 
                                 </div>
                             </form>
-                            <User/>
+                            <User />
                         </div>
                     </div>
                 </section>
@@ -99,6 +105,14 @@ const ApproveProduct = () => {
                                 }
                             </tbody>
                         </table>
+                    </div>
+                    <div className='flex justify-end items-center py-5'>
+                        <Pagination
+                            currentPage={currentPage}
+                            totalItems={totalItems}
+                            pageSize={pageSize}
+                            setCurrentPage={setCurrentPage}
+                        />
                     </div>
                 </section>
             </div>

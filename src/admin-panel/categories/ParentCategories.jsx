@@ -3,22 +3,26 @@ import CategoriesRow from "./ParentCategoriesRow";
 import { ParentModal } from "./ParentModal";
 import getParentList from "./FetchApi";
 import { Link } from "react-router-dom";
-
+import Pagination from "../../Pagination";
 
 const ParentCategories = () => {
   // State for parent categories list
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const [totalItems, setTotalItems] = useState(0);
   const [parentCategories, setParentCategories] = useState([])
   const [parentModal, setParentModal] = useState(false)
   // getting parent list data 
   async function fetchData() {
-    const url = `${process.env.REACT_APP_URL}/v1/categories/get?filter[category_type][$eq]=parent&limit=500`;
+    const url = `${process.env.REACT_APP_URL}/v1/categories/get?filter[category_type][$eq]=parent&page=${currentPage}&limit=${pageSize}`;
     const parentCategories = await getParentList(url);
-    setParentCategories(parentCategories);
+    setParentCategories(parentCategories.categoryList);
+    setTotalItems(parentCategories.totalCount)
     console.log(parentCategories);
   }
   useEffect(() => {
     fetchData()
-  }, [parentModal])
+  }, [parentModal, currentPage, pageSize])
   // For Closing Modal
   const handleClose = () => {
     setParentModal(false)
@@ -127,6 +131,14 @@ const ParentCategories = () => {
                 ))}
             </tbody>
           </table>
+        </div>
+        <div className='flex justify-end items-center py-5'>
+          <Pagination
+            currentPage={currentPage}
+            totalItems={totalItems}
+            pageSize={pageSize}
+            setCurrentPage={setCurrentPage}
+          />
         </div>
       </section>
       {parentModal && <ParentModal
