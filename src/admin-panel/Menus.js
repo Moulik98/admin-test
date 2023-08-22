@@ -16,7 +16,7 @@ const Menus = [
     {
         title: "Dashboard",
         src: dashboard,
-        link: 'category',
+        link: 'dashboard',
     },
     {
         title: "Orders",
