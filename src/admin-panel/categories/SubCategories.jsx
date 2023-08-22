@@ -2,9 +2,13 @@ import React, { useState, useEffect } from "react";
 import SubCategoriesRow from "./SubCategoriesRow";
 import SubCategoriesModal from "./SubModal";
 import { Link } from "react-router-dom";
-const BASE_URL = "https://two1genx.onrender.com";
+import Pagination from "../../Pagination";
 const SubCategories = () => {
   // state for modal
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const [totalItems, setTotalItems] = useState(0);
+
   const [childModal, setChildModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState([]);
@@ -15,15 +19,16 @@ const SubCategories = () => {
   let [childCategories, setChildCategories] = useState([]);
   useEffect(() => {
     fetch(
-      `${process.env.REACT_APP_URL}/v1/categories/get-populated?filter[category_type][$eq]=sub&limit=100&sort=-createdAt`
+      `${process.env.REACT_APP_URL}/v1/categories/get-populated?filter[category_type][$eq]=sub&page=${currentPage}&limit=${pageSize}&sort=-createdAt`
     )
       .then((res) => res.json())
       .then((data) => {
         setChildCategories(data.categoryList);
         setData(data.categoryList);
+        setTotalItems(data.totalCount)
         console.log(data.categoryList);
       });
-  }, [SubCategoriesModal]);
+  }, [SubCategoriesModal, currentPage, pageSize]);
 
 
 
@@ -124,7 +129,7 @@ const SubCategories = () => {
               <p className="text-xs">Add New Sub Category</p>
             </div>
             <div className="flex gap-x-1">
-              <Link   to="/category/parentcategory" className="text-left text-xs text-teal-500 py-1 ">Parent-Category</Link>
+              <Link to="/category/parentcategory" className="text-left text-xs text-teal-500 py-1 ">Parent-Category</Link>
               <Link to="/category/childcategory" className="text-left text-xs text-teal-500 py-1 ">Child-Category</Link>
             </div>
           </div>
@@ -191,6 +196,14 @@ const SubCategories = () => {
                 ))}
             </tbody>
           </table>
+        </div>
+        <div className='flex justify-end items-center py-5'>
+          <Pagination
+            currentPage={currentPage}
+            totalItems={totalItems}
+            pageSize={pageSize}
+            setCurrentPage={setCurrentPage}
+          />
         </div>
       </section>
       {childModal && (
