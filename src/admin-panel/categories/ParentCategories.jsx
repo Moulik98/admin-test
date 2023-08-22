@@ -3,7 +3,7 @@ import CategoriesRow from "./ParentCategoriesRow";
 import { ParentModal } from "./ParentModal";
 import getParentList from "./FetchApi";
 import { Link } from "react-router-dom";
-
+import Pagination from "../../Pagination";
 
 const ParentCategories = () => {
   // State for parent categories list
@@ -131,6 +131,14 @@ const ParentCategories = () => {
                 ))}
             </tbody>
           </table>
+        </div>
+        <div className='flex justify-end items-center py-5'>
+          <Pagination
+            currentPage={currentPage}
+            totalItems={totalItems}
+            pageSize={pageSize}
+            setCurrentPage={setCurrentPage}
+          />
         </div>
       </section>
       {parentModal && <ParentModal
