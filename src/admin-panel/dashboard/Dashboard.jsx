@@ -37,7 +37,7 @@ export const Dashboard = () => {
         <TopBrandsTable/>
         <TopCategoriesTable/>
         </div>
-        <div className='px-16 pt-8'>
+        <div className='px-16 pt-8 w-2/3'>
         <TopProdTable/>
         </div>
     </div>

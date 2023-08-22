@@ -20,7 +20,7 @@ const TopCategoriesTable = () => {
 
   return (
     <div>
-      <h1 className="text-left py-2">Top Categories</h1>
+      <h1 className="text-left p-2 bg-slate-200">Top Categories</h1>
       <table className="w-full border-collapse border ">
         <thead>
           <tr>

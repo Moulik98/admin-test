@@ -9,7 +9,7 @@ export const UserBlock = () => {
       .then(response => response.json())
       .then(data => {
         // Set the user count from the API response
-        setUserCount(data.b2c_active_count);
+        setUserCount(data?.total_active_count);
       })
       .catch(error => {
         console.error('Error fetching user count:', error);

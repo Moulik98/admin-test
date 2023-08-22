@@ -26,8 +26,8 @@ export const Blocks = () => {
       {orderData && (
         <div className="flex justify-between">
           <div className="pl-8 pr-14 py-4 text-left bg-slate-100 shadow-lg">
-            <p className="text-lg">Total Orders</p>
-            <p className="text-xl font-bold">{orderData.total_orders}</p>
+            <p className="text-lg">B2C user</p>
+            <p className="text-xl font-bold">{orderData.b2c_active_count}</p>
           </div>
           <div className="pl-8 pr-14 py-4 text-left bg-slate-100 shadow-lg">
             <p className="text-lg">Pending Orders</p> <p className="text-xl font-bold">{orderData.total_pending_order}</p>
