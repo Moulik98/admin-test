@@ -165,10 +165,7 @@ const ViewModal = (props) => {
                             <h3 className='py-2 px-4  text-[#143250] '>Products Ordered</h3>
                         </div>
 
-                        <div className=' flex text-xs  text-gray-900'>
-                            <div className='w-1/2 flex justify-between font-bold'><p className='text-xs'>Producr Id#</p>:</div>
-                            <div className='w-1/2 font-normal pl-5 text-xs'>{productDetails?._id}</div>
-                        </div>
+                    
                         <div className=' flex text-xs  text-gray-900'>
                             <div className='w-1/2 flex justify-between font-bold'><p className='text-xs'>Seller Name</p>:</div>
                             <div className='w-1/2 font-normal pl-5 text-xs'>{sellerDetails?.fullname}</div>
@@ -183,7 +180,7 @@ const ViewModal = (props) => {
                         </div>
                         <div className=' flex text-xs  text-gray-900'>
                             <div className='w-1/2 flex justify-between font-bold'><p className='text-xs'>Quantity</p>:</div>
-                            <div className='w-1/2 font-normal pl-5 text-xs'>{orderDetails?.total_product}</div>
+                            <div className='w-1/2 font-normal pl-5 text-xs'>{orderDetails?.order_qty}</div>
                         </div>
                         <div className=' flex text-xs  text-gray-900'>
                             <div className='w-1/2 flex justify-between font-bold'><p className='text-xs'>Warranty Type</p>:</div>
