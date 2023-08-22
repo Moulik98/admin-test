@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import ChildCategoriesModal from './ChildCategoriesModal'
+import Description from '../../Description'
 const ChildCategoriesRow = (props) => {
     const { srNo, child, parent, sub, categoriesId, desc, id } = props
     const [showEdit, SetShowEdit] = useState(false)
@@ -15,7 +16,7 @@ const ChildCategoriesRow = (props) => {
             <td className="whitespace-nowrap px-4 py-2 text-xs font-light text-gray-900">{parent === undefined ? 'Null' : parent}</td>
             <td className="whitespace-nowrap px-4 py-2 text-xs font-light text-gray-900">{sub}</td>
             <td className="whitespace-nowrap px-4 py-2 text-xs font-light text-gray-900">{categoriesId}</td>
-            <td className=" px-4 py-2 text-xs font-light text-gray-900">{desc}</td>
+            <td className=" px-4 py-2 text-xs font-light text-gray-900"><Description description={desc} /></td>
             <td className="whitespace-nowrap px-4 py-2 text-xs font-light text-gray-900">
                 <div className="flex gap-2">
                     <div

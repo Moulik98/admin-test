@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SubCategoriesModal from "./SubModal";
-
+import Description from "../../Description";
 const SubCategoriesRow = ({ srNo, parent, sub, categoriesId, desc, id }) => {
   // State for view modal
   const [viewModal, setViewModal] = useState(false);
@@ -26,7 +26,7 @@ const SubCategoriesRow = ({ srNo, parent, sub, categoriesId, desc, id }) => {
         {categoriesId}
       </td>
       <td className="text-wrap px-4 py-2 text-xs font-light text-gray-900">
-        {desc}
+        <Description description={desc} />
       </td>
       <td className="whitespace-nowrap px-4 py-2 text-xs font-light text-gray-900">
         <div className="flex gap-2">

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AwardListModal from "./AwardListModal";
-
+import Description from "../../Description";
 const AwardListRow = ({ srNo, parent, sub, categoriesId, desc, id }) => {
   // State for view modal
   const [viewModal, setViewModal] = useState(false);
@@ -23,7 +23,7 @@ const AwardListRow = ({ srNo, parent, sub, categoriesId, desc, id }) => {
         {categoriesId}
       </td>
       <td className="whitespace-nowrap px-auto py-2  text-xs font-light text-gray-900">
-        {desc}
+        <Description description={desc} />
       </td>
       <td className="whitespace-nowrap px-6 py-2 text-xs font-light text-gray-900">
         <div className="flex gap-2">
