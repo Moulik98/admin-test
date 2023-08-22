@@ -48,7 +48,7 @@ export const Login = () => {
         localStorage.setItem("userId", data.userId);
         localStorage.setItem('isLogin', true);
   
-        navigate("/category");
+        navigate("/dashboard");
         console.log(data);
       } else {
         const errorData = await response.json(); // Assuming the error response has JSON format
