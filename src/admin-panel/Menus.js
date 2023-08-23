@@ -260,7 +260,11 @@ const Menus = [
         src: awardList,
         link: 'awardlist',
     },
-
+    {
+        title: "Customers",
+        src: seller,
+        link: 'customers',
+    }
 
 
 ];

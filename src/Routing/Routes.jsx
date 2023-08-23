@@ -21,7 +21,7 @@ import Coupons from '../admin-panel/coupons/Coupons';
 import Sellerdetails from '../admin-panel/approve-sellerlist/Sellerdetails';
 import Error from '../admin-panel/Error';
 import { Dashboard } from '../admin-panel/dashboard/Dashboard';
-
+import Customers from '../admin-panel/customers/Customers';
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
   return children(location);
@@ -33,18 +33,19 @@ const MainRoutes = () => {
     window.location.href = '/';
   };
 
-  const ProtectedRoute = ({ element: Element, ...rest }) => {const [isLogin, setIsLogin] = useState(false);
+  const ProtectedRoute = ({ element: Element, ...rest }) => {
+    const [isLogin, setIsLogin] = useState(false);
     const navigate = useNavigate()
     useEffect(() => {
       let storedIsLogin = localStorage.getItem('isLogin');
-      if(!storedIsLogin){
+      if (!storedIsLogin) {
         navigate("/")
       }
       setIsLogin(storedIsLogin);
     }, [navigate]);
     return isLogin && (
       <Layout sidebar={<SideBar />} content={<Element />} handleLogout={handleLogout} />
-    ) 
+    )
   };
 
   return (
@@ -69,6 +70,7 @@ const MainRoutes = () => {
             <Route path="/awardlist" element={<ProtectedRoute element={AwardList} />} />
             <Route path="/countrylist" element={<ProtectedRoute element={CountryList} />} />
             <Route path="/coupons" element={<ProtectedRoute element={Coupons} />} />
+            <Route path="/customers" element={<ProtectedRoute element={Customers} />} />
             <Route path="/sellerdetails/:id" element={<ProtectedRoute element={Sellerdetails} />} />
             <Route path="*" element={<Error />} />
 
