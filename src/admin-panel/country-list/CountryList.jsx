@@ -52,7 +52,7 @@ const CountryList = () => {
       )}
       <div>
         <div className="flex items-center py-3">
-          <Link to="/category">
+          <Link to="/dashboard">
             {" "}
             <svg
               xmlns="http://www.w3.org/2000/svg"

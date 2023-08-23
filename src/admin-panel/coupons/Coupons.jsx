@@ -20,7 +20,7 @@ const Coupons = () => {
             <div className='pr-6'>
                 <section>
                     <div className='max-w-6xl mx-auto flex justify-between py-5'>
-                        <Link to='/category' className='text-3xl text-gray-900 font-semibold'>{`${isClicked ? 'Coupons' : 'Coupons List'}`}</Link>
+                        <Link to='/dashboard' className='text-3xl text-gray-900 font-semibold'>{`${isClicked ? 'Coupons' : 'Coupons List'}`}</Link>
                         <div className='flex gap-x-10'>
                             <form className="flex items-center">
                                 <div className="flex items-center px-2 py-1 gap-x-1 bg-gray-100 rounded-2xl ">
