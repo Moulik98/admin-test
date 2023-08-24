@@ -54,7 +54,7 @@ const CustomersDetails = () => {
                         lastSession={data?.formatted_last_login_date}
                         location={data?.custom_address}
                         registrationDate={data?.formatted_register_date}
-                        latestOrder={data?.Latest_orders_date}
+                        latestOrder={data?.latest_orders_date}
                     />
                     <div className='max-w-xl h-96'>
                         <img src={revenue} className='w-full h-full object-cover' />
@@ -79,15 +79,18 @@ const CustomersDetails = () => {
                         </thead>
                         <tbody>
                             {
-                                data?.orders &&
-                                data?.orders.map((item) => (
-                                    <OrdersTableRow
-                                        key={item._id}
-                                        data={item}
-                                    // onDelete={handleDelete}
-                                    />
-                                ))
+                                Array.isArray(data?.orders) && data.orders.length > 0 ? (
+                                    data.orders.map((item) => (
+                                        <OrdersTableRow
+                                            key={item._id}
+                                            data={item}
+                                        />
+                                    ))
+                                ) : (
+                                    <p>No orders available.</p>
+                                )
                             }
+
                         </tbody>
                     </table>
                 </div>
