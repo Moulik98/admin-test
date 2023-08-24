@@ -22,6 +22,7 @@ import Sellerdetails from '../admin-panel/approve-sellerlist/Sellerdetails';
 import Error from '../admin-panel/Error';
 import { Dashboard } from '../admin-panel/dashboard/Dashboard';
 import Customers from '../admin-panel/customers/Customers';
+import CustomersDetails from '../admin-panel/customers/CustomersDetails';
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
   return children(location);
@@ -71,6 +72,7 @@ const MainRoutes = () => {
             <Route path="/countrylist" element={<ProtectedRoute element={CountryList} />} />
             <Route path="/coupons" element={<ProtectedRoute element={Coupons} />} />
             <Route path="/customers" element={<ProtectedRoute element={Customers} />} />
+            <Route path="/customers/:id" element={<ProtectedRoute element={CustomersDetails} />} />
             <Route path="/sellerdetails/:id" element={<ProtectedRoute element={Sellerdetails} />} />
             <Route path="*" element={<Error />} />
 
