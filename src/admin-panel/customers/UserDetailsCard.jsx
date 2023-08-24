@@ -5,7 +5,7 @@ const UserDetailsCard = ({ name, email, lastSession, location, registrationDate,
         <div className='basis-80 shrink-0 flex flex-col gap-5 rounded-xl shadow-xl p-5'>
             <div className='flex flex-col justify-center items-center border-b border-solid border-gray-300 pb-5'>
                 <div className='w-24 h-24 rounded-full overflow-hidden'>
-
+                    <img src={`https://res.cloudinary.com/genx21/image/upload/v1687601345/products/oh6qbida5fkmexaqondm.jpg`} />
                 </div>
                 <p className='text-sm text-[#1C2A53] text-start font-bold' >{name}</p>
                 <p className='text-sm text-gray-400 font-normal' >{email}</p>

@@ -7,6 +7,7 @@ import revenue from '../../assets/Revenue.png'
 import { useEffect } from 'react';
 import { getToken } from '../../hook/getToken';
 import { useState } from 'react';
+import OrdersTableRow from '../orders/OrdersTableRow';
 const CustomersDetails = () => {
     const { id } = useParams()
     const [data, setData] = useState()
@@ -55,7 +56,40 @@ const CustomersDetails = () => {
                         registrationDate={data?.formatted_register_date}
                         latestOrder={data?.Latest_orders_date}
                     />
-                    <img src={revenue} />
+                    <div className='max-w-xl h-96'>
+                        <img src={revenue} className='w-full h-full object-cover' />
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="relative overflow-x-auto mt-5">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-gray-100 text-xs font-medium uppercase text-[#666666]">
+                            <tr>
+                                <th scope="col" class="px-2 py-3">Order</th>
+                                <th scope="col" class="px-2 py-3">Status</th>
+                                <th scope="col" class="px-2 py-3">Method</th>
+                                <th scope="col" class="px-2 py-3">Payment</th>
+                                <th scope="col" class="px-2 py-3">Voucher</th>
+                                <th scope="col" class="px-2 py-3">Seller</th>
+                                <th scope="col" class="px-2 py-3">Amount</th>
+                                <th scope="col" class="px-2 py-3">Order Date</th>
+                                <th scope="col" class="px-2 py-3">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                data?.orders &&
+                                data?.orders.map((item) => (
+                                    <OrdersTableRow
+                                        key={item._id}
+                                        data={item}
+                                    // onDelete={handleDelete}
+                                    />
+                                ))
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </section>
         </main>
