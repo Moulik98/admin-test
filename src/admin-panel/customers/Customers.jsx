@@ -3,35 +3,68 @@ import TableRow from './TableRow'
 import { Link } from 'react-router-dom'
 import { User } from '../user/User'
 import { getToken } from '../../hook/getToken'
+import Pagination from '../../Pagination'
 const Customers = () => {
     const [customerData, setCustomerData] = useState()
     const [countData, setCountData] = useState({})
+    const [filterValue, setFilterValue] = useState('desc')
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
+    const [totalItems, setTotalItems] = useState(0);
     useEffect(() => {
-        const url = `${process.env.REACT_APP_URL}/v1/customer/getCustomer?limit=25&page=1`;
+        const fetchData = async () => {
+            const url = `${process.env.REACT_APP_URL}/v1/customer/getCustomer?page=${currentPage}&limit=${pageSize}&sort=${filterValue}`;
 
-        const token = getToken(); // Replace with your actual Bearer token
+            const token = getToken(); // Replace with your actual Bearer token
 
-        const requestOptions = {
-            method: 'GET',
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        };
+            const requestOptions = {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            };
 
-        fetch(url, requestOptions)
-            .then(res => res.json())
-            .then(data => {
+            try {
+                const response = await fetch(url, requestOptions);
+                const data = await response.json();
+
                 console.log('customer-data', data);
+
                 setCountData({
                     "b2cCount": data.b2cCount,
                     "b2bCount": data.b2bCount,
                     "totalActiveCount": data.totalActiveCount
-                })
-                setCustomerData(data.allCustomers)
-            })
-            .catch(err => console.log(err));
+                });
 
-    }, [])
+                setCustomerData(data.allCustomers);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchData();
+    }, [filterValue]);
+
+    const handleFilterChange = (e) => {
+        console.log('value', e.target.value);
+        setFilterValue(e.target.value)
+    }
+    const [checkedValue, setCheckedValue] = useState([]);
+
+    const handleCheckboxChange = (id) => {
+        // Check if the id is already in the array
+        const index = checkedValue.indexOf(id);
+
+        if (index === -1) {
+            // If not in array, add it
+            setCheckedValue([...checkedValue, id]);
+        } else {
+            // If already in array, remove it
+            const updatedArray = checkedValue.filter(item => item !== id);
+            setCheckedValue(updatedArray);
+        }
+    };
 
     return (
         <main>
@@ -123,9 +156,13 @@ const Customers = () => {
                                         />
                                     </div>
                                 </form>
-                                <select className='flex items-center px-2 py-1 gap-x-1 bg-gray-100 rounded-2xl'>
-                                    <option>Newest</option>
-                                    <option>Oldest</option>
+                                <select
+                                    name='filter-asc-desc'
+                                    onChange={(e) => handleFilterChange(e)}
+                                    className='flex items-center px-2 py-1 gap-x-1 bg-gray-100 rounded-2xl'
+                                >
+                                    <option value='desc' >Newest</option>
+                                    <option value='asc'>Oldest</option>
                                 </select>
                             </div>
                         </div>
@@ -166,12 +203,22 @@ const Customers = () => {
                                                 data={item}
                                                 index={index}
                                                 length={customerData.length}
+                                                checkedValue={checkedValue}
+                                                handleCheckboxChange={handleCheckboxChange}
                                             />
                                         ))
                                         : null
                                 }
                             </tbody>
                         </table>
+                    </div>
+                    <div className='flex justify-end items-center py-5'>
+                        <Pagination
+                            currentPage={currentPage}
+                            totalItems={totalItems}
+                            pageSize={pageSize}
+                            setCurrentPage={setCurrentPage}
+                        />
                     </div>
                 </section>
 

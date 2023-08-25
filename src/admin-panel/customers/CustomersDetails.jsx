@@ -36,6 +36,9 @@ const CustomersDetails = () => {
 
         fetchSingleCustomer();
     }, [id]);
+    const handlePrint = () => {
+        window.print()
+    }
 
     return (
         <main>
@@ -45,7 +48,48 @@ const CustomersDetails = () => {
                     <User />
                 </div>
             </section>
+            <section>
+                <div className='flex justify-between py-5'>
+                    <div>
+                        <p className='text-2xl text-[#1C2A53]'>Connie Robertson</p>
+                    </div>
+                    <div className='flex'>
+                        <div
+                            onClick={() => handlePrint()}
+                            className='p-2 cursor-pointer rounded border border-solid border-[#0072B7]'>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+                                <path d="M15.75 8.75H14.875V3.5H6.125V8.75H5.25C4.27875 8.75 3.5 9.5375 3.5 10.5V16.625H17.5V10.5C17.5 9.5375 16.7212 8.75 15.75 8.75ZM7.875 5.25H13.125V8.75H7.875V5.25ZM15.75 14.875H5.25V10.5H15.75V14.875ZM14.875 13.125H11.375V11.375H14.875V13.125Z" fill="#0072B7" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
+            {/* // status section */}
+            <section>
+                <div className='grid grid-cols-4 gap-5 py-5'>
+                    <div className='flex flex-col justify-center items-center h-24 shadow-lg ' >
+                        <p className='text-gray-500'>Revenue</p>
+                        <p className='text-3xl text-gray-900 font-bold'>{data?.order_status_data[0]?.total_delivered_price}</p>
+
+                    </div>
+                    <div className='flex flex-col justify-center items-center h-24 shadow-lg ' >
+                        <p className='text-gray-500'>Orders Paid</p>
+                        <p className='text-3xl text-gray-900 font-bold'>{data?.order_status_data[0]?.total_delivered_orders}</p>
+                    </div>
+                    <div className='flex flex-col justify-center items-center h-24 shadow-lg ' >
+                        <p className='text-gray-500'>Return</p>
+                        <p className='text-3xl text-gray-900 font-bold'> {data?.order_status_data[0]?.total_return_order}</p>
+
+                    </div>
+                    <div className='flex flex-col justify-center items-center h-24 shadow-lg ' >
+                        <p className='text-gray-500'>Orders</p>
+                        <p className='text-3xl text-gray-900 font-bold'>{data?.order_status_data[0]?.total_orders}</p>
+
+                    </div>
+                </div>
+            </section>
+            {/* Graph section */}
             <section>
                 <div className='flex '>
                     <UserDetailsCard
@@ -61,6 +105,7 @@ const CustomersDetails = () => {
                     </div>
                 </div>
             </section>
+            {/* Order table Section */}
             <section>
                 <div class="relative overflow-x-auto mt-5">
                     <table class="w-full text-left text-xs">
