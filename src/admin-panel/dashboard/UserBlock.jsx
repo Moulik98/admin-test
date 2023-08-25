@@ -17,7 +17,7 @@ export const UserBlock = () => {
   }, []); // Empty dependency array means this effect runs once after the initial render
 
   return (
-    <div className='w-1/2 bg-[#feedec] p-6 rounded-lg'>
+    <div className='bg-[#feedec] p-6 rounded-lg'>
       
       <div>
         <p className='text-xl text-left pb-2'>Total Users</p>

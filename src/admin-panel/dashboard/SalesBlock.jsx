@@ -17,7 +17,7 @@ export const SalesBlock = () => {
   }, []); // Empty dependency array means this effect runs once after the initial render
 
   return (
-    <div className="w-1/2 bg-[#dff0ff] p-6 rounded-lg">
+    <div className="bg-[#dff0ff] p-6 rounded-lg">
       <p className="text-xl text-left pb-2">Total Sales</p>
       <p className="text-2xl text-left font-bold">{totalSalesAmount}</p>
     </div>
