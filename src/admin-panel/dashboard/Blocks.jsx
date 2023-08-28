@@ -5,7 +5,7 @@ export const Blocks = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://two1genx.onrender.com/v1/admin/get-product-order-count")
+    fetch(`${process.env.REACT_APP_URL}/v1/admin/get-product-order-count`)
       .then((response) => response.json())
       .then((data) => {
         setOrderData(data);

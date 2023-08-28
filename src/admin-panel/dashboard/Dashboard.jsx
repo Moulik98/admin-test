@@ -8,6 +8,7 @@ import { UserBlock } from "./UserBlock";
 import { SalesBlock } from "./SalesBlock";
 import { Blocks } from "./Blocks";
 import { User } from "../user/User";
+import UserTable from "./UserTable";
 
 export const Dashboard = () => {
   return (
@@ -44,6 +45,7 @@ export const Dashboard = () => {
       <div className="px-16 pt-8 w-2/3">
         <TopProdTable />
       </div>
+      <div className="w-1/2"><UserTable/></div>
     </div>
   );
 };
