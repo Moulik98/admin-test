@@ -6,13 +6,16 @@ export const Upblock = () => {
 
   useEffect(() => {
     const fetchOrderData = async () => {
-      let access_token = localStorage.getItem('access_token')
+      let access_token = localStorage.getItem("access_token");
       try {
-        const response = await fetch(`${process.env.REACT_APP_URL}/v1/admin/get-product-order-count`, {
-          headers: {
-            Authorization: `Bearer ${access_token}`, // Replace with your actual access token
-          },
-        });
+        const response = await fetch(
+          `${process.env.REACT_APP_URL}/v1/admin/get-product-order-count`,
+          {
+            headers: {
+              Authorization: `Bearer ${access_token}`, // Replace with your actual access token
+            },
+          }
+        );
 
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -38,18 +41,26 @@ export const Upblock = () => {
     <div>
       {orderData && (
         <div className="flex space-x-4">
-          <div className="flex-1 pl-8 pr-14 py-4 text-left bg-orange-200 shadow-lg">
+          <div className="flex-1 pl-8 pr-14 py-4 text-left bg-orange-200 hover:shadow-2xl shadow-lg">
             <p className="text-lg">Total Products</p>
             <p className="text-xl font-bold">{orderData.product_count}</p>
           </div>
-          <div className="flex-1 pl-8 pr-14 py-4 text-left bg-blue-200 shadow-lg">
-            <p className="text-lg">Total Orders</p> <p className="text-xl font-bold">{orderData.total_orders}</p>
+          <div className="flex-1 pl-8 pr-14 py-4 text-left bg-blue-200 hover:shadow-2xl shadow-lg">
+            <p className="text-lg">Total Orders</p>{" "}
+            <p className="text-xl font-bold">{orderData.total_orders}</p>
           </div>
-          <div className="flex-1 pl-8 pr-14 py-4 text-left bg-green-200 shadow-lg">
-            <p className="text-lg">Total Users</p> <p className="text-xl font-bold">{orderData.total_active_count}</p>
+          <div className="flex-1 pl-8 pr-14 py-4 text-left bg-green-200 hover:shadow-2xl shadow-lg">
+            <p className="text-lg">Total Users</p>{" "}
+            <p className="text-xl font-bold">{orderData.total_active_count}</p>
           </div>
-          <div className="flex-1 pl-8 pr-14 py-4 text-left bg-gray-200 shadow-lg">
-            <p className="text-lg">Total Sales</p> <p className="text-xl font-bold">{orderData.total_sales_amount}</p>
+          <div className="flex-1 pl-8 pr-14 py-4 text-left bg-gray-200 hover:shadow-2xl shadow-lg">
+            <p className="text-lg">Total Sales</p>
+            <div className="flex justify-between items-end">
+              <p className="text-xl font-bold">
+                {orderData.total_sales_amount}
+              </p>
+              <img src="../assets/admin-panel/graph.svg" alt="" />
+            </div>
           </div>
           {/* You can add more statistics here */}
         </div>
