@@ -8,8 +8,16 @@ const TopProdTable = () => {
   }, []);
 
   const fetchData = async () => {
+    let access_token = localStorage.getItem('access_token')
     try {
-      const response = await fetch(`${process.env.REACT_APP_URL}/v1/admin/top-products?page=1&limit=5`);
+      const headers = {
+        Authorization: `Bearer ${access_token}`,
+      };
+  
+      const response = await fetch(`${process.env.REACT_APP_URL}/v1/admin/top-products?page=1&limit=5`, {
+        headers: headers,
+      });
+  
       const responseData = await response.json();
       const apiData = responseData.topProducts;
       setData(apiData);
@@ -17,6 +25,7 @@ const TopProdTable = () => {
       console.error('Error fetching data:', error);
     }
   };
+  
 
   return (
     <div className="container mx-auto pb-8 p-1 border">

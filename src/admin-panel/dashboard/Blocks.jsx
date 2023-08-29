@@ -5,17 +5,29 @@ export const Blocks = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_URL}/v1/admin/get-product-order-count`)
-      .then((response) => response.json())
-      .then((data) => {
+    const fetchData = async () => {
+      try {
+        const accessToken = localStorage.getItem('access_token'); // Replace with your actual access token
+        const headers = {
+          Authorization: `Bearer ${accessToken}`,
+        };
+  
+        const response = await fetch(`${process.env.REACT_APP_URL}/v1/admin/get-product-order-count`, {
+          headers: headers,
+        });
+  
+        const data = await response.json();
         setOrderData(data);
         setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
+      } catch (error) {
+        console.error('Error fetching data:', error);
         setIsLoading(false);
-      });
+      }
+    };
+  
+    fetchData();
   }, []);
+  
 
   if (isLoading) {
     return <div>Loading...</div>;

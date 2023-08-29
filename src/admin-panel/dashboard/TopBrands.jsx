@@ -9,7 +9,15 @@ const TopBrandsTable = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_URL}/v1/admin/top-brands?page=1&limit=5`);
+      const accessToken = localStorage.getItem('access_token'); // Replace with your actual access token
+      const headers = {
+        Authorization: `Bearer ${accessToken}`,
+      };
+  
+      const response = await fetch(`${process.env.REACT_APP_URL}/v1/admin/top-brands?page=1&limit=5`, {
+        headers: headers,
+      });
+  
       const responseData = await response.json();
       const apiData = responseData.topBrands.slice(0, 5);
       setData(apiData);
@@ -17,6 +25,7 @@ const TopBrandsTable = () => {
       console.error('Error fetching data:', error);
     }
   };
+  
 
   return (
     <div className="container mx-auto p-1 border">

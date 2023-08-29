@@ -5,16 +5,29 @@ export const Upblock = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_URL}/v1/admin/get-product-order-count`)
-      .then((response) => response.json())
-      .then((data) => {
+    const fetchOrderData = async () => {
+      let access_token = localStorage.getItem('access_token')
+      try {
+        const response = await fetch(`${process.env.REACT_APP_URL}/v1/admin/get-product-order-count`, {
+          headers: {
+            Authorization: `Bearer ${access_token}`, // Replace with your actual access token
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
         setOrderData(data);
         setIsLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error fetching data:", error);
         setIsLoading(false);
-      });
+      }
+    };
+
+    fetchOrderData();
   }, []);
 
   if (isLoading) {
