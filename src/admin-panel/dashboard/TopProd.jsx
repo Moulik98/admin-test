@@ -33,17 +33,19 @@ const TopProdTable = () => {
       <table className="w-full">
         <thead>
           <tr className='bg-gray-100'>
-            <th className=" px-6 py-2">Title</th>
-            <th className=" px-6 py-2">Quantity Sold</th>
-            <th className=" px-6 py-2">Amount</th>
+          <th className=" px-2 py-2"></th>
+            <th className=" px-2 py-2">Title</th>
+            <th className=" px-2 py-2">Quantity Sold</th>
+            <th className=" px-2 py-2">Amount</th>
           </tr>
         </thead>
         <tbody>
           {data.map((item, index) => (
             <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
-              <td className=" px-6 py-2">{item.title}</td>
-              <td className=" px-6 py-2">{item.qty_sold}</td>
-              <td className=" px-6 py-2">{item.amount}</td>
+              <td className=" px-2 py-2"><img className='w-12 h-12 shrink-0' src={item.image} alt=''/></td>
+              <td className=" px-4 py-2 flex-wrap">{item.title}</td>
+              <td className=" px-2 py-2">{item.qty_sold}</td>
+              <td className=" px-2 py-2">{item.sold_amount}</td>
             </tr>
           ))}
         </tbody>
