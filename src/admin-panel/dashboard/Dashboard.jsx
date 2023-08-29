@@ -2,13 +2,10 @@ import React from "react";
 import TopBrandsTable from "./TopBrands";
 import TopProdTable from "./TopProd";
 import TopCategoriesTable from "./TopCategory";
-import { ProductBlock } from "./ProductBlock";
-import { OrderBlock } from "./OrdersBlock";
-import { UserBlock } from "./UserBlock";
-import { SalesBlock } from "./SalesBlock";
 import { Blocks } from "./Blocks";
 import { User } from "../user/User";
 import UserTable from "./UserTable";
+import { Upblock } from "./Upblock";
 
 export const Dashboard = () => {
   return (
@@ -19,33 +16,21 @@ export const Dashboard = () => {
           <User />
         </div>
       </div>
-        <div className="flex justify-between px-16">
-          <div>
-            <ProductBlock />
-          </div>
-
-          <div>
-            <OrderBlock />
-          </div>
-          <div>
-            <UserBlock />
-          </div>
-          <div>
-            <SalesBlock />
-          </div>
+        <div className="px-16 pt-8">
+          <Upblock/>
         </div>
       
       <div className="px-16 pt-8">
         <Blocks />
       </div>
-      <div className="flex justify-between px-16 pt-8">
+      <div className="flex justify-between gap-2 px-16 pt-8">
         <TopBrandsTable />
         <TopCategoriesTable />
       </div>
-      <div className="px-16 pt-8 w-2/3">
+      <div className="flex justify-between gap-2 px-16 py-8">
         <TopProdTable />
+        <UserTable/>
       </div>
-      <div className="w-1/2"><UserTable/></div>
     </div>
   );
 };

@@ -7,7 +7,7 @@ const UserTable = () => {
     async function fetchData() {
       try {
         const accessToken = localStorage.getItem('access_token'); // Replace with your actual access token
-        const response = await fetch(`${process.env.REACT_APP_URL}/v1/admin/get-top-user`, {
+        const response = await fetch(`${process.env.REACT_APP_URL}/v1/admin/get-top-user?page=1&limit=5`, {
           headers: {
             Authorization: `Bearer ${accessToken}`
           }
@@ -15,7 +15,7 @@ const UserTable = () => {
         const data = await response.json();
         
         if (data.success) {
-          setTopUsers(data.topUsers);
+          setTopUsers(data.topUsers.slice(0,5));
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -39,7 +39,7 @@ const UserTable = () => {
           {topUsers.map(user => (
             <tr key={user._id} className='shadow-sm  space-y-5'>
               <td className='py-4 px-4'>
-                <div className='flex justify-center'><img src={user.imageUrl} alt={`${user.customerName}'s Avatar`} className='rounded-full w-10 h-10' /></div>
+                <div className='flex justify-center'><img src={user.avatar} alt={`${user.customerName}'s Avatar`} className='rounded-full w-10 h-10' /></div>
               </td>
               <td className='py-4 px-4'>
                 <p className='font-semibold'>{user.customerName}</p>
