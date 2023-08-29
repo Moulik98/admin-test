@@ -45,7 +45,7 @@ const UserTable = () => {
                 <p className='font-semibold'>{user.customerName}</p>
                 <p className='text-gray-600'>{user.shippingAddress}</p>
               </td>
-              <td className='py-4 px-4 text-right'>{user.totalOrderAmount}</td>
+              <td className='py-4 px-4 text-right'>₹{user.totalOrderAmount}</td>
             </tr>
           ))}
         </tbody>

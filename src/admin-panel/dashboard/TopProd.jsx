@@ -45,7 +45,7 @@ const TopProdTable = () => {
               <td className=" px-2 py-2 w-16 h-16 shrink-0"><img className='w-full h-full' src={item.image} alt=''/></td>
               <td className=" px-4 py-2 flex-wrap">{item.title}</td>
               <td className=" px-2 py-2">{item.qty_sold}</td>
-              <td className=" px-2 py-2">{item.sold_amount}</td>
+              <td className=" px-2 py-2">₹{item.sold_amount}</td>
             </tr>
           ))}
         </tbody>
