@@ -33,17 +33,17 @@ const TopBrandsTable = () => {
       <table className="w-full border-collapse">
         <thead>
           <tr className="bg-gray-100 text-xs font-medium uppercase text-[#666666]">
-            <th className="px-4 py-2">Brand Name</th>
-            <th className="px-4 py-2">Quantity Sold</th>
-            <th className="px-4 py-2">Amount</th>
+            <th className="px-4 py-2 text-left">Brand Name</th>
+            <th className="px-4 py-2 text-left">Quantity Sold</th>
+            <th className="px-4 py-2 text-left">Amount</th>
           </tr>
         </thead>
         <tbody>
           {data.map((item, index) => (
             <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
-              <td className="px-4 py-2">{item.brand_name}</td>
-              <td className="px-4 py-2">{item.qty_sold}</td>
-              <td className="px-4 py-2">₹{item.amount}</td>
+              <td className="px-4 py-2 text-left">{item.brand_name}</td>
+              <td className="px-4 py-2 text-left">{item.qty_sold}</td>
+              <td className="px-4 py-2 text-left">₹{item.amount}</td>
             </tr>
           ))}
         </tbody>

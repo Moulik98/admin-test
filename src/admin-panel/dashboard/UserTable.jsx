@@ -28,13 +28,13 @@ const UserTable = () => {
     <div className='container mx-auto p-4 border border-gray-300 text-sm'>
       <h2 className='text-xl text-left font-semibold mb-4'>Top Customers</h2>
       <table className='w-full'>
-        {/* <thead>
-          <tr className='bg-gray-100'>
-            <th className='py-2 px-4 text-left'>Avatar</th>
-            <th className='py-2 px-4 text-left'>Name & Address</th>
-            <th className='py-2 px-4 text-right'>Total Amount</th>
+        <thead>
+          <tr className='bg-gray-100 text-xs font-medium text-center uppercase text-[#666666]'>
+            <th className='py-2 px-4 '></th>
+            <th className='py-2 px-4 '>Name & Address</th>
+            <th className='py-2 px-4 '> Amount</th>
           </tr>
-        </thead> */}
+        </thead>
         <tbody>
           {topUsers.map(user => (
             <tr key={user._id} className='shadow-sm  space-y-5'>
@@ -45,7 +45,7 @@ const UserTable = () => {
                 <p className='font-semibold'>{user.customerName}</p>
                 <p className='text-gray-600'>{user.shippingAddress}</p>
               </td>
-              <td className='py-4 px-4 text-right'>₹{user.totalOrderAmount}</td>
+              <td className='py-4 px-4'>₹{user.totalOrderAmount}</td>
             </tr>
           ))}
         </tbody>
