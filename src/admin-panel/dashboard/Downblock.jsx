@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export const Upblock = () => {
+export const Downblock = () => {
   const [orderData, setOrderData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -41,24 +41,22 @@ export const Upblock = () => {
     <div>
       {orderData && (
         <div className="flex space-x-4">
-          <div className="flex-1 pl-8 pr-14 py-4 text-left bg-pink-100 border border-blue-200 rounded-md hover:shadow-2xl shadow-lg">
-            <p className="text-lg">Products</p>
-            <p className="text-xl font-bold">{orderData?.product_count}</p>
+          <div className="flex-1 pl-8 pr-14 py-4 text-left bg-white hover:bg-blue-100 border border-blue-300 rounded-md hover:shadow-2xl shadow-lg">
+            <p className="text-lg">Cancelled</p>
+            <p className="text-xl font-bold">{orderData.total_cancel_order}</p>
           </div>
-          <div className="flex-1 pl-8 pr-14 py-4 text-left bg-green-100 border border-blue-200 rounded-md hover:shadow-2xl shadow-lg">
-            <p className="text-lg">Orders</p>{" "}
-            <p className="text-xl font-bold">{orderData?.total_orders}</p>
+          <div className="flex-1 pl-8 pr-14 py-4 text-left bg-white hover:bg-blue-100 border border-blue-300 rounded-md hover:shadow-2xl shadow-lg">
+            <p className="text-lg">Support</p>{" "}
+            <p className="text-xl font-bold">3</p>
           </div>
-          <div className="flex-1 pl-8 pr-14 py-4 text-left bg-yellow-100 border border-blue-200 rounded-md hover:shadow-2xl shadow-lg">
-            <p className="text-lg">Customers</p>{" "}
-            <p className="text-xl font-bold">{orderData?.total_active_count}</p>
+          <div className="flex-1 pl-8 pr-14 py-4 text-left bg-white hover:bg-blue-100 border border-blue-300 rounded-md hover:shadow-2xl shadow-lg">
+            <p className="text-lg">Contacts</p>{" "}
+            <p className="text-xl font-bold">5</p>
           </div>
-          <div className="flex-1 pl-8 pr-14 py-4 text-left bg-teal-100 border border-blue-200 rounded-md hover:shadow-2xl shadow-lg">
-            <p className="text-lg">Sales</p>
-            <div className="flex justify-between gap-2 items-end">
-              <p className="text-xl font-bold">
-              ₹{orderData?.total_sales_amount}
-              </p>
+          <div className="flex-1 pl-8 pr-14 py-4 text-left bg-white hover:bg-blue-100 border border-blue-300 rounded-md hover:shadow-2xl shadow-lg">
+            <p className="text-lg">Blogs</p>
+            <div className="flex justify-between items-end">
+              <p className="text-xl font-bold">10</p>
               <img src="../assets/admin-panel/graph.svg" alt="" />
             </div>
           </div>

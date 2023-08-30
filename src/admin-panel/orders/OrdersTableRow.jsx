@@ -37,20 +37,20 @@ const OrdersTableRow = ({ data, onDelete }) => {
             <td scope="row" class="whitespace-nowrap px-2 py-2 font-medium text-gray-900">{user_order_id}</td>
             <td class="px-2 py-2 capitalize">{order_status}</td>
             <td class="px-2 py-2">{payment_method}</td>
-            <td class="px-2 py-2 capitalize">{payment_status}</td>
+            <td class="px-2 py-2 capitalize"><div className={`p-1 text-center rounded-md capitalize ${payment_status === 'paid' ? 'bg-green-100' : 'bg-red-100'}`}>{payment_status}</div></td>
             <td scope="row" class="whitespace-nowrap px-2 py-2 font-medium text-gray-900">{voucher && voucher[0]?.coupon_code}</td>
             <td class="px-2 py-2">{seller_details && seller_details[0]?.fullname}</td>
-            <td class="px-2 py-2">{amount}</td>
+            <td class="px-2 py-2">₹{amount}</td>
             <td class="px-2 py-2">{order_date}</td>
             <td class="px-2 py-2">
                 <div class="flex gap-x-2">
                     <div
                         onClick={() => setViewModal(true)}
                         class="rounded bg-[#E8F0FE] p-2 text-xs font-bold text-[#4285F4] cursor-pointer">View</div>
-                    <div
+                    {/* <div
                         onClick={() => handleDelete()}
                         class="rounded bg-[#F7D7DB] p-2 text-xs font-bold text-[#A12321] cursor-pointer">Delete
-                    </div>
+                    </div> */}
                     {
                         viewModal && <ViewModal
                             id={_id}

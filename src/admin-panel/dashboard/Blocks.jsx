@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 export const Blocks = () => {
   const [orderData, setOrderData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [topCategories, setTopCategories] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,18 +32,36 @@ export const Blocks = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch("https://two1genx-render.onrender.com/v1/categories/get/count");
+        if (response.ok) {
+          const jsonData = await response.json();
+          setTopCategories(jsonData);
+        } else {
+          console.error("Failed to fetch data from the API.");
+        }
+      } catch (error) {
+        console.error("An error occurred:", error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   return (
     <div>
-      {orderData && (
+      
         <div className="flex space-x-4">
-          <div className="flex-1 pl-8 pr-14 py-4 text-left bg-blue-200 hover:shadow-2xl shadow-lg">
-            <p className="text-lg">B2C user</p>
+          <div className="flex-1 pl-8 pr-14 py-4 text-left bg-white hover:bg-blue-100 border border-blue-300 rounded-md hover:shadow-2xl shadow-lg">
+            <p className="text-lg">B2B user</p>
             <div className="flex gap-2">
-              <p className="text-xl font-bold">{orderData.b2c_active_count}</p>
+              <p className="text-xl font-bold">{orderData.b2b_active_count}</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-8 h-8 text-black"
@@ -55,21 +74,20 @@ export const Blocks = () => {
               </svg>
             </div>
           </div>
-          <div className="flex-1 pl-8 pr-14 py-4 text-left bg-green-200 hover:shadow-2xl shadow-lg">
-            <p className="text-lg">Pending Orders</p>{" "}
-            <p className="text-xl font-bold">{orderData.total_pending_order}</p>
+          <div className="flex-1 pl-8 pr-14 py-4 text-left bg-white hover:bg-blue-100 border border-blue-300 rounded-md hover:shadow-2xl shadow-lg">
+            <p className="text-lg">Categories</p>{" "}
+            <p className="text-xl font-bold">{topCategories?.child}</p>
           </div>
-          <div className="flex-1 pl-8 pr-14 py-4 text-left bg-yellow-200 hover:shadow-2xl shadow-lg">
-            <p className="text-lg">Confirmed Orders</p>{" "}
-            <p className="text-xl font-bold">{orderData.total_confirm_order}</p>
+          <div className="flex-1 pl-8 pr-14 py-4 text-left bg-white hover:bg-blue-100 border border-blue-300 rounded-md hover:shadow-2xl shadow-lg">
+            <p className="text-lg">Sellers</p>{" "}
+            <p className="text-xl font-bold">{orderData?.seller_count}</p>
           </div>
-          <div className="flex-1 pl-8 pr-14 py-4 text-left bg-red-200 hover:shadow-2xl shadow-lg">
-            <p className="text-lg">Cancelled Orders</p>{" "}
-            <p className="text-xl font-bold">{orderData.total_cancel_order}</p>
+          <div className="flex-1 pl-8 pr-14 py-4 text-left bg-white hover:bg-blue-100 border border-blue-300 rounded-md hover:shadow-2xl shadow-lg">
+            <p className="text-lg">Coupons</p>{" "}
+            <p className="text-xl font-bold">{orderData?.total_cancel_order}</p>
           </div>
           {/* You can add more statistics here */}
         </div>
-      )}
     </div>
   );
 };

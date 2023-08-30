@@ -28,24 +28,26 @@ const TopProdTable = () => {
   
 
   return (
-    <div className="container mx-auto pb-8 p-1 border">
+    <div className="container mx-auto pb-8 p-1 border text-sm">
       <h1 className="text-xl font-semibold mb-4 py-1 pl-2 text-left">Best Selling Products</h1>
       <table className="w-full">
         <thead>
-          <tr className='bg-gray-100'>
+          <tr className='bg-gray-100 text-xs font-medium uppercase text-[#666666]'>
           <th className=" px-2 py-2"></th>
             <th className=" px-2 py-2">Title</th>
-            <th className=" px-2 py-2">Quantity Sold</th>
+            <th className=" px-2 py-2">In stocks</th>
+            <th className=" px-2 py-2">Qty sold</th>
             <th className=" px-2 py-2">Amount</th>
           </tr>
         </thead>
         <tbody>
           {data.map((item, index) => (
             <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
-              <td className=" px-2 py-2 w-16 h-16 shrink-0"><img className='w-full h-full' src={item.image} alt=''/></td>
-              <td className=" px-4 py-2 flex-wrap">{item.title}</td>
-              <td className=" px-2 py-2">{item.qty_sold}</td>
-              <td className=" px-2 py-2">₹{item.sold_amount}</td>
+              <td className=" px-2 py-2 w-16 h-16 shrink-0"><img className='w-full h-full' src={item?.image} alt=''/></td>
+              <td className=" px-4 py-2 flex-wrap">{item?.title}</td>
+              <td className=" px-2 py-2">{item?.qty_available}</td>
+              <td className=" px-2 py-2">{item?.qty_sold}</td>
+              <td className=" px-2 py-2">₹{item?.sold_amount}</td>
             </tr>
           ))}
         </tbody>

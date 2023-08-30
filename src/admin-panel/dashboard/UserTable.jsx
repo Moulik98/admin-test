@@ -25,7 +25,7 @@ const UserTable = () => {
   }, []);
 
   return (
-    <div className='container mx-auto p-4 border border-gray-300'>
+    <div className='container mx-auto p-4 border border-gray-300 text-sm'>
       <h2 className='text-xl text-left font-semibold mb-4'>Top Customers</h2>
       <table className='w-full'>
         {/* <thead>

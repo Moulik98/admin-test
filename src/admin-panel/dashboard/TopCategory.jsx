@@ -28,11 +28,11 @@ const TopCategoriesTable = () => {
   
 
   return (
-    <div className="container mx-auto p-1 border">
+    <div className="container mx-auto p-1 border text-sm">
       <h1 className="text-xl font-semibold text-left py-1 pl-2 mb-4">Top Categories</h1>
       <table className="w-full border-collapse">
         <thead>
-          <tr className="bg-gray-100">
+          <tr className="bg-gray-100 text-xs font-medium uppercase text-[#666666]">
             <th className=" px-4 py-2">Category Name</th>
             <th className=" px-4 py-2">Quantity Sold</th>
             <th className=" px-4 py-2">Amount</th>
@@ -43,7 +43,7 @@ const TopCategoriesTable = () => {
             <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
               <td className=" px-4 py-2">{item.category_name}</td>
               <td className=" px-4 py-2">{item.qty_sold}</td>
-              <td className=" px-4 py-2">{item.amount}</td>
+              <td className=" px-4 py-2">₹{item.amount}</td>
             </tr>
           ))}
         </tbody>
