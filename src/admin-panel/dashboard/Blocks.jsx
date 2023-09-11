@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export const Blocks = () => {
   const [orderData, setOrderData] = useState(null);
@@ -75,7 +76,7 @@ export const Blocks = () => {
             </div>
           </div>
           <div className="flex-1 pl-8 pr-14 py-4 text-left bg-white hover:bg-blue-100 border border-blue-300 rounded-md hover:shadow-2xl shadow-lg">
-            <p className="text-lg">Categories</p>{" "}
+            <Link to='/category' className="text-lg">Categories</Link>{" "}
             <div className="flex gap-2">
             <p className="text-xl font-bold">{topCategories?.child}</p>
             <svg
@@ -107,7 +108,7 @@ export const Blocks = () => {
             </div>
           </div>
           <div className="flex-1 pl-8 pr-14 py-4 text-left bg-white hover:bg-blue-100 border border-blue-300 rounded-md hover:shadow-2xl shadow-lg">
-            <p className="text-lg">Coupons</p>{" "}
+            <Link to='/coupons' className="text-lg">Coupons</Link>{" "}
             <div className="flex gap-2">
               <p className="text-xl font-bold">{orderData?.coupon_count}</p>
               <svg

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export const Upblock = () => {
   const [orderData, setOrderData] = useState(null);
@@ -58,7 +59,7 @@ export const Upblock = () => {
             </div>
           </div>
           <div className="flex-1 pl-8 pr-14 py-4 text-left bg-green-100 border border-blue-200 rounded-md hover:shadow-2xl shadow-lg">
-            <p className="text-lg">Orders</p>{" "}
+            <Link to='/orders' className="text-lg">Orders</Link>{" "}
             <div className="flex justify-between gap-2 items-end">
               <p className="text-xl font-bold">
               {orderData?.total_orders}
