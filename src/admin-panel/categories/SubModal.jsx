@@ -202,7 +202,7 @@ const SubCategoriesModal = ({ visible, onClose, id, modalName }) => {
             name="description"
             // placeholder={view && view.category_desc}
             disabled={modalName === 'view'}
-            className="h-24 my-5 px-4 outline-0 border border-solid border-gray-200 resize-none rounded-md"
+            className="h-24 my-5 px-4 outline-0 py-2 border border-solid border-gray-200 resize-none rounded-md"
             type="text"
           />
           <div className="w-1/2 flex flex-col">

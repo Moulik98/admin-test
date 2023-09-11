@@ -158,7 +158,7 @@ export const ParentModal = ({ visible, onClose, id, modalName }) => {
             name="category_desc"
             value={formData.category_desc}
             disabled={modalName === "view"}
-            className="h-24 my-5 px-4 outline-0 border border-solid border-gray-200 resize-none rounded-md"
+            className="h-24 my-5 px-4 py-2 outline-0 border border-solid border-gray-200 resize-none rounded-md"
             type="text"
             maxLength={160}
           />
