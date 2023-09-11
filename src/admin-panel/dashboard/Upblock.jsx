@@ -34,7 +34,7 @@ export const Upblock = () => {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="flex justify-center"><img className="h-16 w-16" src="../assets/admin-panel/loading.gif" alt=""/></div>;
   }
 
   return (
