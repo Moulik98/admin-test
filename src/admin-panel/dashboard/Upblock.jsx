@@ -44,7 +44,7 @@ export const Upblock = () => {
           <div className="flex-1 pl-8 pr-14 py-4 text-left bg-pink-100 border border-blue-200 rounded-md hover:shadow-2xl shadow-lg">
             <p className="text-lg">Products</p>
             <div className="flex gap-2">
-              <p className="text-xl font-bold">{orderData.product_count}</p>
+              <p className="text-xl font-bold">{orderData?.product_count}</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-8 h-8 text-black"
@@ -69,7 +69,7 @@ export const Upblock = () => {
           <div className="flex-1 pl-8 pr-14 py-4 text-left bg-yellow-100 border border-blue-200 rounded-md hover:shadow-2xl shadow-lg">
             <p className="text-lg">Customers</p>{" "}
             <div className="flex gap-2">
-              <p className="text-xl font-bold">{orderData.total_active_count}</p>
+              <p className="text-xl font-bold">{orderData?.total_active_count}</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-8 h-8 text-black"
