@@ -190,6 +190,7 @@ const AttributesModal = ({ visible, onClose, id, modalName }) => {
                 Attribute Name
               </p>
               <input
+              maxLength={80}
                 name="attributeName"
                 placeholder={view && view.attribute_name}
                 onChange={handleChange}
@@ -260,6 +261,7 @@ const AttributesModal = ({ visible, onClose, id, modalName }) => {
             Description
           </p>
           <textarea
+          maxLength={160}
             onChange={handleChange}
             value={formData.description}
             name="description"

@@ -29,7 +29,7 @@ const TopProdTable = () => {
 
   return (
     <div className="container mx-auto pb-8 p-1 border text-sm">
-      <h1 className="text-xl font-semibold mb-4 py-1 pl-2 text-left">Best Selling Products</h1>
+      <h1 className="text-xl font-semibold mb-4 py-1 pl-2 text-left">Top Selling Products</h1>
       <table className="w-full">
         <thead>
           <tr className='bg-gray-100 text-xs font-medium uppercase text-[#666666]'>

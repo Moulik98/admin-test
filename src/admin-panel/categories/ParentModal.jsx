@@ -133,6 +133,7 @@ export const ParentModal = ({ visible, onClose, id, modalName }) => {
                 value={formData.category_name}
                 className="h-10 my-5 px-4 outline-0 border border-solid border-gray-200 rounded-md"
                 type="text"
+                maxLength={80}
               />
             </div>
             <div className="w-1/2 flex flex-col">
@@ -159,6 +160,7 @@ export const ParentModal = ({ visible, onClose, id, modalName }) => {
             disabled={modalName === "view"}
             className="h-24 my-5 px-4 outline-0 border border-solid border-gray-200 resize-none rounded-md"
             type="text"
+            maxLength={160}
           />
           <div className="w-1/2 flex flex-col">
             <p className="w-fit text-xs text-gray-900  py-1 uppercase ">

@@ -168,6 +168,7 @@ const SubCategoriesModal = ({ visible, onClose, id, modalName }) => {
                 Sub Category Name
               </p>
               <input
+              max={80}
                 name="subName"
                 placeholder={view && view.category_name}
                 onChange={handleChange}
@@ -194,6 +195,7 @@ const SubCategoriesModal = ({ visible, onClose, id, modalName }) => {
             Description
           </p>
           <textarea
+          maxLength={160}
            placeholder={view && view.category_desc}
             onChange={handleChange}
             value={formData.description}

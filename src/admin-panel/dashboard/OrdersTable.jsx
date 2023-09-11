@@ -58,7 +58,7 @@ const OrdersTable = () => {
 
     return (
         <div className='mx-16 my-4 border'>
-            <p className='px-2 text-left py-4 text-xl font-semibold'>Latest Orders</p>
+            <p className='px-2 text-left py-4 text-xl font-semibold'>Recent Orders</p>
             <div className='p-1'>
                 <section>
                     <div className="relative overflow-x-auto">

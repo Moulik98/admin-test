@@ -350,6 +350,7 @@ const ChildCategoriesModal = (props) => {
                   disabled={subCategoryList.length === 0}
                   className="h-10 my-5 px-4 outline-0 border border-solid border-gray-200 rounded-md"
                   type="text"
+                  maxLength={80}
                 />
               </div>
               <div className="w-1/2 flex flex-col">
@@ -371,6 +372,7 @@ const ChildCategoriesModal = (props) => {
               Category Desc
             </p>
             <textarea
+            maxLength={160}
               onChange={handleChange}
               name="category_desc"
               value={formData.category_desc}
