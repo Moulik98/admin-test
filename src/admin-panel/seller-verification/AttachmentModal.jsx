@@ -64,6 +64,37 @@ const AttachmentModal = ({ onClose, visible, id }) => {
         }
     }
 
+    async function makeDeclineRequest(id) {
+        try {
+            const url = `${process.env.REACT_APP_URL}/v1/verifySeller/isVerify`;
+    
+            const payload = {
+                id: id,
+                status: false
+            };
+    
+            const requestOptions = {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(payload),
+            };
+    
+            const response = await fetch(url, requestOptions);
+            if (response.ok) {
+                onClose('decline');
+                onClose('close'); // Notify the parent component of the decline action
+            } else {
+                throw new Error('PUT request for decline failed');
+            }
+        } catch (error) {
+            console.error('Error:', error.message);
+        }
+    }
+    
+
 
     const handleVerify = () => {
         makePutRequest(id);
@@ -206,17 +237,14 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                         Verify
                     </button>
                     <button
-                        onClick={(e) => {
-                            
-                            onClose('close');
-                          }}
-                        className='flex justify-center items-center py-2 px-4 bg-[#DC3545] text-white' type='button'>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
+    onClick={() => makeDeclineRequest(id)}
+    className='flex justify-center items-center py-2 px-4 bg-[#DC3545] text-white' type='button'>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+    Decline
+</button>
 
-                        Decline
-                    </button>
 
                 </div>
             </div>
