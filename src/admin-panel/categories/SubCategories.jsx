@@ -192,6 +192,7 @@ const SubCategories = () => {
                     sub={categories.parent_category_id.category_name}
                     categoriesId={categories.category_slug}
                     desc={categories.category_desc}
+                    status={categories.status}
                   />
                 ))}
             </tbody>

@@ -235,7 +235,7 @@ const ChildCategories = () => {
                                         sub={categories.sub_category_id.category_name}
                                         categoriesId={categories.category_slug}
                                         desc={categories.category_desc}
-
+                                        status={categories.status}
                                     />
                                 ))
                             }

@@ -108,6 +108,7 @@ const ParentCategories = () => {
                 >
                   Description
                 </th>
+                
                 <th
                   scope="col"
                   className="px-6 py-2 text-left text-xs font-normal text-gray-900"
@@ -127,6 +128,7 @@ const ParentCategories = () => {
                     parentName={categories.category_name}
                     categoriesId={categories.category_slug}
                     description={categories.category_desc}
+                    status={categories.status}
                   />
                 ))}
             </tbody>

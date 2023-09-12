@@ -1,16 +1,43 @@
 import React, { useState } from "react";
 import { ParentModal } from "./ParentModal";
 import Description from "../../Description";
-const CategoriesRow = ({ srNo, parentName, categoriesId, description, id }) => {
+const CategoriesRow = ({ srNo, parentName, categoriesId, description, id , status }) => {
   // State for view modal
   const [viewModal, setViewModal] = useState(false)
   // State for edit 
   const [editModal, setEditModal] = useState(false)
+  const [selectedStatus, setSelectedStatus] = useState(status);
 
   const handleClose = () => {
     setViewModal(false)
     setEditModal(false)
   }
+
+  const handleOptionChange = (event) => {
+    const selectedOption = event.target.value;
+
+    // Update the selected status state
+    setSelectedStatus(selectedOption);
+    const token = localStorage.getItem('access_token')
+
+    // Send a request to the API with the selected option
+    fetch(`https://two1genx-render.onrender.com/v1/categories/status-update/${id}`, {
+      method: 'POST',
+      body: JSON.stringify({ id, status: selectedOption }),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` // Replace with your actual Bearer token
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(`Category ${selectedOption}d:`, data);
+      // You can add additional logic here if needed
+    })
+    .catch(error => console.error(`Error ${selectedOption}ing category:`, error));
+  };
+
+  const bgColor = selectedStatus === 'active' ? 'bg-green-200' : 'bg-red-200';
   return (
     <tr className="overflow-hidden border-b-2 rounded-b-3xl text-left bg-white transition duration-300 ease-in-out">
 
@@ -67,6 +94,15 @@ const CategoriesRow = ({ srNo, parentName, categoriesId, description, id }) => {
               />
             </svg>
           </div>
+
+          <td className="whitespace-nowrap px-6 text-xs font-light text-gray-900">
+        <div className="flex gap-2">
+          <select onChange={handleOptionChange} value={selectedStatus} className={`rounded outline-none p-1 ${bgColor}`}>
+            <option value="active" >Activate</option>
+            <option value="deactivated">Deactivate</option>
+          </select>
+        </div>
+      </td>
 
           {viewModal && <ParentModal
             id={id}

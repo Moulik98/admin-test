@@ -2,13 +2,39 @@ import React, { useState } from 'react'
 import ChildCategoriesModal from './ChildCategoriesModal'
 import Description from '../../Description'
 const ChildCategoriesRow = (props) => {
-    const { srNo, child, parent, sub, categoriesId, desc, id } = props
+    const { srNo, child, parent, sub, categoriesId, desc, id,status } = props
     const [showEdit, SetShowEdit] = useState(false)
     const [viewModal, SetViewModal] = useState(false)
     const handleClose = () => {
         SetShowEdit(false);
         SetViewModal(false);
     }
+    const [selectedStatus, setSelectedStatus] = useState(status);
+  const handleOptionChange = (event) => {
+    const selectedOption = event.target.value;
+
+    // Update the selected status state
+    setSelectedStatus(selectedOption);
+    const token = localStorage.getItem('access_token')
+
+    // Send a request to the API with the selected option
+    fetch(`https://two1genx-render.onrender.com/v1/categories/status-update/${id}`, {
+      method: 'POST',
+      body: JSON.stringify({ id, status: selectedOption }),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` // Replace with your actual Bearer token
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(`Category ${selectedOption}d:`, data);
+      // You can add additional logic here if needed
+    })
+    .catch(error => console.error(`Error ${selectedOption}ing category:`, error));
+  };
+
+  const bgColor = selectedStatus === 'active' ? 'bg-green-200' : 'bg-red-200';
     return (
         <tr className="overflow-hidden border-b-2 rounded-b-3xl text-left  bg-white transition duration-300 ease-in-out">
             <td className="whitespace-nowrap px-4 py-2 text-xs font-normal text-gray-900">{srNo}</td>
@@ -60,6 +86,14 @@ const ChildCategoriesRow = (props) => {
                             />
                         </svg>
                     </div>
+                    <td className="whitespace-nowrap px-6 text-xs font-light text-gray-900">
+        <div className="flex gap-2">
+          <select onChange={handleOptionChange} value={selectedStatus} className={`rounded outline-none p-1 ${bgColor}`}>
+            <option value="active" >Activate</option>
+            <option value="deactivated">Deactivate</option>
+          </select>
+        </div>
+      </td>
                     {
                         showEdit && <ChildCategoriesModal
                             visible={showEdit}
