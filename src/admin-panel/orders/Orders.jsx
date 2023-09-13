@@ -111,7 +111,7 @@ const Orders = () => {
             <div className='pr-6'>
                 <section>
                     <div className='max-w-5xl mx-auto flex justify-between py-5'>
-                        <a href='/' className='text-2xl text-gray-900 font-semibold'>Orders</a>
+                        <p className='text-2xl text-gray-900 font-semibold'>Orders</p>
                         <div className='flex gap-x-10'>
                             <form className="flex items-center">
                                 <div className="flex items-center px-2 py-1 gap-x-1 bg-gray-100 rounded-2xl ">

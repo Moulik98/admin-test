@@ -23,6 +23,9 @@ import Error from '../admin-panel/Error';
 import { Dashboard } from '../admin-panel/dashboard/Dashboard';
 import Customers from '../admin-panel/customers/Customers';
 import CustomersDetails from '../admin-panel/customers/CustomersDetails';
+
+// Cms Section
+import FaqSection from '../admin-panel/cms/FaqSection';
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
   return children(location);
@@ -75,7 +78,8 @@ const MainRoutes = () => {
             <Route path="/customers/:id" element={<ProtectedRoute element={CustomersDetails} />} />
             <Route path="/sellerdetails/:id" element={<ProtectedRoute element={Sellerdetails} />} />
             <Route path="*" element={<Error />} />
-
+            {/* //Cms Section */}
+            <Route path="/cms/faqs" element={<ProtectedRoute element={FaqSection} />} />
           </Routes>
         )}
       </PreserveLocation>

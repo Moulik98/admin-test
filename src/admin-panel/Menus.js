@@ -259,6 +259,34 @@ const Menus = [
       },
     ],
     isOpen: false, // Add isOpen property
+  },
+  {
+    title: "Cms Section",
+    src: blog,
+    link: "cms/faq",
+    subMenus: [
+      {
+        title: "Privacy Policy",
+        src: "blog",
+        link: "/cms/privacy-policy",
+      },
+      {
+        title: "Terms & Conditions",
+        src: "sub",
+        link: "/cms/terms-conditions",
+      },
+      {
+        title: "Refunds and cancellations",
+        src: "sub",
+        link: "/cms/refunds-cancellations",
+      },
+      {
+        title: "Faqs",
+        src: "sub",
+        link: "/cms/faqs",
+      }
+    ],
+    isOpen: false, // Add isOpen property
   }
 ];
 export default Menus;
