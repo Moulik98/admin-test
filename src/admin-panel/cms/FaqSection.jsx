@@ -68,7 +68,10 @@ const FaqSection = () => {
                 </section>
                 {
                     isClicked ?
-                        <EditModal />
+                        <EditModal
+                            modalName={`Edit Faq Title & Body`}
+                            onClose={setIsClicked}
+                        />
                         : null
                 }
             </div>
