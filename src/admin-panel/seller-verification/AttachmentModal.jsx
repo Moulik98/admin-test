@@ -52,9 +52,9 @@ const AttachmentModal = ({ onClose, visible, id }) => {
       // console.log(JSON.stringify(payload))
       const response = await fetch(url, requestOptions);
       if (response.ok) {
-        // const responseData = await response.json()
+         const responseData = await response.json()
         onClose("verify");
-        // console.log('PUT request successful:', responseData);
+         console.log('PUT request successful:', responseData);
       } else {
         throw new Error("PUT request failed");
       }
@@ -80,11 +80,13 @@ const AttachmentModal = ({ onClose, visible, id }) => {
         },
         body: JSON.stringify(payload),
       };
-
+      console.log(JSON.stringify(payload))
       const response = await fetch(url, requestOptions);
       if (response.ok) {
+        const responseData = await response.json()
+        console.log(responseData)
         onClose("decline");
-        // onClose("close"); // Notify the parent component of the decline action
+        onClose("close"); // Notify the parent component of the decline action
       } else {
         throw new Error("PUT request for decline failed");
       }

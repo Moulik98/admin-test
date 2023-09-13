@@ -12,6 +12,7 @@ const SellerVerification = () => {
             
             const response = await fetch(url, {
                 headers: {
+                    "Content-Type": "application/json",
                     'Authorization': `Bearer ${token}`
                 }
             });
@@ -99,6 +100,7 @@ const SellerVerification = () => {
                                                 key={index}
                                                 data={item}
                                                 onDelete={handleRefresh}
+                                        
                                             />
                                         ))
                                     }
