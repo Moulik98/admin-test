@@ -6,7 +6,7 @@ import { useCallback } from 'react'
 const EditModal = ({ modalName, onClose }) => {
     const [formData, setFormData] = useState()
     // Plain text to be converted to an editor
-    const plainText = 'Hii am navin \x01hello there';
+    const htmlContent = '<p><strong>Hii There</strong></p>\n<ul>\n  <li>Hello There i am navin</li>\n</ul>';
     const handleChange = async (name, value) => {
         setFormData((preValue) => {
             return { ...preValue, [name]: value }
@@ -44,7 +44,7 @@ const EditModal = ({ modalName, onClose }) => {
                     <div>
                         <TextEditor
                             onChange={handleChange}
-                            plainText={plainText}
+                        // htmlContent={htmlContent}
                         />
                     </div>
 
