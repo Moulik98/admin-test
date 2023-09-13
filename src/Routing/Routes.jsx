@@ -26,6 +26,7 @@ import CustomersDetails from '../admin-panel/customers/CustomersDetails';
 
 // Cms Section
 import FaqSection from '../admin-panel/cms/FaqSection';
+import Privacy from '../admin-panel/cms/Privacy';
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
   return children(location);
@@ -80,9 +81,10 @@ const MainRoutes = () => {
             <Route path="*" element={<Error />} />
             {/* //Cms Section */}
             <Route path="/cms/faqs" element={<ProtectedRoute element={FaqSection} />} />
+            <Route path="/cms/privacy-policy" element={<ProtectedRoute element={Privacy} />} />
           </Routes>
         )}
-      </PreserveLocation>
+      </PreserveLocation>l
     </Router>
   );
 };
