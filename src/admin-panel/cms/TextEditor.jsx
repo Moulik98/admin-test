@@ -1,36 +1,37 @@
 import React, { useState } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { EditorState, ContentState, convertToRaw } from 'draft-js';
+import { EditorState, ContentState, convertFromHTML } from 'draft-js';
+import { stateToHTML } from 'draft-js-export-html';
 
-const TextEditor = ({ onChange, plainText }) => {
+const TextEditor = ({ onChange, htmlContent }) => {
     const [editorState, setEditorState] = useState(() => {
-        if (plainText) {
-            // Convert plain text to ContentState
-            const contentState = ContentState.createFromText(plainText);
+        if (htmlContent) {
+            // Convert HTML content to ContentState
+            const blocksFromHTML = convertFromHTML(htmlContent);
+            const contentState = ContentState.createFromBlockArray(
+                blocksFromHTML.contentBlocks,
+                blocksFromHTML.entityMap
+            );
             return EditorState.createWithContent(contentState);
         } else {
             return EditorState.createEmpty();
         }
     });
 
+
     const onEditorStateChange = (newEditorState) => {
         setEditorState(newEditorState);
     };
 
-    const convertToText = (editorContent) => {
-        const contentState = editorContent.getCurrentContent();
-        const text = contentState.getPlainText('\u0001'); // Use a delimiter to separate blocks
-        return text;
-    };
+
 
     const handleSave = () => {
-        const content = convertToRaw(editorState.getCurrentContent());
-        console.log('text editor', content);
+        const contentState = editorState.getCurrentContent();
+        const htmlContent = stateToHTML(contentState);
 
-        // Convert the EditorState to plain text
-        const plainText = convertToText(editorState);
-        onChange('description', plainText);
+
+        onChange('description', htmlContent);
 
         // You can send this content to your server or handle it as needed.
     };

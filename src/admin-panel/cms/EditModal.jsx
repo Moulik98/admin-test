@@ -44,7 +44,7 @@ const EditModal = ({ modalName, onClose }) => {
                     <div>
                         <TextEditor
                             onChange={handleChange}
-                            plainText={plainText}
+                        // htmlContent={htmlContent}
                         />
                     </div>
 
