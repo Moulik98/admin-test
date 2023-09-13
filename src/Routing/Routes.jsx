@@ -84,7 +84,7 @@ const MainRoutes = () => {
             <Route path="/cms/privacy-policy" element={<ProtectedRoute element={Privacy} />} />
           </Routes>
         )}
-      </PreserveLocation>l
+      </PreserveLocation>      
     </Router>
   );
 };
