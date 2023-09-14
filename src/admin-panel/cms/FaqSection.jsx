@@ -2,6 +2,8 @@ import React from 'react'
 import { User } from '../user/User'
 import { useState } from 'react'
 import EditModal from './EditModal'
+import EditButton from './EditButton'
+import Accordian from './Accordian'
 const FaqSection = () => {
     const [isClicked, setIsClicked] = useState(false)
     return (
@@ -43,27 +45,110 @@ const FaqSection = () => {
                     </div>
                 </section>
                 {/* General Questions */}
-                <section className='p-5 flex flex-row gap-x-1 border border-[#E8E8E8] rounded'>
+                <section className='p-5 flex flex-row gap-x-1 border border-[#E8E8E8] rounded mt-2'>
                     <div className='p-1 shrink-0 w-[24rem] flex flex-col space-y-4 '>
                         <div className='flex flex-row justify-between'>
                             <p className='text-base text-gray-900 font-semibold'>General Questions</p>
-                            <p
-                                onClick={() => setIsClicked(true)}
-                                className='text-base text-gray-900 font-semibold flex gap-x-2 justify-center items-center cursor-pointer'>Edit
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4 font-semibold">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-                                    </svg>
-
-                                </span>
-                            </p>
+                            <EditButton
+                                onClick={setIsClicked}
+                            />
                         </div>
                         <div>
                             <p className='text-sm text-[#878A99] font-normal text-left'>General knowledge is information that has been accumulated over time through various mediums and sources. It excludes specialized learning that can only be obtained with extensive training and information confined to a single medium.</p>
                         </div>
                     </div>
-                    <div className='p-1 flex-1'>
+                    <div className='p-1 flex-1 flex flex-col gap-2'>
+                        <Accordian
+                            heading={`What are FAQ questions?`}
+                            title={`An FAQ page (short for Frequently Asked Question page) is a part of your website that provides answers to common questions, assuages concerns, and overcomes objections. It's a space where customers away from your sales-focused landing pages and homepage.`}
+                        />
+                        <Accordian
+                            heading={`What are FAQ questions?`}
+                            title={`An FAQ page (short for Frequently Asked Question page) is a part of your website that provides answers to common questions, assuages concerns, and overcomes objections. It's a space where customers away from your sales-focused landing pages and homepage.`}
+                        />
+                        <Accordian
+                            heading={`What are FAQ questions?`}
+                            title={`An FAQ page (short for Frequently Asked Question page) is a part of your website that provides answers to common questions, assuages concerns, and overcomes objections. It's a space where customers away from your sales-focused landing pages and homepage.`}
+                        />
+                        <Accordian
+                            heading={`What are FAQ questions?`}
+                            title={`An FAQ page (short for Frequently Asked Question page) is a part of your website that provides answers to common questions, assuages concerns, and overcomes objections. It's a space where customers away from your sales-focused landing pages and homepage.`}
+                        />
+                    </div>
+                </section>
 
+                {/* Manage Account */}
+
+                <section className='p-5 flex flex-row gap-x-1 border border-[#E8E8E8] rounded mt-2'>
+                    <div className='p-1 shrink-0 w-[24rem] flex flex-col space-y-4 '>
+                        <div className='flex flex-row justify-between'>
+                            <p className='text-base text-gray-900 font-semibold'>Manage Account</p>
+                            <EditButton
+                                onClick={setIsClicked}
+                            />
+                        </div>
+                        <div>
+                            <p className='text-sm text-[#878A99] font-normal text-left'>Cybersecurity experts recommend changing your
+                                password every three months. There may even be
+                                situations where you should change your password
+                                immediately, especially if a cybercriminal has access to
+                                your account.</p>
+                        </div>
+                    </div>
+                    <div className='p-1 flex-1 flex flex-col gap-2'>
+                        <Accordian
+                            heading={`What is account management process?`}
+                            title={`The new common language will be more simple and regular than the existing European languages. It will be as simple as Occidental; in fact, it will be Occidental. To an English person, it will seem like simplified English, as a skeptical Cambridge friend of mine told me what Occidental is.`}
+                        />
+                        <Accordian
+                            heading={`What is account management process?`}
+                            title={`The new common language will be more simple and regular than the existing European languages. It will be as simple as Occidental; in fact, it will be Occidental. To an English person, it will seem like simplified English, as a skeptical Cambridge friend of mine told me what Occidental is.`}
+                        />
+                        <Accordian
+                            heading={`What is account management process?`}
+                            title={`The new common language will be more simple and regular than the existing European languages. It will be as simple as Occidental; in fact, it will be Occidental. To an English person, it will seem like simplified English, as a skeptical Cambridge friend of mine told me what Occidental is.`}
+                        />
+                        <Accordian
+                            heading={`What is account management process?`}
+                            title={`The new common language will be more simple and regular than the existing European languages. It will be as simple as Occidental; in fact, it will be Occidental. To an English person, it will seem like simplified English, as a skeptical Cambridge friend of mine told me what Occidental is.`}
+                        />
+                    </div>
+                </section>
+
+                {/* Privacy & Security */}
+                <section className='p-5 flex flex-row gap-x-1 border border-[#E8E8E8] rounded mt-2'>
+                    <div className='p-1 shrink-0 w-[24rem] flex flex-col space-y-4 '>
+                        <div className='flex flex-row justify-between'>
+                            <p className='text-base text-gray-900 font-semibold'>Privacy & Security</p>
+                            <EditButton
+                                onClick={setIsClicked}
+                            />
+                        </div>
+                        <div>
+                            <p className='text-sm text-[#878A99] font-normal text-left'>Privacy is the right to control how your information is
+                                viewed and used, while security is protection against
+                                threats or danger. In the digital world, security generally
+                                refers to the unauthorized access of data, often involving
+                                protection against hackers or cyber criminals.</p>
+                        </div>
+                    </div>
+                    <div className='p-1 flex-1 flex flex-col gap-2'>
+                        <Accordian
+                            heading={`Which is important privacy or security?`}
+                            title={`If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual languages. The new common language will be more simple and regular than the existing European languages. It will be as simple their most common words.`}
+                        />
+                        <Accordian
+                            heading={`Which is important privacy or security?`}
+                            title={`If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual languages. The new common language will be more simple and regular than the existing European languages. It will be as simple their most common words.`}
+                        />
+                        <Accordian
+                            heading={`Which is important privacy or security?`}
+                            title={`If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual languages. The new common language will be more simple and regular than the existing European languages. It will be as simple their most common words.`}
+                        />
+                        <Accordian
+                            heading={`Which is important privacy or security?`}
+                            title={`If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual languages. The new common language will be more simple and regular than the existing European languages. It will be as simple their most common words.`}
+                        />
                     </div>
                 </section>
                 {
