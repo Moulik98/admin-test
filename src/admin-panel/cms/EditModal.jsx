@@ -1,12 +1,11 @@
 import React from 'react'
 import TextEditor from './TextEditor'
 import { useState } from 'react'
-import { useCallback } from 'react'
 
 const EditModal = ({ modalName, onClose }) => {
     const [formData, setFormData] = useState()
     // Plain text to be converted to an editor
-    const plainText = '';
+    // const htmlText = '<p><strong>Hello there</strong></p>\n<ul>\n  <li><strong>I am fronted developer&nbsp;</strong>\n    <ul>\n      <li><strong>i am don</strong></li>\n';
     const handleChange = async (name, value) => {
         setFormData((preValue) => {
             return { ...preValue, [name]: value }
@@ -17,15 +16,15 @@ const EditModal = ({ modalName, onClose }) => {
     }
     return (
         <div className='fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center'>
-            <div className='w-3/5 bg-white rounded-xl '>
-                <div className='flex justify-between items-center py-2 pr-5 pl-2 border-b border-[#DEE2E6]'>
+            <div className='w-3/5 h-[30rem] bg-white rounded-xl overflow-scroll no-scrollbar'>
+                <div className='sticky top-0 z-50 flex justify-between items-center py-2 pr-5 pl-2 border-b border-[#DEE2E6] bg-gray-50'>
                     <h1 className='text-lg text-[#143250] font-normal uppercase'>{modalName}</h1>
                     <button
                         onClick={() => onClose(false)}
                         className='text-3xl text-gray-900 opacity-50'>X</button>
                 </div>
 
-                <div className='py-5 px-10 '>
+                <div className='py-5 px-10  '>
                     <div className='py-5 flex flex-row justify-center items-center gap-x-5'>
                         <label className='text-sm text-[#0D3359] font-semibold'>Title *</label>
                         <input
@@ -44,7 +43,7 @@ const EditModal = ({ modalName, onClose }) => {
                     <div>
                         <TextEditor
                             onChange={handleChange}
-                        // htmlContent={htmlContent}
+                        // htmlContent={htmlText}
                         />
                     </div>
 
