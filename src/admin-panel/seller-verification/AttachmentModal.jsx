@@ -52,9 +52,9 @@ const AttachmentModal = ({ onClose, visible, id }) => {
       // console.log(JSON.stringify(payload))
       const response = await fetch(url, requestOptions);
       if (response.ok) {
-         const responseData = await response.json()
+        const responseData = await response.json()
         onClose("verify");
-         console.log('PUT request successful:', responseData);
+        console.log('PUT request successful:', responseData);
       } else {
         throw new Error("PUT request failed");
       }
@@ -175,7 +175,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
               </div>
               <div className="w-2/5 flex justify-between ">
                 <div className="w-1/2 flex justify-between">
-                  <h1 className=" text-base  font-semibold text-[#143250]">
+                  <h1 className=" text-base uppercase  font-semibold text-[#143250]">
                     Gst
                   </h1>
                   :
@@ -189,7 +189,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
             <div className="flex justify-between">
               <div className="w-2/5 flex justify-between ">
                 <div className="w-1/2 flex justify-between">
-                  <h1 className=" text-base  font-semibold text-[#143250]">
+                  <h1 className=" text-base uppercase  font-semibold text-[#143250]">
                     Pan
                   </h1>
                   :
@@ -217,10 +217,10 @@ const AttachmentModal = ({ onClose, visible, id }) => {
               onClick={() => setGstModal(true)}
               className=" w-2/5 flex justify-center items-center h-40 bg-gray-200 rounded"
             >
-              <div className="w-10 h-10">
+              <div className="w-full h-full p-2 cursor-pointer">
                 <img
-                  className="w-full h-full object-cover"
-                  src="https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_3_pdf_x32.png"
+                  className="w-full h-full object-contain"
+                  src="https://res.cloudinary.com/genx21/image/upload/v1694692016/zngnznqxvjtrpvn45jee.webp"
                   alt=""
                 />
               </div>
@@ -236,10 +236,10 @@ const AttachmentModal = ({ onClose, visible, id }) => {
               onClick={() => setPdfModal(true)}
               className=" w-2/5 flex justify-center items-center h-40 bg-gray-200 rounded"
             >
-              <div className="w-10 h-10">
+              <div className="w-full h-full p-2">
                 <img
-                  className="w-full h-full object-cover"
-                  src="https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_3_pdf_x32.png"
+                  className="w-full h-full object-contain"
+                  src="https://res.cloudinary.com/genx21/image/upload/v1694692016/zngnznqxvjtrpvn45jee.webp"
                   alt=""
                 />
               </div>
