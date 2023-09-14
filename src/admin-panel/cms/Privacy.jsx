@@ -2,50 +2,48 @@ import React from "react";
 import { User } from "../user/User";
 import { useState ,useEffect } from "react";
 import EditModal from "./EditModal";
-import { fetchPrivacyData, createOrUpdatePrivacyData } from "./Api"
+import { fetchPrivacyData, createPrivacyData } from "./Api"
 
-const Privacy = () => {
-  const [isClicked, setIsClicked] = useState(false);
-  const [privacyData, setPrivacyData] = useState({
-    _id: null,
-    heading: "",
-    about: "",
-  });
-  const [formData, setFormData] = useState({
-    heading: "",
-    about: "",
-  });
-
-  useEffect(() => {
-    // Fetch privacy data from the API and populate the form if available
-    fetchPrivacyData()
-      .then((data) => {
-        if (data) {
-          setPrivacyData(data);
-          setFormData(data);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching privacy data:", error);
-      });
-  }, []);
-
-  const handleFormChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      // Send the form data to the API for creation or update
-      const updatedData = await createOrUpdatePrivacyData(formData);
-      setPrivacyData(updatedData);
-      setIsClicked(false);
-    } catch (error) {
-      console.error("Error submitting privacy data:", error);
-    }
-  };
+const Privacy = (id) => {
+    const [isClicked, setIsClicked] = useState(false);
+    const [privacyData, setPrivacyData] = useState({
+      _id: null,
+      heading: "",
+      about: "",
+    });
+    const [formData, setFormData] = useState({
+      heading: "",
+      about: "",
+    });
+  
+    useEffect(() => {
+      fetchPrivacyData(id)
+        .then((data) => {
+          if (data) {
+            setPrivacyData(data);
+            setFormData(data);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching privacy data:", error);
+        });
+    }, [id]);
+  
+    const handleFormChange = (e) => {
+      const { name, value } = e.target;
+      setFormData({ ...formData, [name]: value });
+    };
+  
+    const handleFormSubmit = async (e) => {
+      e.preventDefault();
+      try {
+        const updatedData = await createPrivacyData(formData);
+        setPrivacyData(updatedData);
+        setIsClicked(false);
+      } catch (error) {
+        console.error("Error creating privacy data:", error);
+      }
+    };
 
   return (
     <main>

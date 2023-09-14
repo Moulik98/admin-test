@@ -1,8 +1,6 @@
-// api.js
-
-// Define your API endpoint URL
 const API_BASE_URL = 'https://two1genx-render.onrender.com';
 
+// Function to fetch privacy data from the API
 export const fetchPrivacyData = async (privacyId) => {
   try {
     const response = await fetch(`${API_BASE_URL}/v1/cms/privacy-policies/${privacyId}`);
@@ -16,14 +14,11 @@ export const fetchPrivacyData = async (privacyId) => {
   }
 };
 
-// Function to create or update privacy data using POST or PUT
-export const createOrUpdatePrivacyData = async (formData) => {
+// Function to create new privacy data using POST
+export const createPrivacyData = async (formData) => {
   try {
-    const method = formData._id ? 'PUT' : 'POST';
-    const url = formData._id ? `${API_BASE_URL}/${formData._id}` : API_BASE_URL;
-
-    const response = await fetch(url, {
-      method,
+    const response = await fetch(`${API_BASE_URL}/v1/cms/add-privacy`, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -31,7 +26,7 @@ export const createOrUpdatePrivacyData = async (formData) => {
     });
 
     if (!response.ok) {
-      throw new Error('Failed to create/update data');
+      throw new Error('Failed to create data');
     }
 
     const data = await response.json();
