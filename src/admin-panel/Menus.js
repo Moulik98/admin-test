@@ -261,7 +261,7 @@ const Menus = [
     isOpen: false, // Add isOpen property
   },
   {
-    title: "Cms Section",
+    title: "CMS Section",
     src: blog,
     link: "cms/faq",
     subMenus: [
@@ -276,7 +276,7 @@ const Menus = [
         link: "/cms/terms-conditions",
       },
       {
-        title: "Refunds and cancellations",
+        title: "Refunds & cancellations",
         src: "sub",
         link: "/cms/refunds-cancellations",
       },
