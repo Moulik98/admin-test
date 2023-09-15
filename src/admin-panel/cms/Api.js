@@ -1,9 +1,14 @@
 const API_BASE_URL = 'https://two1genx-render.onrender.com';
 
+const accessToken = localStorage.getItem('access_token')
 // Function to fetch privacy data from the API
-export const fetchPrivacyData = async (privacyId) => {
+export const fetchPrivacyData = async (id) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/v1/cms/privacy-policies/${privacyId}`);
+    const response = await fetch(`${API_BASE_URL}/v1/cms/privacy-policies/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+      },
+    });
     if (!response.ok) {
       throw new Error('Failed to fetch data');
     }
@@ -21,10 +26,11 @@ export const createPrivacyData = async (formData) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`,
       },
       body: JSON.stringify(formData),
     });
-
+    console.log(JSON.stringify(formData))
     if (!response.ok) {
       throw new Error('Failed to create data');
     }
@@ -35,3 +41,41 @@ export const createPrivacyData = async (formData) => {
     throw error;
   }
 };
+
+export const fetchAndEditPrivacyData = async ({id, updatedData}) => {
+  try {
+    // Fetch the existing privacy data
+    const response = await fetch(`${API_BASE_URL}/v1/cms/privacy-policies/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+      },
+    });
+    if (!response.ok) {
+      throw new Error('Failed to fetch data');
+    }
+    const existingData = await response.json();
+
+    // Merge the updated data with the existing data
+    const editedData = { ...existingData, ...updatedData };
+
+    // Update the privacy data
+    const editResponse = await fetch(`${API_BASE_URL}/v1/cms/edit-privacy/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(editedData),  // Use the merged data as the request body
+    });
+
+    if (!editResponse.ok) {
+      throw new Error('Failed to edit data');
+    }
+
+    // Return the edited data
+    return editedData;
+  } catch (error) {
+    throw error;
+  }
+};
+

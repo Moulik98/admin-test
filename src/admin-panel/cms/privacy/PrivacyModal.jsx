@@ -1,19 +1,15 @@
-import React from "react";
-import TextEditor from "./TextEditor";
-import { useState } from "react";
+import React, { useState } from "react";
+import TextEditor from "../TextEditor";
 
-const EditModal = ({ modalName, onClose }) => {
-  const [formData, setFormData] = useState();
-  // Plain text to be converted to an editor
-  // const htmlText = '<p><strong>Hello there</strong></p>\n<ul>\n  <li><strong>I am fronted developer&nbsp;</strong>\n    <ul>\n      <li><strong>i am don</strong></li>\n';
-  const handleChange = async (name, value) => {
-    setFormData((preValue) => {
-      return { ...preValue, [name]: value };
+const PrivacyModal = ({ modalName, onClose, handleSubmit }) => {
+  const [formData, setFormData] = useState({ heading: "", about: "" });
+
+  const handleChange = (name, value) => {
+    setFormData((prevValue) => {
+      return { ...prevValue, [name]: value };
     });
   };
-  const handleSubmit = async () => {
-    console.log("formData", formData);
-  };
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
       <div className="w-3/5 h-[30rem] bg-white rounded-xl overflow-scroll no-scrollbar">
@@ -23,7 +19,7 @@ const EditModal = ({ modalName, onClose }) => {
           </h1>
           <button
             onClick={() => onClose(false)}
-            className="text-3xl text-gray-900 opacity-50"
+            className="text-xl text-gray-900 opacity-50"
           >
             X
           </button>
@@ -36,8 +32,8 @@ const EditModal = ({ modalName, onClose }) => {
             </label>
             <input
               type="text"
-              name="title"
-              value={formData?.title}
+              name="heading"
+              value={formData?.heading}
               onChange={(e) => {
                 const { name, value } = e.target;
                 handleChange(name, value);
@@ -49,8 +45,7 @@ const EditModal = ({ modalName, onClose }) => {
           {/* Text Editor */}
           <div>
             <TextEditor
-              onChange={handleChange}
-              // htmlContent={htmlText}
+              onChange={(value) => handleChange("about", value)}
             />
           </div>
 
@@ -63,7 +58,10 @@ const EditModal = ({ modalName, onClose }) => {
               Cancel
             </button>
             <button
-              onClick={() => handleSubmit()}
+              onClick={() => {
+                handleSubmit(formData);
+                onClose(false);
+              }}
               type="button"
               className="py-2 px-12 bg-[#1F224F] text-white"
             >
@@ -76,4 +74,4 @@ const EditModal = ({ modalName, onClose }) => {
   );
 };
 
-export default EditModal;
+export default PrivacyModal;

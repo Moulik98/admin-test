@@ -26,7 +26,7 @@ import CustomersDetails from '../admin-panel/customers/CustomersDetails';
 
 // Cms Section
 import FaqSection from '../admin-panel/cms/FaqSection';
-import Privacy from '../admin-panel/cms/Privacy';
+import Privacy from '../admin-panel/cms/privacy/Privacy';
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
   return children(location);
