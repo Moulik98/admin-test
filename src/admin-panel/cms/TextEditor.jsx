@@ -24,6 +24,7 @@ const TextEditor = ({ onChange, htmlContent }) => {
         const contentState = editorState.getCurrentContent();
         const htmlContent = stateToHTML(contentState);
         onChange('description', htmlContent);
+        onChange('about', htmlContent);
         // You can send this content to your server or handle it as needed.
     };
     const handleBlur = () => {

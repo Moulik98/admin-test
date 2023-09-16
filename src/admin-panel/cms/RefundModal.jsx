@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { getToken } from '../../hook/getToken'
 import TextEditor from './TextEditor'
-const PrivacyModal = ({ modalName, onClose, id, sectionId, apiUrl }) => {
+const RefundModal = ({ modalName, onClose, id, sectionId, apiUrl }) => {
     const [formData, setFormData] = useState()
     const getData = async (url) => {
         const res = await fetch(url)
@@ -46,7 +46,7 @@ const PrivacyModal = ({ modalName, onClose, id, sectionId, apiUrl }) => {
     }
     useEffect(() => {
         if (id && sectionId) {
-            const url = `${process.env.REACT_APP_URL}/v1/cms/edit-privacy/${id}`
+            const url = `${process.env.REACT_APP_URL}/v1/cms/edit-refund/${id}`
             console.log('sub section url', url);
             getData(url).then(data => {
                 console.log(' sub-section-data', data);
@@ -57,7 +57,7 @@ const PrivacyModal = ({ modalName, onClose, id, sectionId, apiUrl }) => {
             }).catch(err => console.log(err))
         }
         else {
-            const url = `${process.env.REACT_APP_URL}/v1/cms/privacy-policies/${id}`
+            const url = `${process.env.REACT_APP_URL}/v1/cms/refund-cancellation/${id}`
             console.log('section url', url);
             getData(url).then(data => {
                 console.log(' section-data', data)
@@ -118,4 +118,4 @@ const PrivacyModal = ({ modalName, onClose, id, sectionId, apiUrl }) => {
         </div>
     )
 }
-export default PrivacyModal
+export default RefundModal

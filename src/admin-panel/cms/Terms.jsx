@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { User } from '../user/User'
-import PrivacyModal from './PrivacyModal'
+import TermsModal from './TermsModal'
 import EditButton from './EditButton'
-const Privacy = () => {
+const Terms= () => {
     const [isClicked, setIsClicked] = useState(false)
     const [sectionId, setSectionId] = useState('')
     const [data, setData] = useState()
@@ -12,7 +12,7 @@ const Privacy = () => {
         return data
     }
     useEffect(() => {
-        const apiUrl = `${process.env.REACT_APP_URL}/v1/cms/privacy-policies`;
+        const apiUrl = `${process.env.REACT_APP_URL}/v1/cms/terms-condition`;
         getData(apiUrl).then(data => {
             setData(data)
             console.log('faq-data', data);
@@ -28,7 +28,7 @@ const Privacy = () => {
             <div className='p-5'>
                 <section>
                     <div className='max-w-6xl mx-auto flex justify-between py-5'>
-                        <p className='text-2xl text-gray-900 font-semibold'>Privacy Policy</p>
+                        <p className='text-2xl text-gray-900 font-semibold'>Terms & Conditions</p>
                         <div className='flex gap-x-10'>
                             <form className="flex items-center">
                                 <div className="flex items-center px-2 py-1 gap-x-1 bg-gray-100 rounded-2xl ">
@@ -106,11 +106,11 @@ const Privacy = () => {
                 </section>      
                 {
                     (isClicked && sectionId) ?
-                        <PrivacyModal
-                            modalName={`Edit Privacy Title & Body`}
+                        <TermsModal
+                            modalName={`Edit Terms Title & Body`}
                             onClose={setIsClicked}
                             id={sectionId}
-                            apiUrl={`/v1/cms/edit-privacy`}
+                            apiUrl={`/v1/cms/edit-terms`}
                         />
                         : null
                 }
@@ -118,4 +118,4 @@ const Privacy = () => {
         </main>
     )
 }
-export default Privacy
+export default Terms
