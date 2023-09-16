@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
 import EditModal from './EditModal'
 import EditButton from './EditButton'
-const Accordian = ({ heading, title }) => {
+const Accordian = ({ heading, title, id, sectionId }) => {
     const [isClicked, setIsClicked] = useState(false)
     const [isEditClicked, setIsEditClicked] = useState(false)
+    const handleClick = () => {
+        setIsEditClicked(true)
+    }
     return (
         <div className='flex flex-col border'>
             <div className={`p-3  flex flex-row  justify-between ${isClicked ? 'bg-[rgba(0,87,255,0.12)]' : 'bg-white'}`}>
                 <div className='flex flex-row  gap-x-5 items-center'>
                     <p className='text-sm text-[#0F1114]'>{heading}</p>
                     <EditButton
-                        onClick={setIsEditClicked}
+                        onClick={handleClick}
                     />
                 </div>
                 <div
@@ -21,7 +24,6 @@ const Accordian = ({ heading, title }) => {
                     </svg>
                 </div>
             </div>
-
             <div className={`p-3  ${isClicked ? 'block transition-all' : 'hidden transition-all'}`}>
                 <p className='text-left text-sm text-[#878A99]'>{title}</p>
             </div>
@@ -30,11 +32,13 @@ const Accordian = ({ heading, title }) => {
                     <EditModal
                         modalName={`Edit Faq Title & Body`}
                         onClose={setIsEditClicked}
+                        id={id}
+                        sectionId={sectionId}
+                        apiUrl={`/v1/cms/edit-faq-sub`}
                     />
                     : null
             }
         </div>
     )
 }
-
 export default Accordian
