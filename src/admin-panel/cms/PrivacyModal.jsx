@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { getToken } from '../../hook/getToken'
 import TextEditor from './TextEditor'
-const EditModal = ({ modalName, onClose, id, sectionId, apiUrl }) => {
+const PrivacyModal = ({ modalName, onClose, id, sectionId, apiUrl }) => {
     const [formData, setFormData] = useState()
     const getData = async (url) => {
         const res = await fetch(url)
         const data = await res.json()
         return data
     }
-    // Plain text to be converted to an editor
-    // const htmlText = '<p><strong>Hello there</strong></p>\n<ul>\n  <li><strong>I am fronted developer&nbsp;</strong>\n    <ul>\n      <li><strong>i am don</strong></li>\n';
-    const handleChange = async (name, value) => {
+ 
+     const handleChange = async (name, value) => {
         setFormData((preValue) => {
             return { ...preValue, [name]: value }
         })
@@ -20,13 +19,13 @@ const EditModal = ({ modalName, onClose, id, sectionId, apiUrl }) => {
         console.log('url', url);
         const token = getToken()
         const body = sectionId ? {
-            section_id: sectionId,
-            question: formData.title,
-            description: formData.description
+            _id: sectionId,
+            heading: formData.heading,
+            about: formData.about
         } :
             {
-                section: formData.title,
-                description: formData.description
+                heading: formData.heading,
+                  about: formData.about
             }
         const requestOptions = {
             method: "POST",
@@ -46,13 +45,13 @@ const EditModal = ({ modalName, onClose, id, sectionId, apiUrl }) => {
     }
     useEffect(() => {
         if (id && sectionId) {
-            const url = `${process.env.REACT_APP_URL}/v1/cms/get/faqsub/${id}`
+            const url = `${process.env.REACT_APP_URL}/v1/cms/privacy-policies/${id}`
             console.log('sub section url', url);
             getData(url).then(data => {
                 console.log(' sub-section-data', data);
                 setFormData({
-                    title: data.question,
-                    description: data.description
+                    heading: data.heading,
+                    about: data.about
                 })
             }).catch(err => console.log(err))
         }
@@ -62,8 +61,8 @@ const EditModal = ({ modalName, onClose, id, sectionId, apiUrl }) => {
             getData(url).then(data => {
                 console.log(' section-data', data)
                 setFormData({
-                    title: data.section,
-                    description: data.description
+                    heading: data.heading,
+                    about: data.about
                 })
             }).catch(err => console.log(err))
         }
@@ -118,4 +117,4 @@ const EditModal = ({ modalName, onClose, id, sectionId, apiUrl }) => {
         </div>
     )
 }
-export default EditModal
+export default PrivacyModal
