@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import slugify from "./Slugify";
+import toast from "react-hot-toast";
 
 export const ParentModal = ({ visible, onClose, id, modalName }) => {
   const [fileInputState, setFileInputState] = useState("");
@@ -21,9 +22,9 @@ export const ParentModal = ({ visible, onClose, id, modalName }) => {
       const data = await response.json();
       if (response.ok) {
         if (modalName === "edit") {
-          alert("Updated Successfully");
+          toast.success("Updated Successfully");
         } else {
-          alert("Added Successfully");
+          toast.success("Added Successfully");
         }
         SetFormData({
           category_name: "",
@@ -31,7 +32,10 @@ export const ParentModal = ({ visible, onClose, id, modalName }) => {
           category_img: "",
         });
         onClose();
+      
         console.log(data);
+      }else{
+        toast.error(data.message);
       }
     } catch (error) {
       setIsFormSubmited(false);
@@ -80,7 +84,10 @@ export const ParentModal = ({ visible, onClose, id, modalName }) => {
     };
 
     if (modalName === "edit") {
-      updateParent(`${process.env.REACT_APP_URL}/v1/categories/edit/${id}`, requestOptions);
+      updateParent(
+        `${process.env.REACT_APP_URL}/v1/categories/edit/${id}`,
+        requestOptions
+      );
     } else {
       updateParent(
         `${process.env.REACT_APP_URL}/v1/categories/add?filter[category_type][$eq]=parent`,
@@ -93,7 +100,9 @@ export const ParentModal = ({ visible, onClose, id, modalName }) => {
     if (modalName === "view" || modalName === "edit") {
       const fetchData = async () => {
         try {
-          const response = await fetch(`${process.env.REACT_APP_URL}/v1/categories/get/${id}`);
+          const response = await fetch(
+            `${process.env.REACT_APP_URL}/v1/categories/get/${id}`
+          );
           if (response.ok) {
             const data = await response.json();
             SetFormData(data.category);
@@ -162,6 +171,12 @@ export const ParentModal = ({ visible, onClose, id, modalName }) => {
             type="text"
             maxLength={160}
           />
+               <div className='flex gap-x-10'>
+                    <div className=''>
+                        <img className='w-44 aspect-square'
+                            src={formData.category_img} />
+                    </div>
+                    </div>
           <div className="w-1/2 flex flex-col">
             <p className="w-fit text-xs text-gray-900  py-1 uppercase ">
               Category image
@@ -192,17 +207,31 @@ export const ParentModal = ({ visible, onClose, id, modalName }) => {
                   "cursor-not-allowed"
                 }`}
               >
-                <button
-                  className={`py-2 px-10 bg-[#00388c] text-white rounded-lg uppercase ${
-                    (isFormSubmited ||
-                      formData.category_desc === "" ||
-                      formData.category_name === "") &&
-                    " pointer-events-none"
-                  }`}
-                  type="submit"
-                >
-                  add new
-                </button>
+                {modalName === "edit" ? (
+                  <button
+                    className={`py-2 px-10 bg-[#00388c] text-white rounded-lg uppercase ${
+                      (isFormSubmited ||
+                        formData.category_desc === "" ||
+                        formData.category_name === "") &&
+                      " pointer-events-none"
+                    }`}
+                    type="submit"
+                  >
+                    update
+                  </button>
+                ) : (
+                  <button
+                    className={`py-2 px-10 bg-[#00388c] text-white rounded-lg uppercase ${
+                      (isFormSubmited ||
+                        formData.category_desc === "" ||
+                        formData.category_name === "") &&
+                      " pointer-events-none"
+                    }`}
+                    type="submit"
+                  >
+                    add new
+                  </button>
+                )}
               </div>
             )}
           </div>
