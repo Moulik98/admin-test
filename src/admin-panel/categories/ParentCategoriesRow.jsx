@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ParentModal } from "./ParentModal";
 import Description from "../../Description";
-const CategoriesRow = ({ srNo, parentName, categoriesId, description, id , status }) => {
+const CategoriesRow = ({ srNo,img, parentName, categoriesId, description, id , status }) => {
   // State for view modal
   const [viewModal, setViewModal] = useState(false)
   // State for edit 
@@ -43,6 +43,9 @@ const CategoriesRow = ({ srNo, parentName, categoriesId, description, id , statu
 
       <td className="whitespace-nowrap px-6 py-2 text-xs font-light text-gray-900">
         {srNo}
+      </td>
+      <td className="w-12 h-12 rounded-full">
+       <img className="w-3/5 h-full rounded-full object-fill" src={img} alt="" />
       </td>
       <td className="whitespace-nowrap px-6 py-2 text-xs font-light text-gray-900">
         {parentName}
