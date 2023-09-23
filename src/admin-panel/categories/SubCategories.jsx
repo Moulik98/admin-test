@@ -147,6 +147,12 @@ const SubCategories = () => {
                 >
                   Sl no.
                 </th>
+                <th
+                  scope="col"
+                  className="px-4 py-2 text-left text-xs font-normal text-gray-900"
+                >
+                 Image
+                </th>
 
                 <th
                   scope="col"
@@ -188,6 +194,7 @@ const SubCategories = () => {
                     id={categories._id}
                     key={categories._id}
                     srNo={index + 1}
+                    img={categories.category_img}
                     parent={categories.category_name}
                     sub={categories.parent_category_id.category_name}
                     categoriesId={categories.category_slug}

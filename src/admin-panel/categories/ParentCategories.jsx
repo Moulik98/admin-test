@@ -73,10 +73,6 @@ const ParentCategories = () => {
             </svg>
             <p className="text-xs">Add New Parent Category</p>
           </div>
-          <div className="flex gap-x-1">
-            <Link to="/category/subcategory" className="text-left text-xs text-teal-500 py-1 ">Sub-Category</Link>
-            <Link to="/category/childcategory" className="text-left text-xs text-teal-500 py-1 ">Child-Category</Link>
-          </div>
         </div>
       </div>
       <section>

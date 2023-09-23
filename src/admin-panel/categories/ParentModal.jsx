@@ -32,9 +32,9 @@ export const ParentModal = ({ visible, onClose, id, modalName }) => {
           category_img: "",
         });
         onClose();
-      
+
         console.log(data);
-      }else{
+      } else {
         toast.error(data.message);
       }
     } catch (error) {
@@ -63,17 +63,17 @@ export const ParentModal = ({ visible, onClose, id, modalName }) => {
     const data =
       modalName === "edit"
         ? {
-            category_desc: formData.category_desc,
-            category_type: "parent",
-            category_img: selectedFile,
-          }
+          category_desc: formData.category_desc,
+          category_type: "parent",
+          category_img: selectedFile,
+        }
         : {
-            category_name: formData.category_name,
-            category_slug: slug,
-            category_desc: formData.category_desc,
-            category_type: "parent",
-            category_img: selectedFile,
-          };
+          category_name: formData.category_name,
+          category_slug: slug,
+          category_desc: formData.category_desc,
+          category_type: "parent",
+          category_img: selectedFile,
+        };
     const requestOptions = {
       method: "POST",
       headers: {
@@ -122,7 +122,7 @@ export const ParentModal = ({ visible, onClose, id, modalName }) => {
   if (visible);
   return (
     <div className=" fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
-      <div className="w-1/2 mx-auto bg-white rounded py-5 px-10">
+      <div className="w-1/2 mx-auto bg-white rounded py-5 px-10 ">
         <form
           onSubmit={(e) => {
             handleSubmit(e);
@@ -140,7 +140,7 @@ export const ParentModal = ({ visible, onClose, id, modalName }) => {
                 name="category_name"
                 disabled={modalName === "view" || modalName === "edit"}
                 value={formData.category_name}
-                className="h-10 my-5 px-4 outline-0 border border-solid border-gray-200 rounded-md"
+                className="h-10 my-2 px-4 outline-0 border border-solid border-gray-200 rounded-md"
                 type="text"
                 maxLength={80}
               />
@@ -154,7 +154,7 @@ export const ParentModal = ({ visible, onClose, id, modalName }) => {
                 placeholder={
                   formData.category_name && slugify(formData.category_name)
                 }
-                className=" h-10 my-5 px-4 outline-0 border border-solid border-gray-200 rounded-md"
+                className=" h-10 my-2 px-4 outline-0 border border-solid border-gray-200 rounded-md"
                 type="text"
               />
             </div>
@@ -167,20 +167,25 @@ export const ParentModal = ({ visible, onClose, id, modalName }) => {
             name="category_desc"
             value={formData.category_desc}
             disabled={modalName === "view"}
-            className="h-24 my-5 px-4 py-2 outline-0 border border-solid border-gray-200 resize-none rounded-md"
+            className="h-24 my-2 px-4 py-2 outline-0 border border-solid border-gray-200 resize-none rounded-md"
             type="text"
             maxLength={160}
           />
-               <div className='flex gap-x-10'>
-                    <div className=''>
-                        <img className='w-44 aspect-square'
-                            src={formData.category_img} />
-                    </div>
-                    </div>
+          <div className='flex gap-y-10'>
+            {modalName === 'edit' || modalName === 'view' ? (
+              <div className=''>
+                <p className="w-fit text-xs text-gray-900  py-1 uppercase ">
+                  Category image
+                </p>
+                <img className='w-24 aspect-square'
+                  src={formData.category_img} />
+              </div>) : (
+              null
+            )
+            }
+          </div>
           <div className="w-1/2 flex flex-col">
-            <p className="w-fit text-xs text-gray-900  py-1 uppercase ">
-              Category image
-            </p>
+
             <div>
               <input
                 onChange={handleFileInputChange}
@@ -194,39 +199,37 @@ export const ParentModal = ({ visible, onClose, id, modalName }) => {
           <div className="flex gap-x-5 justify-center my-5">
             <div
               onClick={() => onClose()}
-              className="py-2 px-4 bg-white text-red-600 rounded-sm"
+              className="py-2 px-10 bg-red-500 text-white rounded-sm"
             >
               Cancel
             </div>
             {modalName === "view" ? null : (
               <div
-                className={`${
-                  (isFormSubmited ||
+                className={`${(isFormSubmited ||
                     formData.category_desc === "" ||
                     formData.category_name === "") &&
                   "cursor-not-allowed"
-                }`}
+                  }`}
               >
                 {modalName === "edit" ? (
                   <button
-                    className={`py-2 px-10 bg-[#00388c] text-white rounded-lg uppercase ${
-                      (isFormSubmited ||
+                    className={`py-2 px-10 bg-[#00388c] text-white rounded-sm uppercase ${(isFormSubmited ||
                         formData.category_desc === "" ||
                         formData.category_name === "") &&
                       " pointer-events-none"
-                    }`}
+                      }`}
                     type="submit"
                   >
                     update
                   </button>
                 ) : (
                   <button
-                    className={`py-2 px-10 bg-[#00388c] text-white rounded-lg uppercase ${
-                      (isFormSubmited ||
+                    className={`py-2 px-10 bg-[#00388c] text-white rounded-sm uppercase ${(isFormSubmited ||
                         formData.category_desc === "" ||
-                        formData.category_name === "") &&
-                      " pointer-events-none"
-                    }`}
+                        formData.category_name === "" ||
+                        formData.category_img === "")
+
+                      }`}
                     type="submit"
                   >
                     add new
