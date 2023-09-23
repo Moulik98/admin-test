@@ -222,14 +222,14 @@ const SubCategoriesModal = ({ visible, onClose, id, modalName }) => {
           <div className="flex gap-x-5 justify-center my-5">
             <div
               onClick={() => onClose()}
-              className="py-2 px-4 bg-white text-red-600 rounded-sm"
+              className="py-2 px-10 bg-red-500 text-white rounded-sm"
             >
               Cancel
             </div>
 
             {
               modalName === 'view' ? null : <button
-                className="py-2 px-10 bg-[#00388c] text-white rounded-lg uppercase"
+                className="py-2 px-10 bg-[#00388c] text-white rounded-sm uppercase"
                 type="submit"
               >
                 add new
