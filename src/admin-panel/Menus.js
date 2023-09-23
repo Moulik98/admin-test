@@ -70,6 +70,11 @@ const Menus = [
     isOpen: false, // Add isOpen property
   },
   {
+    title: "Brands",
+    src: coupons,
+    link: "brands",
+  },
+  {
     title: "Products",
     src: product,
     link: "allproduct",

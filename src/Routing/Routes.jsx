@@ -29,6 +29,7 @@ import FaqSection from '../admin-panel/cms/FaqSection';
 import Privacy from '../admin-panel/cms/Privacy';
 import Terms from '../admin-panel/cms/Terms';
 import Refund from '../admin-panel/cms/Refund';
+import { Brands } from '../admin-panel/brands/Brands';
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
   return children(location);
@@ -86,6 +87,7 @@ const MainRoutes = () => {
             <Route path="/cms/privacy-policy" element={<ProtectedRoute element={Privacy} />} />
             <Route path="/cms/terms-conditions" element={<ProtectedRoute element={Terms} />} />
             <Route path="/cms/refunds-cancellations" element={<ProtectedRoute element={Refund} />} />
+            <Route path="/brands" element={<ProtectedRoute element={Brands} />} />
           </Routes>
         )}
       </PreserveLocation>      
