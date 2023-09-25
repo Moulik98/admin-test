@@ -2,13 +2,18 @@ import React, { useState, useEffect } from "react";
 import { User } from "../user/User";
 import TableRow from "./TableRow";
 import { Link } from "react-router-dom";
+import Pagination from "../../Pagination"; // Import the Pagination component
 
 export const Brands = () => {
   const [verificationList, SetVerificationList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const [totalItems, setTotalItems] = useState(0);
+
   async function fetchSellerVerificationList() {
     try {
-      const token = localStorage.getItem("access_token"); // Replace with your actual bearer token
-      const url = `${process.env.REACT_APP_URL}/v1/brand-registration/get-registration-data/admin`;
+      const token = localStorage.getItem("access_token");
+      const url = `${process.env.REACT_APP_URL}/v1/brand-registration/get-registration-data/admin?page=${currentPage}&limit=${pageSize}`;
 
       const response = await fetch(url, {
         headers: {
@@ -20,6 +25,7 @@ export const Brands = () => {
       const data = await response.json();
       console.log(data);
       SetVerificationList(data?.data?.data);
+      setTotalItems(data?.data?.totalItems);
     } catch (error) {
       console.log(error);
     }
@@ -27,17 +33,21 @@ export const Brands = () => {
 
   useEffect(() => {
     fetchSellerVerificationList();
-  }, []);
+  }, [currentPage, pageSize]); // Update the useEffect dependencies
+
   const handleRefresh = () => {
     fetchSellerVerificationList();
   };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   return (
     <div>
       <section>
         <div className="max-w-6xl mx-auto flex justify-between py-5">
-          <p className="text-2xl text-gray-900 font-semibold">
-            Brands Listing
-          </p>
+          <p className="text-2xl text-gray-900 font-semibold">Brands Listing</p>
           <div className="flex gap-x-10">
             <form className="flex items-center">
               <div className="flex items-center px-2 py-1 gap-x-1 bg-gray-100 rounded-2xl ">
@@ -59,8 +69,6 @@ export const Brands = () => {
                 </div>
                 <input
                   className="w-52 py-1 px-1 bg-gray-100 outline-0"
-                  //   value={searchTerm}
-                  //   onChange={handleSearch}
                   type="text"
                 />
               </div>
@@ -113,6 +121,15 @@ export const Brands = () => {
           </div>
         </div>
       </section>
+
+      <div className="flex justify-end items-center py-5">
+        <Pagination
+          currentPage={currentPage}
+          totalItems={totalItems}
+          pageSize={pageSize}
+          setCurrentPage={handlePageChange} // Use handlePageChange for pagination
+        />
+      </div>
     </div>
   );
 };
