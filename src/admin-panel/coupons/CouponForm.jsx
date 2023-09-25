@@ -136,7 +136,7 @@ const CouponForm = (props) => {
     }, [formData.category_type])
     console.log(categoryList);
     return (
-        <div className='pr-6 py-5'>
+        <div className='pr-6 py-5 text-xs'>
             <form
                 onSubmit={handleSubmit}
             >
