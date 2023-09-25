@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ChildCategoriesModal from './ChildCategoriesModal'
 import Description from '../../Description'
 const ChildCategoriesRow = (props) => {
-    const { srNo, child, parent, sub, categoriesId, desc, id,status } = props
+    const { srNo,img, child, parent, sub, categoriesId, desc, id,status } = props
     const [showEdit, SetShowEdit] = useState(false)
     const [viewModal, SetViewModal] = useState(false)
     const handleClose = () => {
@@ -38,12 +38,15 @@ const ChildCategoriesRow = (props) => {
     return (
         <tr className="overflow-hidden border-b-2 rounded-b-3xl text-left  bg-white transition duration-300 ease-in-out">
             <td className="whitespace-nowrap px-4 py-2 text-xs font-normal text-gray-900">{srNo}</td>
-            <td className="whitespace-nowrap px-4 py-2 text-xs font-light text-gray-900">{child}</td>
-            <td className="whitespace-nowrap px-4 py-2 text-xs font-light text-gray-900">{parent === undefined ? 'Null' : parent}</td>
-            <td className="whitespace-nowrap px-4 py-2 text-xs font-light text-gray-900">{sub}</td>
-            <td className="whitespace-nowrap px-4 py-2 text-xs font-light text-gray-900">{categoriesId}</td>
+            <td className="w-12 h-12 rounded-full ">
+       <img className="w-3/5 h-full rounded-full object-fill ml-4" src={img} alt="" />
+      </td>
+            <td className="whitespace-nowrap px-2 py-2 text-xs font-light text-gray-900">{child}</td>
+            <td className="whitespace-nowrap px-2 py-2 text-xs font-light text-gray-900">{parent === undefined ? 'Null' : parent}</td>
+            <td className="whitespace-nowrap px-2 py-2 text-xs font-light text-gray-900">{sub}</td>
+            <td className="whitespace-nowrap px-2 py-2 text-xs font-light text-gray-900">{categoriesId}</td>
             <td className=" px-4 py-2 text-xs font-light text-gray-900"><Description description={desc} /></td>
-            <td className="whitespace-nowrap px-4 py-2 text-xs font-light text-gray-900">
+            <td className="whitespace-nowrap px-2 py-2 text-xs font-light text-gray-900">
                 <div className="flex gap-2">
                     <div
                         onClick={() => SetViewModal(true)}

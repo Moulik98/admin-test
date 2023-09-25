@@ -186,6 +186,12 @@ const ChildCategories = () => {
                                     scope="col"
                                     className="px-4 py-2 text-left text-sm font-medium text-gray-900"
                                 >
+                                    Image
+                                </th>
+                                <th
+                                    scope="col"
+                                    className="px-4 py-2 text-left text-sm font-medium text-gray-900"
+                                >
                                     Child Category
                                 </th>
                                 <th
@@ -230,6 +236,7 @@ const ChildCategories = () => {
                                         key={categories._id}
                                         id={categories._id}
                                         srNo={index + 1}
+                                        img={categories.category_img}
                                         child={categories.category_name}
                                         parent={categories?.parent_category_id?.category_name}
                                         sub={categories.sub_category_id.category_name}
