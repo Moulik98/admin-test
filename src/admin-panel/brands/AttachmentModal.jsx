@@ -12,7 +12,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
   async function fetchAttachment() {
     try {
       // Replace with your actual bearer token
-      const url = `${process.env.REACT_APP_URL}/v1/verifySeller/viewAttachments/${id}`;
+      const url = `${process.env.REACT_APP_URL}/v1/brand-registration/get-registration-data/admin/${id}`;
 
       const response = await fetch(url, {
         headers: {
@@ -21,7 +21,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
       });
 
       const data = await response.json();
-      SetAttachMent(data[0]);
+      SetAttachMent(data?.data);
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -33,23 +33,23 @@ const AttachmentModal = ({ onClose, visible, id }) => {
 
   async function makePutRequest(id) {
     try {
-      const url = `${process.env.REACT_APP_URL}/v1/verifySeller/isVerify`;
+      const url = `${process.env.REACT_APP_URL}/v1/brand-registration/active-brand/admin/${id}`;
 
       const payload = {
         // Add your desired request body here
-        id: id,
-        status: true,
+        // _id: id,
+        status: "Approved",
       };
 
       const requestOptions = {
-        method: "PUT",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(payload),
       };
-      // console.log(JSON.stringify(payload))
+       console.log(JSON.stringify(payload))
       const response = await fetch(url, requestOptions);
       if (response.ok) {
         const responseData = await response.json()
@@ -65,15 +65,15 @@ const AttachmentModal = ({ onClose, visible, id }) => {
 
   async function makeDeclineRequest(id) {
     try {
-      const url = `${process.env.REACT_APP_URL}/v1/verifySeller/isVerify`;
+      const url = `${process.env.REACT_APP_URL}/v1/brand-registration/active-brand/admin/${id}`;
 
       const payload = {
-        id: id,
-        status: false,
+        // _id: id,
+        status: "Decline",
       };
 
       const requestOptions = {
-        method: "PUT",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -110,7 +110,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
     return (
       <div
         id="container"
-        onClick={handleClosePdf}
+        // onClick={handleClosePdf}
         className=" fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center"
       >
         <div className="w-1/2 flex flex-col mx-auto bg-white rounded ">
@@ -140,12 +140,12 @@ const AttachmentModal = ({ onClose, visible, id }) => {
               <div className="w-2/5 flex justify-between ">
                 <div className="w-1/2 flex justify-between">
                   <h1 className=" text-base  font-semibold text-[#143250]">
-                    Vendor Name
+                    Brand Name
                   </h1>
                   :
                 </div>
                 <p className="text-sm text-right  font-normal mx-1">
-                  {attachMent?.fullname}
+                  {attachMent?.brand_name}
                 </p>
               </div>
               <div className="w-2/5 flex justify-between ">
@@ -156,7 +156,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                   :
                 </div>
                 <p className="text-sm text-right  font-normal mx-1">
-                  {attachMent?.email}
+                  {attachMent?.trademark_office}
                 </p>
               </div>
             </div>
@@ -170,7 +170,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                   :
                 </div>
                 <p className="text-sm text-right  font-normal mx-1">
-                  {attachMent?.store_name}
+                  {attachMent?.trademark_reg_no}
                 </p>
               </div>
               <div className="w-2/5 flex justify-between ">
@@ -181,7 +181,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                   :
                 </div>
                 <p className="text-sm text-right  font-normal mx-1">
-                  {attachMent?.gst_number}
+                  {attachMent?.trademark_status}
                 </p>
               </div>
             </div>
@@ -195,7 +195,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                   :
                 </div>
                 <p className="text-sm text-right  font-normal mx-1">
-                  {attachMent?.pan_number}
+                  {attachMent?.vendor_code}
                 </p>
               </div>
               <div className="w-2/5 flex justify-between ">
@@ -206,52 +206,12 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                   :
                 </div>
                 <p className="text-sm text-right  font-normal mx-1">
-                  {attachMent?.sellerType}
+                  {attachMent?.trademark_type}
                 </p>
               </div>
             </div>
           </div>
           {/* // preview section */}
-          <div className="flex justify-around">
-            <div
-              onClick={() => setGstModal(true)}
-              className=" w-2/5 flex justify-center items-center h-40 bg-gray-200 rounded"
-            >
-              <div className="w-full h-full p-2 cursor-pointer">
-                <img
-                  className="w-full h-full object-contain"
-                  src="https://res.cloudinary.com/genx21/image/upload/v1694692016/zngnznqxvjtrpvn45jee.webp"
-                  alt=""
-                />
-              </div>
-              {gstModal && attachMent.gstImageUrl && (
-                <PdfViewModal
-                  CloseModal={handleClosePdf}
-                  visible={gstModal}
-                  url={attachMent.gstImageUrl}
-                />
-              )}
-            </div>
-            <div
-              onClick={() => setPdfModal(true)}
-              className=" w-2/5 flex justify-center items-center h-40 bg-gray-200 rounded"
-            >
-              <div className="w-full h-full p-2">
-                <img
-                  className="w-full h-full object-contain"
-                  src="https://res.cloudinary.com/genx21/image/upload/v1694692016/zngnznqxvjtrpvn45jee.webp"
-                  alt=""
-                />
-              </div>
-              {pdfModal && attachMent.panImageUrl && (
-                <PdfViewModal
-                  visible={pdfModal}
-                  CloseModal={handleClosePdf}
-                  url={attachMent.panImageUrl}
-                />
-              )}
-            </div>
-          </div>
           <div className="flex justify-center gap-x-5 py-5">
             <button
               onClick={(e) => handleVerify(e)}
