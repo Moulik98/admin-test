@@ -46,3 +46,8 @@
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+.highlighted-item {
+  background-color: #f0f0f0; /* Change the background color as desired */
+  cursor: pointer; /* Change the cursor style on hover */
+}
