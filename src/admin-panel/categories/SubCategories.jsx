@@ -12,36 +12,83 @@ const SubCategories = () => {
   const [childModal, setChildModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [showDropdown, setShowDropDown] = useState(false);
   // For Closing Modal
   const handleClose = () => {
     setChildModal(false);
   };
   let [childCategories, setChildCategories] = useState([]);
+
+  const subData = async() => {
+    const response = await fetch(`${process.env.REACT_APP_URL}/v1/categories/get-populated?filter[category_type][$eq]=sub&page=${currentPage}&limit=${pageSize}&sort=-createdAt`)
+    if(response.ok){
+      const data = await response.json();
+      setChildCategories(data.categoryList);
+      setData(data.categoryList);
+      setTotalItems(data.totalCount)
+      console.log(data.categoryList);
+    }
+  }
   useEffect(() => {
-    fetch(
-      `${process.env.REACT_APP_URL}/v1/categories/get-populated?filter[category_type][$eq]=sub&page=${currentPage}&limit=${pageSize}&sort=-createdAt`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setChildCategories(data.categoryList);
-        setData(data.categoryList);
-        setTotalItems(data.totalCount)
-        console.log(data.categoryList);
-      });
+    subData();
   }, [SubCategoriesModal, currentPage, pageSize]);
 
 
 
-
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
+  const handleInputChange = (event) => {
+    setSearchQuery(event.target.value);
+    if (event.target.value === "") {
+      setShowDropDown(false);
+    } else {
+      setShowDropDown(true);
+    }
   };
-  childCategories = data.filter(item =>
-    item.parent_category_id?.category_name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
-  const currentItem = childCategories.length > 0 ? childCategories[0] : null;
+// Parent Category Search
+useEffect(() => {
+  // Define a function to fetch data from the API
+  const fetchData = async () => {
+    try {
+      // If the searchQuery is empty, fetch all data
+      if (!searchQuery) {
+         await subData();
+      } else {
+        // Fetch data based on the search query
+        const response = await fetch(
+          `${process.env.REACT_APP_URL}/v1/categories/category-search?search=${searchQuery}&category_type=sub`
+        );
 
+        if (response.ok) {
+          const data = await response.json();
+
+          // Assuming the API returns an array of category objects
+          setSearchResults(data.response);
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  // Call the fetchData function when searchQuery changes
+  fetchData();
+}, [searchQuery, currentPage, pageSize]);
+
+
+  const handleClick = async(categoryId) => {
+    try {
+      const response = await fetch (`${process.env.REACT_APP_URL}/v1/categories/get?filter[category_type][$eq]=sub&filter[_id][$eq]=${categoryId}`);
+      if(response.ok){
+        const data = await response.json();
+        setChildCategories(data.categoryList);
+        setShowDropDown(false);
+      }
+    }catch (error){
+      console.error("Error fetching data")
+    }
+  }
   return (
     <div className="pr-6 py-10 text-xs font-semibold">
       {childModal && (
@@ -72,44 +119,7 @@ const SubCategories = () => {
           Categories &gt; Sub Categories
         </div>
       </div>
-      <div className="flex items-center justify-between mt-5">
-        <div className="flex gap-x-5">
-          <div className="flex">
-            {/* // Search 1 */}
-            <form className="flex items-center">
-              <label className="mr-2">Parent Categories</label>
-              <div className="flex items-center p-1 gap-x-1 rounded-lg border border-solid border-[#9D9D9D]">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-4 h-4"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                  />
-                </svg>
-                <input
-                  className="py-1 px-1 outline-0"
-                  value={searchTerm}
-                  onChange={handleSearch}
-                  type="text"
-                />
-                {currentItem && <p>{currentItem.name}</p>}
-                {/* <ul>
-                  {filteredData.map((item) => (
-                    <li key={item._id}>{item.category_name}</li>
-                  ))}
-                </ul> */}
-              </div>
-            </form>
-          </div>
-        </div>
-        <div className="flex justify-end">
+      <div className="flex justify-end">
           <div className="flex flex-col">
             <div onClick={() => setChildModal(true)} className="flex items-center">
               <svg
@@ -128,13 +138,59 @@ const SubCategories = () => {
               </svg>
               <p className="text-xs">Add New Sub Category</p>
             </div>
-            <div className="flex gap-x-1">
-              <Link to="/category/parentcategory" className="text-left text-xs text-teal-500 py-1 ">Parent-Category</Link>
-              <Link to="/category/childcategory" className="text-left text-xs text-teal-500 py-1 ">Child-Category</Link>
-            </div>
           </div>
         </div>
+    
+        <div className="max-w-5xl mx-auto flex justify-end items-center my-4 relative">
+        <form className="flex items-center">
+          <label className="mr-2">Sub Categories</label>
+          <div className="flex flex-col relative">
+            <div className="flex items-center p-1 gap-x-1 rounded-lg border border-solid border-[#9D9D9D]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-4 h-4"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                />
+              </svg>
+              <input
+                className="py-1 px-1 outline-0"
+                value={searchQuery}
+                placeholder="Search categories"
+                onChange={handleInputChange}
+                type="text"
+              />
+            </div>
+            {/* Dropdown */}
+            {showDropdown && searchResults.length > 0 && (
+              <div className="absolute top-[100%] left-0 w-full mt-1  bg-white border border-solid border-[#9D9D9D] rounded-lg shadow-md">
+                <ul>
+                  {searchResults.map((result) => (
+                         <li
+                         key={result._id}
+                        onClick={() => {
+                            handleClick(result._id)
+
+                        }}
+                       
+                         // Apply the highlighted-item class based on hover state
+                         className='p-2 hover:bg-gray-300 font-light text-xs'
+                       >{result?.category_name}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </form>
       </div>
+      
 
       <section>
         <div className="max-w-5xl mx-auto overflow-hidden rounded-t-xl my-5">
@@ -195,8 +251,8 @@ const SubCategories = () => {
                     key={categories._id}
                     srNo={index + 1}
                     img={categories.category_img}
-                    parent={categories.category_name}
-                    sub={categories.parent_category_id.category_name}
+                    parent={categories?.category_name}
+                    sub={categories.parent_category_id?.category_name}
                     categoriesId={categories.category_slug}
                     desc={categories.category_desc}
                     status={categories.status}
