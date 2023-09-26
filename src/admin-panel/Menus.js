@@ -286,12 +286,17 @@ const Menus = [
         link: "/cms/refunds-cancellations",
       },
       {
-        title: "Faqs",
+        title: "FAQs",
         src: "sub",
         link: "/cms/faqs",
       }
     ],
     isOpen: false, // Add isOpen property
+  },
+  {
+    title: "Ratings & Reviews",
+    src: coupons,
+    link: "review-rating",
   }
 ];
 export default Menus;
