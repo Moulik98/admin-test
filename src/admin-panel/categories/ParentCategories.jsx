@@ -17,7 +17,7 @@ const ParentCategories = () => {
   const [showDropdown, setShowDropDown] = useState(false);
   // getting parent list data
   async function parentData() {
-    const url = `${process.env.REACT_APP_URL}/v1/categories/get?filter[category_type][$eq]=parent&page=${currentPage}&limit=${pageSize}`;
+    const url = `${process.env.REACT_APP_URL}/v1/categories/get?filter[category_type][$eq]=parent&page=${currentPage}&limit=${pageSize}&sort=-createdAt`;
     const parentCategories = await getParentList(url);
     setParentCategories(parentCategories.categoryList);
     setTotalItems(parentCategories.totalCount);
@@ -51,7 +51,7 @@ useEffect(() => {
       } else {
         // Fetch data based on the search query
         const response = await fetch(
-          `${process.env.REACT_APP_URL}/v1/categories/category-search?search=${searchQuery}&category_type=parent`
+          `${process.env.REACT_APP_URL}/v1/categories/category-search?search=${searchQuery}&category_type[]=parent`
         );
 
         if (response.ok) {
@@ -111,7 +111,9 @@ useEffect(() => {
           Categories &gt; Parent Categories
         </div>
       </div>
-      <div className="flex justify-end ">
+    
+      <div className="max-w-6xl mx-auto flex justify-between  my-4 relative">
+      <div className="flex justify-end my-4 ">
         <div className="flex flex-col">
           <div
             onClick={() => setParentModal(true)}
@@ -135,7 +137,6 @@ useEffect(() => {
           </div>
         </div>
       </div>
-      <div className="max-w-5xl mx-auto flex justify-end items-center my-4 relative">
         <form className="flex items-center">
           <label className="mr-2">Parent Categories</label>
           <div className="flex flex-col relative">
@@ -157,14 +158,14 @@ useEffect(() => {
               <input
                 className="py-1 px-1 outline-0"
                 value={searchQuery}
-                placeholder="Search categories"
+                placeholder="Search parent categories"
                 onChange={handleInputChange}
                 type="text"
               />
             </div>
             {/* Dropdown */}
             {showDropdown && searchResults.length > 0 && (
-              <div className="absolute top-[100%] left-0 w-full mt-1  bg-white border border-solid border-[#9D9D9D] rounded-lg shadow-md">
+              <div className="absolute max-h-60 top-[100%] left-0 w-full mt-1  bg-white border border-solid border-[#9D9D9D] rounded-md overflow-y-scroll search-scrollbar shadow-md">
                 <ul>
                   {searchResults.map((result) => (
                          <li
@@ -185,7 +186,7 @@ useEffect(() => {
         </form>
       </div>
       <section>
-        <div className="max-w-5xl mx-auto overflow-hidden rounded-t-xl my-5">
+        <div className="max-w-6xl mx-auto overflow-hidden rounded-t-xl my-5">
           <table className="table min-w-full border  border-solid">
             <thead className="bg-[#e5f2f4]">
               <tr>
@@ -201,17 +202,12 @@ useEffect(() => {
                 >
                   Image
                 </th>
+           
                 <th
                   scope="col"
                   className="px-6 py-2 text-left text-xs font-normal text-gray-900"
                 >
                   Parent Category
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-2 text-left text-xs font-normal text-gray-900"
-                >
-                  Category ID
                 </th>
                 <th
                   scope="col"
@@ -237,7 +233,6 @@ useEffect(() => {
                     srNo={index + 1}
                     img={categories?.category_img}
                     parentName={categories.category_name}
-                    categoriesId={categories.category_slug}
                     description={categories.category_desc}
                     status={categories.status}
                   />

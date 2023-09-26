@@ -44,7 +44,6 @@ const ChildCategoriesRow = (props) => {
             <td className="whitespace-nowrap px-2 py-2 text-xs font-light text-gray-900">{child}</td>
             <td className="whitespace-nowrap px-2 py-2 text-xs font-light text-gray-900">{parent === undefined ? 'Null' : parent}</td>
             <td className="whitespace-nowrap px-2 py-2 text-xs font-light text-gray-900">{sub}</td>
-            <td className="whitespace-nowrap px-2 py-2 text-xs font-light text-gray-900">{categoriesId}</td>
             <td className=" px-4 py-2 text-xs font-light text-gray-900"><Description description={desc} /></td>
             <td className="whitespace-nowrap px-2 py-2 text-xs font-light text-gray-900">
                 <div className="flex gap-2">

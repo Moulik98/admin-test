@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SubCategoriesModal from "./SubModal";
 import Description from "../../Description";
-const SubCategoriesRow = ({ srNo,img, parent, sub, categoriesId, desc, id,status }) => {
+const SubCategoriesRow = ({ srNo,img, parent, sub,  desc, id,status }) => {
   // State for view modal
   const [viewModal, setViewModal] = useState(false);
   // State for edit
@@ -50,9 +50,6 @@ const SubCategoriesRow = ({ srNo,img, parent, sub, categoriesId, desc, id,status
       </td>
       <td className="whitespace-nowrap px-4 py-2 text-xs font-light text-gray-900">
         {sub}
-      </td>
-      <td className="whitespace-nowrap px-4 py-2 text-xs font-light text-gray-900">
-        {categoriesId}
       </td>
       <td className="text-wrap px-4 py-2 text-xs font-light text-gray-900">
         <Description description={desc} />

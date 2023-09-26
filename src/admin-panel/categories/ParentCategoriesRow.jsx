@@ -50,9 +50,6 @@ const CategoriesRow = ({ srNo,img, parentName, categoriesId, description, id , s
       <td className="whitespace-nowrap px-6 py-2 text-xs font-light text-gray-900">
         {parentName}
       </td>
-      <td className=" px-6 py-2 text-xs font-light text-black">
-        {categoriesId}
-      </td>
       <td className=" px-6 py-2 text-xs font-light  text-gray-900">
         <Description description={description} />
       </td>

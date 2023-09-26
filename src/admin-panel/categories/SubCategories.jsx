@@ -57,7 +57,7 @@ useEffect(() => {
       } else {
         // Fetch data based on the search query
         const response = await fetch(
-          `${process.env.REACT_APP_URL}/v1/categories/category-search?search=${searchQuery}&category_type=sub`
+          `${process.env.REACT_APP_URL}/v1/categories/category-search?search=${searchQuery}&category_type=sub&category_type=parent`
         );
 
         if (response.ok) {
@@ -77,9 +77,16 @@ useEffect(() => {
 }, [searchQuery, currentPage, pageSize]);
 
 
-  const handleClick = async(categoryId) => {
+  const handleClick = async(categoryId,category_type) => {
     try {
-      const response = await fetch (`${process.env.REACT_APP_URL}/v1/categories/get?filter[category_type][$eq]=sub&filter[_id][$eq]=${categoryId}`);
+      let queryString = "";
+      if(category_type === "sub"){
+        queryString = "filter[category_type][$eq]=sub"
+      }
+      else{
+        queryString = "filter[category_type][$eq]=parent"
+      }
+      const response = await fetch (`${process.env.REACT_APP_URL}/v1/categories/get-populated?${queryString}&filter[_id][$eq]=${categoryId}`);
       if(response.ok){
         const data = await response.json();
         setChildCategories(data.categoryList);
@@ -119,7 +126,10 @@ useEffect(() => {
           Categories &gt; Sub Categories
         </div>
       </div>
-      <div className="flex justify-end">
+     
+    
+        <div className="max-w-6xl mx-auto flex justify-between  my-4 relative">
+        <div className="flex justify-end my-4">
           <div className="flex flex-col">
             <div onClick={() => setChildModal(true)} className="flex items-center">
               <svg
@@ -140,12 +150,10 @@ useEffect(() => {
             </div>
           </div>
         </div>
-    
-        <div className="max-w-5xl mx-auto flex justify-end items-center my-4 relative">
         <form className="flex items-center">
           <label className="mr-2">Sub Categories</label>
           <div className="flex flex-col relative">
-            <div className="flex items-center p-1 gap-x-1 rounded-lg border border-solid border-[#9D9D9D]">
+            <div className="w-60 flex items-center p-1 gap-x-1 rounded-lg border border-solid border-[#9D9D9D]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -161,22 +169,22 @@ useEffect(() => {
                 />
               </svg>
               <input
-                className="py-1 px-1 outline-0"
+                className=" py-1 px-1 outline-0"
                 value={searchQuery}
-                placeholder="Search categories"
+                placeholder="Search sub/parent categories"
                 onChange={handleInputChange}
                 type="text"
               />
             </div>
             {/* Dropdown */}
             {showDropdown && searchResults.length > 0 && (
-              <div className="absolute top-[100%] left-0 w-full mt-1  bg-white border border-solid border-[#9D9D9D] rounded-lg shadow-md">
+              <div className="absolute max-h-60 top-[100%] left-0 w-full mt-1  bg-white border border-solid border-[#9D9D9D] overflow-y-scroll search-scrollbar rounded-md shadow-md">
                 <ul>
                   {searchResults.map((result) => (
                          <li
                          key={result._id}
                         onClick={() => {
-                            handleClick(result._id)
+                            handleClick(result._id,result.category_type)
 
                         }}
                        
@@ -193,7 +201,7 @@ useEffect(() => {
       
 
       <section>
-        <div className="max-w-5xl mx-auto overflow-hidden rounded-t-xl my-5">
+        <div className="max-w-6xl mx-auto overflow-hidden rounded-t-xl my-5">
           <table className="table min-w-full border  border-solid">
             <thead className="bg-[#e5f2f4]">
               <tr>
@@ -222,12 +230,7 @@ useEffect(() => {
                 >
                   Parent Category
                 </th>
-                <th
-                  scope="col"
-                  className="px-4 py-2 text-left text-xs font-normal text-gray-900"
-                >
-                  Category ID
-                </th>
+             
 
                 <th
                   scope="col"
@@ -253,7 +256,6 @@ useEffect(() => {
                     img={categories.category_img}
                     parent={categories?.category_name}
                     sub={categories.parent_category_id?.category_name}
-                    categoriesId={categories.category_slug}
                     desc={categories.category_desc}
                     status={categories.status}
                   />

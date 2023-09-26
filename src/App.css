@@ -51,3 +51,14 @@
   background-color: #f0f0f0; /* Change the background color as desired */
   cursor: pointer; /* Change the cursor style on hover */
 }
+
+.search-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  
+}
+
+
+.search-scrollbar::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 5px;
+}
