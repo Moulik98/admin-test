@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PdfViewModal from "./PdfViewModal";
+
 const AttachmentModal = ({ onClose, visible, id }) => {
   const [pdfModal, setPdfModal] = useState(false);
   const [gstModal, setGstModal] = useState(false);
@@ -11,8 +12,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
 
   async function fetchAttachment() {
     try {
-      // Replace with your actual bearer token
-      const url = `${process.env.REACT_APP_URL}/v1/verifySeller/viewAttachments/${id}`;
+      const url = `${process.env.REACT_APP_URL}/v1/brand-registration/get-registration-data/admin/${id}`;
 
       const response = await fetch(url, {
         headers: {
@@ -21,7 +21,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
       });
 
       const data = await response.json();
-      SetAttachMent(data[0]);
+      SetAttachMent(data?.data);
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -33,28 +33,26 @@ const AttachmentModal = ({ onClose, visible, id }) => {
 
   async function makePutRequest(id) {
     try {
-      const url = `${process.env.REACT_APP_URL}/v1/verifySeller/isVerify`;
+      const url = `${process.env.REACT_APP_URL}/v1/brand-registration/active-brand/admin/${id}`;
 
       const payload = {
-        // Add your desired request body here
-        id: id,
-        status: true,
+        status: "Approved",
       };
 
       const requestOptions = {
-        method: "PUT",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(payload),
       };
-      // console.log(JSON.stringify(payload))
+      console.log(JSON.stringify(payload));
       const response = await fetch(url, requestOptions);
       if (response.ok) {
-        const responseData = await response.json()
+        const responseData = await response.json();
         onClose("verify");
-        console.log('PUT request successful:', responseData);
+        console.log("PUT request successful:", responseData);
       } else {
         throw new Error("PUT request failed");
       }
@@ -65,28 +63,27 @@ const AttachmentModal = ({ onClose, visible, id }) => {
 
   async function makeDeclineRequest(id) {
     try {
-      const url = `${process.env.REACT_APP_URL}/v1/verifySeller/isVerify`;
+      const url = `${process.env.REACT_APP_URL}/v1/brand-registration/active-brand/admin/${id}`;
 
       const payload = {
-        id: id,
-        status: false,
+        status: "Decline",
       };
 
       const requestOptions = {
-        method: "PUT",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(payload),
       };
-      console.log(JSON.stringify(payload))
+      console.log(JSON.stringify(payload));
       const response = await fetch(url, requestOptions);
       if (response.ok) {
-        const responseData = await response.json()
-        console.log(responseData)
+        const responseData = await response.json();
+        console.log(responseData);
         onClose("decline");
-        onClose("close"); // Notify the parent component of the decline action
+        onClose("close"); 
       } else {
         throw new Error("PUT request for decline failed");
       }
@@ -98,6 +95,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
   const handleVerify = () => {
     makePutRequest(id);
   };
+
   const handleClosePdf = (e) => {
     console.log("hii");
     if (e.target.id === "container") {
@@ -105,200 +103,137 @@ const AttachmentModal = ({ onClose, visible, id }) => {
       setGstModal(false);
     }
   };
+
   console.log(pdfModal);
-  if (visible)
-    return (
-      <div
-        id="container"
-        onClick={handleClosePdf}
-        className=" fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center"
-      >
-        <div className="w-1/2 flex flex-col mx-auto bg-white rounded ">
-          <div className="flex justify-between items-center p-5 border border-solid border-gray-300">
-            <h1 className="text-base font-semibold text-[#143250]">
-              Attachments
-            </h1>
-            <div onClick={() => onClose("close")} className="cursor-pointer">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 h-6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </div>
-          </div>
-          <div className="flex flex-col p-5">
-            <div className="flex justify-between">
-              <div className="w-2/5 flex justify-between ">
-                <div className="w-1/2 flex justify-between">
-                  <h1 className=" text-base  font-semibold text-[#143250]">
-                    Vendor Name
-                  </h1>
-                  :
-                </div>
-                <p className="text-sm text-right  font-normal mx-1">
-                  {attachMent?.fullname}
-                </p>
-              </div>
-              <div className="w-2/5 flex justify-between ">
-                <div className="w-1/2 flex justify-between">
-                  <h1 className=" text-base  font-semibold text-[#143250]">
-                    Email
-                  </h1>
-                  :
-                </div>
-                <p className="text-sm text-right  font-normal mx-1">
-                  {attachMent?.email}
-                </p>
-              </div>
-            </div>
-            {/* 2 row */}
-            <div className="flex justify-between">
-              <div className="w-2/5 flex justify-between ">
-                <div className="w-1/2 flex justify-between">
-                  <h1 className=" text-base  font-semibold text-[#143250]">
-                    Store Name
-                  </h1>
-                  :
-                </div>
-                <p className="text-sm text-right  font-normal mx-1">
-                  {attachMent?.store_name}
-                </p>
-              </div>
-              <div className="w-2/5 flex justify-between ">
-                <div className="w-1/2 flex justify-between">
-                  <h1 className=" text-base uppercase  font-semibold text-[#143250]">
-                    Gst
-                  </h1>
-                  :
-                </div>
-                <p className="text-sm text-right  font-normal mx-1">
-                  {attachMent?.gst_number}
-                </p>
-              </div>
-            </div>
-            {/* 3 row  */}
-            <div className="flex justify-between">
-              <div className="w-2/5 flex justify-between ">
-                <div className="w-1/2 flex justify-between">
-                  <h1 className=" text-base uppercase  font-semibold text-[#143250]">
-                    Pan
-                  </h1>
-                  :
-                </div>
-                <p className="text-sm text-right  font-normal mx-1">
-                  {attachMent?.pan_number}
-                </p>
-              </div>
-              <div className="w-2/5 flex justify-between ">
-                <div className="w-1/2 flex justify-between">
-                  <h1 className=" text-base  font-semibold text-[#143250]">
-                    Seller Type
-                  </h1>
-                  :
-                </div>
-                <p className="text-sm text-right  font-normal mx-1">
-                  {attachMent?.sellerType}
-                </p>
-              </div>
-            </div>
-          </div>
-          {/* // preview section */}
-          <div className="flex justify-around">
-            <div
-              onClick={() => setGstModal(true)}
-              className=" w-2/5 flex justify-center items-center h-40 bg-gray-200 rounded"
+
+  return (
+    <div
+      id="container"
+      className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center"
+    >
+      <div className="flex flex-col mx-auto bg-white whitespace-nowrap rounded w-3/4 p-6 overflow-auto">
+        <div className="flex justify-between items-center border-b border-solid border-gray-300 pb-3">
+          <h1 className="text-base font-semibold text-[#143250]">Details</h1>
+          <div onClick={() => onClose("close")} className="cursor-pointer">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="w-6 h-6"
             >
-              <div className="w-full h-full p-2 cursor-pointer">
-                <img
-                  className="w-full h-full object-contain"
-                  src="https://res.cloudinary.com/genx21/image/upload/v1694692016/zngnznqxvjtrpvn45jee.webp"
-                  alt=""
-                />
-              </div>
-              {gstModal && attachMent.gstImageUrl && (
-                <PdfViewModal
-                  CloseModal={handleClosePdf}
-                  visible={gstModal}
-                  url={attachMent.gstImageUrl}
-                />
-              )}
-            </div>
-            <div
-              onClick={() => setPdfModal(true)}
-              className=" w-2/5 flex justify-center items-center h-40 bg-gray-200 rounded"
-            >
-              <div className="w-full h-full p-2">
-                <img
-                  className="w-full h-full object-contain"
-                  src="https://res.cloudinary.com/genx21/image/upload/v1694692016/zngnznqxvjtrpvn45jee.webp"
-                  alt=""
-                />
-              </div>
-              {pdfModal && attachMent.panImageUrl && (
-                <PdfViewModal
-                  visible={pdfModal}
-                  CloseModal={handleClosePdf}
-                  url={attachMent.panImageUrl}
-                />
-              )}
-            </div>
-          </div>
-          <div className="flex justify-center gap-x-5 py-5">
-            <button
-              onClick={(e) => handleVerify(e)}
-              className="flex justify-center items-center py-2 px-4 bg-[#28A745] text-white"
-              type="button"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-4 h-4"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M4.5 12.75l6 6 9-13.5"
-                />
-              </svg>
-              Verify
-            </button>
-            <button
-              onClick={() => makeDeclineRequest(id)}
-              className="flex justify-center items-center py-2 px-4 bg-[#DC3545] text-white"
-              type="button"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-4 h-4"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-              Decline
-            </button>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
           </div>
         </div>
+        <div className="flex flex-col p-5">
+          <div className="flex justify-between py-2">
+            <div className="w-1/2 flex justify-between">
+              <h1 className="text-base font-semibold text-[#143250]">Brand Name:</h1>
+              <p className="text-sm text-right font-normal mx-1">{attachMent?.brand_name}</p>
+            </div>
+            <div className="w-1/2 flex justify-between">
+              <h1 className="text-base font-semibold text-[#143250]">Email:</h1>
+              <p className="text-sm text-right font-normal mx-1">{attachMent?.trademark_office}</p>
+            </div>
+          </div>
+          <div className="flex justify-between py-2">
+            <div className="w-1/2 flex justify-between">
+              <h1 className="text-base font-semibold text-[#143250]">Trademark reg no:</h1>
+              <p className="text-sm text-right font-normal mx-1">{attachMent?.trademark_reg_no}</p>
+            </div>
+            <div className="w-1/2 flex justify-between">
+              <h1 className="text-base font-semibold text-[#143250]">Trademark Status:</h1>
+              <p className="text-sm text-right font-normal mx-1">{attachMent?.trademark_status}</p>
+            </div>
+          </div>
+          <div className="flex justify-between py-2">
+            <div className="w-1/2 flex justify-between">
+              <h1 className="text-base font-semibold text-[#143250]">Vendor code:</h1>
+              <p className="text-sm text-right font-normal mx-1">{attachMent?.vendor_code}</p>
+            </div>
+            <div className="w-1/2 flex justify-between">
+              <h1 className="text-base font-semibold text-[#143250]">Trademark Type:</h1>
+              <p className="text-sm text-right font-normal mx-1">{attachMent?.trademark_type}</p>
+            </div>
+          </div>
+          <div className="flex justify-between py-2">
+            <div className="w-1/2 flex justify-between">
+              <h1 className="text-base font-semibold text-[#143250]">Official Website URLs:</h1>
+              <ul className="text-sm text-left overflow-x-hidden font-normal mx-1">
+                {attachMent?.url_brands_official_website &&
+                  attachMent.url_brands_official_website.map((url, index) => (
+                    <li key={index}>
+                      <a href={url} target="_blank" rel="noopener noreferrer">{url}</a>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+            <div className="w-1/2 flex justify-between">
+              <h1 className="text-base font-semibold text-[#143250]">ASINs:</h1>
+              <ul className="text-sm text-left overflow-x-hidden font-normal mx-1">
+                {attachMent?.ASINs_no &&
+                  attachMent.ASINs_no.map((asin, index) => (
+                    <li key={index}>{asin}</li>
+                  ))}
+              </ul>
+            </div>
+          </div>
+          <div className="flex justify-between py-2">
+            <div className="flex justify-between">
+              <h1 className="text-base font-semibold text-[#143250]">Product Categories:</h1>
+              <p className="text-sm text-right font-normal mx-1">
+                {attachMent?.product_category_details && attachMent?.product_category_details.map((category, index) => (
+                  index === 0 ? category.category_name : `, ${category.category_name}`
+                ))}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-center gap-x-5 py-5">
+          <button onClick={(e) => handleVerify(e)} className="btn-verify p-2 bg-green-700 flex items-center justify-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="w-4 h-4"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4.5 12.75l6 6 9-13.5"
+              />
+            </svg>
+            Verify
+          </button>
+          <button onClick={() => makeDeclineRequest(id)} className="btn-decline p-2 bg-red-700 flex items-center justify-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="w-4 h-4"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+            Decline
+          </button>
+        </div>
       </div>
-    );
+    </div>
+  );
 };
 
 export default AttachmentModal;
