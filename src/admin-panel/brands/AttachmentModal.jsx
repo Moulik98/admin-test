@@ -122,6 +122,9 @@ const AttachmentModal = ({ onClose, visible, id }) => {
             </svg>
           </div>
         </div>
+        <div className="flex justify-center items-center py-2">
+          <img src={attachMent?.brand_logo_url} alt='s' width={100} height={100}/>
+        </div>
         <div className="flex flex-col p-5">
           <div className="flex justify-between py-2 gap-10 ">
             <div className="w-1/2 flex justify-between">
