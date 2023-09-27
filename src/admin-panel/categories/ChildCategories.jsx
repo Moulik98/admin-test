@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ChildCategoriesRow from "./ChildCategoriesRow";
 import ChildCategoriesModal from "./ChildCategoriesModal";
 import { Link } from "react-router-dom";
+import Pagination from "../../Pagination";
 
 const ChildCategories = () => {
   // state for modal
@@ -262,7 +263,7 @@ const ChildCategories = () => {
                 />
               </svg>
               <input
-                className="w-60 py-1 px-1 outline-0"
+                className="w-60 py-1 px-1 outline-0 -z-10"
                 value={searchQuery}
                 placeholder="Search child/sub/parent categories"
                 onChange={handleInputChange}
@@ -343,29 +344,35 @@ const ChildCategories = () => {
               </tr>
             </thead>
             <tbody>
-              {items.length > 0 ? (
-                items.map((categories, index) => (
-                  <ChildCategoriesRow
-                    key={categories._id}
-                    id={categories._id}
-                    srNo={index + 1}
-                    img={categories.category_img}
-                    child={categories.category_name}
-                    parent={categories?.parent_category_id?.category_name}
-                    sub={categories.sub_category_id.category_name}
-                    desc={categories.category_desc}
-                    status={categories.status}
-                  />
-                ))
-              ) : (
-                <tr className="">
-                  <td className="w-full text-5xl text-center align-middle font-bold text-gray-400">No record available</td>
-                </tr>
-              )}
+              {items.map((categories, index) => (
+                <ChildCategoriesRow
+                  key={categories._id}
+                  id={categories._id}
+                  srNo={index + 1}
+                  img={categories.category_img}
+                  child={categories.category_name}
+                  parent={categories?.parent_category_id?.category_name}
+                  sub={categories.sub_category_id.category_name}
+                  desc={categories.category_desc}
+                  status={categories.status}
+                />
+              ))}
             </tbody>
           </table>
+          {items.length === 0 ? (
+            <div className="w-full  flex justify-center items-center ">
+              <p className=" text-xl font-bold text-gray-400">
+                No record available
+              </p>
+            </div>
+          ) : null}
         </div>
-        {renderPagination()}
+        <Pagination
+            currentPage={currentPage}
+            totalItems={totalItems}
+            pageSize={pageSize}
+            setCurrentPage={setCurrentPage}
+          />
       </section>
     </div>
   );

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AttributesRow from "./AttributesRow";
 import AttributesModal from "./AttributesModal";
 import { Link } from "react-router-dom";
+import Pagination from "../../Pagination";
 
 const AddAttributes = () => {
 
@@ -274,7 +275,7 @@ const AddAttributes = () => {
           </table>
         </div>
       </section>
-      {renderPagination()}
+      <Pagination setCurrentPage={setCurrentPage} totalItems={totalItems} pageSize={pageSize} currentPage={currentPage} />
     </div>
   );
 };
