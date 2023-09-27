@@ -132,7 +132,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
           </div>
         </div>
         <div className="flex flex-col p-5">
-          <div className="flex justify-between py-2">
+          <div className="flex justify-between py-2 gap-10 ">
             <div className="w-1/2 flex justify-between">
               <h1 className="text-base font-semibold text-[#143250]">Brand Name:</h1>
               <p className="text-sm text-right font-normal mx-1">{attachMent?.brand_name}</p>
@@ -142,7 +142,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
               <p className="text-sm text-right font-normal mx-1">{attachMent?.trademark_office}</p>
             </div>
           </div>
-          <div className="flex justify-between py-2">
+          <div className="flex justify-between py-2 gap-10 ">
             <div className="w-1/2 flex justify-between">
               <h1 className="text-base font-semibold text-[#143250]">Trademark reg no:</h1>
               <p className="text-sm text-right font-normal mx-1">{attachMent?.trademark_reg_no}</p>
@@ -152,7 +152,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
               <p className="text-sm text-right font-normal mx-1">{attachMent?.trademark_status}</p>
             </div>
           </div>
-          <div className="flex justify-between py-2">
+          <div className="flex justify-between py-2 gap-10 ">
             <div className="w-1/2 flex justify-between">
               <h1 className="text-base font-semibold text-[#143250]">Vendor code:</h1>
               <p className="text-sm text-right font-normal mx-1">{attachMent?.vendor_code}</p>
@@ -162,7 +162,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
               <p className="text-sm text-right font-normal mx-1">{attachMent?.trademark_type}</p>
             </div>
           </div>
-          <div className="flex justify-between py-2">
+          <div className="flex justify-between py-2 gap-10 ">
             <div className="w-1/2 flex justify-between">
               <h1 className="text-base font-semibold text-[#143250]">Official Website URLs:</h1>
               <ul className="text-sm text-left overflow-x-hidden font-normal mx-1">
@@ -184,7 +184,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
               </ul>
             </div>
           </div>
-          <div className="flex justify-between py-2">
+          <div className="flex justify-between py-2 gap-10 ">
             <div className="flex justify-between">
               <h1 className="text-base font-semibold text-[#143250]">Product Categories:</h1>
               <p className="text-sm text-right font-normal mx-1">
