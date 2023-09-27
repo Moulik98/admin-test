@@ -93,10 +93,6 @@ const AttachmentModal = ({ onClose, visible, id }) => {
     makePutRequest(id);
   };
 
-  
-
-  
-
   return (
     <div
       id="container"
@@ -123,7 +119,12 @@ const AttachmentModal = ({ onClose, visible, id }) => {
           </div>
         </div>
         <div className="flex justify-center items-center py-2">
-          <img src={attachMent?.brand_logo_url} alt='s' width={100} height={100}/>
+          <img
+            src={attachMent?.brand_logo_url}
+            alt="s"
+            width={100}
+            height={100}
+          />
         </div>
         <div className="flex flex-col p-5">
           <div className="flex justify-between py-2 gap-10 ">
@@ -205,17 +206,35 @@ const AttachmentModal = ({ onClose, visible, id }) => {
             </div>
           </div>
           <div className="flex justify-between py-2 gap-10 ">
-            <div className="flex justify-between">
+          <div className="flex justify-between">
+            <h1 className="text-base font-semibold text-[#143250]">
+              Product Categories:
+            </h1>
+            <p className="text-sm text-right font-normal mx-1">
+              {attachMent?.product_category_details &&
+                attachMent?.product_category_details.map((category, index) =>
+                  index === 0
+                    ? category.category_name
+                    : `, ${category.category_name}`
+                )}
+            </p>
+          </div>
+          </div>
+          <div className="flex justify-between py-2 gap-5 ">
+            <div className="w-1/2 flex justify-between">
               <h1 className="text-base font-semibold text-[#143250]">
-                Product Categories:
+              Trade Mark Office:
+              </h1>
+              <p className="text-sm text-right font-normal mx-1 overflow-x-clip ">
+                {attachMent?.trademark_office}
+              </p>
+            </div>
+            <div className="w-1/2 flex justify-between">
+              <h1 className="text-base font-semibold text-[#143250]">
+                Trademark Type:
               </h1>
               <p className="text-sm text-right font-normal mx-1">
-                {attachMent?.product_category_details &&
-                  attachMent?.product_category_details.map((category, index) =>
-                    index === 0
-                      ? category.category_name
-                      : `, ${category.category_name}`
-                  )}
+                {attachMent?.trademark_type}
               </p>
             </div>
           </div>
