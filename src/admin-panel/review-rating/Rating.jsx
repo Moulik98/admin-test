@@ -15,7 +15,6 @@ const Rating = ({ rating }) => {
                     <FaStar
                         key={index}
                         size={16}
-
                         color={colors.orange}
                         style={{
                             marginRight: 10,

@@ -3,13 +3,14 @@ import Description from '../../Description'
 import Rating from './Rating'
 import ReviewModal from './ReviewModal'
 const TableRow = ({ data, onDelete }) => {
-    const { _id, isActive, rating, description, userName, productInfo, productImages } = data
+    const { _id, isActive, rating, title, description, userName, productInfo, productImages } = data
 
     const { item_name, sellerName } = productInfo;
     const [showModal, setShowModal] = useState(false)
     const handleClose = (value) => {
         if (value === 'close') {
             setShowModal(false)
+            onDelete()
         } if (value === 'verify') {
             onDelete()
             setShowModal(false)
@@ -119,7 +120,11 @@ const TableRow = ({ data, onDelete }) => {
                         <ReviewModal
                             onCLose={handleClose}
                             isVisible={showModal}
-                            data={data}
+                            id={_id}
+                            rating={rating}
+                            isActive={isActive}
+                            title={title}
+                            description={description}
                         />
                     }
                 </div>
