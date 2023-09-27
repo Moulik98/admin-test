@@ -83,7 +83,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
         const responseData = await response.json();
         console.log(responseData);
         onClose("decline");
-        onClose("close"); 
+        onClose("close");
       } else {
         throw new Error("PUT request for decline failed");
       }
@@ -134,42 +134,68 @@ const AttachmentModal = ({ onClose, visible, id }) => {
         <div className="flex flex-col p-5">
           <div className="flex justify-between py-2 gap-10 ">
             <div className="w-1/2 flex justify-between">
-              <h1 className="text-base font-semibold text-[#143250]">Brand Name:</h1>
-              <p className="text-sm text-right font-normal mx-1">{attachMent?.brand_name}</p>
+              <h1 className="text-base font-semibold text-[#143250]">
+                Brand Name:
+              </h1>
+              <p className="text-sm text-right font-normal mx-1">
+                {attachMent?.brand_name}
+              </p>
             </div>
             <div className="w-1/2 flex justify-between">
               <h1 className="text-base font-semibold text-[#143250]">Email:</h1>
-              <p className="text-sm text-right font-normal mx-1">{attachMent?.trademark_office}</p>
+              <p className="text-sm text-right font-normal mx-1">
+                {attachMent?.trademark_office}
+              </p>
             </div>
           </div>
           <div className="flex justify-between py-2 gap-10 ">
             <div className="w-1/2 flex justify-between">
-              <h1 className="text-base font-semibold text-[#143250]">Trademark reg no:</h1>
-              <p className="text-sm text-right font-normal mx-1">{attachMent?.trademark_reg_no}</p>
+              <h1 className="text-base font-semibold text-[#143250]">
+                Trademark reg no:
+              </h1>
+              <p className="text-sm text-right font-normal mx-1">
+                {attachMent?.trademark_reg_no}
+              </p>
             </div>
             <div className="w-1/2 flex justify-between">
-              <h1 className="text-base font-semibold text-[#143250]">Trademark Status:</h1>
-              <p className="text-sm text-right font-normal mx-1">{attachMent?.trademark_status}</p>
-            </div>
-          </div>
-          <div className="flex justify-between py-2 gap-10 ">
-            <div className="w-1/2 flex justify-between">
-              <h1 className="text-base font-semibold text-[#143250]">Vendor code:</h1>
-              <p className="text-sm text-right font-normal mx-1">{attachMent?.vendor_code}</p>
-            </div>
-            <div className="w-1/2 flex justify-between">
-              <h1 className="text-base font-semibold text-[#143250]">Trademark Type:</h1>
-              <p className="text-sm text-right font-normal mx-1">{attachMent?.trademark_type}</p>
+              <h1 className="text-base font-semibold text-[#143250]">
+                Trademark Status:
+              </h1>
+              <p className="text-sm text-right font-normal mx-1">
+                {attachMent?.trademark_status}
+              </p>
             </div>
           </div>
           <div className="flex justify-between py-2 gap-10 ">
             <div className="w-1/2 flex justify-between">
-              <h1 className="text-base font-semibold text-[#143250]">Official Website URLs:</h1>
+              <h1 className="text-base font-semibold text-[#143250]">
+                Vendor code:
+              </h1>
+              <p className="text-sm text-right font-normal mx-1">
+                {attachMent?.vendor_code}
+              </p>
+            </div>
+            <div className="w-1/2 flex justify-between">
+              <h1 className="text-base font-semibold text-[#143250]">
+                Trademark Type:
+              </h1>
+              <p className="text-sm text-right font-normal mx-1">
+                {attachMent?.trademark_type}
+              </p>
+            </div>
+          </div>
+          <div className="flex justify-between py-2 gap-10 ">
+            <div className="w-1/2 flex justify-between">
+              <h1 className="text-base font-semibold text-[#143250]">
+                Official Website URLs:
+              </h1>
               <ul className="text-sm text-left overflow-x-hidden font-normal mx-1">
                 {attachMent?.url_brands_official_website &&
                   attachMent.url_brands_official_website.map((url, index) => (
                     <li key={index}>
-                      <a href={url} target="_blank" rel="noopener noreferrer">{url}</a>
+                      <a href={url} target="_blank" rel="noopener noreferrer">
+                        {url}
+                      </a>
                     </li>
                   ))}
               </ul>
@@ -186,17 +212,25 @@ const AttachmentModal = ({ onClose, visible, id }) => {
           </div>
           <div className="flex justify-between py-2 gap-10 ">
             <div className="flex justify-between">
-              <h1 className="text-base font-semibold text-[#143250]">Product Categories:</h1>
+              <h1 className="text-base font-semibold text-[#143250]">
+                Product Categories:
+              </h1>
               <p className="text-sm text-right font-normal mx-1">
-                {attachMent?.product_category_details && attachMent?.product_category_details.map((category, index) => (
-                  index === 0 ? category.category_name : `, ${category.category_name}`
-                ))}
+                {attachMent?.product_category_details &&
+                  attachMent?.product_category_details.map((category, index) =>
+                    index === 0
+                      ? category.category_name
+                      : `, ${category.category_name}`
+                  )}
               </p>
             </div>
           </div>
         </div>
         <div className="flex justify-center gap-x-5 py-5">
-          <button onClick={(e) => handleVerify(e)} className="btn-verify p-2 bg-green-700 flex items-center justify-center">
+          <button
+            onClick={(e) => handleVerify(e)}
+            className="btn-verify p-2 bg-green-700 flex items-center justify-center"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -213,7 +247,10 @@ const AttachmentModal = ({ onClose, visible, id }) => {
             </svg>
             Verify
           </button>
-          <button onClick={() => makeDeclineRequest(id)} className="btn-decline p-2 bg-red-700 flex items-center justify-center">
+          <button
+            onClick={() => makeDeclineRequest(id)}
+            className="btn-decline p-2 bg-red-700 flex items-center justify-center"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
