@@ -239,6 +239,13 @@ useEffect(() => {
                 ))}
             </tbody>
           </table>
+          {parentCategories.length === 0 ? (
+            <div className="w-full  flex justify-center items-center ">
+              <p className=" text-3xl font-bold text-gray-400">
+                No record available
+              </p>
+            </div>
+          ) : null}
         </div>
         <div className="flex justify-end items-center py-5">
           <Pagination

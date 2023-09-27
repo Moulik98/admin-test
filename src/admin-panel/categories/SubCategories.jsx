@@ -79,14 +79,16 @@ useEffect(() => {
 
   const handleClick = async(categoryId,category_type) => {
     try {
-      let queryString = "";
+      let queryString = "filter[category_type][$eq]=sub";
+
       if(category_type === "sub"){
-        queryString = "filter[category_type][$eq]=sub"
+        queryString = "filter[category_type][$eq]=sub&filter[_id][$eq]"
       }
-      else{
-        queryString = "filter[category_type][$eq]=parent"
+      if(category_type === "parent")
+      {
+        queryString = "filter[category_type][$eq]=sub&filter[parent_category_id][$eq]"
       }
-      const response = await fetch (`${process.env.REACT_APP_URL}/v1/categories/get-populated?${queryString}&filter[_id][$eq]=${categoryId}`);
+      const response = await fetch (`${process.env.REACT_APP_URL}/v1/categories/get-populated?${queryString}=${categoryId}`);
       if(response.ok){
         const data = await response.json();
         setChildCategories(data.categoryList);
@@ -261,7 +263,15 @@ useEffect(() => {
                   />
                 ))}
             </tbody>
+        
           </table>
+          {childCategories.length === 0 ? (
+            <div className="w-full  flex justify-center items-center ">
+              <p className=" text-xl font-bold text-gray-400">
+                No record available
+              </p>
+            </div>
+          ) : null}
         </div>
         <div className='flex justify-end items-center py-5'>
           <Pagination

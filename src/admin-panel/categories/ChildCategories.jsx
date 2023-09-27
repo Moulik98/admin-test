@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ChildCategoriesRow from "./ChildCategoriesRow";
 import ChildCategoriesModal from "./ChildCategoriesModal";
 import { Link } from "react-router-dom";
+import Pagination from "../../Pagination";
 
 const ChildCategories = () => {
   // state for modal
@@ -93,19 +94,21 @@ const ChildCategories = () => {
   const handleClick = async (categoryId, category_type) => {
     try {
       let queryString = "";
-     
-      if (category_type === "parent"){
-        queryString = "filter[category_type][$eq]=parent"
+
+      if (category_type === "parent") {
+        queryString =
+          "filter[category_type][$eq]=child&filter[parent_category_id][$eq]";
       }
       if (category_type === "sub") {
-        queryString = "filter[category_type][$eq]=sub";
+        queryString =
+          "filter[category_type][$eq]=child&filter[sub_category_id][$eq]";
       }
       if (category_type === "child") {
-        queryString = "filter[category_type][$eq]=child";
+        queryString = "filter[category_type][$eq]=child&filter[_id][$eq]";
       }
-      
+
       const response = await fetch(
-        `${process.env.REACT_APP_URL}/v1/categories/get-populated?${queryString}&filter[_id][$eq]=${categoryId}`
+        `${process.env.REACT_APP_URL}/v1/categories/get-populated?${queryString}=${categoryId}`
       );
       if (response.ok) {
         const data = await response.json();
@@ -260,7 +263,7 @@ const ChildCategories = () => {
                 />
               </svg>
               <input
-                className="w-60 py-1 px-1 outline-0"
+                className="w-60 py-1 px-1 outline-0 -z-10"
                 value={searchQuery}
                 placeholder="Search child/sub/parent categories"
                 onChange={handleInputChange}
@@ -272,16 +275,16 @@ const ChildCategories = () => {
               <div className="absolute max-h-60 top-[100%] left-0 w-full mt-1  bg-white border border-solid border-[#9D9D9D] rounded-md shadow-md overflow-y-scroll search-scrollbar">
                 <ul>
                   {searchResults.map((result) => (
-                         <li
-                         key={result._id}
-                        onClick={() => {
-                            handleClick(result._id,result.category_type)
-
-                        }}
-                       
-                         // Apply the highlighted-item class based on hover state
-                         className='p-2 hover:bg-gray-300 font-light text-xs'
-                       >{result?.category_name}</li>
+                    <li
+                      key={result._id}
+                      onClick={() => {
+                        handleClick(result._id, result.category_type);
+                      }}
+                      // Apply the highlighted-item class based on hover state
+                      className="p-2 hover:bg-gray-300 font-light text-xs"
+                    >
+                      {result?.category_name}
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -341,24 +344,35 @@ const ChildCategories = () => {
               </tr>
             </thead>
             <tbody>
-              {items &&
-                items.map((categories, index) => (
-                  <ChildCategoriesRow
-                    key={categories._id}
-                    id={categories._id}
-                    srNo={index + 1}
-                    img={categories.category_img}
-                    child={categories.category_name}
-                    parent={categories?.parent_category_id?.category_name}
-                    sub={categories.sub_category_id.category_name}
-                    desc={categories.category_desc}
-                    status={categories.status}
-                  />
-                ))}
+              {items.map((categories, index) => (
+                <ChildCategoriesRow
+                  key={categories._id}
+                  id={categories._id}
+                  srNo={index + 1}
+                  img={categories.category_img}
+                  child={categories.category_name}
+                  parent={categories?.parent_category_id?.category_name}
+                  sub={categories.sub_category_id.category_name}
+                  desc={categories.category_desc}
+                  status={categories.status}
+                />
+              ))}
             </tbody>
           </table>
+          {items.length === 0 ? (
+            <div className="w-full  flex justify-center items-center ">
+              <p className=" text-xl font-bold text-gray-400">
+                No record available
+              </p>
+            </div>
+          ) : null}
         </div>
-        {renderPagination()}
+        <Pagination
+            currentPage={currentPage}
+            totalItems={totalItems}
+            pageSize={pageSize}
+            setCurrentPage={setCurrentPage}
+          />
       </section>
     </div>
   );
