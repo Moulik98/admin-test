@@ -68,7 +68,7 @@ const SideBar = () => {
                                 <ul>
                                     {Menu.subMenus.map((subMenuItem, index) => (
                                         <li
-                                            key={index + index + index * 5}
+                                            key={subMenuItem.link}
                                             className="flex  px-5 cursor-pointer text-center text-sm text-gray-200 py-1"
                                         >
                                             <Link to={`${subMenuItem.link}`} className={`flex gap-x-2 ${!open && "hidden"} origin-left duration-200`}>
@@ -84,7 +84,7 @@ const SideBar = () => {
                         </>
                     ))}
                 </ul>
-                
+
             </div>
             {/* <div className="h-screen flex-1 p-7">
                 <h1 className="text-2xl font-semibold ">Home Page</h1>
