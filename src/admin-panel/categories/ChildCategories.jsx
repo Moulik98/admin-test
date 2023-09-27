@@ -93,19 +93,21 @@ const ChildCategories = () => {
   const handleClick = async (categoryId, category_type) => {
     try {
       let queryString = "";
-     
-      if (category_type === "parent"){
-        queryString = "filter[category_type][$eq]=parent"
+
+      if (category_type === "parent") {
+        queryString =
+          "filter[category_type][$eq]=child&filter[parent_category_id][$eq]";
       }
       if (category_type === "sub") {
-        queryString = "filter[category_type][$eq]=sub";
+        queryString =
+          "filter[category_type][$eq]=child&filter[sub_category_id][$eq]";
       }
       if (category_type === "child") {
-        queryString = "filter[category_type][$eq]=child";
+        queryString = "filter[category_type][$eq]=child&filter[_id][$eq]";
       }
-      
+
       const response = await fetch(
-        `${process.env.REACT_APP_URL}/v1/categories/get-populated?${queryString}&filter[_id][$eq]=${categoryId}`
+        `${process.env.REACT_APP_URL}/v1/categories/get-populated?${queryString}=${categoryId}`
       );
       if (response.ok) {
         const data = await response.json();
@@ -272,16 +274,16 @@ const ChildCategories = () => {
               <div className="absolute max-h-60 top-[100%] left-0 w-full mt-1  bg-white border border-solid border-[#9D9D9D] rounded-md shadow-md overflow-y-scroll search-scrollbar">
                 <ul>
                   {searchResults.map((result) => (
-                         <li
-                         key={result._id}
-                        onClick={() => {
-                            handleClick(result._id,result.category_type)
-
-                        }}
-                       
-                         // Apply the highlighted-item class based on hover state
-                         className='p-2 hover:bg-gray-300 font-light text-xs'
-                       >{result?.category_name}</li>
+                    <li
+                      key={result._id}
+                      onClick={() => {
+                        handleClick(result._id, result.category_type);
+                      }}
+                      // Apply the highlighted-item class based on hover state
+                      className="p-2 hover:bg-gray-300 font-light text-xs"
+                    >
+                      {result?.category_name}
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -341,7 +343,7 @@ const ChildCategories = () => {
               </tr>
             </thead>
             <tbody>
-              {items &&
+              {items.length > 0 ? (
                 items.map((categories, index) => (
                   <ChildCategoriesRow
                     key={categories._id}
@@ -354,7 +356,12 @@ const ChildCategories = () => {
                     desc={categories.category_desc}
                     status={categories.status}
                   />
-                ))}
+                ))
+              ) : (
+                <tr className="">
+                  <td className="w-full text-5xl text-center align-middle font-bold text-gray-400">No record available</td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
