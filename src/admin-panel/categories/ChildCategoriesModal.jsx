@@ -399,7 +399,7 @@ const ChildCategoriesModal = (props) => {
             <div className="flex gap-x-5 justify-center my-5">
               <div
                 onClick={() => onClose()}
-                className="py-2 px-4 bg-white text-red-600 rounded-sm"
+                className="py-2 px-4 bg-red-600 text-white rounded-sm"
               >
                 Cancel
               </div>
@@ -414,7 +414,7 @@ const ChildCategoriesModal = (props) => {
                   }`}
                 >
                   <button
-                    className={`py-2 px-10 bg-[#00388c] text-white rounded-lg uppercase ${
+                    className={`py-2 px-10 bg-[#00388c] text-white rounded-sm uppercase ${
                       (isFormSubmited ||
                         formData.category_name === "" ||
                         formData.category_desc === "") &&
