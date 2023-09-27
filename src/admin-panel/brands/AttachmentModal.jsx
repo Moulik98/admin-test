@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-import PdfViewModal from "./PdfViewModal";
 
 const AttachmentModal = ({ onClose, visible, id }) => {
-  const [pdfModal, setPdfModal] = useState(false);
-  const [gstModal, setGstModal] = useState(false);
   const [attachMent, SetAttachMent] = useState([]);
 
   console.log(id);
@@ -96,15 +93,9 @@ const AttachmentModal = ({ onClose, visible, id }) => {
     makePutRequest(id);
   };
 
-  const handleClosePdf = (e) => {
-    console.log("hii");
-    if (e.target.id === "container") {
-      setPdfModal(false);
-      setGstModal(false);
-    }
-  };
+  
 
-  console.log(pdfModal);
+  
 
   return (
     <div

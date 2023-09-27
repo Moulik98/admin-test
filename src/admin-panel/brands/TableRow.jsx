@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import AttachmentModal from "./AttachmentModal";
+import Description from "../../Description";
 const TableRow = ({ data, onDelete }) => {
   const {
     brand_name,
@@ -7,9 +8,11 @@ const TableRow = ({ data, onDelete }) => {
     status,
     trademark_office,
     createdAt,
+    brand_desc,
     _id,
     brand_logo_url,
   } = data;
+  const formattedDate = new Date(createdAt).toLocaleDateString();
   const [viewAttachment, setViewAttachment] = useState(false);
   const handleClose = (value) => {
     if (value === "close") {
@@ -58,6 +61,7 @@ const TableRow = ({ data, onDelete }) => {
   };
   return (
     <tr class="border-b border-solid border-gray-200 hover:bg-gray-50  text-[#222222]">
+     <td className="px-4 py-2">{formattedDate}</td>
       <td className="px-4 py-2">
         <img src={brand_logo_url} alt={brand_name} className="w-8 h-8" />
       </td>
@@ -65,6 +69,7 @@ const TableRow = ({ data, onDelete }) => {
       <td className="px-4 py-2">
         {trademark_office} <br /> {trademark_reg_no}
       </td>
+      <td className="px-4 py-2"><Description description={brand_desc} /></td>
       <td className="text-center px-4 py-2">
         {status === "Approved" ? (
           <div className="flex justify-center items-center rounded-sm py-1 px-2 text-xs  bg-indigo-200">

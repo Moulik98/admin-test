@@ -91,6 +91,9 @@ export const Brands = () => {
             <table className="w-full text-left text-xs">
               <thead className=" text-xs  uppercase text-gray-900 font-semibold border-b border-solid border-gray-200 ">
                 <tr>
+                <th scope="col" className=" px-4 py-3">
+                    Creation Date
+                  </th>
                   <th scope="col" className=" px-4 py-3">
                     Logo
                   </th>
@@ -99,6 +102,9 @@ export const Brands = () => {
                   </th>
                   <th scope="col" className=" px-4 py-3">
                     Registration Details
+                  </th>
+                  <th scope="col" className=" px-4 py-3">
+                    Description
                   </th>
                   <th scope="col" className="text-center px-4 py-3 ">
                     Status
