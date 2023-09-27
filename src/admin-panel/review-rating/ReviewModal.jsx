@@ -31,8 +31,10 @@ const ReviewModal = ({ isVisible, onCLose, id, rating, isActive, title, descript
                 const img_4 = data.review.img_4
                 const img_5 = data.review.img_5
 
-                images = [img_1, img_2, img_3, img_4, img_5].filter(img => img !== (null || undefined))
-                setImages(images)
+                const img = [img_1, img_2, img_3, img_4, img_5].filter(img => img !== null && img !== undefined);
+
+                console.log(img);
+                setImages(img)
             }
         } catch (error) {
             console.log(error);
