@@ -70,6 +70,11 @@ const Menus = [
     isOpen: false, // Add isOpen property
   },
   {
+    title: "Manage GST",
+    
+    link: "ManageGst",
+  },
+  {
     title: "Brands",
     src: coupons,
     link: "brands",

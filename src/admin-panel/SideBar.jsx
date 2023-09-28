@@ -15,12 +15,12 @@ const SideBar = () => {
             })
         );
     };
-
+    console.log("Menu >>>>",Menu)
     return (
         <div className="flex">
             <div
                 className={` ${open ? "w-60" : "w-20 "
-                    } bg-dark-purple min-h-screen p-5  pt-8 relative duration-300`}
+                    } bg-dark-purple min-h-screen p-5  pt-8 relative duration-300 no-scrollbar`}
             >
                 <div className={`absolute cursor-pointer -right-3 top-9 w-7 h-7 flex justify-center items-center  bg-[#F3F4F6] rounded-l-[4rem]
             rounded-full  ${!open && "rotate-180"}`}
