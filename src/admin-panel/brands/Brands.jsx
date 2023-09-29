@@ -104,6 +104,9 @@ export const Brands = () => {
                     Registration Details
                   </th>
                   <th scope="col" className=" px-4 py-3">
+                    Seller Name
+                  </th>
+                  <th scope="col" className=" px-4 py-3">
                     Description
                   </th>
                   <th scope="col" className="text-center px-4 py-3 ">
