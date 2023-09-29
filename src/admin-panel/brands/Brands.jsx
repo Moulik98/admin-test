@@ -92,7 +92,7 @@ export const Brands = () => {
               <thead className=" text-xs  uppercase text-gray-900 font-semibold border-b border-solid border-gray-200 ">
                 <tr>
                 <th scope="col" className=" px-4 py-3">
-                    Creation Date
+                    Date
                   </th>
                   <th scope="col" className=" px-4 py-3">
                     Logo
@@ -104,7 +104,7 @@ export const Brands = () => {
                     Registration Details
                   </th>
                   <th scope="col" className=" px-4 py-3">
-                    Seller Name
+                    Seller
                   </th>
                   <th scope="col" className=" px-4 py-3">
                     Description
