@@ -1,6 +1,20 @@
 import React from "react";
+import { useState } from "react";
+import AddGstModal from "./AddGstModal";
 
-const ManageGstRow = ({ srNo, category, percent, startdate, enddate }) => {
+const ManageGstRow = ({ srNo, category, percent, startdate, enddate,id }) => {
+
+  const [editModal, setEditModal] = useState(false);
+  const [viewModal, setViewModal] = useState(false);
+
+  const handleClose = () => {
+    setEditModal(false);
+    setViewModal(false);
+}
+
+
+
+
   // Format startdate and enddate
   const formattedStartDate = new Date(startdate).toLocaleDateString("en-GB");
   const formattedEndDate = new Date(enddate).toLocaleDateString("en-GB");
@@ -23,7 +37,7 @@ const ManageGstRow = ({ srNo, category, percent, startdate, enddate }) => {
       </td>
       <td className="whitespace-nowrap px-4 py-2 text-xs font-light text-gray-900">
         <div className="flex gap-2">
-          <div>
+          <div onClick={()=>setViewModal(true)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -43,8 +57,14 @@ const ManageGstRow = ({ srNo, category, percent, startdate, enddate }) => {
                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
               />
             </svg>
+            {editModal && <AddGstModal
+             visible={editModal}
+             onClose={handleClose}
+              id={id}
+             modalName='edit'
+            />}
           </div>
-          <div>
+          <div onClick={() => setEditModal(true)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -59,6 +79,14 @@ const ManageGstRow = ({ srNo, category, percent, startdate, enddate }) => {
                 d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
               />
             </svg>
+            {
+              viewModal && <AddGstModal
+              visible={viewModal}
+              onClose={handleClose}
+              id={id}
+              modalName='edit'
+              />
+            }
           </div>
         </div>
       </td>

@@ -2,10 +2,27 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import AddGstModal from "./AddGstModal";
 import ManageGstRow from "./ManageGstRow";
+import Pagination from "../../Pagination";
 
 const ManageGst = () => {
   const [gstModal, setGstModal] = useState(false);
   const [gstdata, setGstData] = useState([]);
+  const [subCategories, setSubCategories] = useState([]);
+  const access_token = localStorage.getItem("access_token");
+
+  const fetchSubCategories = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_URL}/v1/manage-gst/get-category-list?category_type=sub`
+    );
+    if (response.ok) {
+      const data = await response.json();
+      setSubCategories(data.response);
+    }
+  };
+
+  useEffect(() => {
+    fetchSubCategories();
+  }, []);
 
   const fetchGstData = async() => {
     try{
@@ -28,6 +45,49 @@ const ManageGst = () => {
   const handleClose = () => {
     setGstModal(false);
   }
+
+  const [formData, setFormData] = useState({
+    start_date: "",
+    end_date: "",
+    category_id: "",
+  });
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Request Body",formData);
+ 
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_URL}/v1/manage-gst/search-gst-records`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${access_token}`,
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        // Handle the response data if needed
+        setGstData(data.response);
+        console.log("Search result:", data);
+      } else {
+        console.error("Error searching GST records");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
+
+
   return (
     <div className="pr-6 py-10 text-sm font-semibold">
       <div>
@@ -79,17 +139,48 @@ const ManageGst = () => {
             </div>
           </div>
         </div>
-        <form className="flex items-center">
-          <label className="mr-2">Child Categories</label>
+        <form className="flex items-center gap-2" onSubmit={handleFormSubmit}>
+        <select className="border-2 rounded px-2 py-2" name="category_id"  onChange={handleInputChange}>
+          <option value="">All Categories</option>
+          {subCategories.map((category, index) => (
+            <option key={index} value={category._id}>
+              {category.category_name}
+            </option>
+          ))}
+        </select>
+
+        <label className="w-1/10 flex justify-start text-xs text-indigo-900 font-bold ">
+              Start Date *
+            </label>
+            <input
+              required
+              className="grow py-1 px-3 border border-solid border-gray-200 rounded-md"
+              type="date"
+              name="start_date"
+              onChange={handleInputChange}
+            />
+               <label className="w-1/10 flex justify-start text-xs text-indigo-900 font-bold ">
+              End Date *
+            </label>
+            <input
+              required
+              className="grow py-1 px-3 border border-solid border-gray-200 rounded-md"
+              type="date"
+              name="end_date"
+              onChange={handleInputChange}
+            />
+    
+    
           <div className="flex flex-col relative">
-            <div className="flex items-center p-1 gap-x-1 rounded-lg border border-solid border-[#9D9D9D]">
+            <div className="flex items-center p-2 gap-x-1 rounded-lg border border-solid border-[#9D9D9D] bg-blue-700">
+              <button className=" " type="submit">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                fill="none"
+                fill="transparent"
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="w-4 h-4"
+                className="w-4 h-4 text-white"
               >
                 <path
                   strokeLinecap="round"
@@ -97,11 +188,9 @@ const ManageGst = () => {
                   d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
                 />
               </svg>
-              <input
-                className="w-60 py-1 px-1 outline-0 -z-10"
-                placeholder="Search child/sub/parent categories"
-                type="text"
-              />
+              </button>
+           
+           
             </div>
           </div>
         </form>
@@ -168,6 +257,12 @@ const ManageGst = () => {
             </tbody>
           </table>
         </div>
+        <Pagination
+            // currentPage={currentPage}
+            // totalItems={totalItems}
+            // pageSize={pageSize}
+            // setCurrentPage={setCurrentPage}
+          />
       </section>
     </div>
   );

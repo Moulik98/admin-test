@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-const AddGstModal = ({ visible,onClose }) => {
+const AddGstModal = ({ visible,onClose,modalName,id }) => {
   const [subCategories, setSubCategories] = useState([]);
+  const [gstData, setGstData] = useState()
   const [formData, setFormData] = useState({
     category_id: "",
     gst_per: "",
@@ -56,6 +57,29 @@ const AddGstModal = ({ visible,onClose }) => {
       // Handle network or other errors here
     }
   };
+
+  useEffect(() => {
+    if (modalName === "edit" || modalName === "view") {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(
+            `${process.env.REACT_APP_URL}/v1/manage-gst/get-gst-records${id}`
+          );
+          const data = await response.json();
+
+         setGstData(data)
+         console.log(gstData)
+          setFormData({
+            
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      fetchData();
+    }
+  }, [modalName, id]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
