@@ -169,8 +169,8 @@ const Orders = () => {
                                     onChange={handleDescChange}
                                 >
                                     <option selected >Price</option>
-                                    <option value="asc">low</option>
-                                    <option value="desc">high</option>
+                                    <option value="asc">Low</option>
+                                    <option value="desc">High</option>
                                 </select>
                             </div>
                         </div>
