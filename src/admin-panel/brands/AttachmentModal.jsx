@@ -127,6 +127,22 @@ const AttachmentModal = ({ onClose, visible, id }) => {
             height={100}
           />
         </div>
+
+        <div className="px-4 py-2 gap-2">
+  <h1 className="text-base font-semibold text-[#143250]">Product Images :</h1>
+  <div className="flex">
+    {Array.isArray(attachMent.product_image_url) ? (
+      attachMent.product_image_url.map((url, index) => (
+        <img className="w-12 h-16" key={index} src={url} alt="" />
+      ))
+    ) : (
+      <img className="w-12 h-16" src={attachMent.product_image_url} alt="" />
+    )}
+  </div>
+</div>
+
+
+
         <div className="flex flex-col p-5">
           <div className="flex justify-between py-2 gap-10 ">
             <div className="w-1/2 flex justify-between">
@@ -138,9 +154,9 @@ const AttachmentModal = ({ onClose, visible, id }) => {
               </p>
             </div>
             <div className="w-1/2 flex justify-between">
-              <h1 className="text-base font-semibold text-[#143250]">Email:</h1>
+              <h1 className="text-base font-semibold text-[#143250]">Case ID</h1>
               <p className="text-sm text-right font-normal mx-1">
-                {attachMent?.trademark_office}
+                {attachMent?.case_id}
               </p>
             </div>
           </div>
