@@ -30,7 +30,12 @@ import Privacy from '../admin-panel/cms/Privacy';
 import Terms from '../admin-panel/cms/Terms';
 import Refund from '../admin-panel/cms/Refund';
 import { Brands } from '../admin-panel/brands/Brands';
+
 import ManageGst from '../admin-panel/gst/ManageGst';
+
+
+import ReviewRating from '../admin-panel/review-rating/ReviewRating';
+
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
   return children(location);
@@ -89,10 +94,15 @@ const MainRoutes = () => {
             <Route path="/cms/terms-conditions" element={<ProtectedRoute element={Terms} />} />
             <Route path="/cms/refunds-cancellations" element={<ProtectedRoute element={Refund} />} />
             <Route path="/brands" element={<ProtectedRoute element={Brands} />} />
+
             <Route path='/ManageGst' element={<ProtectedRoute element={ManageGst} />} />
+
+            {/* // Review Rationg */}
+            <Route path="/review-rating" element={<ProtectedRoute element={ReviewRating} />} />
+
           </Routes>
         )}
-      </PreserveLocation>      
+      </PreserveLocation>
     </Router>
   );
 };

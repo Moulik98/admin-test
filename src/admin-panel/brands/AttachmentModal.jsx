@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import PdfViewModal from "./PdfViewModal";
+import Description from "../../Description";
 
 const AttachmentModal = ({ onClose, visible, id }) => {
-  const [pdfModal, setPdfModal] = useState(false);
-  const [gstModal, setGstModal] = useState(false);
   const [attachMent, SetAttachMent] = useState([]);
 
   console.log(id);
@@ -96,16 +94,6 @@ const AttachmentModal = ({ onClose, visible, id }) => {
     makePutRequest(id);
   };
 
-  const handleClosePdf = (e) => {
-    console.log("hii");
-    if (e.target.id === "container") {
-      setPdfModal(false);
-      setGstModal(false);
-    }
-  };
-
-  console.log(pdfModal);
-
   return (
     <div
       id="container"
@@ -130,6 +118,14 @@ const AttachmentModal = ({ onClose, visible, id }) => {
               />
             </svg>
           </div>
+        </div>
+        <div className="flex justify-center items-center py-2">
+          <img
+            src={attachMent?.brand_logo_url}
+            alt="s"
+            width={100}
+            height={100}
+          />
         </div>
         <div className="flex flex-col p-5">
           <div className="flex justify-between py-2 gap-10 ">
@@ -225,6 +221,44 @@ const AttachmentModal = ({ onClose, visible, id }) => {
               </p>
             </div>
           </div>
+          <div className="flex justify-between py-2 gap-5 ">
+            <div className="w-1/2 flex justify-between">
+              <h1 className="text-base font-semibold text-[#143250]">
+                Trade Mark Office:
+              </h1>
+              <p className="text-sm text-right font-normal mx-1 overflow-x-clip ">
+                {attachMent?.trademark_office}
+              </p>
+            </div>
+            <div className="w-1/2 flex justify-between">
+              <h1 className="text-base font-semibold text-[#143250]">
+                Trademark Type:
+              </h1>
+              <p className="text-sm text-right font-normal mx-1">
+                {attachMent?.trademark_type}
+              </p>
+            </div>
+          </div>
+          <div className="flex justify-between py-2 gap-5 ">
+          <div className="flex">
+            <h1 className="text-base font-semibold text-[#143250]">
+              Description:
+            </h1>
+            <div className="flex flex-wrap">
+              <p className="text-sm text-left font-normal mx-1 whitespace-normal">
+                <Description description={attachMent?.brand_desc} />
+              </p>
+            </div>
+          </div>
+          <div className="w-1/2 flex justify-between">
+              <h1 className="text-base font-semibold text-[#143250]">
+                Seller Name:
+              </h1>
+              <p className="text-sm text-right font-normal mx-1">
+                {attachMent?.seller?.fullname}
+              </p>
+            </div>
+          </div>
         </div>
         <div className="flex justify-center gap-x-5 py-5">
           <button
@@ -274,3 +308,8 @@ const AttachmentModal = ({ onClose, visible, id }) => {
 };
 
 export default AttachmentModal;
+
+
+
+
+
