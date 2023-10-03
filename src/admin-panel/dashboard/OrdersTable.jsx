@@ -35,7 +35,7 @@ const OrdersTable = () => {
     async function fetchOrderData(data) {
         const token = localStorage.getItem('access_token');
         try {
-            const response = await fetch(`${process.env.REACT_APP_URL}/v1/order/getAllOrders/admin?page=1&limit=5`, {
+            const response = await fetch(`${process.env.REACT_APP_URL}/v1/order/getAllOrders/admin?page=1&limit=5&sort_date=desc`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

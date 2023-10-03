@@ -40,7 +40,7 @@ const Orders = () => {
         console.log('filter-data', filterValues)
         const token = localStorage.getItem('access_token')
         try {
-            const response = await fetch(`${process.env.REACT_APP_URL}/v1/order/getAllOrders/admin?page=${currentPage}&limit=${pageSize}`, {
+            const response = await fetch(`${process.env.REACT_APP_URL}/v1/order/getAllOrders/admin?page=${currentPage}&limit=${pageSize}&sort_date=${dateOption}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -157,9 +157,9 @@ const Orders = () => {
                                     value={dateOption}
                                     onChange={handleDateChange}
                                 >
-                                    <option selected  >Date</option>
-                                    <option value="desc">New</option>
-                                    <option value="asc">Old</option>
+                                    <option selected>Date</option>
+                                    <option value="desc">Old</option>
+                                    <option value="asc">New</option>
                                 </select>
 
                                 <select
