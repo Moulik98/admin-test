@@ -12,6 +12,7 @@ import manageUser from "../assets/manage_user.png";
 import homepageSetting from "../assets/homepage.png";
 import countryList from "../assets/countries.png";
 import awardList from "../assets/awards.png";
+import gst from  "../assets/gst.svg"
 const Menus = [
   {
     title: "Dashboard",
@@ -71,7 +72,7 @@ const Menus = [
   },
   {
     title: "Manage GST",
-    
+    src: gst,
     link: "ManageGst",
   },
   {
