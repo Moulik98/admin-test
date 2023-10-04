@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 const SideBar = () => {
     const [Menu, setMenus] = useState(Menus)
     const [open, setOpen] = useState(true);
+      
 
     const setSubMenuOpen = (index) => {
         setMenus((prevMenus) =>
@@ -20,7 +21,7 @@ const SideBar = () => {
         <div className="flex">
             <div
                 className={` ${open ? "w-60" : "w-20 "
-                    } bg-dark-purple min-h-screen p-5  pt-8 relative duration-300 no-scrollbar`}
+                    } bg-dark-purple min-h-screen p-2  pt-8 relative duration-300 no-scrollbar`}
             >
                 <div className={`absolute cursor-pointer -right-3 top-9 w-7 h-7 flex justify-center items-center  bg-[#F3F4F6] rounded-l-[4rem]
             rounded-full  ${!open && "rotate-180"}`}

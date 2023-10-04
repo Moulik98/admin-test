@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useState} from "react";
 import "./products.css";
 
 const AllProductRow = (props) => {
@@ -19,6 +19,8 @@ const AllProductRow = (props) => {
     action,
     selectedOptions,
   } = props;
+
+  const [isConfirmationVisible, setIsConfirmationVisible] = useState(false);
 
 
 
@@ -51,8 +53,21 @@ const AllProductRow = (props) => {
     console.log(id);
   };
 
+  const showConfirmation = () => {
+    setIsConfirmationVisible(true);
+  };
+
+  const hideConfirmation = () => {
+    setIsConfirmationVisible(false);
+  };
+
+  const confirmDelete = () => {
+    handleDelete(id);
+    hideConfirmation();
+  };
+
   return (
-    <tr className="overflow-hidden border-b-2   bg-white transition duration-300 ease-in-out">
+    <tr className="overflow-hidden border-b-2 bg-white transition duration-300 ease-in-out">
       <td className="whitespace-nowrap px-4 py-2 text-xs font-light text-gray-900">
         {slNo}
       </td>
@@ -119,7 +134,7 @@ const AllProductRow = (props) => {
       </td>
       <td className="whitespace-nowrap px-4 py-2 text-xs font-light text-gray-900">
         <div
-          onClick={() => handleDelete()}
+          onClick={showConfirmation}
           class="flex items-center justify-center cursor-pointer"
         >
           <svg
@@ -138,6 +153,30 @@ const AllProductRow = (props) => {
           </svg>
         </div>
       </td>
+      {isConfirmationVisible && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded shadow-lg">
+            <p className="text-lg font-bold mb-4">Confirm Deletion</p>
+            <p className="text-gray-700 mb-4">
+              Are you sure you want to delete this item?
+            </p>
+            <div className="flex justify-end">
+              <button
+                onClick={hideConfirmation}
+                className="px-4 py-2 mr-2 text-gray-500 border rounded"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmDelete}
+                className="px-4 py-2 bg-red-500 text-white border rounded"
+              >
+                Confirm Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </tr>
   );
 };

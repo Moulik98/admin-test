@@ -518,7 +518,7 @@ const AllProduct = () => {
                 </label>
 
                 {/* Sub */}
-                <label className="block">
+                <label className="flex">
                   <input
                     type="checkbox"
                     checked={selectedOptions.sub}
@@ -529,7 +529,7 @@ const AllProduct = () => {
                 </label>
 
                 {/* Child */}
-                <label className="block">
+                <label className="flex">
                   <input
                     type="checkbox"
                     checked={selectedOptions.child}
