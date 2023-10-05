@@ -33,6 +33,10 @@ import { Brands } from '../admin-panel/brands/Brands';
 
 // Review Rating 
 import ReviewRating from '../admin-panel/review-rating/ReviewRating';
+
+//startup banner
+import Banners from '../admin-panel/starup-cms/Banners';
+
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
   return children(location);
@@ -93,6 +97,9 @@ const MainRoutes = () => {
             <Route path="/brands" element={<ProtectedRoute element={Brands} />} />
             {/* // Review Rationg */}
             <Route path="/review-rating" element={<ProtectedRoute element={ReviewRating} />} />
+
+            {/* startup banner */}
+            <Route path="/startup-cms" element={<ProtectedRoute element={Banners} />} />
           </Routes>
         )}
       </PreserveLocation>
