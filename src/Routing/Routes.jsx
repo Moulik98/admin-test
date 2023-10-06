@@ -36,6 +36,8 @@ import ManageGst from '../admin-panel/gst/ManageGst';
 
 import ReviewRating from '../admin-panel/review-rating/ReviewRating';
 
+import Banners from '../admin-panel/starup-cms/Banners';
+
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
   return children(location);
@@ -99,6 +101,9 @@ const MainRoutes = () => {
 
             {/* // Review Rationg */}
             <Route path="/review-rating" element={<ProtectedRoute element={ReviewRating} />} />
+
+            {/* startup banner */}
+            <Route path="/startup-cms" element={<ProtectedRoute element={Banners} />} />
 
           </Routes>
         )}
