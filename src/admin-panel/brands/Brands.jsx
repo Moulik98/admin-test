@@ -9,6 +9,12 @@ export const Brands = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [totalItems, setTotalItems] = useState(0);
+  // Add a new state for search results
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [showDropdown, setShowDropDown] = useState(false);
+
+
 
   async function fetchSellerVerificationList() {
     try {
@@ -38,6 +44,65 @@ export const Brands = () => {
   const handleRefresh = () => {
     fetchSellerVerificationList();
   };
+
+    // Handle change in search
+    const handleInputChange = (event) => {
+      setSearchQuery(event.target.value);
+      if (event.target.value === "") {
+        setShowDropDown(false);
+      } else {
+        setShowDropDown(true);
+      }
+    };
+  
+  // Add a new function to fetch search results
+  async function fetchSearchResults(query) {
+    try {
+      const token = localStorage.getItem("access_token");
+      const searchUrl = `${process.env.REACT_APP_URL}/v1/brand-registration/searchSuggetion?query=${query}`;
+      const response = await fetch(searchUrl, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      setSearchResults(data); // Update the search results state
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // Parent Category Search
+useEffect(() => {
+  // Define a function to fetch data from the API
+  const fetchData = async () => {
+    try {
+      // If the searchQuery is empty, fetch all data
+      if (!searchQuery) {
+         await fetchSellerVerificationList();
+      } else {
+        // Fetch data based on the search query
+        const response = await fetch(
+          `${process.env.REACT_APP_URL}/v1/brand-registration/searchSuggetion?search=${searchQuery}`
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+
+          // Assuming the API returns an array of category objects
+          setSearchResults(data.response);
+          console.log("Search Results>>>",searchResults);
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  // Call the fetchData function when searchQuery changes
+  fetchData();
+}, [searchQuery, currentPage, pageSize]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -70,6 +135,9 @@ export const Brands = () => {
                 <input
                   className="w-52 py-1 px-1 bg-gray-100 outline-0"
                   type="text"
+                  onChange={() => {
+                    handleInputChange()
+                  }}
                 />
               </div>
             </form>

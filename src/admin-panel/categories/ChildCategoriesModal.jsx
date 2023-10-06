@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import slugify from "./Slugify";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 const ChildCategoriesModal = (props) => {
   const [fileInputState, setFileInputState] = useState("");
   const [selectedFile, setSelectedFile] = useState();
@@ -28,15 +29,16 @@ const ChildCategoriesModal = (props) => {
   ) => {
     try {
       const response = await fetch(url, requestBody);
+      const data = await response.json();
       console.log(response);
       if (response.ok) {
         setIsFormSubmited(false);
-        const data = await response.json();
+        
         console.log(data);
         if (modalName === "edit") {
-          alert("Updated Successfuly");
+          toast.success(data.message);
         } else {
-          alert("Added Successfuly");
+          toast.success(data.message);
         }
         // Prepare data to be sent to the next page
         const attributeData = {
@@ -50,10 +52,12 @@ const ChildCategoriesModal = (props) => {
 
         // Redirect to the next page with the data in the query string
         window.location.href = `attribute?${queryString}`;
+      }else{
+        toast.error(data.message);
       }
     } catch (error) {
       setIsFormSubmited(false);
-      alert(error);
+  
       console.log(error);
     }
   };
@@ -130,16 +134,21 @@ const ChildCategoriesModal = (props) => {
             `${process.env.REACT_APP_URL}/v1/categories/get-populated/${id}`
           );
           const data = await response.json();
-
-          setChildData(data.category);
-          console.log(data.category);
-          setFormData({
-            parent_category: data?.category?.parent_category_id?.category_name,
-            sub_category: data?.category?.sub_category_id?.category_name,
-            category_name: data?.category?.category_name,
-            category_desc: data?.category?.category_desc,
-          });
+            if(response.ok){
+              setChildData(data.category);
+              console.log(data.category);
+              setFormData({
+                parent_category: data?.category?.parent_category_id?.category_name,
+                sub_category: data?.category?.sub_category_id?.category_name,
+                category_name: data?.category?.category_name,
+                category_desc: data?.category?.category_desc,
+              });
+            }else{
+              toast.error(data.message);
+            }
+     
         } catch (error) {
+         
           console.log(error);
         }
       };
@@ -230,11 +239,11 @@ const ChildCategoriesModal = (props) => {
             `${process.env.REACT_APP_URL}/v1/categories/edit/${id}`,
             requestOptions
           );
-
+          const data = await response.json();
           if (response.ok) {
-            alert("Updated Successfully");
-            const data = await response.json();
-            console.log(data);
+           
+          
+            console.log(data.message);
             const attributeData = {
               parentName: childData?.parent_category_id?.category_name,
               subCategory: childData?.sub_category_id?.category_name,
@@ -244,10 +253,13 @@ const ChildCategoriesModal = (props) => {
             };
             const queryString = new URLSearchParams(attributeData).toString();
             // Redirect to the next page with the data in the query string
+            toast.success(data.message);
             navigate(`/category/attribute?${queryString}`);
+          }else{
+            toast.error(data.message)
           }
         } catch (error) {
-          alert(error);
+         
           console.log(error);
         }
       };
@@ -409,16 +421,15 @@ const ChildCategoriesModal = (props) => {
                   className={`${
                     (isFormSubmited ||
                       formData.category_name === "" ||
-                      formData.category_desc === "") &&
-                    "cursor-not-allowed"
+                      formData.category_desc === "")
                   }`}
                 >
                   <button
                     className={`py-2 px-10 bg-[#00388c] text-white rounded-sm uppercase ${
                       (isFormSubmited ||
                         formData.category_name === "" ||
-                        formData.category_desc === "") &&
-                      "pointer-events-none"
+                        formData.category_desc === "")
+                      
                     }`}
                     type="submit"
                   >
