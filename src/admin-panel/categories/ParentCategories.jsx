@@ -242,7 +242,7 @@ useEffect(() => {
           {parentCategories.length === 0 ? (
             <div className="w-full  flex justify-center items-center ">
               <p className=" text-3xl font-bold text-gray-400">
-                No record available
+                Loading...
               </p>
             </div>
           ) : null}

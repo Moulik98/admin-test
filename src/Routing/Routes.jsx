@@ -31,10 +31,11 @@ import Terms from '../admin-panel/cms/Terms';
 import Refund from '../admin-panel/cms/Refund';
 import { Brands } from '../admin-panel/brands/Brands';
 
-// Review Rating 
+import ManageGst from '../admin-panel/gst/ManageGst';
+
+
 import ReviewRating from '../admin-panel/review-rating/ReviewRating';
 
-//startup banner
 import Banners from '../admin-panel/starup-cms/Banners';
 
 const PreserveLocation = ({ children }) => {
@@ -95,11 +96,15 @@ const MainRoutes = () => {
             <Route path="/cms/terms-conditions" element={<ProtectedRoute element={Terms} />} />
             <Route path="/cms/refunds-cancellations" element={<ProtectedRoute element={Refund} />} />
             <Route path="/brands" element={<ProtectedRoute element={Brands} />} />
+
+            <Route path='/ManageGst' element={<ProtectedRoute element={ManageGst} />} />
+
             {/* // Review Rationg */}
             <Route path="/review-rating" element={<ProtectedRoute element={ReviewRating} />} />
 
             {/* startup banner */}
             <Route path="/startup-cms" element={<ProtectedRoute element={Banners} />} />
+
           </Routes>
         )}
       </PreserveLocation>

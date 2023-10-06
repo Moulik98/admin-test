@@ -150,6 +150,7 @@ const AwardListModal = ({ visible, onClose, id, modalName }) => {
               Description
             </p>
             <textarea
+            maxLength={160}
               onChange={(e) => handleChange(e)}
               name="award_description"
               value={formData.award_description}

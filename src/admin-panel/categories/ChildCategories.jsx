@@ -263,7 +263,7 @@ const ChildCategories = () => {
                 />
               </svg>
               <input
-                className="w-60 py-1 px-1 outline-0 -z-10"
+                className="w-60 py-1 px-1 outline-0 "
                 value={searchQuery}
                 placeholder="Search child/sub/parent categories"
                 onChange={handleInputChange}

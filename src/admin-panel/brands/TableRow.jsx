@@ -11,6 +11,8 @@ const TableRow = ({ data, onDelete }) => {
     brand_desc,
     _id,
     brand_logo_url,
+    seller
+    
   } = data;
   const formattedDate = new Date(createdAt).toLocaleDateString();
   const [viewAttachment, setViewAttachment] = useState(false);
@@ -69,6 +71,7 @@ const TableRow = ({ data, onDelete }) => {
       <td className="px-4 py-2">
         {trademark_office} <br /> {trademark_reg_no}
       </td>
+      <td className="px-4 py-2">{seller?.fullname}</td>
       <td className="px-4 py-2"><Description description={brand_desc} /></td>
       <td className="text-center px-4 py-2">
         {status === "Approved" ? (

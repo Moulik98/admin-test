@@ -71,9 +71,9 @@ export const Downblock = () => {
             <p className="text-xl font-bold">5</p>
           </div>
           <div className="flex-1 pl-8 pr-14 py-4 text-left bg-white hover:bg-blue-100 border border-blue-300 rounded-md hover:shadow-2xl shadow-lg">
-            <p className="text-lg">Blogs</p>
+            <p className="text-lg">Brands</p>
             <div className="flex justify-between items-end">
-              <p className="text-xl font-bold">10</p>
+              <p className="text-xl font-bold">{orderData?.total_brands}</p>
               <img src="../assets/admin-panel/graph.svg" alt="" />
             </div>
           </div>

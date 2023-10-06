@@ -22,7 +22,7 @@ const AwardListRow = ({ srNo, parent, sub, categoriesId, desc, id }) => {
       <td className="whitespace-nowrap px-6 py-2 flex items-center text-xs font-light text-gray-900">
         {categoriesId}
       </td>
-      <td className="whitespace-nowrap px-auto py-2  text-xs font-light text-gray-900">
+      <td className="whitespace-wrap px-auto py-2  text-xs font-light text-gray-900">
         <Description description={desc} />
       </td>
       <td className="whitespace-nowrap px-6 py-2 text-xs font-light text-gray-900">
