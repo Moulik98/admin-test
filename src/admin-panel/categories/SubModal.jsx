@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import slugify from "./Slugify";
+import toast from "react-hot-toast";
 
 
 
@@ -30,16 +31,16 @@ const SubCategoriesModal = ({ visible, onClose, id, modalName }) => {
     setSelectedOptionId(selectedOption.dataset.id);
   };
 
-  const updateData = (url, requestOptions) => {
-    fetch(url, requestOptions)
-      .then(response => response.json())
-      .then(data => {
-        if (data) {
-          onClose()
-          console.log(data)
-        }
-      })
-      .catch(error => console.log(error));
+  const updateData = async (url, requestOptions) => {
+    const response = await fetch(url,requestOptions)
+    const data = await response.json();
+    console.log("Data >>>",data);
+    if(response.ok){
+      toast.success([data.message]);
+      onClose();
+    }else{
+      toast.error([data.message]);
+    }
   }
 
   const [parentList, SetParentList] = useState([]);
@@ -104,7 +105,7 @@ const SubCategoriesModal = ({ visible, onClose, id, modalName }) => {
       category_img: "",
     })
 
-    onClose()
+  
   }
 
 
