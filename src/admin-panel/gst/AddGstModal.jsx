@@ -103,6 +103,7 @@ const AddGstModal = ({ visible,onClose,modalName,id }) => {
                 name="category_id"
                 value={formData.category_id}
                 onChange={handleInputChange}
+                
               >
                 <option value="">Select...</option>
                 {subCategories.map((category) => (

@@ -62,3 +62,18 @@
   background-color: gray;
   border-radius: 5px;
 }
+
+.dropdown-wrapper {
+  position: relative;
+}
+
+.dropdown-wrapper select {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #ccc;
+}
+
+.dropdown-wrapper select option {
+  max-height: 200px; /* Adjust as needed */
+  overflow-y: auto;
+}
