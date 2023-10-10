@@ -6,11 +6,14 @@ import Sellerdetails from "./Sellerdetails";
 
 const ApproveSellerList = () => {
   const [data, setData] = useState(null);
+  // Add a new state for search results
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [showDropdown, setShowDropDown] = useState(false);
 
-  const fetchData = async () => {
+  const sellerData = async () => {
     try {
-      const url =
-        `${process.env.REACT_APP_URL}/v1/verifySeller/getApprovedData`;
+      const url = `${process.env.REACT_APP_URL}/v1/verifySeller/getApprovedData`;
       const response = await fetch(url);
       const jsonData = await response.json();
       setData(jsonData);
@@ -21,11 +24,82 @@ const ApproveSellerList = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    sellerData();
   }, []);
 
+    // Handle change in search
+    const handleInputChange = (event) => {
+      setSearchQuery(event.target.value);
+      if (event.target.value === "") {
+        setShowDropDown(false);
+      } else {
+        setShowDropDown(true);
+      }
+    };
+  
+    useEffect(() => {
+      // Define a function to fetch data from the API
+      const fetchData = async () => {
+        try {
+          // If the searchQuery is empty, fetch all data
+          if (!searchQuery) {
+            await sellerData();
+          } else {
+            // Fetch data based on the search query
+            const response = await fetch(
+              `${process.env.REACT_APP_URL}/v1/verifySeller/search?query=${searchQuery}`
+            );
+  
+            if (response.ok) {
+              const data = await response.json();
+  
+              // Assuming the API returns an array of category objects
+              setSearchResults(data);
+              console.log("Search Results>>>", searchResults);
+            }
+          }
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+  
+      // Call the fetchData function when searchQuery changes
+      fetchData();
+    }, [searchQuery]);
+  
+    const handleSelect = async (sellerId) => {
+      try {
+        console.log("seller id",sellerId);
+        const token = localStorage.getItem("access_token");
+        const response = await fetch(
+          `${process.env.REACT_APP_URL}/v1/verifySeller/getSingleApprovedData/${sellerId}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Data >>", data);
+    
+          // Ensure that data is an object
+          
+    
+          // Log the entire data object
+          
+    
+          setData([data]); // Wrap the object in an array if needed
+          setShowDropDown(false);
+        }
+      } catch (error) {
+        console.error("Error fetching data", error);
+      }
+    };
+
   const handleRefresh = () => {
-    fetchData();
+    sellerData();
   };
   return (
     <mian>
@@ -56,10 +130,31 @@ const ApproveSellerList = () => {
                   </div>
                   <input
                     className="w-52 py-1 px-1 bg-gray-100 outline-0"
-                    //   value={searchTerm}
-                    //   onChange={handleSearch}
+                    onChange={(event) => {
+                      handleInputChange(event)
+                    }}
                     type="text"
                   />
+                    {/* Dropdown */}
+                {showDropdown && searchResults.length > 0 && (
+                  <div className="relative">
+                    <div className="z-10 absolute top-full max-h-60 -left-60 w-60 mt-6 bg-white border border-solid border-[#9D9D9D] rounded-md shadow-md overflow-y-scroll search-scrollbar">
+                      <ul>
+                        {searchResults.map((result) => (
+                          <li
+                            key={result._id}
+                            onClick={() => {
+                              handleSelect(result._id);
+                            }}
+                            className="p-2 hover:bg-gray-300 font-light text-xs"
+                          >
+                            {result?.fullname}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                )}
                 </div>
               </form>
               <User />
@@ -78,10 +173,7 @@ const ApproveSellerList = () => {
                     <th scope="col" class=" px-4 py-3">
                       Seller Name
                     </th>
-                    <th
-                      scope="col"
-                      class="px-4 py-3"
-                    >
+                    <th scope="col" class="px-4 py-3">
                       Selller Email
                     </th>
                     <th scope="col" class=" px-4 py-3">
