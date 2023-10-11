@@ -100,7 +100,7 @@ const ApproveSellerList = () => {
     sellerData();
   };
 
-  const [sellerType, setSellerType] = useState('business');
+  const [sellerType, setSellerType] = useState('');
   const [apiData, setApiData] = useState([]);
 
   useEffect(() => {
@@ -137,7 +137,9 @@ const ApproveSellerList = () => {
               <select
                 value={sellerType}
                 onChange={(e) => setSellerType(e.target.value)}
+                className="border border-gray-400 rounded-md leading-4"
               >
+                <option value="">--Select</option>
                 <option value="business">Business</option>
                 <option value="startup">Startup</option>
               </select>
