@@ -160,7 +160,7 @@ export const Brands = () => {
                 {/* Dropdown */}
                 {showDropdown && searchResults.length > 0 && (
                   <div className="relative">
-                    <div className="absolute top-full max-h-60 -left-60 w-60 mt-6 bg-white border border-solid border-[#9D9D9D] rounded-md shadow-md overflow-y-scroll search-scrollbar">
+                    <div className="z-10 absolute top-full max-h-60 -left-60 w-60 mt-6 bg-white border border-solid border-[#9D9D9D] rounded-md shadow-md overflow-y-scroll search-scrollbar">
                       <ul>
                         {searchResults.map((result) => (
                           <li
