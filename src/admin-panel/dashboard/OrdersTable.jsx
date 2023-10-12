@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import OrdersTableRow from '../orders/OrdersTableRow';
 import Pagination from '../../Pagination';
+import { Link } from "react-router-dom";
 
 const status = [
     {
@@ -58,7 +59,7 @@ const OrdersTable = () => {
 
     return (
         <div className='mx-16 my-4 border'>
-            <p className='px-2 text-left py-4 text-xl font-semibold'>Recent Orders</p>
+            <p className='px-2 text-left py-4 text-xl font-semibold'><Link to='/orders'>Recent Orders</Link></p>
             <div className='p-1'>
                 <section>
                     <div className="relative overflow-x-auto">
