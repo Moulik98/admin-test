@@ -119,14 +119,15 @@ const AttachmentModal = ({ onClose, visible, id }) => {
             </svg>
           </div>
         </div>
-        <div className="flex justify-center items-center py-2">
+        <div className="flex justify-center items-center py-2 gap-10">
+        <h2 className="text-base font-semibold">Logo :</h2>
           <img
             src={attachMent?.brand_logo_url}
             alt="s"
             width={100}
             height={100}
           />
-        </div>
+        
 
         <div className="px-4 py-2 gap-2">
   <h1 className="text-base font-semibold text-[#143250]">Product Images :</h1>
@@ -138,6 +139,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
     ) : (
       <img className="w-12 h-16" src={attachMent.product_image_url} alt="" />
     )}
+  </div>
   </div>
 </div>
 
