@@ -1,4 +1,5 @@
 import React from "react";
+import Description from "../../Description";
 
 export const Table = ({srNo,productImage,productName,productDescription,parentCategory,subCategory,childCategory}) => {
   return (
@@ -13,7 +14,7 @@ export const Table = ({srNo,productImage,productName,productDescription,parentCa
         {productName}
       </td>
       <td className=" px-6 py-2 text-xs font-light  text-gray-900">
-        {productDescription}
+        <Description description={productDescription} />
       </td>
       <td className="px-6 py-2 text-xs font-light  text-gray-90">
         {parentCategory}
