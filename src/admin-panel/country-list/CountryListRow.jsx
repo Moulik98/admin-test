@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CountryListModal from "./CountryListModal";
 
-const CountryListRow = ({ srNo, parent, sub, categoriesId, desc,id }) => {
+const CountryListRow = ({ srNo, parent, sub, categoriesId,banner, desc,id }) => {
   // State for view modal
   const [viewModal, setViewModal] = useState(false);
   // State for edit
@@ -17,7 +17,10 @@ const CountryListRow = ({ srNo, parent, sub, categoriesId, desc,id }) => {
         {parent}
       </td>
       <td className="whitespace-nowrap px-6 py-2 text-xs font-light text-gray-900">
-        <img className="w-6 h-6 rounded-full" src={sub}/>
+        <img className="w-6 h-6 rounded-full" src={sub} alt=""/>
+      </td>
+      <td className="whitespace-nowrap px-6 py-2 text-xs font-light text-gray-900">
+        <img className="w-6 h-6 rounded-full" src={banner} alt=""/>
       </td>
       <td className="whitespace-nowrap px-6 py-2 text-xs text-center font-light text-gray-900">
         {categoriesId}

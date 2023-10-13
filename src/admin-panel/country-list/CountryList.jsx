@@ -113,6 +113,12 @@ const CountryList = () => {
                 </th>
                 <th
                   scope="col"
+                  className="px-6 py-2 text-left text-xs font-normal text-white"
+                >
+                 Banner
+                </th>
+                <th
+                  scope="col"
                   className="px-6 py-2  text-xs font-normal text-white"
                 >
                   Products Listed
@@ -132,6 +138,7 @@ const CountryList = () => {
                   key={categories?._id}
                   parent={categories?.country_name}
                   sub={categories?.image}
+                  banner={categories?.banner}
                   categoriesId={categories?.used_country}
                 />
               ))}

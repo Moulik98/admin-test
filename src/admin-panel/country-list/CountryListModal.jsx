@@ -2,17 +2,24 @@ import React, { useEffect, useState } from "react";
 
 const CountryListModal = ({ visible, onClose, id, modalName }) => {
   const [fileInputState, setFileInputState] = useState("");
-  const [selectedFile, setSelectedFile] = useState();
+  const [logo, setLogo] = useState();
+  const [banner, setBanner] = useState();
+
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      setSelectedFile(reader.result);
-      setFileInputState(e.target.value);
+      if (e.target.name === 'logoInput') {
+        setLogo(reader.result);  // Update logo state
+      } else if (e.target.name === 'bannerInput') {
+        setBanner(reader.result);  // Update banner state
+      }
     };
   };
+  
+  
 
   const updateData = (url, requestBody) => {
     fetch(url, requestBody)
@@ -29,6 +36,7 @@ const CountryListModal = ({ visible, onClose, id, modalName }) => {
   const [formData, SetFormData] = useState({
     country_name: "",
     image: "",
+    banner:""
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,7 +50,8 @@ const CountryListModal = ({ visible, onClose, id, modalName }) => {
     const data = {
       country_name: formData.country_name,
 
-      image: selectedFile,
+      image: logo,
+      banner : banner,
     };
     console.log(data);
     // modalName === "edit"
@@ -78,6 +87,7 @@ const CountryListModal = ({ visible, onClose, id, modalName }) => {
     SetFormData({
       country_name: "",
       image: "",
+      banner : "",
     });
   };
   const [view, setView] = useState([]);
@@ -92,6 +102,7 @@ const CountryListModal = ({ visible, onClose, id, modalName }) => {
           SetFormData({
             country_name: data.result.country_name,
             image: "",
+            banner : "",
           });
           console.log(data.data);
         });
@@ -128,6 +139,21 @@ const CountryListModal = ({ visible, onClose, id, modalName }) => {
                   onChange={handleFileInputChange}
                   disabled={modalName === "view"}
                   type="file"
+                  name="logoInput"
+                  className="border mt-6 p-1"
+                />
+              </div>
+            </div>
+            <div className="">
+              <p className="w-fit text-sm text-gray-900  py-1 uppercase ">
+                Banner
+              </p>
+              <div>
+                <input
+                  onChange={handleFileInputChange}
+                  disabled={modalName === "view"}
+                  type="file"
+                  name="bannerInput"
                   className="border mt-6 p-1"
                 />
               </div>
