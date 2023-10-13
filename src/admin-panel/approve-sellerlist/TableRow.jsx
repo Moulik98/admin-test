@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 // import AttachmentModal from './AttachmentModal'
-const TableRow = ({ data, onDelete,onViewDetails }) => {
-  const { fullname, email, isVerify, store_name,sellerType, _id,seller_id } = data;
+const TableRow = ({ data, onDelete, onViewDetails }) => {
+  const { fullname, email, isVerify, store_name, sellerType, _id, seller_id } =
+    data;
   // const [viewAttachment, setViewAttachment] = useState(false)
   // const handleClose = (value) => {
   //     if (value === 'close') {
@@ -21,10 +22,13 @@ const TableRow = ({ data, onDelete,onViewDetails }) => {
         id: id,
       };
 
+      const accessToken = localStorage.getItem("access_token"); // Replace with your actual access token
+
       const requestOptions = {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify(payload),
       };
@@ -42,14 +46,12 @@ const TableRow = ({ data, onDelete,onViewDetails }) => {
       console.error("Error:", error.message);
     }
   }
-  async function onViewDetails(id){
+  async function onViewDetails(id) {
     window.location.href = `/sellerdetails/${id}`;
   }
 
-
   const setViewDetails = () => {
     onViewDetails(_id);
-    
   };
 
   const handleDelete = () => {
@@ -76,11 +78,11 @@ const TableRow = ({ data, onDelete,onViewDetails }) => {
 
                 </div>
             </td> */}
-            <td class="px-4 py-2 text-xs">{seller_id}</td>
+      <td class="px-4 py-2 text-xs">{seller_id}</td>
       <td class="px-4 py-2 text-xs">
         <div class="flex justify-around">
           <div
-             onClick={() => setViewDetails()}
+            onClick={() => setViewDetails()}
             class="flex items-center cursor-pointer"
           >
             View Details
