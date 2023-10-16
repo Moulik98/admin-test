@@ -38,6 +38,10 @@ import ReviewRating from '../admin-panel/review-rating/ReviewRating';
 
 import Banners from '../admin-panel/starup-cms/Banners';
 
+import ManagerDashboard from '../managerdashboard/ManagerDashboard'
+import { CategoryManagerLogin } from '../admin-panel/login/CategoryManagerLogin';
+import ManageStaff from '../admin-panel/manage-staff/ManageStaff';
+
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
   return children(location);
@@ -70,6 +74,8 @@ const MainRoutes = () => {
         {(location) => (
           <Routes location={location}>
             <Route path="/" element={<Login />} />
+            <Route path="/manage-staff"  element={<ProtectedRoute element={ManageStaff} />} />
+            <Route path="/CategoryManagerLogin" element={<CategoryManagerLogin />} />
             <Route path="/dashboard" element={<ProtectedRoute element={Dashboard} />} />
             <Route path="/category" element={<ProtectedRoute element={AdminCategories} />} />
             <Route path="/category/parentcategory" element={<ProtectedRoute element={ParentCategories} />} />
@@ -104,7 +110,8 @@ const MainRoutes = () => {
 
             {/* startup banner */}
             <Route path="/startup-cms" element={<ProtectedRoute element={Banners} />} />
-
+            {/* Category Manager */}
+            <Route path="/ManagerDashboard" element={<ProtectedRoute element={ManagerDashboard} />} />
           </Routes>
         )}
       </PreserveLocation>
