@@ -74,7 +74,7 @@ const Preview = () => {
 
     return (
         <main>
-            <div className='flex flex-col'>
+            <div className='flex flex-col text-left'>
                 <section>
                     <div className='max-w-5xl mx-auto flex justify-between items-center py-5 pr-5'>
                         <p className='text-2xl text-gray-900 font-semibold'>A+ Content Preview</p>
@@ -112,13 +112,13 @@ const Preview = () => {
                 </section>
                 <section>
                     <div>
-                        {error && <h1 className='text-3xl text-black font-medium'>{error}</h1>}
+                        {error && <h1 className='text-3xl text-black font-medium mt-10 text-center'>{error}</h1>}
                     </div>
                     <div className='flex justify-between pr-5 items-center'>
                         <h1 className='text-xl text-gray-900 font-semibold'>{contentDetails?.contentName}</h1>
                         <button className={`py-2 px-4 rounded-md ${status[contentDetails?.status]}`}>{contentDetails?.status}</button>
                     </div>
-                    <div className='mt-5'>
+                    <div className='mt-5 space-y-10'>
                         {data?.map((item, index) => {
                             const ComponentToRender = componentRegistry[item.component];
                             if (ComponentToRender) {
@@ -132,19 +132,23 @@ const Preview = () => {
                         })}
                     </div>
 
-                    <div className='flex justify-center items-center space-x-5 my-5'>
-                        <button
-                            onClick={() => handleClick('approved')}
-                            className='py-2 px-4 rounded-md bg-green-500 text-white'>
-                            Approve
-                        </button>
-                        <button
-                            onClick={() => handleClick('declined')}
-                            type='button'
-                            className='py-2 px-4 rounded-md bg-red-500 text-white'>
-                            Decline
-                        </button>
-                    </div>
+                    {
+                        data?.length > 0 &&
+                        <div className='flex justify-center items-center space-x-5 my-5'>
+                            <button
+                                onClick={() => handleClick('approved')}
+                                className='py-2 px-4 rounded-md bg-green-500 text-white'>
+                                Approve
+                            </button>
+                            <button
+                                onClick={() => handleClick('declined')}
+                                type='button'
+                                className='py-2 px-4 rounded-md bg-red-500 text-white'>
+                                Decline
+                            </button>
+                        </div>
+                    }
+
                 </section>
             </div >
         </main>

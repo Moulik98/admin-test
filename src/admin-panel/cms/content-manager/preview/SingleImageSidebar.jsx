@@ -7,17 +7,17 @@ const SingleImageSidebar = ({ data }) => {
     const { image, image2, image_caption, headline, sub_headline, headline2, body_text, body_text2, bullet_point, bullet_point2 } = data
     return (
         <div className='flex flex-col md:flex-row'>
-            <div className='w-full md:w-[30%] flex flex-col p-2 space-y-2'>
+            <div className='w-full md:w-[30%] flex flex-col  space-y-2'>
                 <ShowImage
                     style={`w-full h-96`}
                     alt={`left-image`}
                     image={image}
                 />
             </div>
-            <div className='w-full md:w-[45%] flex flex-col p-2 space-y-2 '>
+            <div className='w-full md:w-[45%] flex flex-col space-y-2 px-2'>
                 <Heading
                     headline={headline}
-                    style={`text-2xl text-black font-semibold`}
+                    style={`text-2xl text-black font-semibold leading-0`}
                 />
                 <Heading
                     headline={sub_headline}
@@ -30,7 +30,7 @@ const SingleImageSidebar = ({ data }) => {
                     bulletPoints={bullet_point}
                 />
             </div>
-            <div className='w-full md:w-[25%] flex flex-col p-2 space-y-2'>
+            <div className='w-full md:w-[25%] flex flex-col space-y-2'>
                 <ShowImage
                     style={`w-full h-40`}
                     image={image2}
