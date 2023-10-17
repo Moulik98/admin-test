@@ -172,8 +172,9 @@ const AllProduct = () => {
         return res.json();
       })
       .then((data) => {
-        setTotalItems(data.totalCount)
+        setTotalItems(data.totalCount);
         setProducts(data?.productList);
+        console.log('data?productList', data?.productList);
       })
       .catch((error) => {
         handleApiError(error);
@@ -642,6 +643,12 @@ const AllProduct = () => {
                   scope="col"
                   className="px-4 py-2 text-left text-xs font-normal text-gray-900"
                 >
+                  A+ Content
+                </th>
+                <th
+                  scope="col"
+                  className="px-4 py-2 text-left text-xs font-normal text-gray-900"
+                >
                   Actions
                 </th>
               </tr>
@@ -650,6 +657,7 @@ const AllProduct = () => {
               {products?.map((e, index) => (
                 <AllProductRow
                   id={e?._id}
+                  variationId={e?.variation_group_id}
                   key={e?._id}
                   slNo={index + 1}
                   img={e?.product_images[0]?.main_img}

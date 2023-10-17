@@ -1,24 +1,9 @@
-import React ,{useState} from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./products.css";
 
-const AllProductRow = (props) => {
-  const {
-    slNo,
-    name,
-    img,
-    sellerName,
-    parentCategory,
-    subCategory,
-    childCategory,
-    country,
-    award,
-    approved,
-    id,
-    review,
-    handleEdit,
-    action,
-    selectedOptions,
-  } = props;
+const AllProductRow = ({ variationId, slNo, name, img, sellerName, parentCategory, subCategory, childCategory, country, award, approved, id, review, handleEdit, action, selectedOptions, }) => {
+
 
   const [isConfirmationVisible, setIsConfirmationVisible] = useState(false);
 
@@ -31,7 +16,7 @@ const AllProductRow = (props) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-         Authorization: `Bearer ${access_token}`,
+        Authorization: `Bearer ${access_token}`,
         // Add any other headers required by your API
       },
     })
@@ -131,6 +116,12 @@ const AllProductRow = (props) => {
               : "Declined"
             }`}
         </div>
+      </td>
+      <td className="whitespace-nowrap px-4 py-2 text-xs font-light text-gray-900 ">
+        <Link
+          to={`/preview-content-manager?product_id=${id}&variation_group_id=${variationId}`}
+          className="py-2 px-4 rounded-md bg-blue-500 text-white"
+        >Preview</Link>
       </td>
       <td className="whitespace-nowrap px-4 py-2 text-xs font-light text-gray-900">
         <div
