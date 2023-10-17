@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { User } from "../user/User";
 import SideBar from "../SideBar";
+import { json } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const ManageStaff = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    contactNumber: "",
-    userId: "",
+    userName: "",
     password: "",
-    confirmPassword: "",
-    designation: "",
+    roles: "",
   });
 
   // Function to handle form input changes
@@ -23,19 +23,33 @@ const ManageStaff = () => {
   };
 
   // Function to handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Perform any validation or submit data to the server here
     console.log("Form Data Submitted:", formData);
+    const token = localStorage.getItem("access_token")
+    const response = await fetch (`${process.env.REACT_APP_URL}/v1/category-manager/signup`,{
+      method : 'POST',
+      headers : {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body : JSON.stringify(formData)
+    })
+
+    const data = await response.json()
+    if(response.ok){
+      toast.success(data.message)
+    }else{
+      toast.error(data.message)
+    }
     // Reset the form after submission if needed
     setFormData({
       name: "",
       email: "",
-      contactNumber: "",
-      userId: "",
+      userName: "",
       password: "",
-      confirmPassword: "",
-      designation: "",
+      roles: "",
     });
   };
   return (
@@ -46,14 +60,14 @@ const ManageStaff = () => {
 
       <div className=" ">
         <form className="py-8" onSubmit={handleSubmit}>
-          <div className="flex flex-col justify-center items-center gap-8">
+          <div className="flex w-4/5 flex-col justify-center items-center gap-8">
             <div className=" w-3/5 flex flex-row gap-4">
               <label className="w-2/5 text-right">
                 <span>Name:</span>
               </label>
 
               <input
-                className="w-3/5 text-right border rounded-md"
+                className="w-3/5  border rounded-md"
                 type="text"
                 name="name"
                 value={formData.name}
@@ -67,7 +81,7 @@ const ManageStaff = () => {
                 <span>Email:</span>
               </label>
               <input
-                className="w-3/5 text-right border rounded-md"
+                className="w-3/5  border rounded-md"
                 type="email"
                 name="email"
                 value={formData.email}
@@ -75,28 +89,16 @@ const ManageStaff = () => {
                 required
               />
             </div>
-            <div className="w-3/5 flex flex-row gap-4">
-              <label className="w-2/5 text-right">
-                <span>Contact Number:</span>
-              </label>
-              <input
-                className="w-3/5 text-right border rounded-md"
-                type="tel"
-                name="contactNumber"
-                value={formData.contactNumber}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
+      
             <div className="w-3/5 flex flex-row gap-4">
               <label className="w-2/5 text-right">
                 <span>User ID:</span>
               </label>
               <input
-                className="w-3/5 text-right border rounded-md"
+                className="w-3/5  border rounded-md"
                 type="text"
-                name="userId"
-                value={formData.userId}
+                name="userName"
+                value={formData.userName}
                 onChange={handleInputChange}
                 required
               />
@@ -106,7 +108,7 @@ const ManageStaff = () => {
                 <span>Password:</span>
               </label>
               <input
-                className="w-3/5 text-right border rounded-md"
+                className="w-3/5  border rounded-md"
                 type="password"
                 name="password"
                 value={formData.password}
@@ -114,34 +116,22 @@ const ManageStaff = () => {
                 required
               />
             </div>
-            <div className="w-3/5 flex flex-row gap-4">
-              <label className="w-2/5 text-right">
-                <span>Confirm Password:</span>
-              </label>
-              <input
-                className="w-3/5 text-right border rounded-md"
-                type="password"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
+        
             <div className="w-3/5 flex flex-row gap-4">
               <label className="w-2/5 text-right">
                 <span>Designation:</span>
               </label>
               <select
-                className="w-3/5 text-right border rounded-md"
-                name="designation"
-                value={formData.designation}
+                className="w-3/5  border rounded-md"
+                name="roles"
+                value={formData.roles}
                 onChange={handleInputChange}
                 required
               >
                 <option className="text-center" value="" disabled>
                   Select Designation
                 </option>
-                <option value="Category Manager">Category Manager</option>
+                <option value="CM">Category Manager</option>
                 <option value="Approver">Approver</option>
                 {/* Add other designations as needed */}
               </select>

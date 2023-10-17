@@ -1,8 +1,48 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 
 export const CategoryManagerLogin = () => {
- 
+  const [formData, setFormData] = useState({
+    userName: '',
+    password: '',
+  });
+
+  const navigate = useNavigate();
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(formData);
+    try {
+      const response = await fetch(`${process.env.REACT_APP_URL}/v1/category-manager/cm-signin`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+
+      if (response.ok) {
+        // Successful authentication, redirect to /managerdashboard
+       localStorage.setItem("access_token", data.access_token);
+       navigate("/ManagerDashboard")
+      } else {
+        // Handle unsuccessful authentication, show an error message or take appropriate action
+        console.error('Authentication failed');
+      }
+    } catch (error) {
+      // Handle network or other errors
+      console.error('Error during authentication', error);
+    }
+  };
   
 
   return (
@@ -22,7 +62,7 @@ export const CategoryManagerLogin = () => {
 
       {/* right part */}
       <div className="flex items-center justify-center w-5/12">
-        <form className=" mx-auto w-72 " >
+        <form className=" mx-auto w-72 " onSubmit={handleSubmit}>
           <div>
             <h1 className="text-4xl font-bold">Hello Again!</h1>
             <h3 className="text-2xl font-semibold pb-8 pt-3">Welcome Back</h3>
@@ -46,10 +86,11 @@ export const CategoryManagerLogin = () => {
 
               <input
                 className="text-black outline-0"
-                id="email"
+                name="userName"
                 type="text"
-                placeholder="UserID"
-             
+                placeholder="User Name"
+                value={formData.userName}
+             onChange={handleInputChange}
               />
             </p>
           </div>
@@ -72,9 +113,11 @@ export const CategoryManagerLogin = () => {
 
               <input
                 className="outline-0"
-                id="password"
+                name="password"
                 type="password"
                 placeholder="password "
+                value={formData.password}
+                onChange={handleInputChange}
                
               />
             </p>

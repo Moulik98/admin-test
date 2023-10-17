@@ -4,7 +4,9 @@ import SellerTable from './SellerTable'
 import OnboardedSellers from './OnboardedSellers'
 
 
+
 const ManagerDashboard = () => {
+
   return (
     <main className='max-w-6xl'>
     <section className='flex flex-row justify-between py-5 items-center'>
