@@ -6,7 +6,7 @@ import RenderHTML from './RenderHTML'
 const SingleImageSidebar = ({ data }) => {
     const { image, image2, image_caption, headline, sub_headline, headline2, body_text, body_text2, bullet_point, bullet_point2 } = data
     return (
-        <div className='flex flex-col md:flex-row px-2'>
+        <div className='flex flex-col md:flex-row'>
             <div className='w-full md:w-[30%] flex flex-col p-2 space-y-2'>
                 <ShowImage
                     style={`w-full h-96`}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import toast from 'react-hot-toast';
 import { User } from '../../../user/User'
 import { getToken } from '../../../../hook/getToken';
 import { useLocation } from 'react-router-dom';
@@ -22,6 +23,7 @@ const Preview = () => {
     const variation_group_id = queryParams.get('variation_group_id');
 
     useEffect(() => {
+
         fetch(`${process.env.REACT_APP_URL}/v1/product-cms/get-product-dtl-content?product_id=${product_id}&variation_id=${variation_group_id}`).then(res => res.json()).then(data => {
             console.log('data', data.response);
             setError(data.error)
@@ -55,6 +57,7 @@ const Preview = () => {
 
             if (response.ok) {
                 // Request was successful
+                toast.success('Status updated successfully')
                 setIsStatusChanged((pre) => !pre)
                 const data = await response.json();
                 console.log(data);

@@ -5,7 +5,7 @@ import RenderHTML from './RenderHTML'
 const ImageHeaderWithText = ({ data }) => {
     const { headline, headline2, image, body_text } = data
     return (
-        <div className='flex flex-col space-y-2 px-4'>
+        <div className='flex flex-col space-y-2 '>
             <Heading
                 headline={headline}
                 style={`text-2xl text-black font-semibold`}
