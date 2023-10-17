@@ -150,7 +150,7 @@ const Preview = () => {
                     }
 
                 </section>
-            </div >
+            </div>
         </main>
     )
 }

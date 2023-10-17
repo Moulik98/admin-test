@@ -14,7 +14,7 @@ const SingleImageSidebar = ({ data }) => {
                     image={image}
                 />
             </div>
-            <div className='w-full md:w-[45%] flex flex-col space-y-2 px-2'>
+            <div className='w-full md:w-[45%] flex flex-col space-y-2 px-4'>
                 <Heading
                     headline={headline}
                     style={`text-2xl text-black font-semibold leading-0`}
