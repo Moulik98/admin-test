@@ -119,17 +119,19 @@ const Preview = () => {
                         <button className={`py-2 px-4 rounded-md ${status[contentDetails?.status]}`}>{contentDetails?.status}</button>
                     </div>
                     <div className='mt-5 space-y-10'>
-                        {data?.map((item, index) => {
-                            const ComponentToRender = componentRegistry[item.component];
-                            if (ComponentToRender) {
-                                return <ComponentToRender
-                                    key={index}
-                                    data={item.data}
-                                />
-                            } else {
-                                return null; // You can return null if you don't want to render anything for other cases
-                            }
-                        })}
+                        {data?.length > 0 ?
+                            data?.map((item, index) => {
+                                const ComponentToRender = componentRegistry[item.component];
+                                if (ComponentToRender) {
+                                    return <ComponentToRender
+                                        key={index}
+                                        data={item.data}
+                                    />
+                                } else {
+                                    return null; // You can return null if you don't want to render anything for other cases
+                                }
+                            }) : <h1 className='text-xl text-center'>Loading ...</h1>
+                        }
                     </div>
 
                     {
