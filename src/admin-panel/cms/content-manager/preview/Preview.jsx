@@ -113,13 +113,13 @@ const Preview = () => {
                         <div className='flex justify-center items-center space-x-5 my-5'>
                             <button
                                 onClick={() => handleClick('approved')}
-                                className='py-2 px-4 rounded-md bg-green-500 text-white'>
+                                className={`${contentDetails?.status === 'approved' && 'pointer-events-none'} py-2 px-4 rounded-md bg-green-500 text-white`}>
                                 Approve
                             </button>
                             <button
                                 onClick={() => handleClick('declined')}
                                 type='button'
-                                className='py-2 px-4 rounded-md bg-red-500 text-white'>
+                                className={`${contentDetails?.status === 'declined' && 'pointer-events-none'} py-2 px-4 rounded-md bg-red-500 text-white`}>
                                 Decline
                             </button>
                         </div>
