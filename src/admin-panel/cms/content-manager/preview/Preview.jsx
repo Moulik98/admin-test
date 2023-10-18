@@ -74,38 +74,11 @@ const Preview = () => {
 
     return (
         <main>
-            <div className='flex flex-col text-left'>
+            <div className='flex flex-col text-left pr-5'>
                 <section>
-                    <div className='max-w-5xl mx-auto flex justify-between items-center py-5 pr-5'>
+                    <div className='w-full flex justify-between items-center py-5 '>
                         <p className='text-2xl text-gray-900 font-semibold'>A+ Content Preview</p>
                         <div className='flex gap-x-10'>
-                            <form onSubmit={(e) => e.preventDefault()} className="flex items-center">
-                                <div className="flex items-center px-2 py-1 gap-x-1 bg-gray-100 rounded-2xl ">
-                                    <div className=' bg-white rounded-full p-1'>
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth="1.5"
-                                            stroke="currentColor"
-                                            className="w-4 h-4"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                                            />
-                                        </svg>
-                                    </div>
-                                    <input
-                                        className="w-52 py-1 px-1 bg-gray-100 outline-0"
-                                        //   value={searchTerm}
-                                        //   onChange={handleSearch}
-                                        type="text"
-                                    />
-
-                                </div>
-                            </form>
                             <User />
                         </div>
                     </div>
@@ -114,7 +87,7 @@ const Preview = () => {
                     <div>
                         {error && <h1 className='text-3xl text-black font-medium mt-10 text-center'>{error}</h1>}
                     </div>
-                    <div className='flex justify-between pr-5 items-center'>
+                    <div className='flex justify-between  items-center'>
                         <h1 className='text-xl text-gray-900 font-semibold'>{contentDetails?.contentName}</h1>
                         <button className={`py-2 px-4 rounded-md ${status[contentDetails?.status]}`}>{contentDetails?.status}</button>
                     </div>

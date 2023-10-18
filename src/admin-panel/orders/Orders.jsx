@@ -110,7 +110,7 @@ const Orders = () => {
         <main >
             <div className='pr-6'>
                 <section>
-                    <div className='max-w-5xl mx-auto flex justify-between py-5'>
+                    <div className='w-full flex justify-between items-center py-5'>
                         <p className='text-2xl text-gray-900 font-semibold'>Orders</p>
                         <div className='flex gap-x-10'>
                             <form className="flex items-center">
