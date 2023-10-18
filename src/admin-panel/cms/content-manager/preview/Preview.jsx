@@ -74,23 +74,24 @@ const Preview = () => {
 
     return (
         <main>
-            <div className='flex flex-col text-left pr-5'>
-                <section>
-                    <div className='w-full flex justify-between items-center py-5 '>
+            <div className='flex flex-col text-left pr-5 min-h-screen'>
+                <section className=' bg-white w-full h-fit z-50'>
+                    <div className='w-full flex justify-between items-center py-5'>
                         <p className='text-2xl text-gray-900 font-semibold'>A+ Content Preview</p>
                         <div className='flex gap-x-10'>
                             <User />
                         </div>
                     </div>
-                </section>
-                <section>
                     <div>
                         {error && <h1 className='text-3xl text-black font-medium mt-10 text-center'>{error}</h1>}
                     </div>
-                    <div className='flex justify-between  items-center'>
+                    <div className='flex justify-between items-center'>
                         <h1 className='text-xl text-gray-900 font-semibold'>{contentDetails?.contentName}</h1>
-                        <button className={`py-2 px-4 rounded-md ${status[contentDetails?.status]}`}>{contentDetails?.status}</button>
+                        <button className={`py-2 px-4 rounded-md uppercase ${status[contentDetails?.status]}`}>{contentDetails?.status}</button>
                     </div>
+                </section>
+                <section>
+
                     <div className='mt-5 space-y-10'>
                         {data?.length > 0 ?
                             data?.map((item, index) => {
@@ -103,7 +104,7 @@ const Preview = () => {
                                 } else {
                                     return null; // You can return null if you don't want to render anything for other cases
                                 }
-                            }) : <h1 className='text-xl text-center'>Loading ...</h1>
+                            }) : null
                         }
                     </div>
 
