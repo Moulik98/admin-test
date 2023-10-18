@@ -2,26 +2,24 @@ import { useState } from "react";
 import Menus from "./Menus";
 import { Link } from "react-router-dom";
 const SideBar = () => {
-    const [Menu, setMenus] = useState(Menus)
+    const [Menu, setMenus] = useState(Menus);
     const [open, setOpen] = useState(true);
-      
-
     const setSubMenuOpen = (index) => {
         setMenus((prevMenus) =>
             prevMenus.map((menu, i) => {
                 if (i === index) {
                     return { ...menu, isOpen: !menu.isOpen };
                 }
-                return menu;
+                return { ...menu, isOpen: false };
             })
         );
     };
-    console.log("Menu >>>>",Menu)
+
+
     return (
         <div className="flex">
             <div
-                className={` ${open ? "w-60" : "w-20 "
-                    } bg-dark-purple min-h-screen p-2  pt-8 relative duration-300 no-scrollbar`}
+                className={` ${open ? "w-60" : "w-20 "} bg-dark-purple min-h-screen p-2  pt-8 relative duration-300 no-scrollbar`}
             >
                 <div className={`absolute cursor-pointer -right-3 top-9 w-7 h-7 flex justify-center items-center  bg-[#F3F4F6] rounded-l-[4rem]
             rounded-full  ${!open && "rotate-180"}`}

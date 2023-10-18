@@ -33,6 +33,7 @@ import { Brands } from '../admin-panel/brands/Brands';
 
 import ManageGst from '../admin-panel/gst/ManageGst';
 
+import Preview from '../admin-panel/cms/content-manager/preview/Preview';
 
 import ReviewRating from '../admin-panel/review-rating/ReviewRating';
 
@@ -103,6 +104,9 @@ const MainRoutes = () => {
             <Route path="/cms/terms-conditions" element={<ProtectedRoute element={Terms} />} />
             <Route path="/cms/refunds-cancellations" element={<ProtectedRoute element={Refund} />} />
             <Route path="/brands" element={<ProtectedRoute element={Brands} />} />
+
+            {/* A + content manager preview */}
+            <Route path='/preview-content-manager' element={<ProtectedRoute element={Preview} />} />
 
             <Route path='/ManageGst' element={<ProtectedRoute element={ManageGst} />} />
 
