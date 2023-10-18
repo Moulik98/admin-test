@@ -14,7 +14,7 @@ const AwardList = () => {
   };
   let [childCategories, setChildCategories] = useState([]);
   useEffect(() => {
-    
+
     fetch(
       `${process.env.REACT_APP_URL}/v1/product-awards/get-count`
     )
@@ -27,7 +27,7 @@ const AwardList = () => {
   }, [AwardListModal]);
 
   return (
-    <div className="px-20 py-10 text-xs font-semibold">
+    <div className=" py-10 text-xs font-semibold pr-5">
       {childModal && (
         <AwardListModal visible={childModal} onClose={handleClose} />
       )}
@@ -75,7 +75,7 @@ const AwardList = () => {
       </div>
 
       <section>
-        <div className="max-w-6xl mx-auto overflow-hidden rounded-t-3xl my-5">
+        <div className=" overflow-hidden rounded-t-3xl my-5">
           <table className="table min-w-full border  border-solid">
             <thead className="bg-[#00388C]">
               <tr>
@@ -90,7 +90,7 @@ const AwardList = () => {
                   scope="col"
                   className="px-6 py-2 text-left text-xs font-normal text-white"
                 >
-                 Logo
+                  Logo
                 </th>
                 <th
                   scope="col"

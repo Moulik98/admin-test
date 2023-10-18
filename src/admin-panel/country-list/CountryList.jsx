@@ -15,7 +15,7 @@ const CountryList = () => {
   let [childCategories, setChildCategories] = useState([]);
   useEffect(() => {
     const token = localStorage.getItem('access_token'); // Replace with your actual bearer token
-  
+
     fetch(
       `${process.env.REACT_APP_URL}/v1/country/get-count`,
       {
@@ -31,10 +31,10 @@ const CountryList = () => {
         // console.log(data.categoryList);
       });
   }, []);
-  
 
-  
-  
+
+
+
 
   // const handleSearch = (event) => {
   //   setSearchTerm(event.target.value);
@@ -46,7 +46,7 @@ const CountryList = () => {
   // const currentItem = childCategories.length > 0 ? childCategories[0] : null;
 
   return (
-    <div className="px-20 py-10 text-xs font-semibold">
+    <div className=" py-10 text-xs font-semibold pr-5">
       {childModal && (
         <CountryListModal visible={childModal} onClose={handleClose} />
       )}
@@ -94,7 +94,7 @@ const CountryList = () => {
       </div>
 
       <section>
-        <div className="max-w-6xl mx-auto overflow-hidden rounded-t-3xl my-5">
+        <div className=" overflow-hidden rounded-t-3xl my-5">
           <table className="table min-w-full border  border-solid">
             <thead className="bg-[#00388C]">
               <tr>
@@ -109,13 +109,13 @@ const CountryList = () => {
                   scope="col"
                   className="px-6 py-2 text-left text-xs font-normal text-white"
                 >
-                 Logo
+                  Logo
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-2 text-left text-xs font-normal text-white"
                 >
-                 Banner
+                  Banner
                 </th>
                 <th
                   scope="col"

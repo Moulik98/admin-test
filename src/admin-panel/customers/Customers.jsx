@@ -68,7 +68,7 @@ const Customers = () => {
 
     return (
         <main>
-            <div className='container mx-auto flex flex-col'>
+            <div className='container mx-auto flex flex-col pr-5'>
                 <section>
                     <div className='max-w-6xl mx-auto flex justify-between py-5'>
                         <Link to='/customers' className='text-2xl text-gray-900 font-semibold'>Customers</Link>

@@ -2,7 +2,6 @@ import React from 'react'
 
 const CategoriesRow = ({ data, index }) => {
     const { parent_category_id, sub_category_id, category_name, status } = data
-console.log("Data>>>",data);
     return (
         <tr className="overflow-hidden border-b-2 rounded-b-3xl text-left  bg-white transition duration-300 ease-in-out">
             <td className="whitespace-nowrap px-4 py-2 text-xs font-normal text-gray-900">{index + 1}</td>

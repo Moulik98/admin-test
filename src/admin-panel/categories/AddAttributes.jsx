@@ -30,102 +30,11 @@ const AddAttributes = () => {
         setData(data?.attributeList);
         setTotalItems(data?.totalCount);
         console.log(data)
-  
+
       });
   }, [currentPage, pageSize]);
 
-  const handlePreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
 
-  const handleNextPage = () => {
-    const totalPages = Math.ceil(totalItems / pageSize);
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  const renderPagination = () => {
-    const totalPages = Math.ceil(totalItems / pageSize);
-    const pageNumbers = Array.from(
-      { length: totalPages },
-      (_, index) => index + 1
-    );
-
-    return (
-      <>
-        <div className="flex items-center border border-solid border-[#EEEEEE] rounded-md ">
-          <button
-            className="flex justify-center items-center w-9 h-9 border-r border-solid border-[#EEEEEE]"
-            onClick={handlePreviousPage}
-            disabled={currentPage === 1}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-5 h-5"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M15.75 19.5L8.25 12l7.5-7.5"
-              />
-            </svg>
-          </button>
-
-          {pageNumbers.map((page) => (
-            <button
-              key={page}
-              className={`flex justify-center items-center w-9 h-9 border-r border-solid border-[#EEEEEE]  ${page === currentPage
-                ? "bg-[#4285F4] text-gray-900"
-                : "text-[#222222]"
-                }`}
-              onClick={() => handlePageChange(page)}
-              disabled={page === currentPage}
-            >
-              {page}
-            </button>
-          ))}
-
-          <button
-            className="flex justify-center items-center w-9 h-9 border-r border-solid border-[#EEEEEE]"
-            onClick={handleNextPage}
-            disabled={currentPage === totalPages}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-5 h-5"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M8.25 4.5l7.5 7.5-7.5 7.5"
-              />
-            </svg>
-          </button>
-        </div>
-      </>
-    );
-  };
-
-  // const indexOfLastItem = currentPage * itemsPerPage;
-  // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  // const paginatedData = childCategories.slice(
-  //   indexOfFirstItem,
-  //   indexOfLastItem
-  // );
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -137,7 +46,7 @@ const AddAttributes = () => {
   const currentItem = childCategories.length > 0 ? childCategories[0] : null;
 
   return (
-    <div className="px-20 py-10 text-xs font-semibold">
+    <div className=" py-10 text-xs font-semibold pr-5">
       {childModal && (
         <AttributesModal visible={childModal} onClose={handleClose} />
       )}
@@ -215,7 +124,7 @@ const AddAttributes = () => {
       </div>
 
       <section>
-        <div className="max-w-5xl mx-auto overflow-x-scroll rounded-t-xl my-5">
+        <div className="w-full overflow-x-scroll rounded-t-xl my-5">
           <table className="table min-w-full border  border-solid">
             <thead className="bg-[#e5f2f4]">
               <tr>

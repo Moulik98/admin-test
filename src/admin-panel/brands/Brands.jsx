@@ -105,13 +105,13 @@ export const Brands = () => {
       if (response.ok) {
         const data = await response.json();
         console.log("Data >>", data);
-  
+
         // Ensure that data is an object
         const dataObject = data?.data || {};
-  
+
         // Log the entire data object
         console.log("Data Object >>", dataObject);
-  
+
         SetVerificationList([dataObject]); // Wrap the object in an array if needed
         setShowDropDown(false);
       }
@@ -121,64 +121,64 @@ export const Brands = () => {
   };
 
   return (
-    <div>
+    <div className="pr-5">
       <section>
         <div className="max-w-6xl mx-auto flex justify-between py-5">
           <p className="text-2xl text-gray-900 font-semibold">Brands Listing</p>
           <div className="flex gap-x-10">
-         
+
             <User />
           </div>
         </div>
       </section>
       <div className="max-w-6xl mx-auto flex justify-end items-center">
-      <form className="flex items-center">
-              <div className="flex items-center px-2 py-1 gap-x-1 bg-gray-100 rounded-2xl ">
-                <div className=" bg-white rounded-full p-1">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="w-4 h-4"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                    />
-                  </svg>
-                </div>
-                <input
-                  className="w-52 py-1 px-1 bg-gray-100 outline-0"
-                  type="text"
-                  onChange={(event) => {
-                    handleInputChange(event);
-                  }}
+        <form className="flex items-center">
+          <div className="flex items-center px-2 py-1 gap-x-1 bg-gray-100 rounded-2xl ">
+            <div className=" bg-white rounded-full p-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-4 h-4"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
                 />
-                {/* Dropdown */}
-                {showDropdown && searchResults.length > 0 && (
-                  <div className="relative">
-                    <div className="z-10 absolute top-full max-h-60 -left-60 w-60 mt-6 bg-white border border-solid border-[#9D9D9D] rounded-md shadow-md overflow-y-scroll search-scrollbar">
-                      <ul>
-                        {searchResults.map((result) => (
-                          <li
-                            key={result._id}
-                            onClick={() => {
-                              handleClick(result._id, result.brand_name);
-                            }}
-                            className="p-2 hover:bg-gray-300 font-light text-xs"
-                          >
-                            {result?.brand_name}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                )}
+              </svg>
+            </div>
+            <input
+              className="w-52 py-1 px-1 bg-gray-100 outline-0"
+              type="text"
+              onChange={(event) => {
+                handleInputChange(event);
+              }}
+            />
+            {/* Dropdown */}
+            {showDropdown && searchResults.length > 0 && (
+              <div className="relative">
+                <div className="z-10 absolute top-full max-h-60 -left-60 w-60 mt-6 bg-white border border-solid border-[#9D9D9D] rounded-md shadow-md overflow-y-scroll search-scrollbar">
+                  <ul>
+                    {searchResults.map((result) => (
+                      <li
+                        key={result._id}
+                        onClick={() => {
+                          handleClick(result._id, result.brand_name);
+                        }}
+                        className="p-2 hover:bg-gray-300 font-light text-xs"
+                      >
+                        {result?.brand_name}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-            </form>
+            )}
+          </div>
+        </form>
       </div>
       <section>
         <div
