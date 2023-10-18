@@ -58,7 +58,7 @@ const OrdersTable = () => {
     }, [isClicked, currentPage, pageSize]);
 
     return (
-        <div className='mx-16 my-4 border'>
+        <div className='my-4 border'>
             <p className='px-2 text-left py-4 text-xl font-semibold'><Link to='/orders'>Recent Orders</Link></p>
             <div className='p-1'>
                 <section>
@@ -89,7 +89,7 @@ const OrdersTable = () => {
                     </div>
                 </section>
             </div>
-        
+
         </div>
     );
 };
