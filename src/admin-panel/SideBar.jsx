@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const SideBar = () => {
     const [Menu, setMenus] = useState(Menus)
     const [open, setOpen] = useState(true);
-      
+
 
     const setSubMenuOpen = (index) => {
         setMenus((prevMenus) =>
@@ -12,11 +12,12 @@ const SideBar = () => {
                 if (i === index) {
                     return { ...menu, isOpen: !menu.isOpen };
                 }
-                return menu;
+                return { ...menu, isOpen: false };
             })
         );
     };
-    console.log("Menu >>>>",Menu)
+
+
     return (
         <div className="flex">
             <div
