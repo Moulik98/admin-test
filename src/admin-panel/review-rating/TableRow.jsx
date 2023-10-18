@@ -5,7 +5,6 @@ import ReviewModal from './ReviewModal'
 const TableRow = ({ data, onDelete }) => {
     const { _id, isActive, rating, title, description, userName, productInfo, productImages } = data
 
-    const { item_name, sellerName } = productInfo;
     const [showModal, setShowModal] = useState(false)
     const handleClose = (value) => {
         if (value === 'close') {
@@ -63,10 +62,10 @@ const TableRow = ({ data, onDelete }) => {
             >
                 <div className='flex gap-x-2 items-center'>
                     <img src={productImages[0]?.main_img} className='w-7 h-7 object-contain' />
-                    <p>{item_name}</p>
+                    <p>{productInfo?.item_name}</p>
                 </div>
             </td>
-            <td class="px-4 py-2 text-[10px]">{sellerName}</td>
+            <td class="px-4 py-2 text-[10px]">{productInfo?.sellerName}</td>
             <td class="px-4 py-2 text-[10px]">
                 {userName}
             </td>
