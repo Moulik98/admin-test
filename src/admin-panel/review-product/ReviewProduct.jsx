@@ -75,7 +75,7 @@ const ReviewProduct = () => {
                 {/* // table section */}
                 <section>
                     <div class="relative overflow-x-auto rounded-t-lg">
-                        <table class="w-full text-left text-xs">
+                        <table class="max-w-7xl text-left text-xs">
                             <thead class="bg-[#e5f2f4] text-xs font-normal Captilise text-gray-900 ">
                                 <tr>
                                     <th scope="col" class="px-2 py-2">Sl no</th>
