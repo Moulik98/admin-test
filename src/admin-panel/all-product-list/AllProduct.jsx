@@ -172,8 +172,9 @@ const AllProduct = () => {
         return res.json();
       })
       .then((data) => {
-        setTotalItems(data.totalCount)
+        setTotalItems(data.totalCount);
         setProducts(data?.productList);
+        console.log('data?productList', data?.productList);
       })
       .catch((error) => {
         handleApiError(error);
@@ -234,7 +235,7 @@ const AllProduct = () => {
 
 
   return (
-    <div className=" py-10 text-xs font-semibold max-w-screen-2xl mx-auto">
+    <div className=" py-10 text-xs font-semibold w-full pr-5">
       {/* {childModal && (
         <AwardListModal visible={childModal} onClose={handleClose} />
       )} */}
@@ -462,7 +463,7 @@ const AllProduct = () => {
         <div className="border flex p-2 gap-3 bg-slate-100">
 
 
-          <div>
+          <div className=" relative">
             {/* SVG */}
 
             <svg
@@ -483,7 +484,7 @@ const AllProduct = () => {
 
             {/* Pop-up */}
             {popupVisible && (
-              <div className="popup absolute bg-white shadow-md p-2 mt-2">
+              <div className="popup absolute top-4 right-4 bg-white shadow-md p-2 mt-2">
                 {/* Country */}
                 <label className="flex">
                   <input
@@ -545,7 +546,7 @@ const AllProduct = () => {
       </div>
 
       <section>
-        <div className="my-2 rounded-xl overflow-x-scroll scrollbar-hide">
+        <div className="my-2 rounded-xl overflow-x-scroll ">
           <table className="table min-w-full border border-solid">
             <thead className="bg-[#e5f2f4]">
               <tr>
@@ -642,6 +643,12 @@ const AllProduct = () => {
                   scope="col"
                   className="px-4 py-2 text-left text-xs font-normal text-gray-900"
                 >
+                  A+ Content
+                </th>
+                <th
+                  scope="col"
+                  className="px-4 py-2 text-left text-xs font-normal text-gray-900"
+                >
                   Actions
                 </th>
               </tr>
@@ -650,6 +657,7 @@ const AllProduct = () => {
               {products?.map((e, index) => (
                 <AllProductRow
                   id={e?._id}
+                  variationId={e?.variation_group_id}
                   key={e?._id}
                   slNo={index + 1}
                   img={e?.product_images[0]?.main_img}
@@ -668,15 +676,15 @@ const AllProduct = () => {
             </tbody>
           </table>
         </div>
-        <div className='flex justify-end items-center py-5'>
-          <Pagination
-            currentPage={currentPage}
-            totalItems={totalItems}
-            pageSize={pageSize}
-            setCurrentPage={setCurrentPage}
-          />
-        </div>
       </section>
+      <div className='flex justify-end items-center py-5'>
+        <Pagination
+          currentPage={currentPage}
+          totalItems={totalItems}
+          pageSize={pageSize}
+          setCurrentPage={setCurrentPage}
+        />
+      </div>
     </div>
   );
 };

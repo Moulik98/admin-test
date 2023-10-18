@@ -54,7 +54,7 @@ const Orders = () => {
           body: JSON.stringify(filterValues),
         }
       );
-
+​
       const data = await response.json();
       console.log("response", data);
       setOrderList(data.data);
@@ -64,7 +64,7 @@ const Orders = () => {
       console.log(error);
     }
   }
-
+​
   // state for sorting
   const [dateOption, setDateOption] = useState({});
   const [amountOption, setAmmountOption] = useState({});
@@ -76,23 +76,23 @@ const Orders = () => {
       [dateType]: dateValue,
     };
     setFilterValues(newFilterValues);
-
+​
     // Call the function to make the API request with updated filter values
     fetchOrderData(newFilterValues);
   };
-
+​
   const handleDescChange = (e) => {
     setAmmountOption(e.target.value);
     console.log(e.target.value);
     fetchOrderData({ sort_amount: e.target.value });
   };
-
+​
   // state for filter
   const [filterValues, setFilterValues] = useState({
     order_status: [],
     payment_status: [],
   });
-
+​
   const handleCheckboxChange = (event) => {
     const { name, value, checked } = event.target;
     setFilterValues((prevFilterValues) => ({
@@ -102,15 +102,15 @@ const Orders = () => {
         : prevFilterValues[name].filter((val) => val !== value),
     }));
   };
-
+​
   const [orderList, setOrderList] = useState([]);
   useEffect(() => {
     // Call the function to make the POST request
     fetchOrderData(filterValues);
   }, [isClicked, filterValues, currentPage, pageSize]);
-
+​
   console.log(filterValues);
-
+​
   return (
     <main>
       <div className="pr-6">
@@ -165,7 +165,7 @@ const Orders = () => {
                   <option value="desc">Old</option>
                   <option value="asc">New</option>
                 </select>
-
+​
                 <select
                   id="desc"
                   className="text-xs p-1 bg-gray-100 outline-0"
@@ -192,7 +192,7 @@ const Orders = () => {
                         className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-400 focus:outline-none"
                         onChange={(e) => handleCheckboxChange(e)}
                       />
-
+​
                       <label
                         htmlFor={`checkbox-${index}`}
                         className="mr-2 text-xs capitalize font-normal text-gray-900"
@@ -286,5 +286,5 @@ const Orders = () => {
     </main>
   );
 };
-
+​
 export default Orders;
