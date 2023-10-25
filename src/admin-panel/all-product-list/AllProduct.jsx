@@ -227,13 +227,6 @@ const AllProduct = () => {
       });
   }, [approval, review, awardsName, sellerName, countryName, parent, sub, child]);
 
-  // Render loading state if data is being fetched
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-
-
   return (
     <div className=" py-10 text-xs font-semibold w-full pr-5">
       {/* {childModal && (
