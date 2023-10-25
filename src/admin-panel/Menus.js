@@ -30,9 +30,14 @@ const Menus = [
         link: "/manage-staff",
       },
       {
-        title: "Manage Roles",
+        title: "Manage Roles/Designation",
         src: "sub",
         link: "/manage-roles",
+      },
+      {
+        title: "Staff Members",
+        src: "sub",
+        link: "/designation-list",
       },
     ],
     isOpen: false, // Add isOpen property

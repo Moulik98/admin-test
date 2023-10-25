@@ -43,6 +43,8 @@ import ManagerDashboard from '../managerdashboard/ManagerDashboard'
 import { CategoryManagerLogin } from '../admin-panel/login/CategoryManagerLogin';
 import ManageStaff from '../admin-panel/manage-staff/ManageStaff';
 import ManageRoles from '../admin-panel/manage-staff/ManageRoles';
+import SignupForm from '../admin-panel/seller-signup/SellerOnboard';
+import DesignationList from '../admin-panel/manage-staff/DesignationList';
 import B2bVerification from '../admin-panel/b2b/B2bVerification';
 
 
@@ -80,6 +82,7 @@ const MainRoutes = () => {
             <Route path="/" element={<Login />} />
             <Route path="/manage-staff"  element={<ProtectedRoute element={ManageStaff} />} />
             <Route path="/stafflogin" element={<CategoryManagerLogin />} />
+            <Route path="/onboard-seller" element={<SignupForm />} />
             <Route path="/dashboard" element={<ProtectedRoute element={Dashboard} />} />
             <Route path="/category" element={<ProtectedRoute element={AdminCategories} />} />
             <Route path="/category/parentcategory" element={<ProtectedRoute element={ParentCategories} />} />
@@ -118,8 +121,9 @@ const MainRoutes = () => {
             {/* startup banner */}
             <Route path="/startup-cms" element={<ProtectedRoute element={Banners} />} />
             {/* Category Manager */}
-            <Route path="/ManagerDashboard" element={<ProtectedRoute element={ManagerDashboard} />} />
+            <Route path="/ManagerDashboard" element={<ManagerDashboard/>} />
             <Route path="/manage-roles" element={<ProtectedRoute element={ManageRoles} />} />
+            <Route path="/designation-list" element={<ProtectedRoute element={DesignationList} />} />
             <Route path="/b2buser" element={<ProtectedRoute element={B2bVerification} />} />
           </Routes>
         )}
