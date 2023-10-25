@@ -146,7 +146,7 @@ const TableRow = ({ data, onDelete }) => {
                 Cancel
               </button>
               <button
-                className="px-3 py-1 bg-red-400 text-white rounded hover-bg-red-500"
+                className="px-3 py-1 bg-blue-400 text-white rounded hover-bg-red-500"
                 onClick={confirmDelete}
               >
                 Delete
