@@ -8,7 +8,7 @@ import OnboardedSellers from './OnboardedSellers'
 const ManagerDashboard = () => {
 
   return (
-    <main className='max-w-6xl'>
+    <main className='max-w-full mx-8'>
     <section className='flex flex-row justify-between py-5 items-center'>
     <div>
         <h1 className=' text-2xl md:text-3xl text-[#383E50] font-semibold leading-10'>Dashboard</h1>

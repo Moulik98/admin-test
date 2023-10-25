@@ -1,61 +1,95 @@
-import React, { useState } from "react";
-import { User } from "../user/User";
-import SideBar from "../SideBar";
-import { json } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
-
 const ManageStaff = () => {
-  const [formData, setFormData] = useState({
+
+const [formData, setFormData] = useState({
+  name: "",
+  email: "",
+  userName: "",
+  password: "",
+  roles: "",
+});
+
+const [designations, setDesignations] = useState([]);
+const token = localStorage.getItem("access_token");
+
+useEffect(() => {
+  // Fetch designations from the API
+  const fetchDesignations = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_URL}/v1/designaiton/getAllDesignations`,
+        {
+          headers : {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          }
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        setDesignations(data);
+      } else {
+        toast.error("Failed to fetch designations. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("An error occurred. Please try again later.");
+    }
+  };
+
+  fetchDesignations();
+}, []); // Empty dependency array to run the effect only once on component mount
+console.log(designations);
+
+// Function to handle form input changes
+const handleInputChange = (e) => {
+  const { name, value } = e.target;
+  setFormData((prevData) => ({
+    ...prevData,
+    [name]: value,
+  }));
+};
+
+// Function to handle form submission
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  // Perform any validation or submit data to the server here
+  console.log("Form Data Submitted:", formData);
+
+  const response = await fetch(
+    `${process.env.REACT_APP_URL}/v1/category-manager/signup`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(formData),
+    }
+  );
+
+  const data = await response.json();
+  if (response.ok) {
+    toast.success(data.message);
+  } else {
+    toast.error(data.message);
+  }
+  // Reset the form after submission if needed
+  setFormData({
     name: "",
     email: "",
     userName: "",
     password: "",
     roles: "",
   });
+};
 
-  // Function to handle form input changes
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  // Function to handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // Perform any validation or submit data to the server here
-    console.log("Form Data Submitted:", formData);
-    const token = localStorage.getItem("access_token")
-    const response = await fetch (`${process.env.REACT_APP_URL}/v1/category-manager/signup`,{
-      method : 'POST',
-      headers : {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body : JSON.stringify(formData)
-    })
-
-    const data = await response.json()
-    if(response.ok){
-      toast.success(data.message)
-    }else{
-      toast.error(data.message)
-    }
-    // Reset the form after submission if needed
-    setFormData({
-      name: "",
-      email: "",
-      userName: "",
-      password: "",
-      roles: "",
-    });
-  };
   return (
     <div className="max-w-7xl ">
       <div className="flex justify-start py-8 border-b">
-        <h1 className="text-3xl font-bold ">Assign Job Roles</h1>
+        <h1 className="text-3xl font-bold ">Create Role/Designation</h1>
       </div>
 
       <div className=" ">
@@ -89,7 +123,7 @@ const ManageStaff = () => {
                 required
               />
             </div>
-      
+
             <div className="w-3/5 flex flex-row gap-4">
               <label className="w-2/5 text-right">
                 <span>User ID:</span>
@@ -116,7 +150,7 @@ const ManageStaff = () => {
                 required
               />
             </div>
-        
+
             <div className="w-3/5 flex flex-row gap-4">
               <label className="w-2/5 text-right">
                 <span>Designation:</span>
@@ -131,16 +165,21 @@ const ManageStaff = () => {
                 <option className="text-center" value="" disabled>
                   Select Designation
                 </option>
-                <option value="CM">Category Manager</option>
-                <option value="Approver">Approver</option>
-                {/* Add other designations as needed */}
+                {designations.map((designation) => (
+                  <option
+                    key={designation._id}
+                    value={designation.designation_shortform}
+                  >
+                    {designation.designation_name}
+                  </option>
+                ))}
               </select>
             </div>
             <button
               type="submit"
               className="py-2 px-4 bg-blue-500 text-white rounded-md"
             >
-             Create Staff
+             Submit
             </button>
           </div>
         </form>

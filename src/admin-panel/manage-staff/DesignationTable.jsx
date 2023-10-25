@@ -1,25 +1,33 @@
 import React, { useState } from "react";
 import StaffModal from "./StaffModal";
 
-const AssignedStaffs = ({data}) => {
-    // State for view modal
-    const [viewModal, setViewModal] = useState(false);
-    // State for edit
-    const [editModal, setEditModal] = useState(false);
-      // const [view, setView] = useState([])
-  
-  
-    const handleClose = () => {
-      setViewModal(false)
-      setEditModal(false)
-    }
+const DesignationTable = ({id, data, status }) => {
+  const formattedDate = new Date(data.createdAt).toLocaleString();
+  const [selectedStatus, setSelectedStatus] = useState(status);
+  // State for view modal
+  const [viewModal, setViewModal] = useState(false);
+  // State for edit
+  const [editModal, setEditModal] = useState(false);
+    // const [view, setView] = useState([])
+
+
+  const handleClose = () => {
+    setViewModal(false)
+    setEditModal(false)
+  }
+  console.log(selectedStatus);
+  const bgColor = selectedStatus === true ? "bg-green-200" : "bg-red-200";
   return (
     <tr class="border-b border-solid border-gray-200 bg-white hover:bg-gray-50 text-[#222222]">
-    <td scope="row" class="whitespace-nowrap px-2 py-2 font-medium text-gray-900">{data.name}</td>
-    <td class="px-2 py-2 ">{data.email}</td>
-    <td class="px-2 py-2 ">{data.roles}</td>
-    <td class="px-2 py-2 ">{data.userName}</td>
-    <td className="whitespace-nowrap px-6 py-2 text-xs font-light text-gray-900">
+      <td
+        scope="row"
+        class="whitespace-nowrap px-2 py-2 font-medium text-gray-900"
+      >
+        {data.designation_name}
+      </td>
+      <td class="px-2 py-2 ">{data.designation_short}</td>
+      <td class="px-2 py-2 ">{formattedDate}</td>
+      <td className="whitespace-nowrap px-6 py-2 text-xs font-light text-gray-900">
         <div className="flex gap-2">
           <div onClick={() => setViewModal(true)}>
             <svg
@@ -61,7 +69,7 @@ const AssignedStaffs = ({data}) => {
 
           <td className="whitespace-nowrap px-6 text-xs font-light text-gray-900">
             <div className="flex gap-2">
-              <select className={`rounded outline-none p-1`}>
+              <select className={`rounded outline-none p-1 ${bgColor}`}>
                 <option value="active">Activate</option>
                 <option value="deactivated">Deactivate</option>
               </select>
@@ -69,16 +77,25 @@ const AssignedStaffs = ({data}) => {
           </td>
 
           {viewModal && (
-         <></>
+            <StaffModal
+              id={id}
+              modalName="view"
+              visible={viewModal}
+              onClose={handleClose}
+            />
           )}
           {editModal && (
-         <></>
+            <StaffModal
+              id={id}
+              visible={editModal}
+              modalName="edit"
+              onClose={handleClose}
+            />
           )}
         </div>
       </td>
- 
-</tr>
-  )
-}
+    </tr>
+  );
+};
 
-export default AssignedStaffs
+export default DesignationTable;
