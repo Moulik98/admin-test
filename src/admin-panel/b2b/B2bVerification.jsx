@@ -109,7 +109,10 @@ const B2bVerification = () => {
       <div className="pr-7">
         <section>
           <div className="max-w-6xl mx-auto flex justify-between py-5">
-            <Link to="/b2buser" className="text-3xl text-gray-900 font-semibold">
+            <Link
+              to="/b2buser"
+              className="text-3xl text-gray-900 font-semibold"
+            >
               B2b customer Verification
             </Link>
             <div className="flex gap-x-10">
@@ -139,12 +142,12 @@ const B2bVerification = () => {
               <input
                 className="w-52 py-1 px-1 bg-gray-100 outline-0"
                 onChange={(event) => {
-                    handleInputChange(event);
-                  }}
+                  handleInputChange(event);
+                }}
                 type="text"
               />
-                {/* Dropdown */}
-                {showDropdown && searchResults.length > 0 && (
+              {/* Dropdown */}
+              {showDropdown && searchResults.length > 0 && (
                 <div className="relative">
                   <div className="z-10 absolute top-full max-h-60 -left-60 w-60 mt-6 bg-white border border-solid border-[#9D9D9D] rounded-md shadow-md overflow-y-scroll search-scrollbar">
                     <ul>

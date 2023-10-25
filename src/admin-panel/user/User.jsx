@@ -104,7 +104,7 @@ export const User = () => {
               <button
                 className="px-3 py-1 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 mr-2"
                 onClick={() => setShowLogoutPopup(false)}
-              >
+              > 
                 Cancel
               </button>
               <button
