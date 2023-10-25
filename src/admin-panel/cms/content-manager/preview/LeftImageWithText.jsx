@@ -16,13 +16,13 @@ const LeftImageWithText = ({ data }) => {
             <div className='px-10'>
                 <Heading
                     headline={headline}
-                    style={`text-3xl text-black font-semibold `}
+                    style={`text-2xl text-black font-semibold `}
                 />
                 <Heading
                     headline={sub_headline}
-                    style={`text-2xl text-gray-500 font-semibold`}
+                    style={`text-xl text-gray-500 font-semibold`}
                 />
-                <div className='py-5 text-xl leading-8'>
+                <div className='py-5 text-lg leading-9'>
                     <RenderHTML
                         htmlContent={body_text}
                     />
