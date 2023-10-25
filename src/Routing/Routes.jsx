@@ -43,6 +43,8 @@ import ManagerDashboard from '../managerdashboard/ManagerDashboard'
 import { CategoryManagerLogin } from '../admin-panel/login/CategoryManagerLogin';
 import ManageStaff from '../admin-panel/manage-staff/ManageStaff';
 import ManageRoles from '../admin-panel/manage-staff/ManageRoles';
+import B2bVerification from '../admin-panel/b2b/B2bVerification';
+
 
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
@@ -118,6 +120,7 @@ const MainRoutes = () => {
             {/* Category Manager */}
             <Route path="/ManagerDashboard" element={<ProtectedRoute element={ManagerDashboard} />} />
             <Route path="/manage-roles" element={<ProtectedRoute element={ManageRoles} />} />
+            <Route path="/b2buser" element={<ProtectedRoute element={B2bVerification} />} />
           </Routes>
         )}
       </PreserveLocation>

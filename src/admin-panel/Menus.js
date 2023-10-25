@@ -127,6 +127,12 @@ const Menus = [
     isOpen: false, // Add isOpen property
   },
   {
+    title: "B2B User",
+    src: seller,
+    link: "b2buser",
+    isOpen: false, // Add isOpen property
+  },
+  {
     title: "Customers",
     src: seller,
     link: "customers",
