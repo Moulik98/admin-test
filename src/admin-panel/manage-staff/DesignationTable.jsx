@@ -20,19 +20,20 @@ console.log("Status",selectedStatus);
 
   const handleChange = async () => {
     // Make the API call
-    const response = await fetch(
-      `${process.env.REACT_APP_URL}/v1/designation/updateDesignationStatus/${data._id}`,
+    const url = `${process.env.REACT_APP_URL}/v1/designaiton/updateDesignationStatus/${id}`;
+    console.log(url)
+    const response = await fetch(url,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body : null,
+       
       }
     );
 
-  
+
     if (response.ok) {
       // If the API call is successful, toggle the selectedStatus
      
