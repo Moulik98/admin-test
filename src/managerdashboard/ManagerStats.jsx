@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useMemo } from "react";
+import React from "react";
 
 
 const StatsCard = ({ img, heading, number, title, style }) => {
