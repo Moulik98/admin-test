@@ -1,21 +1,50 @@
 import React, { useState } from "react";
 import StaffModal from "./StaffModal";
 
-const DesignationTable = ({id, data, status }) => {
+const DesignationTable = ({ id, data, status }) => {
   const formattedDate = new Date(data.createdAt).toLocaleString();
   const [selectedStatus, setSelectedStatus] = useState(status);
   // State for view modal
   const [viewModal, setViewModal] = useState(false);
   // State for edit
   const [editModal, setEditModal] = useState(false);
-    // const [view, setView] = useState([])
-
-
+  // const [view, setView] = useState([])
+  const role_statuses = ["activate", "deactivate"]
+console.log("Status",selectedStatus);
+  const token = localStorage.getItem("access_token");
   const handleClose = () => {
-    setViewModal(false)
-    setEditModal(false)
-  }
+    setViewModal(false);
+    setEditModal(false);
+  };
   console.log(selectedStatus);
+
+  const handleChange = async () => {
+    // Make the API call
+    const url = `${process.env.REACT_APP_URL}/v1/designaiton/updateDesignationStatus/${id}`;
+    console.log(url)
+    const response = await fetch(url,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+       
+      }
+    );
+
+
+    if (response.ok) {
+      // If the API call is successful, toggle the selectedStatus
+     
+      setSelectedStatus((prevStatus) => !prevStatus);
+      console.log("status",selectedStatus)
+      // Handle success if needed
+    } else {
+      // Handle error
+      console.error('Error updating status:', response.statusText);
+    }
+  };
   const bgColor = selectedStatus === true ? "bg-green-200" : "bg-red-200";
   return (
     <tr class="border-b border-solid border-gray-200 bg-white hover:bg-gray-50 text-[#222222]">
@@ -69,7 +98,11 @@ const DesignationTable = ({id, data, status }) => {
 
           <td className="whitespace-nowrap px-6 text-xs font-light text-gray-900">
             <div className="flex gap-2">
-              <select className={`rounded outline-none p-1 ${bgColor}`}>
+              <select
+                className={`rounded outline-none p-1 ${bgColor}`}
+                value={selectedStatus ? "active" : "deactivated"}
+                onChange={handleChange}
+              >
                 <option value="active">Activate</option>
                 <option value="deactivated">Deactivate</option>
               </select>

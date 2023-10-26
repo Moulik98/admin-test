@@ -24,7 +24,7 @@ const DesignationList = () => {
         setStaffs(data.nonAdmins);
       }
     } catch (error) {
-      console.error('Error fetching staff list:', error);
+      console.error("Error fetching staff list:", error);
     }
   };
 
@@ -33,8 +33,8 @@ const DesignationList = () => {
   }, []);
 
   const handleClose = () => {
-      setShowModal(false)  
-  }
+    setShowModal(false);
+  };
   console.log("staffs >>>", staffs);
   return (
     <div className="">
@@ -64,7 +64,29 @@ const DesignationList = () => {
       <div className="max-w-6xl mx-auto flex justify-between  my-4 relative">
         <div className="flex justify-end my-4 ">
           <div className="flex flex-col">
+            <Link to="/manage-staff">
+            <div
+              className="flex items-center "
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-4 h-4"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
 
+              <p className="text-xs">Add Staff Members</p>
+          
+            </div>
+            </Link>
           </div>
         </div>
         <form className="flex items-center">
@@ -112,8 +134,8 @@ const DesignationList = () => {
                   Username
                 </th>
                 <th scope="col" class="px-2 py-3">
-                Action
-              </th>
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -125,7 +147,7 @@ const DesignationList = () => {
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default DesignationList
+export default DesignationList;

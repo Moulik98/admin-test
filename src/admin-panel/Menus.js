@@ -27,18 +27,14 @@ const Menus = [
       {
         title: "Manage Staff",
         src: "parent",
-        link: "/manage-staff",
+        link: "/designation-list",
       },
       {
         title: "Manage Roles/Designation",
         src: "sub",
         link: "/manage-roles",
       },
-      {
-        title: "Staff Members",
-        src: "sub",
-        link: "/designation-list",
-      },
+   
     ],
     isOpen: false, // Add isOpen property
   },
