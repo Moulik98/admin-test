@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
+
 const ManageStaff = () => {
 
+ 
 const [formData, setFormData] = useState({
   name: "",
   email: "",
@@ -18,18 +20,19 @@ useEffect(() => {
   const fetchDesignations = async () => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_URL}/v1/designaiton/getAllDesignations`,
+        `${process.env.REACT_APP_URL}/v1/designation/getAllDesignations`,
         {
-          headers : {
+          headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
-          }
+          },
         }
       );
 
       if (response.ok) {
         const data = await response.json();
         setDesignations(data);
+        console.log(data); // Move the log statement here
       } else {
         toast.error("Failed to fetch designations. Please try again.");
       }
@@ -39,9 +42,10 @@ useEffect(() => {
     }
   };
 
+  // Call the fetchDesignations function once on component mount
   fetchDesignations();
 }, []); // Empty dependency array to run the effect only once on component mount
-console.log(designations);
+
 
 // Function to handle form input changes
 const handleInputChange = (e) => {
@@ -72,7 +76,9 @@ const handleSubmit = async (e) => {
 
   const data = await response.json();
   if (response.ok) {
+    
     toast.success(data.message);
+   
   } else {
     toast.error(data.message);
   }
@@ -168,7 +174,7 @@ const handleSubmit = async (e) => {
                 {designations.map((designation) => (
                   <option
                     key={designation._id}
-                    value={designation.designation_shortform}
+                    value={designation.designation_short}
                   >
                     {designation.designation_name}
                   </option>
