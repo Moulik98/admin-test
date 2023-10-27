@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const ManageStaff = () => {
 
+  const navigate = useNavigate();
  
 const [formData, setFormData] = useState({
   name: "",
   email: "",
+  phone: "",
   userName: "",
   password: "",
+  confirmPassword: "",
   roles: "",
 });
 
@@ -20,7 +24,7 @@ useEffect(() => {
   const fetchDesignations = async () => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_URL}/v1/designation/getAllDesignations`,
+        `${process.env.REACT_APP_URL}/v1/designaiton/getAllDesignations`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -33,6 +37,7 @@ useEffect(() => {
         const data = await response.json();
         setDesignations(data);
         console.log(data); // Move the log statement here
+       
       } else {
         toast.error("Failed to fetch designations. Please try again.");
       }
@@ -50,6 +55,11 @@ useEffect(() => {
 // Function to handle form input changes
 const handleInputChange = (e) => {
   const { name, value } = e.target;
+
+  if (value.includes(' ')) {
+    toast.error("Spaces are not allowed in this field");
+    return;
+  }
   setFormData((prevData) => ({
     ...prevData,
     [name]: value,
@@ -76,7 +86,7 @@ const handleSubmit = async (e) => {
 
   const data = await response.json();
   if (response.ok) {
-    
+    navigate('/designation-list')
     toast.success(data.message);
    
   } else {
@@ -86,8 +96,10 @@ const handleSubmit = async (e) => {
   setFormData({
     name: "",
     email: "",
+    phone : "",
     userName: "",
     password: "",
+    confirmPassword:"",
     roles: "",
   });
 };
@@ -129,10 +141,23 @@ const handleSubmit = async (e) => {
                 required
               />
             </div>
+            <div className="w-3/5 flex flex-row gap-4">
+              <label className="w-2/5 text-right">
+                <span>Phone:</span>
+              </label>
+              <input
+                className="w-3/5  border rounded-md"
+                type="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
 
             <div className="w-3/5 flex flex-row gap-4">
               <label className="w-2/5 text-right">
-                <span>User ID:</span>
+                <span>Username:</span>
               </label>
               <input
                 className="w-3/5  border rounded-md"
@@ -152,6 +177,19 @@ const handleSubmit = async (e) => {
                 type="password"
                 name="password"
                 value={formData.password}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className="w-3/5 flex flex-row gap-4">
+              <label className="w-2/5 text-right">
+                <span>Confirm Password:</span>
+              </label>
+              <input
+                className="w-3/5  border rounded-md"
+                type="password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
                 onChange={handleInputChange}
                 required
               />
