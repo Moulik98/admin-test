@@ -7,6 +7,7 @@ export const CategoryManagerLogin = () => {
     password: '',
   });
 
+
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -25,6 +26,7 @@ export const CategoryManagerLogin = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+         
         },
         body: JSON.stringify(formData),
       });
