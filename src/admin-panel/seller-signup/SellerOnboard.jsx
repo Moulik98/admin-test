@@ -3,9 +3,10 @@ import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 
 export const SignupForm = () => {
-  const [responseMessage, setResponseMessage] = useState("");
+  const [responseMessage, setResponseMessage] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
   const [access_token, setToken] = useState(null);
+  const [isSuccess, setSuccess] = useState("");
   useEffect(() => {
     if (typeof window !== "undefined") {
       const accessToken = localStorage.getItem("access_token");
@@ -45,107 +46,109 @@ export const SignupForm = () => {
   };
 
   async function Signup(url, formData, accessToken) {
-      console.log("url", url);
-      console.log("formData", formData);
-      console.log("access token", accessToken);
-      setResponseMessage('')
-      try {
-          const response = await fetch(url, {
-              method: "POST",
-              body: formData,
-              headers: {
-                  Authorization: `Bearer ${accessToken}`,
-              },
-          });
-          console.log(response);
-          const responseData = await response.json();
-          console.log(responseData);
-          if (response.ok) {
-              // Removing items from localStorage
-              localStorage.removeItem('access_token');
-              localStorage.removeItem('refresh_token');
-              localStorage.removeItem('userId');
-            toast.success("Registration successful",responseData.message);
-          } else {
-              setResponseMessage(responseData.message)
-          }
-          // Process the response data as needed
-      } catch (error) {
-          console.error(error);
-          // Handle the error and display an error message to the user
+    console.log("url", url);
+    console.log("formData", formData);
+    console.log("access token", accessToken);
+    setResponseMessage("");
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      console.log("Response status:", response.status);
+
+      const responseData = await response.json();
+      console.log("Response data:", responseData);
+      if (response.ok) {
+        setResponseMessage(responseData.message);
+        setSuccess(true);
+      } else {
+        setResponseMessage(responseData.message);
+        setSuccess(responseData.success);
       }
+    } catch (error) {
+      console.error("Error during signup:", error);
+      setResponseMessage("An error occurred during registration.");
+    }
   }
 
   const [validationMessage, setValidationMessage] = useState({
-      password: '',
-      confirmPassword: '',
-      gstNumber: '',
-      panNumber: ''
-  })
+    password: "",
+    confirmPassword: "",
+    gstNumber: "",
+    panNumber: "",
+  });
 
   const handleSubmit = (event) => {
-      event.preventDefault();
-      const passwordRegx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,15}$/;
-      const gstRegx = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}[Z]{1}[0-9A-Z]{1}$/;
-      const panRegx = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+    event.preventDefault();
+    const passwordRegx =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,15}$/;
+    const gstRegx =
+      /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}[Z]{1}[0-9A-Z]{1}$/;
+    const panRegx = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
 
-      const isValidPassword = passwordRegx.test(data.password);
-      const isValidGst = gstRegx.test(data.gst_number);
-      const isValidPan = panRegx.test(data.pan_number);
+    const isValidPassword = passwordRegx.test(data.password);
+    const isValidGst = gstRegx.test(data.gst_number);
+    const isValidPan = panRegx.test(data.pan_number);
 
-      if (!isValidPassword) {
-          setValidationMessage((preValue) => ({
-              ...preValue,
-              password: 'Password is weak '
-          }));
-      } else {
-          setValidationMessage((preValue) => ({
-              ...preValue,
-              password: ''
-          }));
-      }
-      if (!isValidGst) {
-          setValidationMessage((preValue) => ({
-              ...preValue,
-              gstNumber: 'Invalid GST number.'
-          }));
-      } else {
-          setValidationMessage((preValue) => ({
-              ...preValue,
-              gstNumber: ''
-          }));
-      }
-      if (!isValidPan) {
-          setValidationMessage((preValue) => ({
-              ...preValue,
-              panNumber: 'Invalid PAN number.'
-          }));
-      } else {
-          setValidationMessage((preValue) => ({
-              ...preValue,
-              panNumber: ''
-          }));
-      }
+    if (!isValidPassword) {
+      setValidationMessage((preValue) => ({
+        ...preValue,
+        password: "Password is weak ",
+      }));
+    } else {
+      setValidationMessage((preValue) => ({
+        ...preValue,
+        password: "",
+      }));
+    }
+    if (!isValidGst) {
+      setValidationMessage((preValue) => ({
+        ...preValue,
+        gstNumber: "Invalid GST number.",
+      }));
+    } else {
+      setValidationMessage((preValue) => ({
+        ...preValue,
+        gstNumber: "",
+      }));
+    }
+    if (!isValidPan) {
+      setValidationMessage((preValue) => ({
+        ...preValue,
+        panNumber: "Invalid PAN number.",
+      }));
+    } else {
+      setValidationMessage((preValue) => ({
+        ...preValue,
+        panNumber: "",
+      }));
+    }
 
-      const formData = new FormData();
-      formData.append("sellerType", data.sellerType);
-      formData.append("fullname", data.fullname);
-      formData.append("email", data.email);
-      formData.append("password", data.password);
-      formData.append("store_name", data.store_name);
-      formData.append("gst_number", data.gst_number);
-      formData.append("pan_number", data.pan_number);
-      formData.append("panImageUrl", panCard);
-      formData.append("gstImageUrl", gstCertificate);
+    const formData = new FormData();
+    formData.append("sellerType", data.sellerType);
+    formData.append("fullname", data.fullname);
+    formData.append("email", data.email);
+    formData.append("phone", data.phone);
+    formData.append("password", data.password);
+    formData.append("store_name", data.store_name);
+    formData.append("gst_number", data.gst_number);
+    formData.append("pan_number", data.pan_number);
+    formData.append("panImageUrl", panCard);
+    formData.append("gstImageUrl", gstCertificate);
 
-      console.log('formData', formData);
-      return;
-      const url = process.env.REACT_APP_URL + 'v1/category-manager/sellerCompleteSignupByCm'; // Fixed the URL by adding a slash before the endpoint
-      console.log(url);
-      if (isValidPassword && isValidGst && isValidPan) {
-          Signup(url, formData, access_token);
-          console.log('signup', access_token);
-      }
+    const url =
+      process.env.REACT_APP_URL +
+      "/v1/category-manager/sellerCompleteSignupByCm"; // Fixed the URL by adding a slash before the endpoint
+
+    if (isValidPassword && isValidGst && isValidPan) {
+      Signup(url, formData, access_token);
+      console.log("signup", access_token);
+    }
   };
 
   return (
@@ -358,11 +361,6 @@ export const SignupForm = () => {
                 </div>
               )}
             </p>
-            {/* {validationMessage.password ? (
-              <p className="text-red-500 max-w-sm">
-                {validationMessage.password}
-              </p>
-            ) : null} */}
           </div>
           <div className="mb-2">
             <p className=" flex gap-2 shadow appearance-none border rounded-full w-full py-2 px-3 text-[#c2c2c2] leading-tight focus:outline-none focus:shadow-outline">
@@ -460,7 +458,7 @@ export const SignupForm = () => {
                   title="upload"
                   required
                   onChange={handleGstCertificateChange}
-                //   value={gstImage}
+                  //   value={gstImage}
                 />
               </div>
 
@@ -472,7 +470,7 @@ export const SignupForm = () => {
                   type="file"
                   className="custom-file-input  h-8 border-2 border-white  pl-1"
                   onChange={handlePanCardChange}
-                //   value={panImage}
+                  //   value={panImage}
                 />
               </div>
             </div>
@@ -485,7 +483,15 @@ export const SignupForm = () => {
             Register
           </button>
 
-          <div></div>
+          <div className="flex justify-center items-center">
+            <p
+              className={`text-sm ${
+                isSuccess ? "text-green-500" : "text-red-500"
+              }`}
+            >
+              {responseMessage}
+            </p>
+          </div>
         </form>
       </div>
     </div>

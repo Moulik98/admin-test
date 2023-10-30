@@ -35,7 +35,11 @@ export const CategoryManagerLogin = () => {
       if (response.ok) {
         // Successful authentication, redirect to /managerdashboard
        localStorage.setItem("access_token", data.access_token);
-       navigate("/ManagerDashboard")
+       console.log("Response Data >>>>", data.roles[0]);
+       if(data.roles[0] === "CM"){
+        navigate("/ManagerDashboard")
+       }
+      
       } else {
         // Handle unsuccessful authentication, show an error message or take appropriate action
         console.error('Authentication failed');
