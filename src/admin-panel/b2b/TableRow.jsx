@@ -81,11 +81,11 @@ const TableRow = ({ data, onDelete }) => {
         className="whitespace-nowrap px-4 py-2 text-xs font-medium text-gray-900"
       >
         <div
-          className={`flex justify-center items-center rounded-full py-1 px-2 text-xs text-white ${
+          className={`flex justify-center items-center rounded-full py-1 px-2 capitalize text-xs text-white ${
             is_approved ? "bg-indigo-500" : "bg-indigo-900"
           }`}
         >
-          {`${is_approved ? "Approved" : "Declined"}`}
+          {is_approved}
         </div>
       </td>
       <td className="px-4 py-2 text-xs">
