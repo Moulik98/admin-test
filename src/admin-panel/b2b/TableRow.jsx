@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import AttachmentModal from "./AttachmentModal";
 const TableRow = ({ data, onDelete }) => {
   const { email, is_approved, business_name, _id, personal_name } = data;
-  const [viewAttachment, setViewAttachment] = useState(false);
+  const [viewAttachment, 
+    setViewAttachment] = useState(false);
   const [showDeletePopup, setShowDeletePopup] = useState(false);
 
   const handleClose = (value) => {
