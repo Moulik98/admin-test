@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import PdfViewModal from "./PdfViewModal";
+import DeclineReasonModal from "./DeclineReqModal";
 const AttachmentModal = ({ onClose, visible, id }) => {
   const [pdfModal, setPdfModal] = useState(false);
   const [gstModal, setGstModal] = useState(false);
   const [attachMent, SetAttachMent] = useState([]);
+  const [declineReason, setDeclineReason] = useState("");
+  const [showDeclineReasonModal, setShowDeclineReasonModal] = useState(false);
 
   console.log(id);
 
@@ -12,7 +15,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
   async function fetchAttachment() {
     try {
       // Replace with your actual bearer token
-      const url = `${process.env.REACT_APP_URL}/v1/verifySeller/viewAttachments/${id}`;
+      const url = `${process.env.REACT_APP_URL}/v1/b2b-approval/get/${id}`;
 
       const response = await fetch(url, {
         headers: {
@@ -21,7 +24,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
       });
 
       const data = await response.json();
-      SetAttachMent(data[0]);
+      SetAttachMent(data);
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -33,7 +36,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
 
   async function makePutRequest(id) {
     try {
-      const url = `${process.env.REACT_APP_URL}/v1/verifySeller/isVerify`;
+      const url = `${process.env.REACT_APP_URL}/v1/b2b-approval/approve_b2b/${id}`;
 
       const payload = {
         // Add your desired request body here
@@ -42,7 +45,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
       };
 
       const requestOptions = {
-        method: "PUT",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -52,11 +55,11 @@ const AttachmentModal = ({ onClose, visible, id }) => {
       // console.log(JSON.stringify(payload))
       const response = await fetch(url, requestOptions);
       if (response.ok) {
-        const responseData = await response.json()
+        const responseData = await response.json();
         onClose("verify");
-        console.log('PUT request successful:', responseData);
+        console.log("Post request successful:", responseData);
       } else {
-        throw new Error("PUT request failed");
+        throw new Error("Post request failed");
       }
     } catch (error) {
       console.error("Error:", error.message);
@@ -80,11 +83,11 @@ const AttachmentModal = ({ onClose, visible, id }) => {
         },
         body: JSON.stringify(payload),
       };
-      console.log(JSON.stringify(payload))
+      console.log(JSON.stringify(payload));
       const response = await fetch(url, requestOptions);
       if (response.ok) {
-        const responseData = await response.json()
-        console.log(responseData)
+        const responseData = await response.json();
+        console.log(responseData);
         onClose("decline");
         onClose("close"); // Notify the parent component of the decline action
       } else {
@@ -97,6 +100,16 @@ const AttachmentModal = ({ onClose, visible, id }) => {
 
   const handleVerify = () => {
     makePutRequest(id);
+  };
+
+  const handleDecline = () => {
+    setShowDeclineReasonModal(true); // Show the decline reason modal
+  };
+
+  const submitDeclineReason = () => {
+    if (declineReason) {
+      makeDeclineRequest(id, declineReason); // Pass the decline reason to the decline request function
+    }
   };
   const handleClosePdf = (e) => {
     console.log("hii");
@@ -145,7 +158,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                   :
                 </div>
                 <p className="text-sm text-right  font-normal mx-1">
-                  {attachMent?.fullname}
+                  {attachMent?.personal_name}
                 </p>
               </div>
               <div className="w-2/5 flex justify-between ">
@@ -170,7 +183,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                   :
                 </div>
                 <p className="text-sm text-right  font-normal mx-1">
-                  {attachMent?.store_name}
+                  {attachMent?.business_name}
                 </p>
               </div>
               <div className="w-2/5 flex justify-between ">
@@ -181,7 +194,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                   :
                 </div>
                 <p className="text-sm text-right  font-normal mx-1">
-                  {attachMent?.gst_number}
+                  {attachMent?.gst_id}
                 </p>
               </div>
             </div>
@@ -195,7 +208,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                   :
                 </div>
                 <p className="text-sm text-right  font-normal mx-1">
-                  {attachMent?.pan_number}
+                  {attachMent?.pan_id}
                 </p>
               </div>
             </div>
@@ -213,11 +226,11 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                   alt=""
                 />
               </div>
-              {gstModal && attachMent.gstImageUrl && (
+              {gstModal && attachMent.gst_upload && (
                 <PdfViewModal
                   CloseModal={handleClosePdf}
                   visible={gstModal}
-                  url={attachMent.gstImageUrl}
+                  url={attachMent.gst_upload}
                 />
               )}
             </div>
@@ -232,11 +245,11 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                   alt=""
                 />
               </div>
-              {pdfModal && attachMent.panImageUrl && (
+              {pdfModal && attachMent.pan_upload && (
                 <PdfViewModal
                   visible={pdfModal}
                   CloseModal={handleClosePdf}
-                  url={attachMent.panImageUrl}
+                  url={attachMent.pan_upload}
                 />
               )}
             </div>
@@ -264,7 +277,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
               Verify
             </button>
             <button
-              onClick={() => makeDeclineRequest(id)}
+              onClick={handleDecline}
               className="flex justify-center items-center py-2 px-4 bg-[#DC3545] text-white"
               type="button"
             >
@@ -284,6 +297,14 @@ const AttachmentModal = ({ onClose, visible, id }) => {
               </svg>
               Decline
             </button>
+
+            {showDeclineReasonModal && (
+              <DeclineReasonModal
+                onClose={() => setShowDeclineReasonModal(false)}
+                onSubmit={submitDeclineReason}
+                onChange={(e) => setDeclineReason(e.target.value)}
+              />
+            )}
           </div>
         </div>
       </div>

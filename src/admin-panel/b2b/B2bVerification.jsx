@@ -77,7 +77,7 @@ const B2bVerification = () => {
       console.log("seller id", sellerId);
       const token = localStorage.getItem("access_token");
       const response = await fetch(
-        `${process.env.REACT_APP_URL}/v1/verifySeller/viewAttachments/${sellerId}`,
+        `${process.env.REACT_APP_URL}/v1/b2b-approval/get/${sellerId}`,
         {
           headers: {
             "Content-Type": "application/json",
