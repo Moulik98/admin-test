@@ -56,10 +56,7 @@ useEffect(() => {
 const handleInputChange = (e) => {
   const { name, value } = e.target;
 
-  if (value.includes(' ')) {
-    toast.error("Spaces are not allowed in this field");
-    return;
-  }
+
   setFormData((prevData) => ({
     ...prevData,
     [name]: value,
@@ -71,6 +68,12 @@ const handleSubmit = async (e) => {
   e.preventDefault();
   // Perform any validation or submit data to the server here
   console.log("Form Data Submitted:", formData);
+
+    // Check if the username contains spaces
+    if (formData.userName.includes(" ")) {
+      toast.error("Username cannot contain spaces.");
+      return; // Prevent further execution of the function
+    }
 
   const response = await fetch(
     `${process.env.REACT_APP_URL}/v1/category-manager/signup`,
@@ -119,7 +122,7 @@ const handleSubmit = async (e) => {
               </label>
 
               <input
-                className="w-3/5  border rounded-md"
+                className="w-3/5  border rounded-md px-4 py-1"
                 type="text"
                 name="name"
                 value={formData.name}
@@ -133,7 +136,7 @@ const handleSubmit = async (e) => {
                 <span>Email:</span>
               </label>
               <input
-                className="w-3/5  border rounded-md"
+                className="w-3/5  border rounded-md px-4 py-1"
                 type="email"
                 name="email"
                 value={formData.email}
@@ -141,12 +144,12 @@ const handleSubmit = async (e) => {
                 required
               />
             </div>
-            <div className="w-3/5 flex flex-row gap-4">
+            <div className="w-3/5 flex flex-row gap-4  ">
               <label className="w-2/5 text-right">
                 <span>Phone:</span>
               </label>
               <input
-                className="w-3/5  border rounded-md"
+                className="w-3/5  border rounded-md px-4 py-1"
                 type="phone"
                 name="phone"
                 value={formData.phone}
@@ -160,7 +163,7 @@ const handleSubmit = async (e) => {
                 <span>Username:</span>
               </label>
               <input
-                className="w-3/5  border rounded-md"
+                className="w-3/5  border rounded-md  px-4 py-1"
                 type="text"
                 name="userName"
                 value={formData.userName}
@@ -173,7 +176,7 @@ const handleSubmit = async (e) => {
                 <span>Password:</span>
               </label>
               <input
-                className="w-3/5  border rounded-md"
+                className="w-3/5  border rounded-md  px-4 py-1"
                 type="password"
                 name="password"
                 value={formData.password}
@@ -186,7 +189,7 @@ const handleSubmit = async (e) => {
                 <span>Confirm Password:</span>
               </label>
               <input
-                className="w-3/5  border rounded-md"
+                className="w-3/5  border rounded-md  px-4 py-1"
                 type="password"
                 name="confirmPassword"
                 value={formData.confirmPassword}
@@ -200,7 +203,7 @@ const handleSubmit = async (e) => {
                 <span>Designation:</span>
               </label>
               <select
-                className="w-3/5  border rounded-md"
+                className="w-3/5  border rounded-md px-4 py-1"
                 name="roles"
                 value={formData.roles}
                 onChange={handleInputChange}

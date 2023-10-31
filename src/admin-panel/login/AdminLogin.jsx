@@ -148,7 +148,7 @@ export const Login = () => {
               <p className="text-red-500 text-center mt-2">{error}</p>
             )}
           </div>
-          <a className="text-xs text-blue-400" href="/stafflogin">Login as Category Manager</a>
+          <a className="text-xs text-blue-400" href="/stafflogin">Login as Staff</a>
         </form>
         
       </div>

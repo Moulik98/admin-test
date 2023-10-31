@@ -126,9 +126,7 @@ const StaffModal = ({ id, visible, onClose, modalName }) => {
           <div className="flex gap-x-5 justify-center my-5">
             <div
               className="py-2 px-10 bg-red-500 text-white rounded-sm"
-              onClick={() =>
-                
-                onClose()}
+              onClick={onClose}
             >
               Cancel
             </div>
