@@ -11,7 +11,7 @@ const B2bVerification = () => {
   async function fetchSellerVerificationList() {
     try {
       const token = localStorage.getItem("access_token"); // Replace with your actual bearer token
-      const url = `${process.env.REACT_APP_URL}/v1/b2b-approval/get`;
+      const url = `${process.env.REACT_APP_URL}/v1/b2b-approval/get?sort=desc`;
 
       const response = await fetch(url, {
         headers: {
