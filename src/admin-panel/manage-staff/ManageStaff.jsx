@@ -91,20 +91,21 @@ const handleSubmit = async (e) => {
   if (response.ok) {
     navigate('/designation-list')
     toast.success(data.message);
+    setFormData({
+      name: "",
+      email: "",
+      phone : "",
+      userName: "",
+      password: "",
+      confirmPassword:"",
+      roles: "",
+    });
    
   } else {
     toast.error(data.message);
   }
   // Reset the form after submission if needed
-  setFormData({
-    name: "",
-    email: "",
-    phone : "",
-    userName: "",
-    password: "",
-    confirmPassword:"",
-    roles: "",
-  });
+
 };
 
   return (
