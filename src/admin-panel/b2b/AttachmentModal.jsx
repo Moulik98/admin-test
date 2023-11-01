@@ -299,6 +299,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
 
             {showDeclineReasonModal && (
               <DeclineReasonModal
+                id={id}
                 onClose={() => setShowDeclineReasonModal(false)}
                 onSubmit={submitDeclineReason}
                 onChange={(e) => setDeclineReason(e.target.value)}
