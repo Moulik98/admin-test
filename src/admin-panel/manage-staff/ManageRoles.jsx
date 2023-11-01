@@ -33,7 +33,7 @@ console.log("Show Modal >>>",showModal);
           const data = await response.json();
           setDesignations(data);
         } else {
-          toast.error("Failed to fetch designations. Please try again.");
+          console.error("Failed to fetch designations")
         }
       } catch (error) {
         console.error("Error:", error);
