@@ -8,7 +8,6 @@ const AttachmentModal = ({ onClose, visible, id }) => {
   const [declineReason, setDeclineReason] = useState("");
   const [showDeclineReasonModal, setShowDeclineReasonModal] = useState(false);
 
-  console.log(id);
 
   const token = localStorage.getItem("access_token");
 

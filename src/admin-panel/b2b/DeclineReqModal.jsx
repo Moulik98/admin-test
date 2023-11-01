@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const DeclineReasonModal = ({ isOpen, onClose, onSubmit }) => {
+const DeclineReasonModal = ({ isOpen, onClose, onSubmit, id, token }) => {
   const [selectedReasons, setSelectedReasons] = useState([]);
   const [message, setMessage] = useState("");
 
@@ -23,8 +23,37 @@ const DeclineReasonModal = ({ isOpen, onClose, onSubmit }) => {
     setMessage(e.target.value);
   };
 
-  const handleSubmit = () => {
-    onSubmit(selectedReasons, message);
+  const handleSubmit = async () => {
+    try {
+      const url = `${process.env.REACT_APP_URL}/v1/b2b-approval/decline_b2b/${id}`;
+
+      const payload = {
+        reasons: selectedReasons,
+        message: message
+      };
+
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(payload),
+      };
+      console.log(JSON.stringify(payload))
+      const response = await fetch(url, requestOptions);
+
+      if (response.ok) {
+        const responseData = await response.json();
+        onSubmit(); // Call the parent component's callback function
+        onClose(); // Close the modal
+        console.log("Decline request successful:", responseData);
+      } else {
+        throw new Error("Decline request failed");
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
   };
 
   return (
@@ -53,8 +82,8 @@ const DeclineReasonModal = ({ isOpen, onClose, onSubmit }) => {
           value={message}
         ></textarea>
         <div className="mt-4 flex justify-end">
-          <button onClick={onClose} className="bg-gray-300 hover:bg-gray-400 py-2 px-4 mr-2 rounded-lg">Cancel</button>
-          <button onClick={handleSubmit} className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg">Submit</button>
+          <button onClick={onClose} className="bg-gray-300 hover-bg-gray-400 py-2 px-4 mr-2 rounded-lg">Cancel</button>
+          <button onClick={handleSubmit} className="bg-blue-500 hover-bg-blue-600 text-white py-2 px-4 rounded-lg">Submit</button>
         </div>
       </div>
     </div>
