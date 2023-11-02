@@ -39,6 +39,8 @@ import ReviewRating from '../admin-panel/review-rating/ReviewRating';
 
 import Banners from '../admin-panel/starup-cms/Banners';
 
+//Manage staff
+import CategoryHeadDashboard from '../managerdashboard/CategoryHeadDashboard';
 import ManagerDashboard from '../managerdashboard/ManagerDashboard'
 import { CategoryManagerLogin } from '../admin-panel/login/CategoryManagerLogin';
 import ManageStaff from '../admin-panel/manage-staff/ManageStaff';
@@ -80,7 +82,7 @@ const MainRoutes = () => {
         {(location) => (
           <Routes location={location}>
             <Route path="/" element={<Login />} />
-            <Route path="/manage-staff"  element={<ProtectedRoute element={ManageStaff} />} />
+            <Route path="/manage-staff" element={<ProtectedRoute element={ManageStaff} />} />
             <Route path="/stafflogin" element={<CategoryManagerLogin />} />
             <Route path="/onboard-seller" element={<SignupForm />} />
             <Route path="/dashboard" element={<ProtectedRoute element={Dashboard} />} />
@@ -109,7 +111,7 @@ const MainRoutes = () => {
             <Route path="/cms/terms-conditions" element={<ProtectedRoute element={Terms} />} />
             <Route path="/cms/refunds-cancellations" element={<ProtectedRoute element={Refund} />} />
             <Route path="/brands" element={<ProtectedRoute element={Brands} />} />
-
+            <Route path="/b2buser" element={<ProtectedRoute element={B2bVerification} />} />
             {/* A + content manager preview */}
             <Route path='/preview-content-manager' element={<ProtectedRoute element={Preview} />} />
 
@@ -120,11 +122,15 @@ const MainRoutes = () => {
 
             {/* startup banner */}
             <Route path="/startup-cms" element={<ProtectedRoute element={Banners} />} />
-            {/* Category Manager */}
-            <Route path="/ManagerDashboard" element={<ManagerDashboard/>} />
+
+
+            {/* Manage Staff */}
+            <Route path="/ManagerDashboard" element={<ManagerDashboard />} />
+            <Route path="/category-head-dashboard" element={<CategoryHeadDashboard />} />
+
             <Route path="/manage-roles" element={<ProtectedRoute element={ManageRoles} />} />
             <Route path="/designation-list" element={<ProtectedRoute element={DesignationList} />} />
-            <Route path="/b2buser" element={<ProtectedRoute element={B2bVerification} />} />
+
           </Routes>
         )}
       </PreserveLocation>

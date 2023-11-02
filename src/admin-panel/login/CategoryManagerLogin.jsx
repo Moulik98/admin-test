@@ -2,16 +2,41 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const CategoryManagerLogin = () => {
+  const navigate = useNavigate();
+
+  const [message, setMessage] = useState('')
   const [formData, setFormData] = useState({
     userName: '',
     password: '',
   });
 
+  const redirect = (role) => {
+    switch (role) {
+      case 'CM':
+        navigate('/ManagerDashboard')
+        break;
+      case 'CH':
+        navigate('/category-head-dashboard')
+        break;
+      case 'PM':
+        navigate('/product-manager-dashboard')
+        break;
+      case 'DMM':
+        navigate('/digitalmarketing-manager-dashboard')
+        break;
+      case 'QAA':
+        navigate('/qaapprover-dashboard')
+        break;
+      default:
+        console.log('Unknown Role');
+    }
 
-  const navigate = useNavigate();
+  }
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    setMessage('')
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -20,36 +45,35 @@ export const CategoryManagerLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const apiUrl = `${process.env.REACT_APP_URL}/v1/category-manager/cm-signin`;
     console.log(formData);
     try {
-      const response = await fetch(`${process.env.REACT_APP_URL}/v1/category-manager/cm-signin`, {
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-         
         },
         body: JSON.stringify(formData),
       });
       const data = await response.json();
-
+      if (data.message) {
+        setMessage(data.message)
+      }
+      console.log('data', data)
       if (response.ok) {
-        // Successful authentication, redirect to /managerdashboard
-       localStorage.setItem("access_token", data.access_token);
-       console.log("Response Data >>>>", data.roles[0]);
-       if(data.roles[0] === "CM"){
-        navigate("/ManagerDashboard")
-       }
-      
-      } else {
-        // Handle unsuccessful authentication, show an error message or take appropriate action
-        console.error('Authentication failed');
+        const token = data.access_token
+        localStorage.setItem("access_token", token);
+        const role = data.roles[0]
+        if (role) {
+          redirect(role)
+        }
       }
     } catch (error) {
       // Handle network or other errors
       console.error('Error during authentication', error);
     }
   };
-  
+
 
   return (
     <div className="flex w-full max-w-screen-2xl mx-auto">
@@ -96,7 +120,7 @@ export const CategoryManagerLogin = () => {
                 type="text"
                 placeholder="User Name"
                 value={formData.userName}
-             onChange={handleInputChange}
+                onChange={handleInputChange}
               />
             </p>
           </div>
@@ -124,7 +148,7 @@ export const CategoryManagerLogin = () => {
                 placeholder="password "
                 value={formData.password}
                 onChange={handleInputChange}
-               
+
               />
             </p>
           </div>
@@ -135,10 +159,11 @@ export const CategoryManagerLogin = () => {
             >
               Log In
             </button>
-         
+
           </div>
+          <p className="text-red-500 text-sm">{message}</p>
         </form>
-       
+
       </div>
     </div>
   );
