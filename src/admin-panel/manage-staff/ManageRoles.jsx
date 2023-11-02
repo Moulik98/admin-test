@@ -9,8 +9,9 @@ const ManageRoles = () => {
   const [showModal, setShowModal] = useState(false);
   const token = localStorage.getItem("access_token");
 
-  const handleClose = () => {
-    setShowModal(false);
+  const handleClose = async() => {
+    console.log('hii i got clicked')
+    setShowModal((preValue)=>  !preValue);
     console.log(showModal);
   };
 console.log("Show Modal >>>",showModal);
@@ -42,8 +43,8 @@ console.log("Show Modal >>>",showModal);
     };
 
     fetchDesignations();
-  }, []); // Empty dependency array to run the effect only once on component mount
-  console.log(designations);
+  }, [showModal]); // Empty dependency array to run the effect only once on component mount
+
 
 
   return (
@@ -67,7 +68,7 @@ console.log("Show Modal >>>",showModal);
             />
           </svg>
         </Link>
-        <p className="text-2xl">Staff List</p>
+        <p className="text-2xl">Role/Designation</p>
       </div>
     </div>
 
@@ -127,7 +128,7 @@ console.log("Show Modal >>>",showModal);
       </form>
     </div>
     <section>
-      <div class="relative overflow-x-auto">
+      <div class="max-w-6xl relative overflow-x-auto">
         <table class="w-full text-left text-xs">
           <thead class="bg-gray-100 text-xs font-medium uppercase text-[#666666]">
             <tr>
