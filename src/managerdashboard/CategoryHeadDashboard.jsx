@@ -51,7 +51,7 @@ const CategoryHeadDashboard = () => {
                 <section className='flex flex-row justify-between py-5 items-center'>
                     <div>
                         <h1 className=' text-2xl md:text-3xl text-[#383E50] font-semibold leading-10 text-left'>Dashboard</h1>
-                        <p className='text-sm leading-6 font-normal'>Whole data about your business here</p>
+                        <p className='text-sm leading-6 font-normal'>Whole data about assign seller</p>
                     </div>
                     <div>
                         <a href={`/onboard-seller`} className='text-white flex gap-x-5 bg-[#556EE6] py-2 px-10 rounded'>
@@ -63,9 +63,7 @@ const CategoryHeadDashboard = () => {
                     </div>
                 </section>
                 <section className='flex flex-col'>
-                    <div className="">
-                        <ManageStats />
-                    </div>
+
                     <div className="">
                         <OnboardedSellers />
                     </div>
