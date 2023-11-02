@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 
-const DeclineReasonModal = ({ isOpen, onClose, onSubmit }) => {
+const DeclineReasonModal = ({ isOpen, onClose, onSubmit, id }) => {
   const [selectedReasons, setSelectedReasons] = useState([]);
   const [message, setMessage] = useState("");
+
+  const token = localStorage.getItem("access_token");
 
   const declineReasons = [
     "PAN number not properly visible.",
@@ -23,8 +25,39 @@ const DeclineReasonModal = ({ isOpen, onClose, onSubmit }) => {
     setMessage(e.target.value);
   };
 
-  const handleSubmit = () => {
-    onSubmit(selectedReasons, message);
+  const handleSubmit = async () => {
+    try {
+      const url = `${process.env.REACT_APP_URL}/v1/b2b-approval/decline_b2b/${id}`;
+
+      const payload = {
+        reasons: selectedReasons,
+        emailContent: message
+      };
+
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(payload),
+      };
+
+      const response = await fetch(url, requestOptions);
+
+      if (response.ok) {
+        const responseData = await response.json();
+        onSubmit(); // Call the parent component's callback function
+        onClose(); // Close the modal
+        console.log("Decline request successful:", responseData);
+      } else {
+        throw new Error("Decline request failed");
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+      // You can handle errors here by showing an error message to the user
+      // Example: set an error state and display it in the UI
+    }
   };
 
   return (
