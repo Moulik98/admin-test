@@ -87,15 +87,13 @@ const StaffModal = ({ id, visible, onClose, modalName }) => {
       fetchData();
     }
   }, [modalName, id]);
-
+  if(visible)
   return (
     <div
-      className={`fixed z-10 inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center ${
-        visible ? "" : "hidden"
-      }`}
+      className={`fixed z-10 inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center`}
     >
       <div className="w-1/3 mx-auto bg-white rounded py-5 px-10">
-        <form className="flex flex-col" onSubmit={handleSubmit}>
+        <form className="flex flex-col" onSubmit={(e)=>handleSubmit(e)}>
           <div className="flex gap-5"></div>
 
           <div className="flex flex-col w-full justify-start">
@@ -125,8 +123,9 @@ const StaffModal = ({ id, visible, onClose, modalName }) => {
 
           <div className="flex gap-x-5 justify-center my-5">
             <div
-              className="py-2 px-10 bg-red-500 text-white rounded-sm"
-              onClick={onClose}
+              className="py-2 px-10 bg-red-500 text-white rounded-sm cursor-pointer"
+              onClick={()=>onClose()}
+              
             >
               Cancel
             </div>

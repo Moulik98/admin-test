@@ -3,9 +3,6 @@ import slugify from "./Slugify";
 import toast from "react-hot-toast";
 
 
-
-
-
 const SubCategoriesModal = ({ visible, onClose, id, modalName }) => {
 
   const [fileInputState, setFileInputState] = useState("");

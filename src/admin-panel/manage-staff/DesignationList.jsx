@@ -117,7 +117,7 @@ const DesignationList = () => {
         </form>
       </div>
       <section>
-        <div class="relative overflow-x-auto">
+        <div class="max-w-6xl relative overflow-x-auto">
           <table class="w-full text-left text-xs">
             <thead class="bg-gray-100 text-xs font-medium uppercase text-[#666666]">
               <tr>
