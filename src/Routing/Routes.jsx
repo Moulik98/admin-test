@@ -47,15 +47,15 @@ import Banners from "../admin-panel/starup-cms/Banners";
 
 //Manage staff
 import CategoryHeadDashboard from "../managerdashboard/CategoryHeadDashboard";
-import ManagerDashboard from "../managerdashboard/ManagerDashboard";
+import ManagerDashboard from "../managerdashboard/cm/ManagerDashboard";
 import { CategoryManagerLogin } from "../admin-panel/login/CategoryManagerLogin";
 import ManageStaff from "../admin-panel/manage-staff/ManageStaff";
 import ManageRoles from "../admin-panel/manage-staff/ManageRoles";
 import SignupForm from "../admin-panel/seller-signup/SellerOnboard";
 import DesignationList from "../admin-panel/manage-staff/DesignationList";
 import B2bVerification from "../admin-panel/b2b/B2bVerification";
-import Profile from "../managerdashboard/Profile";
-import QAADashboard from "../managerdashboard/QA";
+import Profile from "../managerdashboard/cm/Profile";
+import QAADashboard from "../managerdashboard/qaa/QA";
 
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
@@ -228,8 +228,10 @@ const MainRoutes = () => {
 
             {/* Manage Staff */}
 
-
-             <Route path="/category-manager-dashboard" element={<ManagerDashboard />} />
+            <Route
+              path="/category-manager-dashboard"
+              element={<ManagerDashboard />}
+            />
             <Route
               path="/category-head-dashboard"
               element={<CategoryHeadDashboard />}
@@ -244,7 +246,6 @@ const MainRoutes = () => {
               path="/designation-list"
               element={<ProtectedRoute element={DesignationList} />}
             />
-
           </Routes>
         )}
       </PreserveLocation>

@@ -1,7 +1,7 @@
 import React from 'react'
-import ManageStats from './ManagerStats'
-import SellerTable from './SellerTable'
-import OnboardedSellers from './OnboardedSellers'
+import ManageStats from '../cm/ManagerStats'
+import SellerTable from '../cm/SellerTable'
+import OnboardedSellers from '../cm/OnboardedSellers'
 
 
 
