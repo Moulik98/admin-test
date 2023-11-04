@@ -126,7 +126,7 @@ const MainRoutes = () => {
 
 
             {/* Manage Staff */}
-            <Route path="/ManagerDashboard" element={<ManagerDashboard />} />
+            <Route path="/category-manager-dashboard" element={<ManagerDashboard />} />
             <Route path="/category-head-dashboard" element={<CategoryHeadDashboard />} />
             <Route path="/CM-Info"  element={<Profile />}  />
             <Route path="/manage-roles" element={<ProtectedRoute element={ManageRoles} />} />

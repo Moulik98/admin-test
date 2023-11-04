@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import SideBar from './Sidebar'
 import Loader from './Loader';
 import toast from 'react-hot-toast';
+import { categoryManagerMenu, categoryMenu } from '../constant';
 
 const inputFields = [
     {
@@ -108,9 +109,12 @@ const Profile = () => {
 
   return (
     <main className='max-w-full flex'>
-     
-    <form className=' mx-auto' onSubmit={(e) => handleSubmit(e)}>
-    <div className='grid grid-cols-2 gap-5'>
+       <div className="sidebar bg-[#00388c] h-screen w-fit sticky top-0">
+    <SideBar menu={categoryManagerMenu} />
+    </div>
+    <form className='grow p-8' onSubmit={(e) => handleSubmit(e)}>
+        <h1 className='text-xl text-left font-bold'>Category Manager Profile</h1>
+    <div className='grid grid-cols-2 gap-5 mt-8'>
         {
             inputFields.map((field, index) => (
                 <div key={field.id + index} className='flex flex-col'>
@@ -129,7 +133,7 @@ const Profile = () => {
     <div className='flex justify-end gap-x-5 mt-5'>
         <button
             type='submit'
-            className='py-2 px-6 rounded bg-blue-500 text-blue-900'>
+            className='py-2 px-6 rounded bg-blue-500  text-white'>
             {isMutating ? <Loader /> : 'Update'}
         </button>
 
