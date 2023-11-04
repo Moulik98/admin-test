@@ -4,8 +4,8 @@ import React from "react";
 const StatsCard = ({ img, heading, number, title, style }) => {
   return (
     <div className="w-full  flex flex-row gap-5  bg-[#FFF] border border-solid border-[#EEE] rounded-xl p-5">
-      <div className={`${style} flex  px-4 pt-4 pb-10 rounded-3xl`}>
-        <img src={img} />
+      <div className={`${style} w-8 h-8 flex  px-4 pt-4 pb-10 rounded-3xl`}>
+        <img className="object-cover" src={img} />
       </div>
       <div className="flex flex-col">
         <h3 className="text-base text-[#383E50] font-semibold leading-5">
@@ -26,7 +26,7 @@ const ManagerStats = () => {
     <section className=" flex flex-row gap-5">
       <div className="shrink-0 w-[62%]">
         <StatsCard
-          img={`/assets/dashboard/revenue.svg`}
+          img={`/assets/admin-panel/seller.png`}
           heading={`Onboarded Seller`}
         
           title={`Seller Onboarded`}

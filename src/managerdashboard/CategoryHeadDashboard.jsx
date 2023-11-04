@@ -1,5 +1,8 @@
 import React from 'react'
-import categoryMenu from '../constant'
+import { categoryManagerMenu, categoryMenu } from '../constant';
+
+// Now you can use categoryManagerMenu and categoryMenu independently
+
 import CmAndSellerTable from './CmAndSellerTable'
 import SideBar from './Sidebar'
 

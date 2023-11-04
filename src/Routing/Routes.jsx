@@ -227,7 +227,9 @@ const MainRoutes = () => {
             />
 
             {/* Manage Staff */}
-            <Route path="/ManagerDashboard" element={<ManagerDashboard />} />
+
+
+             <Route path="/category-manager-dashboard" element={<ManagerDashboard />} />
             <Route
               path="/category-head-dashboard"
               element={<CategoryHeadDashboard />}
@@ -242,6 +244,7 @@ const MainRoutes = () => {
               path="/designation-list"
               element={<ProtectedRoute element={DesignationList} />}
             />
+
           </Routes>
         )}
       </PreserveLocation>

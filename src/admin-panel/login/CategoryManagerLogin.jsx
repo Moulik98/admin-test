@@ -13,7 +13,7 @@ export const CategoryManagerLogin = () => {
   const redirect = (role) => {
     switch (role) {
       case 'CM':
-        navigate('/ManagerDashboard')
+        navigate('/category-manager-dashboard')
         break;
       case 'CH':
         navigate('/category-head-dashboard')
