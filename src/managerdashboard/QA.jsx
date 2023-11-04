@@ -5,7 +5,7 @@ import OnboardedSellers from './OnboardedSellers'
 
 
 
-const ManagerDashboard = () => {
+const QAADashboard = () => {
 
   return (
     <main className='max-w-full mx-8'>
@@ -36,4 +36,4 @@ const ManagerDashboard = () => {
   )
 }
 
-export default ManagerDashboard
+export default QAADashboard
