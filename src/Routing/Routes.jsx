@@ -49,6 +49,7 @@ import SignupForm from '../admin-panel/seller-signup/SellerOnboard';
 import DesignationList from '../admin-panel/manage-staff/DesignationList';
 import B2bVerification from '../admin-panel/b2b/B2bVerification';
 import Profile from '../managerdashboard/Profile';
+import QAADashboard from '../managerdashboard/QA';
 
 
 const PreserveLocation = ({ children }) => {
@@ -128,6 +129,7 @@ const MainRoutes = () => {
             {/* Manage Staff */}
             <Route path="/ManagerDashboard" element={<ManagerDashboard />} />
             <Route path="/category-head-dashboard" element={<CategoryHeadDashboard />} />
+            <Route path="/qaapprover-dashboard" element={<QAADashboard />} />
             <Route path="/CM-Info"  element={<Profile />}  />
             <Route path="/manage-roles" element={<ProtectedRoute element={ManageRoles} />} />
             <Route path="/designation-list" element={<ProtectedRoute element={DesignationList} />} />
