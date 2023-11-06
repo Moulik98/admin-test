@@ -1,10 +1,8 @@
 import React from 'react'
+import CmwithSellerCount from './CmwithSellerCount'
 import { categoryMenu } from '../constant'
-import CmAndSellerTable from './CmAndSellerTable'
 import SideBar from './Sidebar'
-
-const CategoryHeadDashboard = () => {
-
+const CategoryHeadAssignSeller = () => {
     return (
         <main className='w-full flex flex-row gap-x-5'>
             <div className='sidebar bg-[#00388c] h-screen w-fit sticky top-0'>
@@ -16,7 +14,7 @@ const CategoryHeadDashboard = () => {
 
                 <section className='flex flex-row justify-between py-5 items-center'>
                     <div>
-                        <h1 className=' text-2xl text-[#383E50] font-semibold leading-10 text-left'>List of Cm and Seller</h1>
+                        <h1 className=' text-2xl text-[#383E50] font-semibold leading-10 text-left'>Seller to cm assignment</h1>
 
                     </div>
                     <div className='flex flex-row gap-5'>
@@ -25,7 +23,7 @@ const CategoryHeadDashboard = () => {
                     </div>
                 </section>
                 <section className='flex flex-col'>
-                    <CmAndSellerTable />
+                    <CmwithSellerCount />
                 </section>
             </div>
 
@@ -34,4 +32,4 @@ const CategoryHeadDashboard = () => {
     )
 }
 
-export default CategoryHeadDashboard;
+export default CategoryHeadAssignSeller

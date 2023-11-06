@@ -29,24 +29,19 @@ import Error from "../admin-panel/Error";
 import { Dashboard } from "../admin-panel/dashboard/Dashboard";
 import Customers from "../admin-panel/customers/Customers";
 import CustomersDetails from "../admin-panel/customers/CustomersDetails";
-
 // Cms Section
 import FaqSection from "../admin-panel/cms/FaqSection";
 import Privacy from "../admin-panel/cms/Privacy";
 import Terms from "../admin-panel/cms/Terms";
 import Refund from "../admin-panel/cms/Refund";
 import { Brands } from "../admin-panel/brands/Brands";
-
 import ManageGst from "../admin-panel/gst/ManageGst";
-
 import Preview from "../admin-panel/cms/content-manager/preview/Preview";
-
 import ReviewRating from "../admin-panel/review-rating/ReviewRating";
-
 import Banners from "../admin-panel/starup-cms/Banners";
-
 //Manage staff
 import CategoryHeadDashboard from "../managerdashboard/CategoryHeadDashboard";
+import CategoryHeadAssignSeller from "../managerdashboard/CategoryHeadAssignSeller";
 import ManagerDashboard from "../managerdashboard/cm/ManagerDashboard";
 import { CategoryManagerLogin } from "../admin-panel/login/CategoryManagerLogin";
 import ManageStaff from "../admin-panel/manage-staff/ManageStaff";
@@ -56,18 +51,15 @@ import DesignationList from "../admin-panel/manage-staff/DesignationList";
 import B2bVerification from "../admin-panel/b2b/B2bVerification";
 import Profile from "../managerdashboard/cm/Profile";
 import QAADashboard from "../managerdashboard/qaa/QA";
-
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
   return children(location);
 };
-
 const MainRoutes = () => {
   const handleLogout = () => {
     localStorage.setItem("isLogin", false);
     window.location.href = "/";
   };
-
   const ProtectedRoute = ({ element: Element, ...rest }) => {
     const [isLogin, setIsLogin] = useState(false);
     const navigate = useNavigate();
@@ -88,7 +80,6 @@ const MainRoutes = () => {
       )
     );
   };
-
   return (
     <Router>
       <PreserveLocation>
@@ -208,26 +199,21 @@ const MainRoutes = () => {
               path="/preview-content-manager"
               element={<ProtectedRoute element={Preview} />}
             />
-
             <Route
               path="/ManageGst"
               element={<ProtectedRoute element={ManageGst} />}
             />
-
             {/* // Review Rationg */}
             <Route
               path="/review-rating"
               element={<ProtectedRoute element={ReviewRating} />}
             />
-
             {/* startup banner */}
             <Route
               path="/startup-cms"
               element={<ProtectedRoute element={Banners} />}
             />
-
             {/* Manage Staff */}
-
             <Route
               path="/category-manager-dashboard"
               element={<ManagerDashboard />}
@@ -235,6 +221,10 @@ const MainRoutes = () => {
             <Route
               path="/category-head-dashboard"
               element={<CategoryHeadDashboard />}
+            />
+            <Route
+              path="/category-head-assign-seller"
+              element={<CategoryHeadAssignSeller />}
             />
             <Route path="/qaapprover-dashboard" element={<QAADashboard />} />
             <Route path="/CM-Info" element={<Profile />} />
@@ -252,5 +242,4 @@ const MainRoutes = () => {
     </Router>
   );
 };
-
 export default MainRoutes;
