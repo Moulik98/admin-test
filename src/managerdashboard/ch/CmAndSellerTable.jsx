@@ -1,0 +1,71 @@
+import React, { useState, useEffect } from 'react';
+import getList from '../getList';
+import { format } from 'date-fns';
+import { getToken } from '../../hook/getToken';
+import EyeButton from './EyeButton';
+import MergeButton from './MergeButton';
+
+
+const CmAndSellerTable = () => {
+    const [list, setList] = useState([]);
+    useEffect(() => {
+        const url = `${process.env.REACT_APP_URL}/v1/category-head/onboarded-seller-cm`;
+        const token = getToken();
+        getList(url, token).then((data) => {
+            setList(data.onboardedSellers)
+        })
+
+    }, [])
+    return (
+        <div className="relative  overflow-hidden">
+            <table className="w-full text-left text-xs">
+                <thead className="bg-gray-100 text-xs font-medium uppercase text-[#666666]">
+                    <tr>
+                        <th scope="col" className="px-6 py-2">
+                            Assign / Creation Date
+                        </th>
+                        <th scope="col" className="px-6 py-2">
+                            Category Manager
+                        </th>
+                        <th scope="col" className="px-6 py-2">
+                            Cm user Name
+                        </th>
+                        <th scope="col" className="px-6 py-2">
+                            Seller Name
+                        </th>
+                        <th scope="col" className="px-6 py-2">
+                            Seller Store Name
+                        </th>
+                        <th scope="col" className="px-6 py-2">
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {Array.isArray(list) &&
+                        list?.map((item) => {
+                            const { _id, createdAt, seller_info, cm_info, } = item;
+                            const date = format(new Date(createdAt), 'dd/MM/yyyy');
+                            return (
+                                <tr key={_id}>
+                                    <td className="px-6 py-2">{date}</td>
+                                    <td className="px-6 py-2">{cm_info.name}</td>
+                                    <td className="px-6 py-2">{cm_info.userName}</td>
+                                    <td className="px-6 py-2">{seller_info.fullname}</td>
+                                    <td className="px-6 py-2">{seller_info.store_name}</td>
+                                    <td className="px-6 py-2">
+                                        <div className='flex space-x-2'>
+                                            <EyeButton />
+                                            <MergeButton />
+                                        </div>
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                </tbody>
+            </table>
+        </div>
+    )
+}
+
+export default CmAndSellerTable;

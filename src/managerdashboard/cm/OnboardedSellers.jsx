@@ -1,51 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import SellerTable from './SellerTable'
 
-const OnboardedSellers = () => {
-    const [approvedSellers, setApprovedSellers] = useState();
-    const [pendingSellers, setPendingSellers] = useState();
-    const token = localStorage.getItem("access_token")
+const OnboardedSellers = ({approvedSellers,pendingSellers}) => {
 
-    const fetchData = async() => {
-        const url = process.env.REACT_APP_URL + '/v1/category-manager/approved/Onboard-Seller'
-        const response = await fetch(url,{
-            headers : {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-              }
-        })
-        const data = await response.json();
-        if(response.ok){
-            setApprovedSellers(data.approvedseller)
-        }else{
-            console.error("Failed to fetch")
-        }
-    }
-  useEffect(()=> {
-    fetchData();
-  },[])
-
-  const fetchSellers = async() => {
-    const url = process.env.REACT_APP_URL + '/v1/category-manager/pending/Onboard-Seller'
-    const response = await fetch(url,{
-        headers : {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          }
-    })
-    const data = await response.json();
-    if(response.ok){
-        setPendingSellers(data.pendingSeller)
-    }else{
-        console.error("Failed to fetch")
-    }
-  }
-
-  useEffect(()=> {
-    fetchSellers()
-  },[])
-  console.log("Pending List >>",pendingSellers)
-  console.log("Approved List >>",approvedSellers)
   return (
     <section className='flex flex-row gap-5 py-5'>
     {/* //Left Side */}

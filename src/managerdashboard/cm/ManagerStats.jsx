@@ -20,7 +20,7 @@ const StatsCard = ({ img, heading, number, title, style }) => {
   );
 };
 
-const ManagerStats = () => {
+const ManagerStats = ({approvednumber,pendingnumber}) => {
 
   return (
     <section className=" flex flex-row gap-5">
@@ -28,7 +28,7 @@ const ManagerStats = () => {
         <StatsCard
           img={`/assets/admin-panel/seller.png`}
           heading={`Onboarded Seller`}
-        
+        number={approvednumber}
           title={`Seller Onboarded`}
           style={`bg-[#08817833]`}
         />
@@ -37,7 +37,7 @@ const ManagerStats = () => {
       <StatsCard
         img={`/assets/dashboard/earning.svg`}
         heading={`Pending`}
-
+        number={pendingnumber}
         title={`Seller who are in the process of being onboarded`}
         style={`bg-[#0DCA8C33]`}
       />
