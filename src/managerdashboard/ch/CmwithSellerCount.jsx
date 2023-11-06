@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import AssignButton from './AssignButton';
-import getList from './getList';
-import { getToken } from '../hook/getToken';
+import getList from '../getList';
+import { getToken } from '../../hook/getToken';
 import EyeButton from './EyeButton';
 const CmwithSellerCount = () => {
     const [isOpen, setIsOpen] = useState(false)

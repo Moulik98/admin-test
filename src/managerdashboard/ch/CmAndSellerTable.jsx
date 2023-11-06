@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import getList from './getList';
+import getList from '../getList';
 import { format } from 'date-fns';
-import { getToken } from '../hook/getToken';
+import { getToken } from '../../hook/getToken';
 import EyeButton from './EyeButton';
 import MergeButton from './MergeButton';
 

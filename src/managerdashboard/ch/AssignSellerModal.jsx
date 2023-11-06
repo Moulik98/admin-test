@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import toast from 'react-hot-toast';
 import Select from 'react-select';
-import { getToken } from '../hook/getToken'
-import getList from './getList'
+import { getToken } from '../../hook/getToken'
+import getList from '../getList'
 const AssignSellerModal = ({ isOpen, onClose, cmId }) => {
     const [isSaving, setIsSaving] = useState(false)
     const [selectedOption, setSelectedOption] = useState(null);

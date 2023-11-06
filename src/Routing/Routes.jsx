@@ -40,8 +40,8 @@ import Preview from "../admin-panel/cms/content-manager/preview/Preview";
 import ReviewRating from "../admin-panel/review-rating/ReviewRating";
 import Banners from "../admin-panel/starup-cms/Banners";
 //Manage staff
-import CategoryHeadDashboard from "../managerdashboard/CategoryHeadDashboard";
-import CategoryHeadAssignSeller from "../managerdashboard/CategoryHeadAssignSeller";
+import CategoryHeadDashboard from "../managerdashboard/ch/CategoryHeadDashboard";
+import CategoryHeadAssignSeller from "../managerdashboard/ch/CategoryHeadAssignSeller";
 import ManagerDashboard from "../managerdashboard/cm/ManagerDashboard";
 import { CategoryManagerLogin } from "../admin-panel/login/CategoryManagerLogin";
 import ManageStaff from "../admin-panel/manage-staff/ManageStaff";
