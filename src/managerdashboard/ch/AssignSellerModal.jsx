@@ -76,7 +76,7 @@ const AssignSellerModal = ({ isOpen, onClose, cmId }) => {
                                 onChange={handleChange}
                                 options={list?.map(item => ({
                                     value: item._id,
-                                    label: item.fullname + (item.store_name ? ` (${item.store_name})` : ''),
+                                    label: (item?.fullname ? item.fullname : '') + (item.store_name ? ` (${item.store_name})` : ''),
                                 }))}
                             />
                         </div>
