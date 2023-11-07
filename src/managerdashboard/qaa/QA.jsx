@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import ManageStats from "./ManagerStats";
 import OnboardedSellers from "./OnboardedSellers";
 import SideBar from "../Sidebar";
@@ -8,8 +8,8 @@ import { categoryManagerMenu, categoryMenu } from "../../constant";
 const QA = () => {
   const [approvedSellers, setApprovedSellers] = useState();
   const [pendingSellers, setPendingSellers] = useState();
-  const [approvedcount, setApprovedCount] = useState()
-  const [pendingCount, setPendingCount] = useState()
+  const [approvedcount, setApprovedCount] = useState();
+  const [pendingCount, setPendingCount] = useState();
   const token = localStorage.getItem("access_token");
 
   const fetchData = async () => {
@@ -25,7 +25,7 @@ const QA = () => {
     const data = await response.json();
     if (response.ok) {
       setApprovedSellers(data.approvedseller);
-      setApprovedCount(data.count)
+      setApprovedCount(data.count);
     } else {
       console.error("Failed to fetch");
     }
@@ -46,7 +46,7 @@ const QA = () => {
     const data = await response.json();
     if (response.ok) {
       setPendingSellers(data.pendingSeller);
-      setPendingCount(data.count)
+      setPendingCount(data.count);
     } else {
       console.error("Failed to fetch");
     }
@@ -56,7 +56,7 @@ const QA = () => {
     fetchSellers();
   }, []);
   console.log("Pending List >>", pendingSellers);
-  console.log("Approved Sellers",approvedcount)
+  console.log("Approved Sellers", approvedcount);
   console.log("Approved List >>", approvedSellers);
   return (
     <main className="max-w-full flex">
@@ -96,10 +96,16 @@ const QA = () => {
         </section>
         <section className="flex flex-col">
           <div className="">
-            <ManageStats approvednumber={approvedcount} pendingnumber={pendingCount}/>
+            <ManageStats
+              approvednumber={approvedcount}
+              pendingnumber={pendingCount}
+            />
           </div>
           <div className="">
-            <OnboardedSellers approvedSellers={approvedSellers} pendingSellers={pendingSellers} />
+            <OnboardedSellers
+              approvedSellers={approvedSellers}
+              pendingSellers={pendingSellers}
+            />
           </div>
         </section>
       </div>
