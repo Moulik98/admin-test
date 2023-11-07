@@ -100,4 +100,4 @@ const QA = [
     }
 ]
 
-export { categoryManagerMenu, categoryMenu };
+export { categoryManagerMenu, categoryMenu , QA };
