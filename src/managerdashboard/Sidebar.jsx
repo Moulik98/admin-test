@@ -20,9 +20,9 @@ const SideBar = ({ menu }) => {
 
                 <div className="flex justify-center gap-x-4 items-center">
                     <img
-                        src="./assets/admin-panel/logo.png"
+                        src="https://res.cloudinary.com/genx21/image/upload/v1690368093/home/bwsfzhunctjank2jmbvo.png"
                         alt="logo"
-                        className={`cursor-pointer duration-500 ${open && "rotate-[360deg]"}`}
+                        className={`w-1/2 cursor-pointer duration-500 ${open && "rotate-[360deg]"}`}
                     />
                 </div>
                 <ul className="pt-6">

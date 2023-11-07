@@ -2,6 +2,7 @@ import React from 'react'
 import CmwithSellerCount from './CmwithSellerCount'
 import { categoryMenu } from '../../constant'
 import SideBar from '../Sidebar'
+import NavigateBack from '../NavigateBack'
 const CategoryHeadAssignSeller = () => {
     return (
         <main className='w-full flex flex-row gap-x-5'>
@@ -13,7 +14,8 @@ const CategoryHeadAssignSeller = () => {
             <div className='flex-1 mr-5'>
 
                 <section className='flex flex-row justify-between py-5 items-center'>
-                    <div>
+                    <div className='flex space-x-2 items-center'>
+                        <NavigateBack />
                         <h1 className=' text-2xl text-[#383E50] font-semibold leading-10 text-left'>Seller to cm assignment</h1>
 
                     </div>
@@ -26,8 +28,6 @@ const CategoryHeadAssignSeller = () => {
                     <CmwithSellerCount />
                 </section>
             </div>
-
-
         </main>
     )
 }

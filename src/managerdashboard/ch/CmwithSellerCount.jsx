@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
+import { useNavigate } from "react-router-dom";
+
 import AssignButton from './AssignButton';
 import getList from '../getList';
 import { getToken } from '../../hook/getToken';
 import EyeButton from './EyeButton';
 const CmwithSellerCount = () => {
+    const navigate = useNavigate()
     const [isOpen, setIsOpen] = useState(false)
     const [list, setList] = useState([])
     useEffect(() => {
@@ -13,6 +16,11 @@ const CmwithSellerCount = () => {
             setList(data.cmSellerCounts)
         })
     }, [isOpen])
+
+    const handleClick = useCallback((id) => {
+        const url = `/category-head-dashboard/associate-seller/${id}`
+        navigate(url);
+    }, [])
     return (
         <div className='w-full'>
             <table className="w-full text-left text-xs">
@@ -41,7 +49,10 @@ const CmwithSellerCount = () => {
                                     <td className="px-6 py-2">{name} ({userName})</td>
                                     <td className="px-6 py-2">{onboardCount}</td>
                                     <td className="px-6 py-2">
-                                        <EyeButton />
+                                        <EyeButton
+                                            id={_id}
+                                            onClick={handleClick}
+                                        />
                                     </td>
                                     <td className="px-6 py-2">
                                         <AssignButton

@@ -5,11 +5,7 @@ import AssignSellerModal from './AssignSellerModal'
 const AssignButton = ({ cmId, count, isOpen, setIsOpen }) => {
 
     const handleClick = () => {
-        if (count < 5) {
-            setIsOpen(true)
-        } else (
-            toast.error('Can not assign more than 5 seller')
-        )
+        setIsOpen(true)
     }
     return (
         <>
