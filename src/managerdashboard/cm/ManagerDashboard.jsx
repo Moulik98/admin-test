@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from "react";
 import ManageStats from "./ManagerStats";
-import SellerTable from "./SellerTable";
 import OnboardedSellers from "./OnboardedSellers";
 import SideBar from "../Sidebar";
 import Layout from "../../Routing/Layout";
