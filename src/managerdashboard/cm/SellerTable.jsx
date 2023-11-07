@@ -35,7 +35,7 @@ const SellerTable = ({ sellers }) => {
                   <td className="px-2 py-3">{item?.store_name}</td>
                   <td className="px-2 py-3">{item?.email}</td>
                   <td className="px-2 py-3">
-                    <a href="/auth/login">
+                    <a href={`https://seller-panel-git-hello-neo062.vercel.app/staff-access?id=${item._id}`}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
