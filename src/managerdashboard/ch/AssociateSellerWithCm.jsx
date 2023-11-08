@@ -18,7 +18,7 @@ const AssociateSellerWithCm = () => {
             setList(data.cmSellerCounts[0]?.sellers)
             setCmName(data.cmSellerCounts[0]?.cmName)
         })
-    }, [])
+    }, [id])
     return (
         <main className='w-full flex flex-row gap-x-5'>
             <div className='sidebar bg-[#00388c] h-screen w-fit sticky top-0'>
@@ -43,6 +43,7 @@ const AssociateSellerWithCm = () => {
                     <AssociateSellerTable
                         cmId={id}
                         list={list}
+                        cmName={cmName}
                     />
                 </section>
             </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { format } from 'date-fns';
 import MergeButton from './MergeButton';
-const AssociateSellerTable = ({ list, cmId }) => {
+const AssociateSellerTable = ({ list, cmId, cmName }) => {
     return (
         <div className="relative  overflow-hidden">
             <table className="w-full text-left text-xs">
@@ -38,6 +38,9 @@ const AssociateSellerTable = ({ list, cmId }) => {
                                         <div className='flex px-4'>
                                             <MergeButton
                                                 cmId={cmId}
+                                                sellerId={_id}
+                                                cmName={cmName}
+                                                sellerName={fullname}
                                             />
                                         </div>
                                     </td>
