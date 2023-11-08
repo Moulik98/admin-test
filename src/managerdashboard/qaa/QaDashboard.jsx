@@ -1,5 +1,5 @@
 import React from "react";
-import { categoryManagerMenu, categoryMenu } from "../../constant";
+import { QA } from "../../constant";
 
 // Now you can use categoryManagerMenu and categoryMenu independently
 
@@ -10,7 +10,7 @@ const CategoryHeadDashboard = () => {
   return (
     <main className="w-full flex flex-row gap-x-5">
       <div className="sidebar bg-[#00388c] h-screen w-fit sticky top-0">
-        <SideBar menu={categoryMenu} />
+        <SideBar menu={QA} />
       </div>
       <div className="flex-1 mr-5">
         <section className="flex flex-row justify-between py-5 items-center">
