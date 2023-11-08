@@ -42,6 +42,7 @@ import Banners from "../admin-panel/starup-cms/Banners";
 //Manage staff
 import CategoryHeadDashboard from "../managerdashboard/ch/CategoryHeadDashboard";
 import CategoryHeadAssignSeller from "../managerdashboard/ch/CategoryHeadAssignSeller";
+import AssociateSellerWithCm from "../managerdashboard/ch/AssociateSellerWithCm";
 import ManagerDashboard from "../managerdashboard/cm/ManagerDashboard";
 import { CategoryManagerLogin } from "../admin-panel/login/CategoryManagerLogin";
 import ManageStaff from "../admin-panel/manage-staff/ManageStaff";
@@ -222,6 +223,12 @@ const MainRoutes = () => {
               path="/category-head-dashboard"
               element={<CategoryHeadDashboard />}
             />
+
+            <Route
+              path="/category-head-dashboard/associate-seller/:id"
+              element={<AssociateSellerWithCm />}
+            />
+
             <Route
               path="/category-head-assign-seller"
               element={<CategoryHeadAssignSeller />}

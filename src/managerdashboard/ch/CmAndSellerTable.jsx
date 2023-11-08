@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import getList from '../getList';
 import { format } from 'date-fns';
 import { getToken } from '../../hook/getToken';
@@ -15,6 +15,10 @@ const CmAndSellerTable = () => {
             setList(data.onboardedSellers)
         })
 
+    }, [])
+
+    const handleClick = useCallback((id) => {
+        console.log('hii there');
     }, [])
     return (
         <div className="relative  overflow-hidden">
@@ -55,7 +59,9 @@ const CmAndSellerTable = () => {
                                     <td className="px-6 py-2">{seller_info.store_name}</td>
                                     <td className="px-6 py-2">
                                         <div className='flex space-x-2'>
-                                            <EyeButton />
+                                            <EyeButton
+                                                onClick={handleClick}
+                                            />
                                             <MergeButton />
                                         </div>
                                     </td>
