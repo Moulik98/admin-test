@@ -9,7 +9,7 @@ const OnboardedSellers = ({ approvedSellers, pendingSellers }) => {
         <div className="flex gap-5 ">
           <div className="grow w-full p-5 flex flex-col gap-5 border border-solid border-[#EEE] rounded-xl">
             <p className="text-base text-[#383E50] font-semibold">
-              Onboarded Sellers
+            List of Pending Sellers
             </p>
             <SellerTable sellers={approvedSellers} />
           </div>
@@ -20,7 +20,7 @@ const OnboardedSellers = ({ approvedSellers, pendingSellers }) => {
       <div className="grow flex flex-col">
         <div className="grow p-5 flex flex-col gap-5 border border-solid border-[#EEE] rounded-xl">
           <p className="text-base text-[#383E50] font-semibold">
-            Pending Sellers
+            List of Pending Sellers
           </p>
           <div className="grid grid-cols-2 gap-4">
             {Array.isArray(pendingSellers) &&
