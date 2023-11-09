@@ -15,8 +15,8 @@ const AssociateSellerWithCm = () => {
         const url = `${process.env.REACT_APP_URL}/v1/category-head/single-cm/${id}`
         const token = getToken()
         getList(url, token).then(data => {
-            setList(data.cmSellerCounts[0]?.sellers)
-            setCmName(data.cmSellerCounts[0]?.cmName)
+            setList(data?.cmSellerCounts[0]?.sellers)
+            setCmName(data?.cmSellerCounts[0]?.cmName)
         })
     }, [id])
     return (

@@ -4,6 +4,7 @@ import Select from 'react-select';
 import { getToken } from '../../hook/getToken'
 import getList from '../getList'
 const AssignSellerModal = ({ isOpen, onClose, cmId }) => {
+
     const [isSaving, setIsSaving] = useState(false)
     const [selectedOption, setSelectedOption] = useState(null);
 
@@ -18,7 +19,7 @@ const AssignSellerModal = ({ isOpen, onClose, cmId }) => {
         getList(url, token).then((data) => {
             setList(data.offboardedseller)
         })
-    }, [])
+    }, [isOpen, cmId])
 
     const handleSubmit = async (e) => {
         setIsSaving(true)
@@ -30,6 +31,7 @@ const AssignSellerModal = ({ isOpen, onClose, cmId }) => {
                 cm_id: cmId,
                 seller_id: selectedOption.value
             }
+            console.log('body', body);
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
@@ -58,6 +60,7 @@ const AssignSellerModal = ({ isOpen, onClose, cmId }) => {
             onClose()
         }
     }
+    if (!isOpen) return null;
     return (
         <div
             onClick={(e) => handleClick(e)}
