@@ -24,7 +24,7 @@ const ManagerStats = ({approvednumber,pendingnumber}) => {
 
   return (
     <section className=" flex flex-row gap-5">
-      <div className="shrink-0 w-[62%]">
+      <div className="shrink-0 w-[58%]">
         <StatsCard
           img={`/assets/admin-panel/seller.png`}
           heading={`Onboarded Seller`}
