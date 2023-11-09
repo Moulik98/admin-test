@@ -16,7 +16,7 @@ const CategoryHeadAssignSeller = () => {
                 <section className='flex flex-row justify-between py-5 items-center'>
                     <div className='flex space-x-2 items-center'>
                         <NavigateBack />
-                        <h1 className=' text-2xl text-[#383E50] font-semibold leading-10 text-left'>Seller to cm assignment</h1>
+                        <h1 className=' text-2xl text-[#383E50] font-semibold leading-10 text-left'>Seller to CM assignment</h1>
 
                     </div>
                     <div className='flex flex-row gap-5'>
