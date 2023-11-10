@@ -8,16 +8,34 @@ const AssociateSellerTable = ({ list, cmId, cmName }) => {
                 <thead className="bg-gray-100 text-xs font-medium uppercase text-[#666666]">
                     <tr>
                         <th scope="col" className="px-6 py-2">
-                            Assign / Creation Date
-                        </th>
-
-                        <th scope="col" className="px-6 py-2">
                             Seller Name
                         </th>
+
                         <th scope="col" className="px-6 py-2">
-                            Store Name
+                            Bussiness Type
+                        </th>
+                        <th scope="col" className="px-6 py-2">
+                            Live Brands
                         </th>
 
+                        <th scope="col" className="px-6 py-2">
+                            Pending Brands
+                        </th>
+                        <th scope="col" className="px-6 py-2">
+                            Live Products
+                        </th>
+                        <th scope="col" className="px-6 py-2">
+                            Pending Products
+                        </th>
+                        <th scope="col" className="px-6 py-2">
+                            Number of Sku
+                        </th>
+                        <th scope="col" className="px-6 py-2">
+                            Live A+ Content
+                        </th>
+                        <th scope="col" className="px-6 py-2">
+                            Pending A+ Content
+                        </th>
                         <th scope="col" className="px-6 py-2">
                             Actions
                         </th>
@@ -44,6 +62,12 @@ const AssociateSellerTable = ({ list, cmId, cmName }) => {
                                             />
                                         </div>
                                     </td>
+                                    <td className="px-6 py-2">{date}</td>
+                                    <td className="px-6 py-2">{fullname}</td>
+                                    <td className="px-6 py-2">{store_name}</td>
+                                    <td className="px-6 py-2">{date}</td>
+                                    <td className="px-6 py-2">{fullname}</td>
+                                    <td className="px-6 py-2">{store_name}</td>
                                 </tr>
                             )
                         })}
