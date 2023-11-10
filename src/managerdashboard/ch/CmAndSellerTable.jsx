@@ -22,6 +22,7 @@ const CmAndSellerTable = () => {
     // }, [])
     return (
         <div className="relative  overflow-hidden">
+            <h4 className='text-left text-xl text-[#383E50] font-medium py-2'>List of CM and Seller</h4>
             <table className="w-full text-left text-xs">
                 <thead className="bg-gray-100 text-xs font-medium uppercase text-[#666666]">
                     <tr>
