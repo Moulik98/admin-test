@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import ManageStats from "./ManagerStats";
 import OnboardedSellers from "./OnboardedSellers";
 import SideBar from "../Sidebar";
 import { QAList } from "../../constant";
