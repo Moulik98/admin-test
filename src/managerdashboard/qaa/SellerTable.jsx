@@ -28,7 +28,7 @@ const SellerTable = ({ sellers }) => {
           </thead>
           <tbody>
             {Array.isArray(sellers) &&
-              sellers?.map((item) => (
+             sellers?.map((item) => (
                 <tr key={item._id}>
                   <td className="px-2 py-3">{item?.fullname}</td>
                   <td className="px-2 py-3">{item?.sellerType}</td>

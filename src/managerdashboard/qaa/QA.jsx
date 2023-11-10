@@ -14,7 +14,7 @@ const QA = () => {
   const fetchData = async () => {
     const url =
       process.env.REACT_APP_URL +
-      "/v1/category-manager/approved/Onboard-Seller";
+      "/v1/qa-approver/onborded-sellers?isVerify=approved";
     const response = await fetch(url, {
       headers: {
         "Content-Type": "application/json",
@@ -35,7 +35,7 @@ const QA = () => {
 
   const fetchSellers = async () => {
     const url =
-      process.env.REACT_APP_URL + "/v1/category-manager/pending/Onboard-Seller";
+      process.env.REACT_APP_URL + "/v1/qa-approver/onborded-sellers?isVerify=approved";
     const response = await fetch(url, {
       headers: {
         "Content-Type": "application/json",
@@ -44,7 +44,7 @@ const QA = () => {
     });
     const data = await response.json();
     if (response.ok) {
-      setPendingSellers(data.pendingSeller);
+      setPendingSellers(data.pendingSellers);
       setPendingCount(data.count);
     } else {
       console.error("Failed to fetch");
@@ -75,12 +75,12 @@ const QA = () => {
          
         </section>
         <section className="flex flex-col">
-          <div className="">
+          {/* <div className="">
             <ManageStats
               approvednumber={approvedcount}
               pendingnumber={pendingCount}
             />
-          </div>
+          </div> */}
           <div className="">
             <OnboardedSellers
               approvedSellers={approvedSellers}
