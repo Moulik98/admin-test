@@ -96,7 +96,7 @@ const QAList = [
             </svg>
 
         ),
-        link: "/category-manager-dashboard",
+        link: "/qaapprover-dashboard",
     }
 ]
 
