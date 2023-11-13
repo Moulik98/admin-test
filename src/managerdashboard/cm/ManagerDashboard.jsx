@@ -63,7 +63,7 @@ const ManagerDashboard = () => {
       <div className="sidebar bg-[#00388c] h-screen w-fit sticky top-0">
         <SideBar menu={categoryManagerMenu} />
       </div>
-      <div className="max-w-full grow mx-8">
+      <div className="max-w-full grow mx-4">
         <section className="flex flex-row justify-between py-5 items-center">
           <div>
             <h1 className=" text-2xl md:text-3xl text-[#383E50] font-semibold leading-10">

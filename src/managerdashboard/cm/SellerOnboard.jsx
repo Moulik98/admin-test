@@ -1,5 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import SideBar from "../Sidebar";
+import { categoryManagerMenu, categoryMenu } from "../../constant";
 import toast from "react-hot-toast";
 
 export const SignupForm = () => {
@@ -155,19 +157,12 @@ export const SignupForm = () => {
     <div className="flex w-full max-w-screen-2xl mx-auto">
       {/* left part */}
 
-      <div className="bg-gradient-to-b from-[#0573e3] to-[#031d7a]  w-7/12  min-h-screen flex justify-center items-center">
-        <div className="">
-          <h1 className="text-white  text-5xl font-semibold ">
-            21 Genx Seller Portal
-          </h1>
-          <p className="text-white py-4 text-xl">
-            The most robust and functional seller panel
-          </p>
-        </div>
+      <div className="sidebar bg-[#00388c] h-screen w-fit sticky top-0">
+        <SideBar menu={categoryManagerMenu} />
       </div>
 
       {/* right part */}
-      <div className="flex items-center justify-center w-6/12 pb-3">
+      <div className="flex items-center justify-center w-full pb-3">
         <form className=" mx-auto  " onSubmit={handleSubmit}>
           <div>
             <h1 className="text-4xl font-bold text-center">Hello!</h1>

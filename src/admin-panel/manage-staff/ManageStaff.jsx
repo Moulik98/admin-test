@@ -111,7 +111,7 @@ const handleSubmit = async (e) => {
   return (
     <div className="max-w-7xl ">
       <div className="flex justify-start py-8 border-b">
-        <h1 className="text-3xl font-bold ">Create Role/Designation</h1>
+        <h1 className="text-3xl font-bold ">Create Staff Member</h1>
       </div>
 
       <div className=" ">
