@@ -17,11 +17,12 @@ const CmAndSellerTable = () => {
 
     }, [])
 
-    const handleClick = useCallback((id) => {
-        console.log('hii there');
-    }, [])
+    // const handleClick = useCallback((id) => {
+    //     console.log('hii there');
+    // }, [])
     return (
         <div className="relative  overflow-hidden">
+            <h4 className='text-left text-xl text-[#383E50] font-medium py-2'>List of CM and Seller</h4>
             <table className="w-full text-left text-xs">
                 <thead className="bg-gray-100 text-xs font-medium uppercase text-[#666666]">
                     <tr>
@@ -49,6 +50,7 @@ const CmAndSellerTable = () => {
                     {Array.isArray(list) &&
                         list?.map((item) => {
                             const { _id, createdAt, seller_info, cm_info, } = item;
+
                             const date = format(new Date(createdAt), 'dd/MM/yyyy');
                             return (
                                 <tr key={_id}>
@@ -58,11 +60,16 @@ const CmAndSellerTable = () => {
                                     <td className="px-6 py-2">{seller_info.fullname}</td>
                                     <td className="px-6 py-2">{seller_info.store_name}</td>
                                     <td className="px-6 py-2">
-                                        <div className='flex space-x-2'>
-                                            <EyeButton
+                                        <div className='flex '>
+                                            {/* <EyeButton
                                                 onClick={handleClick}
+                                            /> */}
+                                            <MergeButton
+                                                cmId={cm_info._id}
+                                                sellerId={seller_info._id}
+                                                cmName={cm_info.name}
+                                                sellerName={seller_info.fullname}
                                             />
-                                            <MergeButton />
                                         </div>
                                     </td>
                                 </tr>

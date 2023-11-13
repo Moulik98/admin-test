@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import AssignSellerModal from './AssignSellerModal'
 
-const AssignButton = ({ cmId, count, isOpen, setIsOpen }) => {
-
+const AssignButton = ({ cmId, count, onClick }) => {
+    const [isOpen, setIsOpen] = useState(false)
     const handleClick = () => {
         setIsOpen(true)
+        onClick()
     }
     return (
         <>
@@ -15,13 +16,16 @@ const AssignButton = ({ cmId, count, isOpen, setIsOpen }) => {
                 Assign Seller
             </button>
             {
-                isOpen &&
-                <AssignSellerModal
-                    isOpen={isOpen}
-                    cmId={cmId}
-                    onClose={() => setIsOpen(false)}
-                />
-
+                isOpen ?
+                    <AssignSellerModal
+                        isOpen={isOpen}
+                        cmId={cmId}
+                        onClose={() => {
+                            setIsOpen(false)
+                            onClick()
+                        }}
+                    />
+                    : null
             }
         </>
     )

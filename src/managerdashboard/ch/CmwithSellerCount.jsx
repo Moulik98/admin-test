@@ -7,7 +7,7 @@ import { getToken } from '../../hook/getToken';
 import EyeButton from './EyeButton';
 const CmwithSellerCount = () => {
     const navigate = useNavigate()
-    const [isOpen, setIsOpen] = useState(false)
+    const [isDataChange, setIsDataChange] = useState(false)
     const [list, setList] = useState([])
     useEffect(() => {
         const url = `${process.env.REACT_APP_URL}/v1/category-head/cm-seller-count`
@@ -15,8 +15,11 @@ const CmwithSellerCount = () => {
         getList(url, token).then((data) => {
             setList(data.cmSellerCounts)
         })
-    }, [isOpen])
+    }, [isDataChange])
 
+    const handleRefresh = () => {
+        setIsDataChange((preValue) => !preValue)
+    }
     const handleClick = useCallback((id) => {
         const url = `/category-head-dashboard/associate-seller/${id}`
         navigate(url);
@@ -44,6 +47,7 @@ const CmwithSellerCount = () => {
                     {Array.isArray(list) &&
                         list?.map((item) => {
                             const { _id, name, userName, onboardCount } = item;
+
                             return (
                                 <tr key={_id}>
                                     <td className="px-6 py-2">{name} ({userName})</td>
@@ -57,9 +61,8 @@ const CmwithSellerCount = () => {
                                     <td className="px-6 py-2">
                                         <AssignButton
                                             cmId={_id}
-                                            isOpen={isOpen}
-                                            setIsOpen={setIsOpen}
                                             count={onboardCount}
+                                            onClick={handleRefresh}
                                         />
                                     </td>
                                 </tr>

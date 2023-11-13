@@ -15,10 +15,10 @@ const AssociateSellerWithCm = () => {
         const url = `${process.env.REACT_APP_URL}/v1/category-head/single-cm/${id}`
         const token = getToken()
         getList(url, token).then(data => {
-            setList(data.cmSellerCounts[0]?.sellers)
-            setCmName(data.cmSellerCounts[0]?.cmName)
+            setList(data?.cmSellerCounts[0]?.sellers)
+            setCmName(data?.cmSellerCounts[0]?.cmName)
         })
-    }, [])
+    }, [id])
     return (
         <main className='w-full flex flex-row gap-x-5'>
             <div className='sidebar bg-[#00388c] h-screen w-fit sticky top-0'>
@@ -31,7 +31,7 @@ const AssociateSellerWithCm = () => {
                 <section className='flex flex-row justify-between py-5 items-center'>
                     <div className='flex space-x-2 items-center'>
                         <NavigateBack />
-                        <h1 className=' text-2xl text-[#383E50] font-semibold leading-10 text-left'>Cm {cmName} associated with following seller</h1>
+                        <h1 className=' text-2xl text-[#383E50] font-semibold leading-10 text-left'>CM {cmName} associated with following seller</h1>
 
                     </div>
                     {/* <div className='flex flex-row gap-5'>
@@ -43,6 +43,7 @@ const AssociateSellerWithCm = () => {
                     <AssociateSellerTable
                         cmId={id}
                         list={list}
+                        cmName={cmName}
                     />
                 </section>
             </div>

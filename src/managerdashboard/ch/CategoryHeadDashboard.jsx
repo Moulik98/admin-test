@@ -1,6 +1,7 @@
 import React from 'react'
 import { categoryMenu } from '../../constant'
 import CmAndSellerTable from './CmAndSellerTable'
+import Stats from './Stats'
 import SideBar from '../Sidebar'
 import NavigateBack from '../NavigateBack'
 
@@ -14,11 +15,10 @@ const CategoryHeadDashboard = () => {
                 />
             </div>
             <div className='flex-1 mr-5'>
-
                 <section className='flex flex-row justify-between py-5 items-center'>
                     <div className='flex space-x-2 items-center'>
                         <NavigateBack />
-                        <h1 className=' text-2xl text-[#383E50] font-semibold leading-10 text-left'>List of Cm and Seller</h1>
+                        <h1 className=' text-2xl text-[#383E50] font-semibold leading-10 text-left'>CH Dashboard</h1>
 
                     </div>
                     <div className='flex flex-row gap-5'>
@@ -26,6 +26,8 @@ const CategoryHeadDashboard = () => {
 
                     </div>
                 </section>
+                <Stats />
+
                 <section className='flex flex-col'>
                     <CmAndSellerTable />
                 </section>
