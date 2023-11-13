@@ -78,7 +78,7 @@ const QAList = [
             </svg>
 
         ),
-        link: "/CM-Info",
+        link: "/qa-profile",
     },
     {
         title: "New/pending seller",
@@ -88,7 +88,7 @@ const QAList = [
             </svg>
 
         ),
-        link: "/CM-Info",
+        link: "/pending-seller",
     },
     {
         title: "Approved Seller",

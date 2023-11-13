@@ -52,6 +52,8 @@ import DesignationList from "../admin-panel/manage-staff/DesignationList";
 import B2bVerification from "../admin-panel/b2b/B2bVerification";
 import Profile from "../managerdashboard/cm/Profile";
 import QAADashboard from "../managerdashboard/qaa/QA";
+import QaProfile from "../managerdashboard/qaa/QaProfile";
+import PendingSeller from "../managerdashboard/qaa/PendingSeller";
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
   return children(location);
@@ -242,6 +244,14 @@ const MainRoutes = () => {
             <Route
               path="/designation-list"
               element={<ProtectedRoute element={DesignationList} />}
+            />
+            <Route
+              path="/qa-profile"
+              element={<QaProfile/>}
+            />
+            <Route
+              path="/pending-seller"
+              element={<PendingSeller/>}
             />
           </Routes>
         )}

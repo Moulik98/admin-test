@@ -4,7 +4,7 @@ import { QAList } from "../../constant";
 import TableRow from "./TableRow";
 import AttachmentModal from "./AttachmentModal"; // Import the TableRow component
 
-const QA = () => {
+const PendingSeller = () => {
   const [pendingSellers, setPendingSellers] = useState([]);
   const [viewAttachment, setViewAttachment] = useState(false);
   const token = localStorage.getItem("access_token");
@@ -21,7 +21,7 @@ const QA = () => {
   const fetchPendingSellers = async () => {
     const url =
       process.env.REACT_APP_URL +
-      "/v1/qa-approver/onborded-sellers?isVerify=approved";
+      "/v1/qa-approver/onborded-sellers?isVerify=pending" && "/v1/qa-approver/onborded-sellers?isVerify=decline"
     const response = await fetch(url, {
       headers: {
         "Content-Type": "application/json",
@@ -81,4 +81,4 @@ const QA = () => {
   );
 };
 
-export default QA;
+export default PendingSeller;
