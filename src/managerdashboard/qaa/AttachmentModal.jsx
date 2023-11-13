@@ -32,7 +32,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
 
       if (response.ok) {
         const data = await response.json();
-        SetAttachMent(data[0]); // Assuming you are getting an array with a single item
+        SetAttachMent(data); // Assuming you are getting an array with a single item
         console.log(data);
       } else {
         throw new Error("Failed to fetch data");
@@ -130,7 +130,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
     }
   };
 
-  if (visible) {
+  if (visible && Array.isArray(attachMent) && attachMent.length > 0) {
     return (
       <div
         id="container"
@@ -159,112 +159,116 @@ const AttachmentModal = ({ onClose, visible, id }) => {
               </svg>
             </div>
           </div>
-          <div className="flex flex-col p-5">
-            <div className="flex justify-between">
-              <div className="w-2/5 flex justify-between">
-                <div className="w-1/2 flex justify-between">
-                  <h1 className=" text-base  font-semibold text-[#143250]">
-                    Vendor Name
-                  </h1>
-                  :
+          {attachMent.map((attachment) => (
+            <div key={id} className="flex flex-col p-5">
+              <div className="flex justify-between">
+                <div className="w-2/5 flex justify-between">
+                  <div className="w-1/2 flex justify-between">
+                    <h1 className=" text-base  font-semibold text-[#143250]">
+                      Vendor Name
+                    </h1>
+                    :
+                  </div>
+                  <p className="text-sm text-right font-normal mx-1">
+                    {attachment.fullname}
+                  </p>
                 </div>
-                <p className="text-sm text-right font-normal mx-1">
-                  {attachMent.fullname}
-                </p>
+                <div className="w-2/5 flex justify-between">
+                  <div className="w-1/2 flex justify-between">
+                    <h1 className=" text-base  font-semibold text-[#143250]">
+                      Email
+                    </h1>
+                    :
+                  </div>
+                  <p className="text-sm text-right font-normal mx-1">
+                    {attachment.email}
+                  </p>
+                </div>
               </div>
-              <div className="w-2/5 flex justify-between">
-                <div className="w-1/2 flex justify-between">
-                  <h1 className=" text-base  font-semibold text-[#143250]">
-                    Email
-                  </h1>
-                  :
+              {/* 2nd row */}
+              <div className="flex justify-between">
+                <div className="w-2/5 flex justify-between">
+                  <div className="w-1/2 flex justify-between">
+                    <h1 className=" text-base  font-semibold text-[#143250]">
+                      Store Name
+                    </h1>
+                    :
+                  </div>
+                  <p className="text-sm text-right font-normal mx-1">
+                    {attachment.store_name}
+                  </p>
                 </div>
-                <p className="text-sm text-right font-normal mx-1">
-                  {attachMent.email}
-                </p>
+                <div className="w-2/5 flex justify-between">
+                  <div className="w-1/2 flex justify-between">
+                    <h1 className=" text-base uppercase  font-semibold text-[#143250]">
+                      Gst
+                    </h1>
+                    :
+                  </div>
+                  <p className="text-sm text-right font-normal mx-1">
+                    {attachment.gst_number}
+                  </p>
+                </div>
+              </div>
+              {/* 3rd row  */}
+              <div className="flex justify-between">
+                <div className="w-2/5 flex justify-between">
+                  <div className="w-1/2 flex justify-between">
+                    <h1 className=" text-base uppercase  font-semibold text-[#143250]">
+                      Pan
+                    </h1>
+                    :
+                  </div>
+                  <p className="text-sm text-right font-normal mx-1">
+                    {attachment.pan_number}
+                  </p>
+                </div>
               </div>
             </div>
-            {/* 2nd row */}
-            <div className="flex justify-between">
-              <div className="w-2/5 flex justify-between">
-                <div className="w-1/2 flex justify-between">
-                  <h1 className=" text-base  font-semibold text-[#143250]">
-                    Store Name
-                  </h1>
-                  :
-                </div>
-                <p className="text-sm text-right font-normal mx-1">
-                  {attachMent.store_name}
-                </p>
-              </div>
-              <div className="w-2/5 flex justify-between">
-                <div className="w-1/2 flex justify-between">
-                  <h1 className=" text-base uppercase  font-semibold text-[#143250]">
-                    Gst
-                  </h1>
-                  :
-                </div>
-                <p className="text-sm text-right font-normal mx-1">
-                  {attachMent.gst_number}
-                </p>
-              </div>
-            </div>
-            {/* 3rd row  */}
-            <div className="flex justify-between">
-              <div className="w-2/5 flex justify-between">
-                <div className="w-1/2 flex justify-between">
-                  <h1 className=" text-base uppercase  font-semibold text-[#143250]">
-                    Pan
-                  </h1>
-                  :
-                </div>
-                <p className="text-sm text-right font-normal mx-1">
-                  {attachMent.pan_number}
-                </p>
-              </div>
-            </div>
-          </div>
+          ))}
           {/* // preview section */}
-          <div className="flex justify-around">
-            <div
-              onClick={() => setGstModal(true)}
-              className="w-2/5 flex justify-center items-center h-40 bg-gray-200 rounded"
-            >
-              <div className="w-full h-full p-2 cursor-pointer">
-                <img
-                  className="w-full h-full object-contain"
-                  src={attachMent.gstImageUrl}
-                  alt=""
-                />
+          {attachMent.map((attachment) => (
+            <div key={id} className="flex justify-around">
+              <div
+                onClick={() => setGstModal(true)}
+                className="w-2/5 flex justify-center items-center h-40 bg-gray-200 rounded"
+              >
+                <div className="w-full h-full p-2 cursor-pointer">
+                  <img
+                    className="w-full h-full object-contain"
+                    src={attachment.gstImageUrl}
+                    alt=""
+                  />
+                </div>
+                {gstModal && attachment.gstImageUrl && (
+                  <PdfViewModal
+                    CloseModal={handleClosePdf}
+                    visible={gstModal}
+                    url={attachment.gstImageUrl}
+                  />
+                )}
               </div>
-              {gstModal && attachMent.gstImageUrl && (
-                <PdfViewModal
-                  CloseModal={handleClosePdf}
-                  visible={gstModal}
-                  url={attachMent.gstImageUrl}
-                />
-              )}
-            </div>
-            <div
-              onClick={() => setPdfModal(true)}
-              className="w-2/5 flex justify-center items-center h-40 bg-gray-200 rounded"
-            >
-              <div className="w-full h-full p-2">
-                <img
-                  className="w-full h-full object-contain"
-                  src={attachMent.panImageUrl}
-                  alt=""
-                />
+              <div
+                onClick={() => setPdfModal(true)}
+                className="w-2/5 flex justify-center items-center h-40 bg-gray-200 rounded"
+              >
+                <div className="w-full h-full p-2">
+                  <img
+                    className="w-full h-full object-contain"
+                    src={attachment.panImageUrl}
+                    alt=""
+                  />
+                </div>
+                {pdfModal && attachment.panImageUrl && (
+                  <PdfViewModal
+                    visible={pdfModal}
+                    CloseModal={handleClosePdf}
+                    url={attachment.panImageUrl}
+                  />
+                )}
               </div>
-              {pdfModal && attachMent.panImageUrl && (
-                <PdfViewModal
-                  visible={pdfModal}
-                  CloseModal={handleClosePdf}
-                  url={attachMent.panImageUrl}
-                />
-              )}
             </div>
-          </div>
+          ))}
           <div className="flex justify-center gap-x-5 py-5">
             <button
               onClick={handleVerify}
