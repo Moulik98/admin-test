@@ -113,7 +113,7 @@ const QaProfile = () => {
       </div>
       <form className="grow p-8" onSubmit={(e) => handleSubmit(e)}>
         <h1 className="text-xl text-left font-bold">
-          Category Manager Profile
+          QA Approver Profile
         </h1>
         <div className="grid grid-cols-2 gap-5 mt-8">
           {inputFields.map((field, index) => (
