@@ -18,53 +18,53 @@ const Stats = () => {
     const dummyData = [
         {
             id: '483fe8uher',
-            name: 'Total CM',
-            count: 100
+            name: 'TOTAL CMs',
+            count: 14
         },
         {
             id: '483fe8uher',
-            name: 'Total Seller',
-            count: 244
+            name: 'TOTAL SELLERS',
+            count: 23
         },
         {
             id: '483fe8uher',
-            name: 'Total Brands',
-            count: 100
+            name: 'LIVE BRANDS',
+            count: 24
+        },
+        {
+            id: '483feq28uher',
+            name: 'PENDING BRANDS',
+            count: 65
         },
         {
             id: '483fe8uher',
-            name: 'Total Products',
-            count: 100
+            name: 'LIVE PRODUCTS',
+            count: 75
+        },
+        {
+            id: '483fq44e8uher',
+            name: 'DRAFT PRODUCTS',
+            count: 12
+        },
+        {
+            id: '483fq44e8u34her',
+            name: 'PENDING PRODUCTS',
+            count: 140
         },
         {
             id: '483fe8uher',
-            name: 'Total A+ Content',
-            count: 100
+            name: 'LIVE A+CONTENT',
+            count: 15
+        },
+        {
+            id: '4836r3fe8uher',
+            name: 'PENDING A+CONTENT',
+            count: 17
         },
         {
             id: '483fe8uher',
             name: 'Total SKU',
-            count: 2000
-        },
-        {
-            id: '483fe8uher',
-            name: 'Total B2C Customer',
-            count: 244
-        },
-        {
-            id: '483fe8uher',
-            name: 'Total B2B Customer',
-            count: 50
-        },
-        {
-            id: '483fe8uher',
-            name: 'Total Orders',
-            count: 1000
-        },
-        {
-            id: '483fe8uher',
-            name: 'Total Cancelled Orders',
-            count: 103
+            count: 21
         }
     ]
     return (

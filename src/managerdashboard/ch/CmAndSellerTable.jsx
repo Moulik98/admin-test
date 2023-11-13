@@ -1,25 +1,81 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import getList from '../getList';
-import { format } from 'date-fns';
 import { getToken } from '../../hook/getToken';
 import EyeButton from './EyeButton';
 import MergeButton from './MergeButton';
 
 
 const CmAndSellerTable = () => {
-    const [list, setList] = useState([]);
-    useEffect(() => {
-        const url = `${process.env.REACT_APP_URL}/v1/category-head/onboarded-seller-cm`;
-        const token = getToken();
-        getList(url, token).then((data) => {
-            setList(data.onboardedSellers)
-        })
+    // const [list, setList] = useState([]);
+    // useEffect(() => {
+    //     const url = `${process.env.REACT_APP_URL}/v1/category-head/onboarded-seller-cm`;
+    //     const token = getToken();
+    //     getList(url, token).then((data) => {
+    //         setList(data.onboardedSellers)
+    //     })
 
-    }, [])
-
-    // const handleClick = useCallback((id) => {
-    //     console.log('hii there');
     // }, [])
+
+
+    const list = [
+        {
+            slNo: 1,
+            empCode: 'EC001',
+            name: 'John Doe',
+            contactNo: '123-456-7890',
+            mailId: 'john.doe@example.com',
+            onboardSellers: 10,
+            pendingSellers: 5,
+            onboardBrands: 8,
+            actions: 'View Details',
+        },
+        {
+            slNo: 2,
+            empCode: 'EC002',
+            name: 'Jane Smith',
+            contactNo: '987-654-3210',
+            mailId: 'jane.smith@example.com',
+            onboardSellers: 15,
+            pendingSellers: 3,
+            onboardBrands: 12,
+            actions: 'View Details',
+        },
+        // Add more objects as needed
+        {
+            slNo: 3,
+            empCode: 'EC003',
+            name: 'Alice Johnson',
+            contactNo: '555-123-4567',
+            mailId: 'alice.johnson@example.com',
+            onboardSellers: 8,
+            pendingSellers: 7,
+            onboardBrands: 6,
+            actions: 'View Details',
+        },
+        {
+            slNo: 4,
+            empCode: 'EC004',
+            name: 'Bob Williams',
+            contactNo: '111-222-3333',
+            mailId: 'bob.williams@example.com',
+            onboardSellers: 12,
+            pendingSellers: 2,
+            onboardBrands: 10,
+            actions: 'View Details',
+        },
+        {
+            slNo: 5,
+            empCode: 'EC005',
+            name: 'Eva Davis',
+            contactNo: '999-888-7777',
+            mailId: 'eva.davis@example.com',
+            onboardSellers: 5,
+            pendingSellers: 10,
+            onboardBrands: 4,
+            actions: 'View Details',
+        },
+    ];
+
     return (
         <div className="relative  overflow-hidden">
             <h4 className='text-left text-xl text-[#383E50] font-medium py-2'>List of CM and Seller</h4>
@@ -27,49 +83,57 @@ const CmAndSellerTable = () => {
                 <thead className="bg-gray-100 text-xs font-medium uppercase text-[#666666]">
                     <tr>
                         <th scope="col" className="px-6 py-2">
-                            Assign / Creation Date
+                            Sl. NO
                         </th>
                         <th scope="col" className="px-6 py-2">
-                            Category Manager
+                            EmpCode
+                        </th>
+
+                        <th scope="col" className="px-6 py-2">
+                            Name (username)
+                        </th>
+
+                        <th scope="col" className="px-6 py-2">
+                            Contact No
                         </th>
                         <th scope="col" className="px-6 py-2">
-                            Cm user Name
+                            Mail Id
                         </th>
                         <th scope="col" className="px-6 py-2">
-                            Seller Name
+                            Onboad Sellers
                         </th>
                         <th scope="col" className="px-6 py-2">
-                            Seller Store Name
+                            Pending Sellers
                         </th>
                         <th scope="col" className="px-6 py-2">
-                            Actions
+                            Onboard Brands
+                        </th>
+                        <th scope="col" className="px-6 py-2">
+                            Actions (View Details)
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     {Array.isArray(list) &&
-                        list?.map((item) => {
-                            const { _id, createdAt, seller_info, cm_info, } = item;
+                        list?.map((item, index) => {
+                            const { slNo, empCode, name, contactNo, mailId, onboardSellers, pendingSellers, onboardBrands, actions } = item;
 
-                            const date = format(new Date(createdAt), 'dd/MM/yyyy');
                             return (
-                                <tr key={_id}>
-                                    <td className="px-6 py-2">{date}</td>
-                                    <td className="px-6 py-2">{cm_info.name}</td>
-                                    <td className="px-6 py-2">{cm_info.userName}</td>
-                                    <td className="px-6 py-2">{seller_info.fullname}</td>
-                                    <td className="px-6 py-2">{seller_info.store_name}</td>
+                                <tr key={index + empCode}>
+                                    <td className="px-6 py-2">{slNo}</td>
+                                    <td className="px-6 py-2">{empCode}</td>
+                                    <td className="px-6 py-2">{name}</td>
+                                    <td className="px-6 py-2">{contactNo}</td>
+                                    <td className="px-6 py-2">{mailId}</td>
+                                    <td className="px-6 py-2">{onboardSellers}</td>
+                                    <td className="px-6 py-2">{pendingSellers}</td>
+                                    <td className="px-6 py-2">{onboardBrands}</td>
                                     <td className="px-6 py-2">
                                         <div className='flex '>
                                             {/* <EyeButton
                                                 onClick={handleClick}
                                             /> */}
-                                            <MergeButton
-                                                cmId={cm_info._id}
-                                                sellerId={seller_info._id}
-                                                cmName={cm_info.name}
-                                                sellerName={seller_info.fullname}
-                                            />
+                                            <EyeButton />
                                         </div>
                                     </td>
                                 </tr>
