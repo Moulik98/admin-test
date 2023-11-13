@@ -1,15 +1,27 @@
 import React, { useState, useEffect } from "react";
 import SideBar from "../Sidebar";
 import { QAList } from "../../constant";
-import TableRow from "./TableRow"; // Import the TableRow component
+import TableRow from "./TableRow";
+import AttachmentModal from "./AttachmentModal"; // Import the TableRow component
 
 const QA = () => {
   const [pendingSellers, setPendingSellers] = useState([]);
+  const [viewAttachment, setViewAttachment] = useState(false);
   const token = localStorage.getItem("access_token");
+
+  const handleClose = (value) => {
+    if (value === "close") {
+      setViewAttachment(false);
+    }
+    if (value === "verify") {
+      setViewAttachment(false);
+    }
+  };
 
   const fetchPendingSellers = async () => {
     const url =
-      process.env.REACT_APP_URL + "/v1/qa-approver/onborded-sellers?isVerify=approved";
+      process.env.REACT_APP_URL +
+      "/v1/qa-approver/onborded-sellers?isVerify=approved";
     const response = await fetch(url, {
       headers: {
         "Content-Type": "application/json",
@@ -19,7 +31,7 @@ const QA = () => {
     const data = await response.json();
     if (response.ok) {
       setPendingSellers(data.pendingSellers);
-      console.log(data.pendingSellers)
+      console.log(data.pendingSellers);
     } else {
       console.error("Failed to fetch pending sellers");
     }
@@ -58,9 +70,60 @@ const QA = () => {
                 </tr>
               </thead>
               <tbody>
-                {pendingSellers.map((seller, index) => (
-                  <TableRow key={index} data={seller} />
-                ))}
+                {Array.isArray(pendingSellers) &&
+                  pendingSellers.map((item) => {
+                    const { seller} = item;
+                    return (
+                      <tr key={seller._id}>
+                        <td className="px-4 py-2">{seller.fullname}</td>
+                        <td className="px-4 py-2">{seller.email}</td>
+                        <td className="px-4 py-2">{seller.store_name}</td>
+                        <td className="px-4 py-2">
+                          <div
+                            className={`flex justify-center items-center rounded-full py-1 px-2 capitalize text-xs text-white ${
+                              seller.isVerify === "approved "
+                                ? "bg-indigo-500"
+                                : "bg-indigo-900"
+                            }`}
+                          >
+                            {seller.isVerify}
+                          </div>
+                        </td>
+                        <td className="px-4 py-2">
+                          <div className="flex gap-1 justify-around">
+                            <div
+                              onClick={() => setViewAttachment(true)}
+                              className="flex items-center cursor-pointer"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                className="w-4 h-4"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
+                                />
+                              </svg>
+                              View Attachment
+                            </div>
+                          </div>
+                        </td>
+                        {viewAttachment && (
+                          <AttachmentModal
+                            visible={viewAttachment}
+                            id={seller._id}
+                            onClose={handleClose}
+                          />
+                        )}
+                        {/* Include AttachmentModal component here if needed */}
+                      </tr>
+                    );
+                  })}
               </tbody>
             </table>
           </div>
