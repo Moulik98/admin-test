@@ -20,13 +20,13 @@ const AssociateSellerWithCm = () => {
         })
     }, [id])
     return (
-        <main className='w-full flex flex-row gap-x-5'>
+        <main className='w-full flex flex-row gap-x-5 '>
             <div className='sidebar bg-[#00388c] h-screen w-fit sticky top-0'>
                 <SideBar
                     menu={categoryMenu}
                 />
             </div>
-            <div className='flex-1 mr-5'>
+            <div className='flex-1 overflow-hidden mr-5'>
 
                 <section className='flex flex-row justify-between py-5 items-center'>
                     <div className='flex space-x-2 items-center'>
@@ -39,7 +39,7 @@ const AssociateSellerWithCm = () => {
 
                     </div> */}
                 </section>
-                <section className='flex flex-col'>
+                <section className='w-full flex flex-col'>
                     <AssociateSellerTable
                         cmId={id}
                         list={list}

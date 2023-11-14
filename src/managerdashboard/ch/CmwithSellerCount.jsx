@@ -30,16 +30,16 @@ const CmwithSellerCount = () => {
                 <thead className="bg-gray-100 text-xs font-medium uppercase text-[#666666]">
                     <tr>
                         <th scope="col" className="px-6 py-2">
-                            Category Manager Name
+                            CM Name
                         </th>
                         <th scope="col" className="px-6 py-2">
-                            No of Seller
+                            No: Of Sellers
                         </th>
                         <th scope="col" className="px-6 py-2">
-                            Status
+                            View Details
                         </th>
                         <th scope="col" className="px-6 py-2">
-                            Assign Seller
+                            Assign
                         </th>
                     </tr>
                 </thead>

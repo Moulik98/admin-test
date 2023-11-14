@@ -14,13 +14,13 @@ const MergeButton = ({ cmId, sellerId, sellerName, cmName }) => {
             </div>
             {
                 isOpen &&
-                <DeAssingModal
+                {/* <DeAssingModal
                     cmId={cmId}
                     sellerId={sellerId}
                     cmName={cmName}
                     sellerName={sellerName}
                     onClose={() => setIsopen(false)}
-                />
+                /> */}
             }
         </>
     )
