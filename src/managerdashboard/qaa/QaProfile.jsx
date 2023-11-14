@@ -8,21 +8,33 @@ import { QAList } from "../../constant";
 const inputFields = [
   {
     id: "YUJDdfdruefndiyijhcihufb",
+    label: "EmpID",
+    isDisabled: true,
+    name: "empId",
+  },
+  {
+    id: "dfdruef450ndiyijhcihufb",
+    label: "Designation",
+    isDisabled: true,
+    name: "designation",
+  },
+  {
+    id: "fdruefndiy8457ijhcihufb",
     label: "Full Name",
     isDisabled: false,
     name: "name",
   },
   {
-    id: "dfdruef450ndiyijhcihufb",
-    label: "Phone Number",
+    id: "fdruefndiy8457ijhcihufb",
+    label: "Email",
     isDisabled: false,
-    name: "phone",
+    name: "email",
   },
   {
     id: "fdruefndiy8457ijhcihufb",
-    label: "Email Address",
+    label: "Phone Number",
     isDisabled: false,
-    name: "email",
+    name: "phone",
   },
   {
     id: "fdruefndiy645ijhcihufb",
@@ -30,8 +42,21 @@ const inputFields = [
     isDisabled: true,
     name: "userName",
   },
+  {
+    id: "fdruefndiy645ijhcihufb",
+    label: "Password",
+    isDisabled: false,
+    name: "password",
+    type: "password",
+  },
+  {
+    id: "fdruefndiy645ijhcihufb",
+    label: "Confirm Password",
+    isDisabled: false,
+    name: "confirmPassword",
+    type: "password",
+  },
 ];
-
 const QaProfile = () => {
   const [cminfo, setCMInfo] = useState();
   const [isMutating, setIsMutating] = useState(false);
@@ -111,17 +136,22 @@ const QaProfile = () => {
       <div className="sidebar bg-[#00388c] h-screen w-fit sticky top-0">
         <SideBar menu={QAList} />
       </div>
-      <form className="grow p-8" onSubmit={(e) => handleSubmit(e)}>
-        <h1 className="text-xl text-left font-bold">QA Approver Profile</h1>
-        <div className="grid grid-cols-2 gap-5 mt-8">
+      <form
+        className="grow p-8 mx-auto max-w-md"
+        onSubmit={(e) => handleSubmit(e)}
+      >
+        <h1 className="text-xl flex text-left font-bold mb-6">
+          QA Approver Profile
+        </h1>
+        <div className="flex flex-col">
           {inputFields.map((field, index) => (
-            <div key={field.id + index} className="flex flex-col">
-              <label className="text-sm text-gray-900 py-2">
+            <div key={field.id + index} className="flex flex-col mb-4">
+              <label className="text-sm flex text-left text-gray-500 py-2">
                 {field.label}
               </label>
               <input
                 type="text"
-                className="w-full py-2 px-4 rounded border border-solid border-gray-200 text-sm"
+                className="w-full py-2 px-3 rounded border border-solid border-gray-300 text-gray-800 text-sm"
                 name={field.name}
                 disabled={field.isDisabled}
                 value={`${formData[field.name]}`}
@@ -130,10 +160,10 @@ const QaProfile = () => {
             </div>
           ))}
         </div>
-        <div className="flex justify-end gap-x-5 mt-5">
+        <div className="flex justify-center mt-5">
           <button
             type="submit"
-            className="py-2 px-6 rounded bg-blue-500  text-white"
+            className="py-2 px-6 rounded bg-blue-500 text-white"
           >
             {isMutating ? <Loader /> : "Update"}
           </button>
