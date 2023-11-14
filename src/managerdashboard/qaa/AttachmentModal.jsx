@@ -268,7 +268,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
             <div key={id} className="flex justify-around">
               <div
                 onClick={() => setGstModal(true)}
-                className="w-20 flex justify-center items-center h-20 bg-gray-200 rounded"
+                className="w-16 flex justify-center items-center h-16 bg-gray-200 rounded"
               >
                 <div className="w-full h-full p-2 cursor-pointer">
                   <img
@@ -287,7 +287,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
               </div>
               <div
                 onClick={() => setPdfModal(true)}
-                className="w-20 flex justify-center items-center h-20 bg-gray-200 rounded"
+                className="w-16 flex justify-center items-center h-16 bg-gray-200 rounded"
               >
                 <div className="w-full h-full p-2">
                   <img
