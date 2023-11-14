@@ -6,7 +6,7 @@ const UnAssignSellerTable = () => {
             "SL_No": 1,
             "OnBoard_Date": "2023-11-14",
             "Seller_Name": "John Doe",
-            "Business_Type": "Retail",
+            "Business_Type": "Startup",
             "PAN": "ABCDE1234F",
             "GSTN": "GST123456789",
             "Contact_No": "123-456-7890"
@@ -15,7 +15,7 @@ const UnAssignSellerTable = () => {
             "SL_No": 2,
             "OnBoard_Date": "2023-11-15",
             "Seller_Name": "Jane Smith",
-            "Business_Type": "Wholesale",
+            "Business_Type": "Startup",
             "PAN": "FGHIJ5678K",
             "GSTN": "GST987654321",
             "Contact_No": "987-654-3210"
@@ -24,7 +24,7 @@ const UnAssignSellerTable = () => {
             "SL_No": 3,
             "OnBoard_Date": "2023-11-16",
             "Seller_Name": "Alice Johnson",
-            "Business_Type": "Online",
+            "Business_Type": "Startup",
             "PAN": "LMNOP9012L",
             "GSTN": "GST246813579",
             "Contact_No": "555-555-5555"
@@ -33,7 +33,7 @@ const UnAssignSellerTable = () => {
             "SL_No": 4,
             "OnBoard_Date": "2023-11-17",
             "Seller_Name": "Bob Williams",
-            "Business_Type": "Manufacturing",
+            "Business_Type": "Startup",
             "PAN": "QRSTU3456M",
             "GSTN": "GST369852147",
             "Contact_No": "999-999-9999"
@@ -42,7 +42,7 @@ const UnAssignSellerTable = () => {
             "SL_No": 5,
             "OnBoard_Date": "2023-11-18",
             "Seller_Name": "Eva Brown",
-            "Business_Type": "Service",
+            "Business_Type": "Business",
             "PAN": "VWXYZ6789N",
             "GSTN": "GST951753864",
             "Contact_No": "777-777-7777"
