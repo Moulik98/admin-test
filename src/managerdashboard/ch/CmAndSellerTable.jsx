@@ -88,33 +88,33 @@ const CmAndSellerTable = () => {
             <table className="w-full text-left text-xs">
                 <thead className="bg-gray-100 text-xs font-medium uppercase text-[#666666]">
                     <tr>
-                        <th scope="col" className="px-6 py-2">
+                        <th scope="col" className="px-4 py-2">
                             Sl. NO
                         </th>
-                        <th scope="col" className="px-6 py-2">
+                        <th scope="col" className="px-4 py-2">
                             EmpCode
                         </th>
 
-                        <th scope="col" className="px-6 py-2">
+                        <th scope="col" className="px-4 py-2">
                             Name (username)
                         </th>
 
-                        <th scope="col" className="px-6 py-2">
+                        <th scope="col" className="px-4 py-2">
                             Contact No
                         </th>
-                        <th scope="col" className="px-6 py-2">
+                        <th scope="col" className="px-4 py-2">
                             Mail Id
                         </th>
-                        <th scope="col" className="px-6 py-2">
+                        <th scope="col" className="px-4 py-2">
                             Onboad Sellers
                         </th>
-                        <th scope="col" className="px-6 py-2">
+                        <th scope="col" className="px-4 py-2">
                             Pending Sellers
                         </th>
-                        <th scope="col" className="px-6 py-2">
+                        <th scope="col" className="px-4 py-2">
                             Onboard Brands
                         </th>
-                        <th scope="col" className="px-6 py-2">
+                        <th scope="col" className="px-4 py-2">
                             Actions (View Details)
                         </th>
                     </tr>
@@ -126,15 +126,15 @@ const CmAndSellerTable = () => {
 
                             return (
                                 <tr key={index + empCode}>
-                                    <td className="px-6 py-2">{slNo}</td>
-                                    <td className="px-6 py-2">{empCode}</td>
-                                    <td className="px-6 py-2">{name}</td>
-                                    <td className="px-6 py-2">{contactNo}</td>
-                                    <td className="px-6 py-2">{mailId}</td>
-                                    <td className="px-6 py-2">{onboardSellers}</td>
-                                    <td className="px-6 py-2">{pendingSellers}</td>
-                                    <td className="px-6 py-2">{onboardBrands}</td>
-                                    <td className="px-6 py-2">
+                                    <td className="px-4 py-2">{slNo}</td>
+                                    <td className="px-4 py-2">{empCode}</td>
+                                    <td className="px-4 py-2">{name}</td>
+                                    <td className="px-4 py-2">{contactNo}</td>
+                                    <td className="px-4 py-2">{mailId}</td>
+                                    <td className="px-4 py-2">{onboardSellers}</td>
+                                    <td className="px-4 py-2">{pendingSellers}</td>
+                                    <td className="px-4 py-2">{onboardBrands}</td>
+                                    <td className="px-4 py-2">
                                         <div className='flex '>
                                             {/* <EyeButton
                                                 onClick={handleClick}
