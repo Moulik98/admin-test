@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import AttachmentModal from "./AttachmentModal";
 
-const TableRow = ({ data}) => {
+const TableRow = ({ data, index }) => {
   const { _id, fullname, email, store_name, isVerify } = data.seller;
-  const {name}=data.cm
+  const { name } = data.cm;
   const [viewAttachment, setViewAttachment] = useState(false);
   const [showDeletePopup, setShowDeletePopup] = useState(false);
 
@@ -23,9 +23,12 @@ const TableRow = ({ data}) => {
 
   return (
     <tr key={_id}>
+      <td className="px-4 py-2">{index+1}</td>
       <td className="px-4 py-2">{fullname}</td>
-      <td className="px-4 py-2">{email}</td>
+      <td className="px-4 py-2">23/05/2022</td>
+      <td className="px-4 py-2">GX00259785</td>
       <td className="px-4 py-2">{store_name}</td>
+      <td className="px-4 py-2">Startup</td>
       <td className="px-4 py-2">{name}</td>
       <td className="px-4 py-2">
         <div
@@ -61,7 +64,11 @@ const TableRow = ({ data}) => {
         </div>
       </td>
       {viewAttachment && (
-        <AttachmentModal visible={viewAttachment} id={_id} onClose={handleClose} />
+        <AttachmentModal
+          visible={viewAttachment}
+          id={_id}
+          onClose={handleClose}
+        />
       )}
     </tr>
   );

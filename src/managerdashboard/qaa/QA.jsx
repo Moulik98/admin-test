@@ -58,19 +58,21 @@ const QA = () => {
             <table className="min-w-full table-auto">
               <thead className="bg-gray-300">
                 <tr>
-                  <th className="px-4 py-2">Full Name</th>
-                  <th className="px-4 py-2">Email</th>
+                <th className="px-4 py-2">Sl.No</th>
+                  <th className="px-4 py-2">Seller Name</th>
+                  <th className="px-4 py-2">Onboard Date</th>
+                  <th className="px-4 py-2">Supplier Code</th>
                   <th className="px-4 py-2">Store Name</th>
+                  <th className="px-4 py-2">Business Type</th>
                   <th className="px-4 py-2">Category Manager</th>
                   <th className="px-4 py-2">Verification Status</th>
                   <th className="px-4 py-2">Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {Array.isArray(pendingSellers) &&
-                  pendingSellers.map((item) => {
-                    const { seller } = item;
-                    return <TableRow data={item} />;
+              {Array.isArray(pendingSellers) &&
+                  pendingSellers.map((item, index) => {
+                    return <TableRow key={item._id} data={item} index={index} />;
                   })}
               </tbody>
             </table>
