@@ -60,23 +60,29 @@ const DeclineReasonModal = ({ isOpen, onClose, onSubmit, id }) => {
     }
   };
 
+  // Calculate the number of columns and rows
+  const columns = 2;
+  const rows = Math.ceil(declineReasons.length / columns);
+
   return (
-    <div className={`modal ${isOpen ? "open" : ""} fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center`}>
-      <div className="modal-content bg-white p-4 w-1/2 h-2/3 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold mb-4">Choose Decline Reasons</h2>
-        {declineReasons.map((reason, index) => (
-          <label key={index} className="flex items-center mb-2">
-            <input
-              type="checkbox"
-              value={reason}
-              checked={selectedReasons.includes(reason)}
-              onChange={() => handleCheckboxChange(reason)}
-              className="mr-2"
-            />
-            {reason}
-          </label>
-        ))}
-        <h2 className="text-2xl font-bold my-4">Enter a Message</h2>
+    <div>
+      <div className="modal-content bg-white p-4 h-2/3 rounded-lg shadow-lg">
+        <h2 className="text-xl font-bold mb-4">Choose Decline Reasons</h2>
+        <div className="grid grid-cols-2 gap-4">
+          {declineReasons.map((reason, index) => (
+            <label key={index} className="flex items-center">
+              <input
+                type="checkbox"
+                value={reason}
+                checked={selectedReasons.includes(reason)}
+                onChange={() => handleCheckboxChange(reason)}
+                className="mr-2"
+              />
+              {reason}
+            </label>
+          ))}
+        </div>
+        <h2 className="text-xl font-bold my-4">Enter a Message</h2>
         <textarea
           onChange={handleTextareaChange}
           rows="4"

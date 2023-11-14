@@ -161,11 +161,37 @@ const AttachmentModal = ({ onClose, visible, id }) => {
           </div>
           {attachMent.map((attachment) => (
             <div key={id} className="flex flex-col p-5">
-              <div className="flex justify-between">
+            <div className="flex justify-between">
+              
                 <div className="w-2/5 flex justify-between">
                   <div className="w-1/2 flex justify-between">
                     <h1 className=" text-base  font-semibold text-[#143250]">
-                      Vendor Name
+                      seller Code
+                    </h1>
+                    :
+                  </div>
+                  <p className="text-sm text-right font-normal mx-1">
+                   GX58582
+                  </p>
+                </div>
+                <div className="w-2/5 flex justify-between">
+                  <div className="w-1/2 flex justify-between">
+                    <h1 className=" text-base  font-semibold text-[#143250]">
+                      Seller Date
+                    </h1>
+                    :
+                  </div>
+                  <p className="text-sm text-right font-normal mx-1">
+                    22/08/23
+                  </p>
+                </div>
+              </div>
+              <div className="flex justify-between">
+              
+                <div className="w-2/5 flex justify-between">
+                  <div className="w-1/2 flex justify-between">
+                    <h1 className=" text-base  font-semibold text-[#143250]">
+                      seller Name
                     </h1>
                     :
                   </div>
@@ -176,12 +202,12 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                 <div className="w-2/5 flex justify-between">
                   <div className="w-1/2 flex justify-between">
                     <h1 className=" text-base  font-semibold text-[#143250]">
-                      Email
+                      CM
                     </h1>
                     :
                   </div>
                   <p className="text-sm text-right font-normal mx-1">
-                    {attachment.email}
+                    Saikat Gupta
                   </p>
                 </div>
               </div>
@@ -214,8 +240,19 @@ const AttachmentModal = ({ onClose, visible, id }) => {
               <div className="flex justify-between">
                 <div className="w-2/5 flex justify-between">
                   <div className="w-1/2 flex justify-between">
+                    <h1 className=" text-base font-semibold text-[#143250]">
+                      Business Type
+                    </h1>
+                    :
+                  </div>
+                  <p className="text-sm text-right font-normal mx-1">
+                    {attachment.sellerType}
+                  </p>
+                </div>
+                <div className="w-2/5 flex justify-between">
+                  <div className="w-1/2 flex justify-between">
                     <h1 className=" text-base uppercase  font-semibold text-[#143250]">
-                      Pan
+                    Pan
                     </h1>
                     :
                   </div>
@@ -231,7 +268,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
             <div key={id} className="flex justify-around">
               <div
                 onClick={() => setGstModal(true)}
-                className="w-2/5 flex justify-center items-center h-40 bg-gray-200 rounded"
+                className="w-20 flex justify-center items-center h-20 bg-gray-200 rounded"
               >
                 <div className="w-full h-full p-2 cursor-pointer">
                   <img
@@ -250,7 +287,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
               </div>
               <div
                 onClick={() => setPdfModal(true)}
-                className="w-2/5 flex justify-center items-center h-40 bg-gray-200 rounded"
+                className="w-20 flex justify-center items-center h-20 bg-gray-200 rounded"
               >
                 <div className="w-full h-full p-2">
                   <img
@@ -313,7 +350,9 @@ const AttachmentModal = ({ onClose, visible, id }) => {
               Decline
             </button>
 
-            {showDeclineReasonModal && (
+            
+          </div>
+          {showDeclineReasonModal && (
               <DeclineReasonModal
                 id={id}
                 onClose={() => setShowDeclineReasonModal(false)}
@@ -321,7 +360,6 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                 onChange={(e) => setDeclineReason(e.target.value)}
               />
             )}
-          </div>
         </div>
       </div>
     );
