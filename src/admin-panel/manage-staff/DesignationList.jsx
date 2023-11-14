@@ -121,8 +121,17 @@ const DesignationList = () => {
           <table class="w-full text-left text-xs">
             <thead class="bg-gray-100 text-xs font-medium uppercase text-[#666666]">
               <tr>
+              <th scope="col" class="px-2 py-3">
+                  Employee ID
+                </th>
                 <th scope="col" class="px-2 py-3">
                   Name
+                </th>
+                <th scope="col" class="px-2 py-3">
+                  Onboard Date
+                </th>
+                <th scope="col" class="px-2 py-3">
+                  Contact No
                 </th>
                 <th scope="col" class="px-2 py-3">
                   Email
