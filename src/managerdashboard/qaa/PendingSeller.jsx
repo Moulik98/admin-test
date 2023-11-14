@@ -4,7 +4,7 @@ import { QAList } from "../../constant";
 import TableRow from "./TableRow";
 import AttachmentModal from "./AttachmentModal"; // Import the TableRow component
 
-const PendingSeller = () => {
+const PendingSellers= () => {
   const [pendingSellers, setPendingSellers] = useState([]);
   const [viewAttachment, setViewAttachment] = useState(false);
   const token = localStorage.getItem("access_token");
@@ -21,7 +21,7 @@ const PendingSeller = () => {
   const fetchPendingSellers = async () => {
     const url =
       process.env.REACT_APP_URL +
-      "/v1/qa-approver/onborded-sellers?isVerify=pending" && "/v1/qa-approver/onborded-sellers?isVerify=decline"
+      "/v1/qa-approver/onborded-sellers?isVerify=pending";
     const response = await fetch(url, {
       headers: {
         "Content-Type": "application/json",
@@ -58,19 +58,21 @@ const PendingSeller = () => {
             <table className="min-w-full table-auto">
               <thead className="bg-gray-300">
                 <tr>
-                  <th className="px-4 py-2">Full Name</th>
-                  <th className="px-4 py-2">Email</th>
+                <th className="px-4 py-2">Sl.No</th>
+                  <th className="px-4 py-2">Seller Name</th>
+                  <th className="px-4 py-2">Onboard Date</th>
+                  <th className="px-4 py-2">Supplier Code</th>
                   <th className="px-4 py-2">Store Name</th>
+                  <th className="px-4 py-2">Business Type</th>
                   <th className="px-4 py-2">Category Manager</th>
                   <th className="px-4 py-2">Verification Status</th>
                   <th className="px-4 py-2">Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {Array.isArray(pendingSellers) &&
-                  pendingSellers.map((item) => {
-                    const { seller } = item;
-                    return <TableRow data={item} />;
+              {Array.isArray(pendingSellers) &&
+                  pendingSellers.map((item, index) => {
+                    return <TableRow key={item._id} data={item} index={index} />;
                   })}
               </tbody>
             </table>
@@ -81,4 +83,4 @@ const PendingSeller = () => {
   );
 };
 
-export default PendingSeller;
+export default PendingSellers;
