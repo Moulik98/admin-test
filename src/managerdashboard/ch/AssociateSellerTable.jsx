@@ -87,45 +87,45 @@ const AssociateSellerTable = ({ list, cmId, cmName }) => {
             <table className="w-full overflow-x-scroll text-left text-xs">
                 <thead className="bg-gray-100 text-xs font-medium uppercase text-[#666666]">
                     <tr>
-                        <th scope="col" className="px-6 py-2">
+                        <th scope="col" className="px-4 py-2">
                             Sl. No
                         </th>
 
-                        <th scope="col" className="px-6 py-2">
+                        <th scope="col" className="px-4 py-2">
                             Seller Name
                         </th>
-                        <th scope="col" className="px-6 py-2">
+                        <th scope="col" className="px-4 py-2">
                             Onboard Date
                         </th>
 
-                        <th scope="col" className="px-6 py-2">
+                        <th scope="col" className="px-4 py-2">
                             Live Brands
                         </th>
-                        <th scope="col" className="px-6 py-2">
+                        <th scope="col" className="px-4 py-2">
                             Pending Brands
                         </th>
-                        <th scope="col" className="px-6 py-2">
+                        <th scope="col" className="px-4 py-2">
                             OnBoarded Products
                         </th>
-                        <th scope="col" className="px-6 py-2">
+                        <th scope="col" className="px-4 py-2">
                             Live Products
                         </th>
-                        <th scope="col" className="px-6 py-2">
+                        <th scope="col" className="px-4 py-2">
                             Draft Products
                         </th>
-                        <th scope="col" className="px-6 py-2">
+                        <th scope="col" className="px-4 py-2">
                             Approval
                         </th>
-                        <th scope="col" className="px-6 py-2">
+                        <th scope="col" className="px-4 py-2">
                             Pending Products
                         </th>
-                        <th scope="col" className="px-6 py-2">
+                        <th scope="col" className="px-4 py-2">
                             Live A+ Content
                         </th>
-                        <th scope="col" className="px-6 py-2">
+                        <th scope="col" className="px-4 py-2">
                             Pending A+Content
                         </th>
-                        <th scope="col" className="px-6 py-2">
+                        <th scope="col" className="px-4 py-2">
                             Actions
                         </th>
                     </tr>
@@ -151,22 +151,22 @@ const AssociateSellerTable = ({ list, cmId, cmName }) => {
 
                             return (
                                 <tr key={SlNo}>
-                                    <td className="px-6 py-2">{index}</td>
-                                    <td className="px-6 py-2">{SellerName}</td>
-                                    <td className="px-6 py-2">{OnboardDate}</td>
-                                    <td className="px-6 py-2">{LiveBrands}</td>
+                                    <td className="px-4 py-2">{index}</td>
+                                    <td className="px-4 py-2">{SellerName}</td>
+                                    <td className="px-4 py-2">{OnboardDate}</td>
+                                    <td className="px-4 py-2">{LiveBrands}</td>
 
 
-                                    <td className="px-6 py-2">{PendingBrands}</td>
-                                    <td className="px-6 py-2">{OnBoardedProducts}</td>
-                                    <td className="px-6 py-2">{LiveProducts}</td>
-                                    <td className="px-6 py-2">{DraftProducts}</td>
+                                    <td className="px-4 py-2">{PendingBrands}</td>
+                                    <td className="px-4 py-2">{OnBoardedProducts}</td>
+                                    <td className="px-4 py-2">{LiveProducts}</td>
+                                    <td className="px-4 py-2">{DraftProducts}</td>
 
-                                    <td className="px-6 py-2">{Approval}</td>
-                                    <td className="px-6 py-2">{LiveAContent}</td>
-                                    <td className="px-6 py-2">{PendingAContent}</td>
-                                    <td className="px-6 py-2">{Actions}</td>
-                                    <td className="px-6 py-2">
+                                    <td className="px-4 py-2">{Approval}</td>
+                                    <td className="px-4 py-2">{LiveAContent}</td>
+                                    <td className="px-4 py-2">{PendingAContent}</td>
+                                    <td className="px-4 py-2">{Actions}</td>
+                                    <td className="px-4 py-2">
                                         <div className='flex gap-x-2 px-4'>
                                             {/* <EyeButton /> */}
                                             <MergeButton
