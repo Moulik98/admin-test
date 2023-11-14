@@ -57,7 +57,7 @@ const inputFields = [
     type: "password",
   },
 ];
-const Profile = () => {
+const ChProfile = () => {
   const [cminfo, setCMInfo] = useState();
   const [isMutating, setIsMutating] = useState(false);
   const token = localStorage.getItem("access_token");
@@ -141,7 +141,7 @@ const Profile = () => {
         onSubmit={(e) => handleSubmit(e)}
       >
         <h1 className="text-xl flex text-left font-bold mb-6">
-          Category Head Profile
+          Category Manager Profile
         </h1>
         <div className="flex flex-col">
           {inputFields.map((field, index) => (
@@ -173,4 +173,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ChProfile;

@@ -54,6 +54,7 @@ import Profile from "../managerdashboard/cm/Profile";
 import QAADashboard from "../managerdashboard/qaa/QA";
 import QaProfile from "../managerdashboard/qaa/QaProfile";
 import PendingSeller from "../managerdashboard/qaa/PendingSeller";
+import ChProfile from "../managerdashboard/ch/Chprofile";
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
   return children(location);
@@ -229,6 +230,10 @@ const MainRoutes = () => {
             <Route
               path="/category-head-dashboard/associate-seller/:id"
               element={<AssociateSellerWithCm />}
+            />
+              <Route
+              path="/category-head-profile"
+              element={<ChProfile/>}
             />
 
             <Route
