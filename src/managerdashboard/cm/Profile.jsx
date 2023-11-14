@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import SideBar from "../Sidebar";
 import Loader from "../Loader";
 import toast from "react-hot-toast";
-import { QAList } from "../../constant";
+import { categoryManagerMenu } from "../../constant";
 
 const inputFields = [
   {
@@ -134,14 +134,14 @@ const Profile = () => {
   return (
     <main className="max-w-full flex">
       <div className="sidebar bg-[#00388c] h-screen w-fit sticky top-0">
-        <SideBar menu={QAList} />
+        <SideBar menu={categoryManagerMenu} />
       </div>
       <form
         className="grow p-8 mx-auto max-w-md"
         onSubmit={(e) => handleSubmit(e)}
       >
         <h1 className="text-xl flex text-left font-bold mb-6">
-          Category Head Profile
+          Category Manager Profile
         </h1>
         <div className="flex flex-col">
           {inputFields.map((field, index) => (
