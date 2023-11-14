@@ -3,6 +3,7 @@ import CmwithSellerCount from './CmwithSellerCount'
 import { categoryMenu } from '../../constant'
 import SideBar from '../Sidebar'
 import NavigateBack from '../NavigateBack'
+import UnAssignSellerTable from './UnAssignSellerTable'
 const CategoryHeadAssignSeller = () => {
     return (
         <main className='w-full flex flex-row gap-x-5'>
@@ -26,6 +27,9 @@ const CategoryHeadAssignSeller = () => {
                 </section>
                 <section className='flex flex-col'>
                     <CmwithSellerCount />
+                </section>
+                <section className='flex flex-col'>
+                    <UnAssignSellerTable />
                 </section>
             </div>
         </main>

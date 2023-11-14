@@ -25,51 +25,53 @@ const CmwithSellerCount = () => {
         navigate(url);
     }, [])
     return (
-        <div className='w-full'>
-            <table className="w-full text-left text-xs">
-                <thead className="bg-gray-100 text-xs font-medium uppercase text-[#666666]">
-                    <tr>
-                        <th scope="col" className="px-6 py-2">
-                            CM Name
-                        </th>
-                        <th scope="col" className="px-6 py-2">
-                            No: Of Sellers
-                        </th>
-                        <th scope="col" className="px-6 py-2">
-                            View Details
-                        </th>
-                        <th scope="col" className="px-6 py-2">
-                            Assign
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {Array.isArray(list) &&
-                        list?.map((item) => {
-                            const { _id, name, userName, onboardCount } = item;
+        <div className='w-full flex flex-col'>
+            <div className='w-full h-80'>
+                <table className="w-full  overflow-y-scroll text-left text-xs">
+                    <thead className="bg-gray-100 text-xs font-medium uppercase text-[#666666]">
+                        <tr>
+                            <th scope="col" className="px-6 py-2">
+                                CM Name
+                            </th>
+                            <th scope="col" className="px-6 py-2">
+                                No: Of Sellers
+                            </th>
+                            <th scope="col" className="px-6 py-2">
+                                View Details
+                            </th>
+                            <th scope="col" className="px-6 py-2">
+                                Assign
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {Array.isArray(list) &&
+                            list?.map((item) => {
+                                const { _id, name, userName, onboardCount } = item;
 
-                            return (
-                                <tr key={_id}>
-                                    <td className="px-6 py-2">{name} ({userName})</td>
-                                    <td className="px-6 py-2">{onboardCount}</td>
-                                    <td className="px-6 py-2">
-                                        <EyeButton
-                                            id={_id}
-                                            onClick={handleClick}
-                                        />
-                                    </td>
-                                    <td className="px-6 py-2">
-                                        <AssignButton
-                                            cmId={_id}
-                                            count={onboardCount}
-                                            onClick={handleRefresh}
-                                        />
-                                    </td>
-                                </tr>
-                            )
-                        })}
-                </tbody>
-            </table>
+                                return (
+                                    <tr key={_id}>
+                                        <td className="px-6 py-2">{name} ({userName})</td>
+                                        <td className="px-6 py-2">{onboardCount}</td>
+                                        <td className="px-6 py-2">
+                                            <EyeButton
+                                                id={_id}
+                                                onClick={handleClick}
+                                            />
+                                        </td>
+                                        <td className="px-6 py-2">
+                                            <AssignButton
+                                                cmId={_id}
+                                                count={onboardCount}
+                                                onClick={handleRefresh}
+                                            />
+                                        </td>
+                                    </tr>
+                                )
+                            })}
+                    </tbody>
+                </table>
+            </div>
         </div>
     )
 }
