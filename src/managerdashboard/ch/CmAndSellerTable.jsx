@@ -3,9 +3,10 @@ import getList from '../getList';
 import { getToken } from '../../hook/getToken';
 import EyeButton from './EyeButton';
 import MergeButton from './MergeButton';
-
+import { useNavigate } from "react-router-dom";
 
 const CmAndSellerTable = () => {
+    const navigate = useNavigate()
     // const [list, setList] = useState([]);
     // useEffect(() => {
     //     const url = `${process.env.REACT_APP_URL}/v1/category-head/onboarded-seller-cm`;
@@ -76,6 +77,11 @@ const CmAndSellerTable = () => {
         },
     ];
 
+    const handleClick = useCallback((id) => {
+        // const url = `/category-head-dashboard/associate-seller/${id}`
+        // navigate(url);
+        console.log('id', id);
+    }, [])
     return (
         <div className="relative  overflow-hidden">
             <h4 className='text-left text-xl text-[#383E50] font-medium py-2'>List of CM and Seller</h4>
@@ -133,7 +139,10 @@ const CmAndSellerTable = () => {
                                             {/* <EyeButton
                                                 onClick={handleClick}
                                             /> */}
-                                            <EyeButton />
+                                            <EyeButton
+                                                id={empCode}
+                                                onClick={handleClick}
+                                            />
                                         </div>
                                     </td>
                                 </tr>
