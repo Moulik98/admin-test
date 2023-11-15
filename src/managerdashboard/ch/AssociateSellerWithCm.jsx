@@ -51,4 +51,4 @@ const AssociateSellerWithCm = () => {
     )
 }
 
-export default AssociateSellerWithCm
+export default AssociateSellerWithCm;
