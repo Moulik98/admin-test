@@ -175,7 +175,7 @@ const QaProfile = () => {
         />
       </div>
       <form
-        className="  grow p-8 "
+        className="grow p-8"
         onSubmit={(e) => handleSubmit(e)}
       >
         <h1 className="text-xl flex text-left font-bold mb-6">
