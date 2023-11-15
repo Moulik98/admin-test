@@ -165,7 +165,7 @@ const AssociateSellerTable = ({ list, cmId, cmName }) => {
                                     <td className="px-4 py-2">{Approval}</td>
                                     <td className="px-4 py-2">{LiveAContent}</td>
                                     <td className="px-4 py-2">{PendingAContent}</td>
-                                    <td className="px-4 py-2">{Actions}</td>
+                                    <td className="px-4 py-2">{PendingAContent}</td>
                                     <td className="px-4 py-2">
                                         <div className='flex gap-x-2 px-4'>
                                             {/* <EyeButton /> */}
