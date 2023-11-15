@@ -31,7 +31,7 @@ const AssociateSellerWithCm = () => {
                 <section className='flex flex-row justify-between py-5 items-center'>
                     <div className='flex space-x-2 items-center'>
                         <NavigateBack />
-                        <h1 className=' text-2xl text-[#383E50] font-semibold leading-10 text-left'>CM {cmName} associated with following seller</h1>
+                        <h1 className=' text-2xl text-[#383E50] font-semibold leading-10 text-left'>CM {cmName} associated with following sellers</h1>
 
                     </div>
                     {/* <div className='flex flex-row gap-5'>
