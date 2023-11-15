@@ -183,7 +183,7 @@ const QaProfile = () => {
         </h1>
         <div className="grid grid-cols-2 gap-8">
         {inputFields.map((field, index) => (
-              <div key={field.id + index} className="flex w-full flex-col mb-4">
+              <div key={field.id + index} className="flex w-full flex-col ">
                 <label className="text-sm flex text-left text-gray-500 py-2">
                   {field.label}
                 </label>
