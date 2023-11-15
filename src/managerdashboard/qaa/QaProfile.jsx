@@ -152,7 +152,7 @@ const QaProfile = () => {
       <SideBar menu={QAList} />
     </div>
     <div className="flex items-top justify-center">
-      <div className="ml-48 mt-28" onClick={handleImageClick}>
+      <div className="ml-40 mt-28" onClick={handleImageClick}>
         <div className="rounded-full w-32 h-32 object-cover border border-dashed border-gray-300 cursor-pointer">
           {image ? (
             <img
