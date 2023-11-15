@@ -166,7 +166,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                 <div className="w-2/5 flex justify-between">
                   <div className="w-1/2 flex justify-between">
                     <h1 className=" text-base  font-semibold text-[#143250]">
-                      seller Code
+                      Seller Code
                     </h1>
                     :
                   </div>
@@ -191,7 +191,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                 <div className="w-2/5 flex justify-between">
                   <div className="w-1/2 flex justify-between">
                     <h1 className=" text-base  font-semibold text-[#143250]">
-                      seller Name
+                      Seller Name
                     </h1>
                     :
                   </div>
@@ -258,6 +258,19 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                   </div>
                   <p className="text-sm text-right font-normal mx-1">
                     {attachment.pan_number}
+                  </p>
+                </div>
+              </div>
+              <div className="flex justify-between">
+                <div className="w-2/5 flex justify-between">
+                  <div className="w-1/2 flex justify-between">
+                    <h1 className=" text-base font-semibold text-[#143250]">
+                      Bank Details
+                    </h1>
+                    :
+                  </div>
+                  <p className="text-sm text-right font-normal mx-1">
+                   2036988956212
                   </p>
                 </div>
               </div>
