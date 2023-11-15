@@ -128,7 +128,7 @@ const CmAndSellerTable = () => {
                                 <tr key={_id}>
                                     <td className="px-4 py-2">{index}</td>
                                     <td className="px-4 py-2">{ }</td>
-                                    <td className="px-4 py-2">{name}</td>
+                                    <td className="px-4 py-2">{name} ({userName})</td>
                                     <td className="px-4 py-2">{phone}</td>
                                     <td className="px-4 py-2">{email}</td>
                                     <td className="px-4 py-2">{onboardCount}</td>
