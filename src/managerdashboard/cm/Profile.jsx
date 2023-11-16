@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import SideBar from "../Sidebar";
 import Loader from "../Loader";
 import toast from "react-hot-toast";
-import { categoryManagerMenu } from "../../constant";
+import {categoryManagerMenu } from "../../constant";
 
 const inputFields = [
   {
@@ -57,17 +56,19 @@ const inputFields = [
     type: "password",
   },
 ];
-const Profile = () => {
+
+const QaProfile = () => {
   const [cminfo, setCMInfo] = useState();
   const [isMutating, setIsMutating] = useState(false);
-  const token = localStorage.getItem("access_token");
-
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
     email: "",
     userName: "",
   });
+  const [image, setImage] = useState(null);
+
+  const token = localStorage.getItem("access_token");
 
   const CategotyManager = async () => {
     const url = process.env.REACT_APP_URL + "/v1/category-manager/me";
@@ -90,23 +91,36 @@ const Profile = () => {
       console.error("Failed to fetch Data");
     }
   };
+
   useEffect(() => {
     CategotyManager();
   }, []);
 
-  console.log("Category manger Info", cminfo);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((preValue) => {
-      return { ...preValue, [name]: value };
+    setFormData((prevValue) => {
+      return { ...prevValue, [name]: value };
     });
+  };
+
+  const handleImageChange = (e) => {
+    const selectedImage = e.target.files[0];
+    setImage(selectedImage);
+  };
+
+  const handleImageClick = () => {
+    document.getElementById("imageInput").click();
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const updatedFormData = image
+      ? { ...formData, image }
+      : { ...formData };
+
     const url =
       process.env.REACT_APP_URL + "/v1/category-manager/editStaffProfile";
+
     try {
       const response = await fetch(url, {
         method: "POST",
@@ -114,8 +128,9 @@ const Profile = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(updatedFormData),
       });
+
       const data = await response.json();
       if (response.ok) {
         setIsMutating(false);
@@ -124,7 +139,7 @@ const Profile = () => {
         setIsMutating(false);
       }
 
-      console.log("stote details response", data);
+      console.log("store details response", data);
     } catch (error) {
       console.error("Error submitting form:", error);
       setIsMutating(false);
@@ -133,32 +148,70 @@ const Profile = () => {
 
   return (
     <main className="max-w-full flex">
-      <div className="sidebar bg-[#00388c] h-screen w-fit sticky top-0">
-        <SideBar menu={categoryManagerMenu} />
+    <div className="sidebar bg-[#00388c] h-screen w-fit sticky top-0">
+      <SideBar menu={categoryManagerMenu} />
+    </div>
+    <div className="flex items-top justify-center">
+      <div className="ml-40 mt-28" onClick={handleImageClick}>
+        <div className="rounded-full w-32 h-32 object-cover border border-dashed border-gray-300 cursor-pointer">
+          {image ? (
+            <img
+              src={URL.createObjectURL(image)}
+              alt="Selected Profile Image"
+              className="rounded-full w-32 h-32 object-cover"
+            />
+          ) : (
+            <span className="text-gray-500 flex items-center justify-center h-full">
+              {image === null ? "Click to add image" : "Select Profile Image"}
+            </span>
+          )}
+        </div>
+        <input
+          type="file"
+          id="imageInput"
+          accept="image/*"
+          onChange={handleImageChange}
+          className="hidden"
+        />
       </div>
       <form
-        className="grow p-8 mx-auto max-w-md"
+        className="grow p-8"
         onSubmit={(e) => handleSubmit(e)}
       >
         <h1 className="text-xl flex text-left font-bold mb-6">
-          Category Head Profile
+         Category Manager Profile
         </h1>
-        <div className="flex flex-col">
-          {inputFields.map((field, index) => (
-            <div key={field.id + index} className="flex flex-col mb-4">
-              <label className="text-sm flex text-left text-gray-500 py-2">
-                {field.label}
-              </label>
-              <input
-                type="text"
-                className="w-full py-2 px-3 rounded border border-solid border-gray-300 text-gray-800 text-sm"
-                name={field.name}
-                disabled={field.isDisabled}
-                value={`${formData[field.name]}`}
-                onChange={(e) => handleChange(e)}
-              />
-            </div>
-          ))}
+        <div className="grid grid-cols-2 gap-8">
+        {inputFields.map((field, index) => (
+              <div key={field.id + index} className="flex w-full flex-col ">
+                <label className="text-sm flex text-left text-gray-500 py-2">
+                  {field.label}
+                </label>
+                <input
+                  type="text"
+                  className="w-full py-2 px-3 rounded border border-solid border-gray-300 text-gray-800 text-sm"
+                  name={field.name}
+                  disabled={field.isDisabled}
+                  value={`${formData[field.name]}`}
+                  onChange={(e) => handleChange(e)}
+                />
+              </div>
+            ))}
+          {/* <div className="flex flex-col mb-4">
+            <label
+              className="text-sm flex text-left text-gray-500 py-2 cursor-pointer"
+              onClick={handleImageClick}
+            >
+              Profile Image
+            </label>
+            <input
+              type="file"
+              id="imageInput"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="hidden"
+            />
+          </div> */}
         </div>
         <div className="flex justify-center mt-5">
           <button
@@ -169,8 +222,9 @@ const Profile = () => {
           </button>
         </div>
       </form>
-    </main>
+    </div>
+  </main>
   );
 };
 
-export default Profile;
+export default QaProfile;

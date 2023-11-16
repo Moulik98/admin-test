@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { format } from 'date-fns';
 import MergeButton from './MergeButton';
 import EyeButton from './EyeButton';
+import { useNavigate } from "react-router-dom";
 
 const dummyData = [
     {
@@ -82,6 +83,12 @@ const dummyData = [
 ];
 
 const AssociateSellerTable = ({ list, cmId, cmName }) => {
+    const navigate = useNavigate();
+    const handleClick = useCallback((id) => {
+        const url = `/category-head-dashboard/associate-seller/${id}`
+        console.log('url', url);
+        // navigate(url);
+    }, [])
     return (
         <div className="relative w-full overflow-x-scroll">
             <table className="w-full overflow-x-scroll text-left text-xs">
@@ -165,10 +172,13 @@ const AssociateSellerTable = ({ list, cmId, cmName }) => {
                                     <td className="px-4 py-2">{Approval}</td>
                                     <td className="px-4 py-2">{LiveAContent}</td>
                                     <td className="px-4 py-2">{PendingAContent}</td>
-                                    <td className="px-4 py-2">{Actions}</td>
+                                    <td className="px-4 py-2">{PendingAContent}</td>
                                     <td className="px-4 py-2">
                                         <div className='flex gap-x-2 px-4'>
-                                            {/* <EyeButton /> */}
+                                            <EyeButton
+                                                id={'id'}
+                                                onClick={handleClick}
+                                            />
                                             <MergeButton
                                             // cmId={cmId}
                                             // sellerId={_id}
