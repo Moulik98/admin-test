@@ -153,12 +153,12 @@ const QaProfile = () => {
     </div>
     <div className="flex items-top justify-center">
       <div className="ml-40 mt-28" onClick={handleImageClick}>
-        <div className="rounded-full w-32 h-32 object-cover border border-dashed border-gray-300 cursor-pointer">
+        <div className="rounded-full w-48 h-48 object-cover border border-dashed border-gray-300 cursor-pointer">
           {image ? (
             <img
               src={URL.createObjectURL(image)}
               alt="Selected Profile Image"
-              className="rounded-full w-32 h-32 object-cover"
+              className="rounded-full w-full h-full object-cover"
             />
           ) : (
             <span className="text-gray-500 flex items-center justify-center h-full">
@@ -175,15 +175,15 @@ const QaProfile = () => {
         />
       </div>
       <form
-        className="grow p-8"
+        className="grow p-12"
         onSubmit={(e) => handleSubmit(e)}
       >
         <h1 className="text-xl flex text-left font-bold mb-6">
           QA Approver Profile
         </h1>
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid grid-cols-2 gap-4">
         {inputFields.map((field, index) => (
-              <div key={field.id + index} className="flex w-full flex-col ">
+              <div key={field.id + index} className="flex w-full flex-col">
                 <label className="text-sm flex text-left text-gray-500 py-2">
                   {field.label}
                 </label>
