@@ -3,6 +3,7 @@ import SideBar from "../Sidebar";
 import Loader from "../Loader";
 import toast from "react-hot-toast";
 import { QAList } from "../../constant";
+import { Link } from "react-router-dom";
 
 const inputFields = [
   {
@@ -40,21 +41,7 @@ const inputFields = [
     label: "UserName",
     isDisabled: true,
     name: "userName",
-  },
-  {
-    id: "fdruefndiy645ijhcihufb",
-    label: "Password",
-    isDisabled: false,
-    name: "password",
-    type: "password",
-  },
-  {
-    id: "fdruefndiy645ijhcihufb",
-    label: "Confirm Password",
-    isDisabled: false,
-    name: "confirmPassword",
-    type: "password",
-  },
+  }
 ];
 
 const QaProfile = () => {
@@ -114,9 +101,7 @@ const QaProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const updatedFormData = image
-      ? { ...formData, image }
-      : { ...formData };
+    const updatedFormData = image ? { ...formData, image } : { ...formData };
 
     const url =
       process.env.REACT_APP_URL + "/v1/category-manager/editStaffProfile";
@@ -148,41 +133,38 @@ const QaProfile = () => {
 
   return (
     <main className="max-w-full flex">
-    <div className="sidebar bg-[#00388c] h-screen w-fit sticky top-0">
-      <SideBar menu={QAList} />
-    </div>
-    <div className="flex items-top justify-center">
-      <div className="ml-40 mt-28" onClick={handleImageClick}>
-        <div className="rounded-full w-48 h-48 object-cover border border-dashed border-gray-300 cursor-pointer">
-          {image ? (
-            <img
-              src={URL.createObjectURL(image)}
-              alt="Selected Profile Image"
-              className="rounded-full w-full h-full object-cover"
-            />
-          ) : (
-            <span className="text-gray-500 flex items-center justify-center h-full">
-              {image === null ? "Click to add image" : "Select Profile Image"}
-            </span>
-          )}
-        </div>
-        <input
-          type="file"
-          id="imageInput"
-          accept="image/*"
-          onChange={handleImageChange}
-          className="hidden"
-        />
+      <div className="sidebar bg-[#00388c] h-screen w-fit sticky top-0">
+        <SideBar menu={QAList} />
       </div>
-      <form
-        className="grow p-12"
-        onSubmit={(e) => handleSubmit(e)}
-      >
-        <h1 className="text-xl flex text-left font-bold mb-6">
-          QA Approver Profile
-        </h1>
-        <div className="grid grid-cols-2 gap-4">
-        {inputFields.map((field, index) => (
+      <div className="flex items-top justify-center">
+        <div className="ml-40 mt-28" onClick={handleImageClick}>
+          <div className="rounded-full w-48 h-48 object-cover border border-dashed border-gray-300 cursor-pointer">
+            {image ? (
+              <img
+                src={URL.createObjectURL(image)}
+                alt="Selected Profile Image"
+                className="rounded-full w-full h-full object-cover"
+              />
+            ) : (
+              <span className="text-gray-500 flex items-center justify-center h-full">
+                {image === null ? "Click to add image" : "Select Profile Image"}
+              </span>
+            )}
+          </div>
+          <input
+            type="file"
+            id="imageInput"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="hidden"
+          />
+        </div>
+        <form className="grow p-12" onSubmit={(e) => handleSubmit(e)}>
+          <h1 className="text-xl flex text-left font-bold mb-6">
+            QA Approver Profile
+          </h1>
+          <div className="grid grid-cols-2 gap-4">
+            {inputFields.map((field, index) => (
               <div key={field.id + index} className="flex w-full flex-col">
                 <label className="text-sm flex text-left text-gray-500 py-2">
                   {field.label}
@@ -197,7 +179,10 @@ const QaProfile = () => {
                 />
               </div>
             ))}
-          {/* <div className="flex flex-col mb-4">
+            <Link className="flex justify-start text-xs text-blue-400" to="/change-password">
+              <button>Change Password</button>
+            </Link>
+            {/* <div className="flex flex-col mb-4">
             <label
               className="text-sm flex text-left text-gray-500 py-2 cursor-pointer"
               onClick={handleImageClick}
@@ -212,18 +197,20 @@ const QaProfile = () => {
               className="hidden"
             />
           </div> */}
-        </div>
-        <div className="flex justify-center mt-5">
-          <button
-            type="submit"
-            className="py-2 px-6 rounded bg-blue-500 text-white"
-          >
-            {isMutating ? <Loader /> : "Update"}
-          </button>
-        </div>
-      </form>
-    </div>
-  </main>
+          </div>
+          <div className="flex justify-center mt-5">
+            <button
+              type="submit"
+              className="py-2 px-6 rounded bg-blue-500 text-white"
+            >
+              {isMutating ? <Loader /> : "Update"}
+            </button>
+
+            
+          </div>
+        </form>
+      </div>
+    </main>
   );
 };
 

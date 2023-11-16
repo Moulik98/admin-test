@@ -55,6 +55,7 @@ import QAADashboard from "../managerdashboard/qaa/QA";
 import QaProfile from "../managerdashboard/qaa/QaProfile";
 import PendingSeller from "../managerdashboard/qaa/PendingSeller";
 import ChProfile from "../managerdashboard/ch/Chprofile";
+import Qapassword from "../managerdashboard/qaa/Qapassword";
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
   return children(location);
@@ -257,6 +258,10 @@ const MainRoutes = () => {
             <Route
               path="/pending-seller"
               element={<PendingSeller/>}
+            />
+            <Route
+              path="/change-password"
+              element={<Qapassword/>}
             />
           </Routes>
         )}

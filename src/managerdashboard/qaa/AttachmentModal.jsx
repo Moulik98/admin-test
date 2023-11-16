@@ -7,7 +7,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
   const [gstModal, setGstModal] = useState(false);
   const [attachMent, SetAttachMent] = useState({
     fullname: "",
-    email: "",
+    seller_id: "",
     store_name: "",
     gst_number: "",
     pan_number: "",
@@ -171,7 +171,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                     :
                   </div>
                   <p className="text-sm text-right font-normal mx-1">
-                   GX58582
+                  {attachment.seller_id}
                   </p>
                 </div>
                 <div className="w-2/5 flex justify-between">
