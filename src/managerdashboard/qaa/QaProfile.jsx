@@ -147,7 +147,7 @@ const QaProfile = () => {
               />
             ) : (
               <span className="text-gray-500 flex items-center justify-center h-full">
-                {image === null ? "Click to add image" : "Select Profile Image"}
+                {image === null ? "No Image" : "Select Profile Image"}
               </span>
             )}
           </div>
