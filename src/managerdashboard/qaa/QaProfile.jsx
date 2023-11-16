@@ -147,7 +147,7 @@ const QaProfile = () => {
               />
             ) : (
               <span className="text-gray-500 flex items-center justify-center h-full">
-                {image === null ? "No Image" : "Select Profile Image"}
+                {image === null ? <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" id="profile"><circle cx="12" cy="12" r="11" fill="#000" opacity=".4"></circle><path fill="#000" fill-rule="evenodd" d="M12 11C13.6569 11 15 9.65685 15 8C15 6.34315 13.6569 5 12 5C10.3431 5 9 6.34315 9 8C9 9.65685 10.3431 11 12 11ZM10 13C8.34315 13 7 14.3431 7 16C7 17.6569 8.34315 19 10 19H14C15.6569 19 17 17.6569 17 16C17 14.3431 15.6569 13 14 13H10Z" clip-rule="evenodd"></path></svg>: "Select Profile Image"}
               </span>
             )}
           </div>
@@ -160,9 +160,7 @@ const QaProfile = () => {
           />
         </div>
         <form className="grow p-12" onSubmit={(e) => handleSubmit(e)}>
-          <h1 className="text-xl flex text-left font-bold mb-6">
-            QA Approver Profile
-          </h1>
+          
           <div className="grid grid-cols-2 gap-4">
             {inputFields.map((field, index) => (
               <div key={field.id + index} className="flex w-full flex-col">
