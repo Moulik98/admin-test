@@ -82,7 +82,7 @@ export const CategoryManagerLogin = () => {
       <div className="bg-gradient-to-b from-[#0573e3] to-[#031d7a]  w-7/12  h-screen flex justify-center items-center">
         <div className="">
           <h1 className="text-white  text-5xl font-semibold ">
-            21 Genx Admin Portal
+            21 Genx Subadmin/Staff Login Portal
           </h1>
           <p className="text-white py-4 text-xl">
             The most robust and functional admin panel
