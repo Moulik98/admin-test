@@ -61,7 +61,7 @@ const QA = () => {
                 <th className="px-4 py-2">Sl.No</th>
                   <th className="px-4 py-2">Seller Name</th>
                   <th className="px-4 py-2">Onboard Date</th>
-                  <th className="px-4 py-2">Supplier Code</th>
+                  <th className="px-4 py-2">Seller Code</th>
                   <th className="px-4 py-2">Store Name</th>
                   <th className="px-4 py-2">Business Type</th>
                   <th className="px-4 py-2">Category Manager</th>
