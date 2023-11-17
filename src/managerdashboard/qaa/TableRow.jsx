@@ -7,6 +7,8 @@ const TableRow = ({ data, index }) => {
   const [viewAttachment, setViewAttachment] = useState(false);
   const [showDeletePopup, setShowDeletePopup] = useState(false);
 
+  console.log(viewAttachment)
+
   const handleClose = (value) => {
     if (value === "close") {
       setViewAttachment(false);
