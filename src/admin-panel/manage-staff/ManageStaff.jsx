@@ -11,6 +11,7 @@ const [formData, setFormData] = useState({
   email: "",
   phone: "",
   userName: "",
+  emp_id:"",
   password: "",
   confirmPassword: "",
   roles: "",
@@ -96,6 +97,7 @@ const handleSubmit = async (e) => {
       email: "",
       phone : "",
       userName: "",
+      emp_id:"",
       password: "",
       confirmPassword:"",
       roles: "",
@@ -168,6 +170,20 @@ const handleSubmit = async (e) => {
                 type="text"
                 name="userName"
                 value={formData.userName}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            
+            <div className="w-3/5 flex flex-row gap-4">
+              <label className="w-2/5 text-right">
+                <span>Employee ID:</span>
+              </label>
+              <input
+                className="w-3/5  border rounded-md  px-4 py-1"
+                type="text"
+                name="emp_id"
+                value={formData.emp_id}
                 onChange={handleInputChange}
                 required
               />
