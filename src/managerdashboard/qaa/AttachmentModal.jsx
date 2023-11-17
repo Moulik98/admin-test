@@ -16,6 +16,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
   });
   const [declineReason, setDeclineReason] = useState("");
   const [showDeclineReasonModal, setShowDeclineReasonModal] = useState(false);
+  
 
   const token = localStorage.getItem("access_token");
 
@@ -33,7 +34,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
       if (response.ok) {
         const data = await response.json();
         SetAttachMent(data); // Assuming you are getting an array with a single item
-        console.log(data);
+        console.log(data.sellerInfo);
       } else {
         throw new Error("Failed to fetch data");
       }
@@ -130,7 +131,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
     }
   };
 
-  if (visible && Array.isArray(attachMent) && attachMent.length > 0) {
+  if (visible  && attachMent.length > 0) {
     return (
       <div
         id="container"
@@ -159,8 +160,8 @@ const AttachmentModal = ({ onClose, visible, id }) => {
               </svg>
             </div>
           </div>
-          {attachMent.map((attachment) => (
-            <div key={id} className="flex flex-col p-5">
+          {/* {attachMent.map((attachment) => ( */}
+            {/* <div key={id} className="flex flex-col p-5"> */}
             <div className="flex justify-between">
               
                 <div className="w-2/5 flex justify-between">
@@ -171,7 +172,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                     :
                   </div>
                   <p className="text-sm text-right font-normal mx-1">
-                  {attachment.seller_id}
+                  {attachMent?.seller_id}
                   </p>
                 </div>
                 <div className="w-2/5 flex justify-between">
@@ -196,7 +197,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                     :
                   </div>
                   <p className="text-sm text-right font-normal mx-1">
-                    {attachment.fullname}
+                    {attachMent?.fullname}
                   </p>
                 </div>
                 <div className="w-2/5 flex justify-between">
@@ -221,7 +222,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                     :
                   </div>
                   <p className="text-sm text-right font-normal mx-1">
-                    {attachment.store_name}
+                    {attachMent?.store_name}
                   </p>
                 </div>
                 <div className="w-2/5 flex justify-between">
@@ -232,7 +233,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                     :
                   </div>
                   <p className="text-sm text-right font-normal mx-1">
-                    {attachment.gst_number}
+                    {attachMent.gst_number}
                   </p>
                 </div>
               </div>
@@ -246,7 +247,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                     :
                   </div>
                   <p className="text-sm text-right font-normal mx-1">
-                    {attachment.sellerType}
+                    {attachMent.sellerType}
                   </p>
                 </div>
                 <div className="w-2/5 flex justify-between">
@@ -257,7 +258,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                     :
                   </div>
                   <p className="text-sm text-right font-normal mx-1">
-                    {attachment.pan_number}
+                    {attachMent.pan_number}
                   </p>
                 </div>
               </div>
@@ -274,10 +275,10 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                   </p>
                 </div>
               </div>
-            </div>
-          ))}
+            {/* </div> */}
+          {/* ))} */}
           {/* // preview section */}
-          {attachMent.map((attachment) => (
+          {/* {attachMent.map((attachment) => (
             <div key={id} className="flex justify-around">
               <div
                 onClick={() => setGstModal(true)}
@@ -286,7 +287,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                 <div className="w-full h-full p-2 cursor-pointer">
                   <img
                     className="w-full h-full object-contain"
-                    src={attachment.gstImageUrl}
+                    src={attachment?.gstImageUrl}
                     alt=""
                   />
                 </div>
@@ -294,7 +295,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                   <PdfViewModal
                     CloseModal={handleClosePdf}
                     visible={gstModal}
-                    url={attachment.gstImageUrl}
+                    url={attachment?.gstImageUrl}
                   />
                 )}
               </div>
@@ -305,7 +306,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                 <div className="w-full h-full p-2">
                   <img
                     className="w-full h-full object-contain"
-                    src={attachment.panImageUrl}
+                    src={attachment?.panImageUrl}
                     alt=""
                   />
                 </div>
@@ -313,12 +314,12 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                   <PdfViewModal
                     visible={pdfModal}
                     CloseModal={handleClosePdf}
-                    url={attachment.panImageUrl}
+                    url={attachment?.panImageUrl}
                   />
                 )}
               </div>
             </div>
-          ))}
+          ))} */}
           <div className="flex justify-center gap-x-5 py-5">
             <button
               onClick={handleVerify}

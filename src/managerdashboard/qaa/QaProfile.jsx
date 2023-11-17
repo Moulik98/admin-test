@@ -69,11 +69,21 @@ const QaProfile = () => {
     if (response.ok) {
       setCMInfo(data.sellerDetails);
       setFormData({
+        designation: data.sellerDetails.roles[0],
+        empId: data.sellerDetails.emp_id,
         name: data.sellerDetails.name,
         phone: data.sellerDetails.phone,
         email: data.sellerDetails.email,
         userName: data.sellerDetails.userName,
       });
+
+      // Assuming the image URL is provided in the response
+      if (data.sellerDetails.image) {
+        setImage(data.sellerDetails.image
+          ); // Update with the actual property name
+      } else {
+        console.error("Image URL not found in the response");
+      }
     } else {
       console.error("Failed to fetch Data");
     }
@@ -172,7 +182,7 @@ const QaProfile = () => {
                   className="w-full py-2 px-3 rounded border border-solid border-gray-300 text-gray-800 text-sm"
                   name={field.name}
                   disabled={field.isDisabled}
-                  value={`${formData[field.name]}`}
+                  value={formData[field.name]}
                   onChange={(e) => handleChange(e)}
                 />
               </div>
@@ -180,21 +190,6 @@ const QaProfile = () => {
             <Link className="flex justify-start text-xs text-blue-400" to="/change-password">
               <button>Change Password</button>
             </Link>
-            {/* <div className="flex flex-col mb-4">
-            <label
-              className="text-sm flex text-left text-gray-500 py-2 cursor-pointer"
-              onClick={handleImageClick}
-            >
-              Profile Image
-            </label>
-            <input
-              type="file"
-              id="imageInput"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="hidden"
-            />
-          </div> */}
           </div>
           <div className="flex justify-center mt-5">
             <button
@@ -203,8 +198,6 @@ const QaProfile = () => {
             >
               {isMutating ? <Loader /> : "Update"}
             </button>
-
-            
           </div>
         </form>
       </div>

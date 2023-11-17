@@ -15,7 +15,7 @@ const TableRow = ({ data, index }) => {
       setViewAttachment(false);
     }
   };
-
+  
   const handleDelete = () => {
     // Show the delete confirmation popup
     setShowDeletePopup(true);
@@ -68,6 +68,7 @@ const TableRow = ({ data, index }) => {
           visible={viewAttachment}
           id={_id}
           onClose={handleClose}
+          
         />
       )}
     </tr>
