@@ -15,7 +15,7 @@ const inputFields = [
     id: "dfdruef450ndiyijhcihufb",
     label: "Designation",
     isDisabled: true,
-    name: "designation",
+    name: "roles",
   },
   {
     id: "fdruefndiy8457ijhcihufb",
