@@ -122,14 +122,15 @@ const DesignationList = () => {
             <thead class="bg-gray-100 text-xs font-medium uppercase text-[#666666]">
               <tr>
               <th scope="col" class="px-2 py-3">
+                  Sl No
+                </th>
+              <th scope="col" class="px-2 py-3">
                   Employee ID
                 </th>
                 <th scope="col" class="px-2 py-3">
                   Name
                 </th>
-                <th scope="col" class="px-2 py-3">
-                  Onboard Date
-                </th>
+              
                 <th scope="col" class="px-2 py-3">
                   Contact No
                 </th>
@@ -148,8 +149,8 @@ const DesignationList = () => {
               </tr>
             </thead>
             <tbody>
-              {staffs?.map((item) => (
-                <AssignedStaffs key={item._id} data={item} />
+              {staffs?.map((item,index) => (
+                <AssignedStaffs key={item._id} data={item} index={index} />
               ))}
             </tbody>
           </table>
