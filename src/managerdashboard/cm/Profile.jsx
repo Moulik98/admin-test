@@ -9,7 +9,7 @@ const inputFields = [
     id: "YUJDdfdruefndiyijhcihufb",
     label: "EmpID",
     isDisabled: true,
-    name: "empId",
+    name: "emp_id",
   },
   {
     id: "dfdruef450ndiyijhcihufb",
@@ -65,6 +65,8 @@ const QaProfile = () => {
     phone: "",
     email: "",
     userName: "",
+    emp_id:"",
+
   });
   const [image, setImage] = useState(null);
 
@@ -86,12 +88,14 @@ const QaProfile = () => {
         phone: data.sellerDetails.phone,
         email: data.sellerDetails.email,
         userName: data.sellerDetails.userName,
+        emp_id:data.sellerDetails.emp_id
       });
     } else {
       console.error("Failed to fetch Data");
     }
   };
 
+  console.log("category manager info ",cminfo)
   useEffect(() => {
     CategotyManager();
   }, []);

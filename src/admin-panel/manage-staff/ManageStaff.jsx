@@ -182,7 +182,7 @@ const handleSubmit = async (e) => {
               <input
                 className="w-3/5  border rounded-md  px-4 py-1"
                 type="text"
-                name="userName"
+                name="emp_id"
                 value={formData.emp_id}
                 onChange={handleInputChange}
                 required
