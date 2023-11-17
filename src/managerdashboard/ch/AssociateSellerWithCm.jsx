@@ -15,8 +15,8 @@ const AssociateSellerWithCm = () => {
         const url = `${process.env.REACT_APP_URL}/v1/category-head/single-cm/${id}`
         const token = getToken()
         getList(url, token).then(data => {
-            setList(data?.cmSellerCounts[0]?.sellers)
-            setCmName(data?.cmSellerCounts[0]?.cmName)
+            setList(data?.response?.sellers)
+            setCmName(data?.response?.cmName)
         })
     }, [id])
     return (
@@ -41,7 +41,7 @@ const AssociateSellerWithCm = () => {
                 </section>
                 <section className='w-full flex flex-col'>
                     <AssociateSellerTable
-                        cmId={id}
+                        id={id}
                         list={list}
                         cmName={cmName}
                     />

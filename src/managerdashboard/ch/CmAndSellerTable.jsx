@@ -18,65 +18,6 @@ const CmAndSellerTable = () => {
     }, [])
 
 
-    // const list = [
-    //     {
-    //         slNo: 1,
-    //         empCode: 'EC001',
-    //         name: 'John Doe',
-    //         contactNo: '123-456-7890',
-    //         mailId: 'john.doe@example.com',
-    //         onboardSellers: 10,
-    //         pendingSellers: 5,
-    //         onboardBrands: 8,
-    //         actions: 'View Details',
-    //     },
-    //     {
-    //         slNo: 2,
-    //         empCode: 'EC002',
-    //         name: 'Jane Smith',
-    //         contactNo: '987-654-3210',
-    //         mailId: 'jane.smith@example.com',
-    //         onboardSellers: 15,
-    //         pendingSellers: 3,
-    //         onboardBrands: 12,
-    //         actions: 'View Details',
-    //     },
-    //     // Add more objects as needed
-    //     {
-    //         slNo: 3,
-    //         empCode: 'EC003',
-    //         name: 'Alice Johnson',
-    //         contactNo: '555-123-4567',
-    //         mailId: 'alice.johnson@example.com',
-    //         onboardSellers: 8,
-    //         pendingSellers: 7,
-    //         onboardBrands: 6,
-    //         actions: 'View Details',
-    //     },
-    //     {
-    //         slNo: 4,
-    //         empCode: 'EC004',
-    //         name: 'Bob Williams',
-    //         contactNo: '111-222-3333',
-    //         mailId: 'bob.williams@example.com',
-    //         onboardSellers: 12,
-    //         pendingSellers: 2,
-    //         onboardBrands: 10,
-    //         actions: 'View Details',
-    //     },
-    //     {
-    //         slNo: 5,
-    //         empCode: 'EC005',
-    //         name: 'Eva Davis',
-    //         contactNo: '999-888-7777',
-    //         mailId: 'eva.davis@example.com',
-    //         onboardSellers: 5,
-    //         pendingSellers: 10,
-    //         onboardBrands: 4,
-    //         actions: 'View Details',
-    //     },
-    // ];
-
     const handleClick = useCallback((id) => {
         const url = `/category-head-dashboard/associate-seller/${id}`
         navigate(url);
