@@ -4,6 +4,7 @@ import OnboardedSellers from "./OnboardedSellers";
 import SideBar from "../Sidebar";
 import Layout from "../../Routing/Layout";
 import { categoryManagerMenu, categoryMenu } from "../../constant";
+import { useNavigate } from "react-router-dom";
 
 const ManagerDashboard = () => {
   const [approvedSellers, setApprovedSellers] = useState();
@@ -11,6 +12,7 @@ const ManagerDashboard = () => {
   const [approvedcount, setApprovedCount] = useState()
   const [pendingCount, setPendingCount] = useState()
   const token = localStorage.getItem("access_token");
+  const navigate = useNavigate();
 
   const fetchData = async () => {
     const url =
@@ -55,9 +57,17 @@ const ManagerDashboard = () => {
   useEffect(() => {
     fetchSellers();
   }, []);
-  console.log("Pending List >>", pendingSellers);
-  console.log("Approved Sellers", approvedcount)
-  console.log("Approved List >>", approvedSellers);
+
+
+  const handleLogout = () => {
+    // Remove access token and refresh token from localStorage or wherever you store them
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+
+    // Redirect to the login page
+    navigate('/stafflogin');
+  };
+
   return (
     <main className="max-w-full flex">
       <div className="sidebar bg-[#00388c] h-screen w-fit sticky top-0">
@@ -74,6 +84,12 @@ const ManagerDashboard = () => {
             </p>
           </div>
           <div className="flex gap-5">
+            <div className="flex items-center" onClick={handleLogout}>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+              </svg>
+
+            </div>
             <a
               href={`/onboard-seller`}
               className="text-white flex gap-x-5 bg-[#556EE6] py-2 px-10 rounded"
@@ -93,9 +109,9 @@ const ManagerDashboard = () => {
               Onboard Seller
             </a>
             <div className="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0M3.124 7.5A8.969 8.969 0 015.292 3m13.416 0a8.969 8.969 0 012.168 4.5" />
-            </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0M3.124 7.5A8.969 8.969 0 015.292 3m13.416 0a8.969 8.969 0 012.168 4.5" />
+              </svg>
             </div>
           </div>
         </section>
