@@ -6,14 +6,21 @@ import { QAList } from "../../constant";
 
 const inputFields = [
   {
-    id: "fdruefndiy645ijhcihufb",
-    label: "Password",
+    id: "currentPassword",
+    label: "Current Password",
     isDisabled: false,
-    name: "password",
+    name: "currentPassword",
     type: "password",
   },
   {
-    id: "fdruefndiy645ijhcihufb",
+    id: "newPassword",
+    label: "New Password",
+    isDisabled: false,
+    name: "newPassword",
+    type: "password",
+  },
+  {
+    id: "confirmPassword",
     label: "Confirm Password",
     isDisabled: false,
     name: "confirmPassword",
@@ -24,7 +31,8 @@ const inputFields = [
 const Qapassword = () => {
   const [isMutating, setIsMutating] = useState(false);
   const [formData, setFormData] = useState({
-    password: "",
+    currentPassword: "",
+    newPassword: "",
     confirmPassword: "",
   });
 
@@ -38,29 +46,40 @@ const Qapassword = () => {
       return { ...prevValue, [name]: value };
     });
   };
+  const token = localStorage.getItem("access_token");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validate passwords match
-    if (formData.password !== formData.confirmPassword) {
+    if (formData.newPassword !== formData.confirmPassword) {
       toast.error("Passwords do not match");
       return;
     }
 
     const url = process.env.REACT_APP_URL + "/v1/category-manager/changePassword";
-
+    
     try {
       const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           // Include any authorization headers if needed
+          "Authorization": `Bearer ${token}`,
         },
         body: JSON.stringify({
-          newPassword: formData.password,
+          currentPassword: formData.currentPassword,
+          newPassword: formData.newPassword,
+          confirmPassword: formData.confirmPassword,
         }),
       });
+
+      console.log(JSON.stringify({
+        currentPassword: formData.currentPassword,
+        newPassword: formData.newPassword,
+        confirmPassword: formData.confirmPassword,
+      }))
+      console.log(token)
 
       const data = await response.json();
       if (response.ok) {

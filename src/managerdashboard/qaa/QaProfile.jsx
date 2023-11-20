@@ -79,8 +79,7 @@ const QaProfile = () => {
 
       // Assuming the image URL is provided in the response
       if (data.sellerDetails.image) {
-        setImage(data.sellerDetails.image
-          ); // Update with the actual property name
+        setImage(data.sellerDetails.image); // Update with the actual property name
       } else {
         console.error("Image URL not found in the response");
       }
@@ -100,9 +99,40 @@ const QaProfile = () => {
     });
   };
 
-  const handleImageChange = (e) => {
+// Helper function to convert image to base64
+const convertImageToBase64 = (image) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const base64Image = reader.result.split(",")[1];
+      resolve(`data:image/jpeg;base64,${base64Image}`);
+    };
+
+    reader.onerror = (error) => {
+      reject(error);
+    };
+
+    reader.readAsDataURL(image);
+  });
+};
+
+
+
+  const handleFileChange = (e) => {
     const selectedImage = e.target.files[0];
-    setImage(selectedImage);
+  
+    if (selectedImage) {
+      const reader = new FileReader();
+  
+      reader.onload = () => {
+        const base64Image = reader.result;
+        setImage(selectedImage); // Update with the actual property name
+        // Now you can use the base64Image as needed, e.g., sending it to the server or displaying it.
+      };
+  
+      reader.readAsDataURL(selectedImage); // Pass the selectedImage directly to readAsDataURL
+    }
   };
 
   const handleImageClick = () => {
@@ -111,11 +141,20 @@ const QaProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const updatedFormData = image ? { ...formData, image } : { ...formData };
-
+  
+    // Convert image to base64 string
+    let base64Image = null;
+    if (image) {
+      base64Image = await convertImageToBase64(image);
+    }
+  
+    const updatedFormData = base64Image
+      ? { ...formData, image: base64Image }
+      : { ...formData };
+  
     const url =
       process.env.REACT_APP_URL + "/v1/category-manager/editStaffProfile";
-
+  
     try {
       const response = await fetch(url, {
         method: "POST",
@@ -125,7 +164,7 @@ const QaProfile = () => {
         },
         body: JSON.stringify(updatedFormData),
       });
-
+  
       const data = await response.json();
       if (response.ok) {
         setIsMutating(false);
@@ -133,13 +172,14 @@ const QaProfile = () => {
       } else {
         setIsMutating(false);
       }
-
+  
       console.log("store details response", data);
     } catch (error) {
       console.error("Error submitting form:", error);
       setIsMutating(false);
     }
   };
+  // Helper function to convert image to base64
 
   return (
     <main className="max-w-full flex">
@@ -162,12 +202,12 @@ const QaProfile = () => {
             )}
           </div>
           <input
-            type="file"
-            id="imageInput"
-            accept="image/*"
-            onChange={handleImageChange}
-            className="hidden"
-          />
+      type="file"
+      id="imageInput"
+      accept="image/*"
+      onChange={handleFileChange}
+      className="hidden"
+    />
         </div>
         <form className="grow p-12" onSubmit={(e) => handleSubmit(e)}>
           
