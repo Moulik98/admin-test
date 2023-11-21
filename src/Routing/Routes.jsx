@@ -57,6 +57,7 @@ import PendingSeller from "../managerdashboard/qaa/PendingSeller";
 import ChProfile from "../managerdashboard/ch/Chprofile";
 import Qapassword from "../managerdashboard/qaa/Qapassword";
 import DeclinedSeller from "../managerdashboard/cm/DeclinedSeller";
+import CmPassword from "../managerdashboard/cm/Cmpassword";
 import DeclineSellers from "../managerdashboard/qaa/DeclineSeller";
 import MMDash from "../managerdashboard/mm/MMdash";
 const PreserveLocation = ({ children }) => {
