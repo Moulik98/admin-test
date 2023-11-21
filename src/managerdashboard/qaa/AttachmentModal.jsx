@@ -179,12 +179,12 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                 <div className="w-2/5 flex justify-between">
                   <div className="w-1/2 flex justify-between">
                     <h1 className=" text-base  font-semibold text-[#143250]">
-                      Seller Date
+                      Onboard Date
                     </h1>
                     :
                   </div>
                   <p className="text-sm text-right font-normal mx-1">
-                    22/08/23
+                  {new Date(attachMent.createdAt).toDateString()}
                   </p>
                 </div>
               </div>
