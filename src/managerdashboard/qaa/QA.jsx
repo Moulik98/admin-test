@@ -3,11 +3,13 @@ import SideBar from "../Sidebar";
 import { QAList } from "../../constant";
 import TableRow from "./TableRow";
 import AttachmentModal from "./AttachmentModal"; // Import the TableRow component
+import { useNavigate } from "react-router-dom";
 
 const QA = () => {
   const [pendingSellers, setPendingSellers] = useState([]);
   const [viewAttachment, setViewAttachment] = useState(false);
   const token = localStorage.getItem("access_token");
+  const navigate = useNavigate();
 
   const handleClose = (value) => {
     if (value === "close") {
@@ -40,6 +42,15 @@ const QA = () => {
     fetchPendingSellers();
   }, []);
 
+  const handleLogout = () => {
+    // Remove access token and refresh token from localStorage or wherever you store them
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+
+    // Redirect to the login page
+    navigate('/stafflogin');
+  };
+
   return (
     <main className="max-w-full text-xs flex">
       <div className="sidebar bg-[#00388c] h-screen w-fit sticky top-0">
@@ -52,6 +63,12 @@ const QA = () => {
               QA Approver Dashboard
             </h1>
           </div>
+          <div className="flex items-center" onClick={handleLogout}>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+              </svg>
+
+            </div>
         </section>
         <section className="flex flex-col border">
           <div className="overflow-x-auto">
