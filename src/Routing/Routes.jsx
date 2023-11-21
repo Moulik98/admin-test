@@ -58,6 +58,7 @@ import ChProfile from "../managerdashboard/ch/Chprofile";
 import Qapassword from "../managerdashboard/qaa/Qapassword";
 import DeclinedSeller from "../managerdashboard/cm/DeclinedSeller";
 import DeclineSellers from "../managerdashboard/qaa/DeclineSeller";
+import MMDash from "../managerdashboard/mm/MMdash";
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
   return children(location);
@@ -269,6 +270,10 @@ const MainRoutes = () => {
             <Route
               path="/change-password"
               element={<Qapassword/>}
+            />
+            <Route
+              path="/mm-dashboard"
+              element={<MMDash/>}
             />
           </Routes>
         )}

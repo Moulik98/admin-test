@@ -27,6 +27,9 @@ export const CategoryManagerLogin = () => {
       case 'QAA':
         navigate('/qaapprover-dashboard')
         break;
+      case 'MM':
+        navigate('/mm-dashboard')
+        break;
       default:
         console.log('Unknown Role');
     }
