@@ -58,6 +58,7 @@ import ChProfile from "../managerdashboard/ch/Chprofile";
 import Qapassword from "../managerdashboard/qaa/Qapassword";
 import DeclinedSeller from "../managerdashboard/cm/DeclinedSeller";
 import DeclineSellers from "../managerdashboard/qaa/DeclineSeller";
+import CmPassword from "../managerdashboard/cm/Cmpassword";
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
   return children(location);
@@ -246,6 +247,7 @@ const MainRoutes = () => {
             <Route path="/qaapprover-dashboard" element={<QAADashboard />} />
             <Route path="/CM-Info" element={<Profile />} />
             <Route path="/declined-seller" element={<DeclinedSeller/>} />
+            <Route path="/CM-change-password" element={<CmPassword/>} />
             <Route
               path="/manage-roles"
               element={<ProtectedRoute element={ManageRoles} />}
