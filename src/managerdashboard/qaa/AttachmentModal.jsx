@@ -34,8 +34,8 @@ const AttachmentModal = ({ onClose, visible, id }) => {
       if (response.ok) {
         const data = await response.json();
         SetAttachMent(data.sellerInfo);
-        SetCm(data.cmAdmins) // Assuming you are getting an array with a single item
-        console.log(data.sellerInfo);
+        SetCm(data.cmAdmins[0]) // Assuming you are getting an array with a single item
+        console.log(data.cmAdmins[0]);
       } else {
         throw new Error("Failed to fetch data");
       }
@@ -173,7 +173,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                     :
                   </div>
                   <p className="text-sm text-right font-normal mx-1">
-                  {attachMent.seller_id}
+                  {attachMent.seller_code}
                   </p>
                 </div>
                 <div className="w-2/5 flex justify-between">
