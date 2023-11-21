@@ -1,8 +1,36 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import SideBar from "../Sidebar";
 import {categoryManagerMenu } from "../../constant";
+import TableRow from './TableRow';
 
 const DeclinedSeller = () => {
+
+    const [declinedsellers, setDeclinedSelllers] = useState([])
+    const token = localStorage.getItem("access_token")
+    const fetchDeclinedSellers = async () => {
+        const url =
+          process.env.REACT_APP_URL +
+          "/v1/category-manager/decline/Onboard-Seller";
+          console.log("Url",url)
+        const response = await fetch(url, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await response.json();
+        console.log("Response Data >>>",data);
+        if (response.ok) {
+          setDeclinedSelllers(data.pendingSeller);
+        } else {
+          console.error("Failed to fetch pending sellers");
+        }
+      };
+      console.log("Pending Sellers declined",declinedsellers)
+    
+      useEffect(() => {
+        fetchDeclinedSellers();
+      }, []);
     return (
         <div className="max-w-full flex">
             <div className="sidebar bg-[#00388c] h-screen w-fit sticky top-0">
@@ -17,11 +45,11 @@ const DeclinedSeller = () => {
                             Sl. NO
                         </th>
                         <th scope="col" className="px-4 py-2">
-                            EmpCode
+                            Seller Declined
                         </th>
 
                         <th scope="col" className="px-4 py-2">
-                            CM (username)
+                             Seller Code 
                         </th>
 
                         <th scope="col" className="px-4 py-2">
@@ -31,12 +59,21 @@ const DeclinedSeller = () => {
                             Mail Id
                         </th>
                         <th scope="col" className="px-4 py-2">
+                            Business Type
+                        </th>
+                        <th scope="col" className="px-4 py-2">
+                            Store Name
+                        </th>
+                        <th scope="col" className="px-4 py-2">
                             Actions (View Details)
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-
+                {Array.isArray(declinedsellers) &&
+                  declinedsellers.map((item, index) => {
+                    return <TableRow key={item._id} data={item} index={index} />;
+                  })}
                 </tbody>
             </table>
             </div>

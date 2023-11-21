@@ -247,6 +247,7 @@ const MainRoutes = () => {
             <Route path="/qaapprover-dashboard" element={<QAADashboard />} />
             <Route path="/CM-Info" element={<Profile />} />
             <Route path="/declined-seller" element={<DeclinedSeller/>} />
+            <Route path="/CM-change-password" element={<CmPassword/>} />
             <Route
               path="/manage-roles"
               element={<ProtectedRoute element={ManageRoles} />}
