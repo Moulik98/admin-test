@@ -3,6 +3,7 @@ import SideBar from "../Sidebar";
 import Loader from "../Loader";
 import toast from "react-hot-toast";
 import { categoryMenu } from "../../constant";
+import { Link } from "react-router-dom";
 
 const inputFields = [
   {
@@ -40,24 +41,10 @@ const inputFields = [
     label: "UserName",
     isDisabled: true,
     name: "userName",
-  },
-  {
-    id: "fdruefndiy645ijhcihufb",
-    label: "Password",
-    isDisabled: false,
-    name: "password",
-    type: "password",
-  },
-  {
-    id: "fdruefndiy645ijhcihufb",
-    label: "Confirm Password",
-    isDisabled: false,
-    name: "confirmPassword",
-    type: "password",
-  },
+  }
 ];
 
-const Chprofile = () => {
+const QaProfile = () => {
   const [cminfo, setCMInfo] = useState();
   const [isMutating, setIsMutating] = useState(false);
   const [formData, setFormData] = useState({
@@ -82,11 +69,20 @@ const Chprofile = () => {
     if (response.ok) {
       setCMInfo(data.sellerDetails);
       setFormData({
+        designation: data.sellerDetails.roles[0],
+        empId: data.sellerDetails.emp_id,
         name: data.sellerDetails.name,
         phone: data.sellerDetails.phone,
         email: data.sellerDetails.email,
         userName: data.sellerDetails.userName,
       });
+
+      // Assuming the image URL is provided in the response
+      if (data.sellerDetails.image) {
+        setImage(data.sellerDetails.image); // Update with the actual property name
+      } else {
+        console.error("Image URL not found in the response");
+      }
     } else {
       console.error("Failed to fetch Data");
     }
@@ -103,9 +99,40 @@ const Chprofile = () => {
     });
   };
 
-  const handleImageChange = (e) => {
+// Helper function to convert image to base64
+const convertImageToBase64 = (image) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const base64Image = reader.result.split(",")[1];
+      resolve(`data:image/jpeg;base64,${base64Image}`);
+    };
+
+    reader.onerror = (error) => {
+      reject(error);
+    };
+
+    reader.readAsDataURL(image);
+  });
+};
+
+
+
+  const handleFileChange = (e) => {
     const selectedImage = e.target.files[0];
-    setImage(selectedImage);
+  
+    if (selectedImage) {
+      const reader = new FileReader();
+  
+      reader.onload = () => {
+        const base64Image = reader.result;
+        setImage(selectedImage); // Update with the actual property name
+        // Now you can use the base64Image as needed, e.g., sending it to the server or displaying it.
+      };
+  
+      reader.readAsDataURL(selectedImage); // Pass the selectedImage directly to readAsDataURL
+    }
   };
 
   const handleImageClick = () => {
@@ -114,11 +141,20 @@ const Chprofile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const updatedFormData = image ? { ...formData, image } : { ...formData };
-
+  
+    // Convert image to base64 string
+    let base64Image = null;
+    if (image) {
+      base64Image = await convertImageToBase64(image);
+    }
+  
+    const updatedFormData = base64Image
+      ? { ...formData, image: base64Image }
+      : { ...formData };
+  
     const url =
       process.env.REACT_APP_URL + "/v1/category-manager/editStaffProfile";
-
+  
     try {
       const response = await fetch(url, {
         method: "POST",
@@ -128,7 +164,7 @@ const Chprofile = () => {
         },
         body: JSON.stringify(updatedFormData),
       });
-
+  
       const data = await response.json();
       if (response.ok) {
         setIsMutating(false);
@@ -136,13 +172,14 @@ const Chprofile = () => {
       } else {
         setIsMutating(false);
       }
-
+  
       console.log("store details response", data);
     } catch (error) {
       console.error("Error submitting form:", error);
       setIsMutating(false);
     }
   };
+  // Helper function to convert image to base64
 
   return (
     <main className="max-w-full flex">
@@ -151,34 +188,32 @@ const Chprofile = () => {
       </div>
       <div className="flex items-top justify-center">
         <div className="ml-40 mt-28" onClick={handleImageClick}>
-          <div className="rounded-full w-32 h-32 object-cover border border-dashed border-gray-300 cursor-pointer">
+          <div className="rounded-full w-48 h-48 object-cover border border-dashed border-gray-300 cursor-pointer">
             {image ? (
               <img
                 src={URL.createObjectURL(image)}
                 alt="Selected Profile Image"
-                className="rounded-full w-32 h-32 object-cover"
+                className="rounded-full w-full h-full object-cover"
               />
             ) : (
               <span className="text-gray-500 flex items-center justify-center h-full">
-                {image === null ? "Click to add image" : "Select Profile Image"}
+                {image === null ? <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" id="profile"><circle cx="12" cy="12" r="11" fill="#000" opacity=".4"></circle><path fill="#000" fill-rule="evenodd" d="M12 11C13.6569 11 15 9.65685 15 8C15 6.34315 13.6569 5 12 5C10.3431 5 9 6.34315 9 8C9 9.65685 10.3431 11 12 11ZM10 13C8.34315 13 7 14.3431 7 16C7 17.6569 8.34315 19 10 19H14C15.6569 19 17 17.6569 17 16C17 14.3431 15.6569 13 14 13H10Z" clip-rule="evenodd"></path></svg>: "Select Profile Image"}
               </span>
             )}
           </div>
           <input
-            type="file"
-            id="imageInput"
-            accept="image/*"
-            onChange={handleImageChange}
-            className="hidden"
-          />
+      type="file"
+      id="imageInput"
+      accept="image/*"
+      onChange={handleFileChange}
+      className="hidden"
+    />
         </div>
-        <form className="grow p-8" onSubmit={(e) => handleSubmit(e)}>
-          <h1 className="text-xl flex text-left font-bold mb-6">
-            Category Head Profile
-          </h1>
-          <div className="grid grid-cols-2 gap-8">
+        <form className="grow p-12" onSubmit={(e) => handleSubmit(e)}>
+          
+          <div className="grid grid-cols-2 gap-4">
             {inputFields.map((field, index) => (
-              <div key={field.id + index} className="flex w-full flex-col ">
+              <div key={field.id + index} className="flex w-full flex-col">
                 <label className="text-sm flex text-left text-gray-500 py-2">
                   {field.label}
                 </label>
@@ -187,11 +222,14 @@ const Chprofile = () => {
                   className="w-full py-2 px-3 rounded border border-solid border-gray-300 text-gray-800 text-sm"
                   name={field.name}
                   disabled={field.isDisabled}
-                  value={`${formData[field.name]}`}
+                  value={formData[field.name]}
                   onChange={(e) => handleChange(e)}
                 />
               </div>
             ))}
+            <Link className="flex justify-start text-xs text-blue-400" to="/category-head-password-change">
+              <button>Change Password</button>
+            </Link>
           </div>
           <div className="flex justify-center mt-5">
             <button
@@ -207,4 +245,4 @@ const Chprofile = () => {
   );
 };
 
-export default Chprofile;
+export default QaProfile;
