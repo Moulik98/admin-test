@@ -62,7 +62,7 @@ export const User = () => {
         // Successful logout
         console.log("Logout successful");
         setIsLogin(false);
-        localStorage.setItem('isLogin', false) // Set isAuthenticated to false on successful logout
+        // localStorage.setItem('isLogin', false) // Set isAuthenticated to false on successful logout
       } else {
         // Logout failed
         console.log("Logout failed");

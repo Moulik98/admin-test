@@ -30,6 +30,9 @@ export const CategoryManagerLogin = () => {
       case 'MM':
         navigate('/mm-dashboard')
         break;
+      case 'MH':
+        navigate('/mh-dashboard')
+        break;
       default:
         console.log('Unknown Role');
     }
