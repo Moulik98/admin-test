@@ -60,6 +60,7 @@ import DeclinedSeller from "../managerdashboard/cm/DeclinedSeller";
 import CmPassword from "../managerdashboard/cm/Cmpassword";
 import DeclineSellers from "../managerdashboard/qaa/DeclineSeller";
 import MMDash from "../managerdashboard/mm/MMdash";
+import ChPassword from "../managerdashboard/ch/Chpassword";
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
   return children(location);
@@ -239,6 +240,10 @@ const MainRoutes = () => {
               <Route
               path="/category-head-profile"
               element={<ChProfile/>}
+            />
+               <Route
+              path="/category-head-password-change"
+              element={<ChPassword/>}
             />
 
             <Route
