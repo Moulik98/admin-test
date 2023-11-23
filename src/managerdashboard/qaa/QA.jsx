@@ -4,11 +4,13 @@ import { QAList } from "../../constant";
 import TableRow from "./TableRow";
 import AttachmentModal from "./AttachmentModal"; // Import the TableRow component
 import { useNavigate } from "react-router-dom";
+import LogOutModal from "../Logout";
 
 const QA = () => {
   const [pendingSellers, setPendingSellers] = useState([]);
   const [viewAttachment, setViewAttachment] = useState(false);
   const token = localStorage.getItem("access_token");
+  const [showLogoutModal, setShowLogoutModal] = useState(false);  
   const navigate = useNavigate();
 
   const handleClose = (value) => {
@@ -43,13 +45,12 @@ const QA = () => {
   }, []);
 
   const handleLogout = () => {
-    // Remove access token and refresh token from localStorage or wherever you store them
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
+    setShowLogoutModal(true);
+};
+const handleModalClose = () => {
+  setShowLogoutModal(false);
+};
 
-    // Redirect to the login page
-    navigate('/stafflogin');
-  };
 
   return (
     <main className="max-w-full text-xs flex">
@@ -69,6 +70,7 @@ const QA = () => {
               </svg>
 
             </div>
+            <LogOutModal visible={showLogoutModal} onClose={handleModalClose} />
         </section>
         <section className="flex flex-col border">
           <div className="overflow-x-auto">
