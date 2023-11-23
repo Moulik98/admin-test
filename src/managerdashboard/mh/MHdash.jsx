@@ -4,6 +4,7 @@ import { MarHead } from '../../constant'
 import Stats from './Stats'
 import SideBar from '../Sidebar'
 import NavigateBack from '../NavigateBack'
+import CmAndSellerTable from './CmAndSellerTable'
 
 const MHdash = () => {
 
@@ -27,6 +28,10 @@ const MHdash = () => {
                     </div>
                 </section>
                 <Stats />
+
+                <section className='flex flex-col'>
+                    <CmAndSellerTable/>
+                </section>
 
             </div>
 
