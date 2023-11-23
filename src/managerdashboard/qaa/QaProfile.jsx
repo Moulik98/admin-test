@@ -183,6 +183,8 @@ const QaProfile = () => {
       <div className="sidebar bg-[#00388c] h-screen w-fit sticky top-0">
         <SideBar menu={QAList} />
       </div>
+      <div className="flex flex-col">
+      <p className="text-2xl flex justify-start p-4 ">Profile Update</p>
       <div className="flex items-top justify-center">
         <div className="ml-40 mt-28" onClick={handleImageClick}>
         
@@ -256,6 +258,7 @@ const QaProfile = () => {
             </button>
           </div>
         </form>
+      </div>
       </div>
     </main>
   );

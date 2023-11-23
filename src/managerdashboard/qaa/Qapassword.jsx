@@ -104,7 +104,7 @@ const Qapassword = () => {
       </div>
       <div className="flex items-top justify-center">
         <form className="grow p-12" onSubmit={(e) => handleSubmit(e)}>
-          <h1 className="text-xl flex text-left font-bold mb-6">
+          <h1 className="text-2xl flex text-left  mb-6">
             Change Password
           </h1>
           <div className="gap-4">
