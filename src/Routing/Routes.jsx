@@ -91,6 +91,27 @@ const MainRoutes = () => {
       )
     );
   };
+
+  const ProtectedStaffRoute = ({ element: Element, ...rest }) => {
+    const [isStaffLogin, setIsStaffLogin] = useState(false);
+    const navigate = useNavigate();
+    useEffect(() => {
+      let storedIsLogin = localStorage.getItem('isStaffLogin');
+      if (!storedIsLogin) {
+        navigate("/stafflogin");
+      }
+      setIsStaffLogin(storedIsLogin);
+    }, [navigate]);
+    return (
+      isStaffLogin && (
+        <Layout
+          
+          content={<Element />}
+          handleLogout={handleLogout}
+        />
+      )
+    );
+  };
   return (
     <Router>
       <PreserveLocation>
@@ -227,34 +248,34 @@ const MainRoutes = () => {
             {/* Manage Staff */}
             <Route
               path="/category-manager-dashboard"
-              element={<ManagerDashboard />}
+              element={<ProtectedStaffRoute element={ManagerDashboard} />}
             />
             <Route
               path="/category-head-dashboard"
-              element={<CategoryHeadDashboard />}
+              element={<ProtectedStaffRoute element={CategoryHeadDashboard} />}
             />
 
             <Route
               path="/category-head-dashboard/associate-seller/:id"
-              element={<AssociateSellerWithCm />}
+              element={<ProtectedStaffRoute element={AssociateSellerWithCm} />}
             />
               <Route
               path="/category-head-profile"
-              element={<ChProfile/>}
+              element={<ProtectedStaffRoute element={ChProfile}/>}
             />
                  <Route
               path="/category-head-password-change"
-              element={<ChPassword/>}
+              element={<ProtectedStaffRoute element={ChPassword}/>}
             />
 
             <Route
               path="/category-head-assign-seller"
-              element={<CategoryHeadAssignSeller />}
+              element={<ProtectedStaffRoute element={CategoryHeadAssignSeller} />}
             />
-            <Route path="/qaapprover-dashboard" element={<QAADashboard />} />
-            <Route path="/CM-Info" element={<Profile />} />
-            <Route path="/declined-seller" element={<DeclinedSeller/>} />
-            <Route path="/CM-change-password" element={<CmPassword/>} />
+            <Route path="/qaapprover-dashboard" element={<ProtectedStaffRoute element={QAADashboard} />} />
+            <Route path="/CM-Info" element={<ProtectedStaffRoute element={Profile} />} />
+            <Route path="/declined-seller" element={<ProtectedStaffRoute element={DeclinedSeller}/>} />
+            <Route path="/CM-change-password" element={<ProtectedStaffRoute element={CmPassword}/>} />
             <Route
               path="/manage-roles"
               element={<ProtectedRoute element={ManageRoles} />}
@@ -265,27 +286,27 @@ const MainRoutes = () => {
             />
             <Route
               path="/qa-profile"
-              element={<QaProfile/>}
+              element={<ProtectedStaffRoute element={QaProfile}/>}
             />
             <Route
               path="/pending-seller"
-              element={<PendingSeller/>}
+              element={<ProtectedStaffRoute element={PendingSeller}/>}
             />
             <Route
               path="/decline-seller"
-              element={<DeclineSellers/>}
+              element={<ProtectedStaffRoute element={DeclineSellers}/>}
             />
             <Route
               path="/change-password"
-              element={<Qapassword/>}
+              element={<ProtectedStaffRoute element={Qapassword}/>}
             />
             <Route
               path="/mm-dashboard"
-              element={<MMDash/>}
+              element={<ProtectedStaffRoute element={MMDash}/>}
             />
             <Route
               path="/mh-dashboard"
-              element={<MHDash/>}
+              element={<ProtectedStaffRoute element={MHDash}/>}
             />
           </Routes>
         )}
