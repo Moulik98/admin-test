@@ -61,7 +61,7 @@ const handleModalClose = () => {
         <section className="flex flex-row justify-between py-5 items-center">
           <div>
             <h1 className="text-2xl md:text-3xl text-[#383E50] font-semibold leading-10">
-              QA Approver Dashboard
+              Approved Seller List
             </h1>
           </div>
           <div className="flex items-center" onClick={handleLogout}>
