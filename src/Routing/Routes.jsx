@@ -62,6 +62,7 @@ import DeclineSellers from "../managerdashboard/qaa/DeclineSeller";
 import MMDash from "../managerdashboard/mm/MMdash";
 import MHDash from "../managerdashboard/mh/MHdash";
 import ChPassword from "../managerdashboard/ch/Chpassword";
+import StaffLayout from "./StaffLayout.jsx";
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
   return children(location);
@@ -104,7 +105,7 @@ const MainRoutes = () => {
     }, [navigate]);
     return (
       isStaffLogin && (
-        <Layout
+        <StaffLayout
           
           content={<Element />}
           handleLogout={handleLogout}
