@@ -185,6 +185,7 @@ const QaProfile = () => {
       </div>
       <div className="flex items-top justify-center">
         <div className="ml-40 mt-28" onClick={handleImageClick}>
+        
           <div className="rounded-full w-48 h-48 object-cover border border-dashed border-gray-300 cursor-pointer">
             {image ? (
               <img
@@ -242,7 +243,7 @@ const QaProfile = () => {
                 />
               </div>
             ))}
-            <Link className="flex justify-start text-xs text-blue-400" to="/change-password">
+            <Link className="flex justify-start text-sm text-blue-600" to="/change-password">
               <button>Change Password</button>
             </Link>
           </div>
