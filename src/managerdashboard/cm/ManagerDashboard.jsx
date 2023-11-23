@@ -4,7 +4,8 @@ import OnboardedSellers from "./OnboardedSellers";
 import SideBar from "../Sidebar";
 import Layout from "../../Routing/Layout";
 import { categoryManagerMenu, categoryMenu } from "../../constant";
-import { useNavigate } from "react-router-dom";
+
+import LogOutModal from "../Logout";
 
 const ManagerDashboard = () => {
   const [approvedSellers, setApprovedSellers] = useState();
@@ -12,7 +13,8 @@ const ManagerDashboard = () => {
   const [approvedcount, setApprovedCount] = useState()
   const [pendingCount, setPendingCount] = useState()
   const token = localStorage.getItem("access_token");
-  const navigate = useNavigate();
+  const [showLogoutModal, setShowLogoutModal] = useState(false);  
+ 
 
   const fetchData = async () => {
     const url =
@@ -60,13 +62,12 @@ const ManagerDashboard = () => {
 
 
   const handleLogout = () => {
-    // Remove access token and refresh token from localStorage or wherever you store them
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-
-    // Redirect to the login page
-    navigate('/stafflogin');
+      setShowLogoutModal(true);
   };
+  const handleClose = () => {
+    setShowLogoutModal(false);
+  };
+
 
   return (
     <main className="max-w-full flex">
@@ -88,8 +89,10 @@ const ManagerDashboard = () => {
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
               </svg>
-
             </div>
+            {showLogoutModal && (
+              <LogOutModal visible={showLogoutModal} onClose={handleClose} />
+            )}
             <a
               href={`/onboard-seller`}
               className="text-white flex gap-x-5 bg-[#556EE6] py-2 px-10 rounded"
