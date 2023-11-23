@@ -58,39 +58,43 @@ const QaProfile = () => {
   const token = localStorage.getItem("access_token");
 
   const CategotyManager = async () => {
-    const url = process.env.REACT_APP_URL + "/v1/category-manager/me";
-    const response = await fetch(url, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const data = await response.json();
-    if (response.ok) {
-      setCMInfo(data.sellerDetails);
-      setFormData({
-        designation: data.sellerDetails.roles[0],
-        empId: data.sellerDetails.emp_id,
-        name: data.sellerDetails.name,
-        phone: data.sellerDetails.phone,
-        email: data.sellerDetails.email,
-        userName: data.sellerDetails.userName,
+    try {
+      const url = process.env.REACT_APP_URL + "/v1/category-manager/me";
+      const response = await fetch(url, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       });
+      
+      if (response.ok) {
+        const data = await response.json();
+        setCMInfo(data.sellerDetails);
+        setFormData({
+          designation: data.sellerDetails.roles[0],
+          empId: data.sellerDetails.emp_id,
+          name: data.sellerDetails.name,
+          phone: data.sellerDetails.phone,
+          email: data.sellerDetails.email,
+          userName: data.sellerDetails.userName,
+        });
 
-      // Assuming the image URL is provided in the response
-      if (data.sellerDetails.image) {
-        setImage(data.sellerDetails.image); // Update with the actual property name
+        if (data.sellerDetails.image) {
+          setImage(data.sellerDetails.image);
+        } else {
+          console.error("Image URL not found in the response");
+        }
       } else {
-        console.error("Image URL not found in the response");
+        console.error("Failed to fetch Data");
       }
-    } else {
-      console.error("Failed to fetch Data");
+    } catch (error) {
+      console.error("Error fetching data:", error);
     }
   };
 
   useEffect(() => {
     CategotyManager();
-  }, []);
+  }, [token]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -99,39 +103,36 @@ const QaProfile = () => {
     });
   };
 
-// Helper function to convert image to base64
-const convertImageToBase64 = (image) => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
+  // Helper function to convert image to base64
+  const convertImageToBase64 = (image) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
 
-    reader.onload = () => {
-      const base64Image = reader.result.split(",")[1];
-      resolve(`data:image/jpeg;base64,${base64Image}`);
-    };
+      reader.onload = () => {
+        const base64Image = reader.result.split(",")[1];
+        resolve(`data:image/jpeg;base64,${base64Image}`);
+      };
 
-    reader.onerror = (error) => {
-      reject(error);
-    };
+      reader.onerror = (error) => {
+        reject(error);
+      };
 
-    reader.readAsDataURL(image);
-  });
-};
-
-
+      reader.readAsDataURL(image);
+    });
+  };
 
   const handleFileChange = (e) => {
     const selectedImage = e.target.files[0];
-  
+
     if (selectedImage) {
       const reader = new FileReader();
-  
+
       reader.onload = () => {
         const base64Image = reader.result;
-        setImage(selectedImage); // Update with the actual property name
-        // Now you can use the base64Image as needed, e.g., sending it to the server or displaying it.
+        setImage(selectedImage);
       };
-  
-      reader.readAsDataURL(selectedImage); // Pass the selectedImage directly to readAsDataURL
+
+      reader.readAsDataURL(selectedImage);
     }
   };
 
@@ -141,21 +142,20 @@ const convertImageToBase64 = (image) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    // Convert image to base64 string
+
     let base64Image = null;
     if (image) {
       base64Image = await convertImageToBase64(image);
     }
-  
+
     const updatedFormData = base64Image
       ? { ...formData, image: base64Image }
       : { ...formData };
-  
-    const url =
-      process.env.REACT_APP_URL + "/v1/category-manager/editStaffProfile";
-  
+
+    const url = process.env.REACT_APP_URL + "/v1/category-manager/editStaffProfile";
+
     try {
+      setIsMutating(true); // Set loading state to true
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -164,22 +164,19 @@ const convertImageToBase64 = (image) => {
         },
         body: JSON.stringify(updatedFormData),
       });
-  
+
       const data = await response.json();
       if (response.ok) {
-        setIsMutating(false);
         toast.success(data.message);
       } else {
-        setIsMutating(false);
+        toast.error(data.message);
       }
-  
-      console.log("store details response", data);
     } catch (error) {
       console.error("Error submitting form:", error);
-      setIsMutating(false);
+    } finally {
+      setIsMutating(false); // Set loading state back to false
     }
   };
-  // Helper function to convert image to base64
 
   return (
     <main className="max-w-full flex">
@@ -191,26 +188,44 @@ const convertImageToBase64 = (image) => {
           <div className="rounded-full w-48 h-48 object-cover border border-dashed border-gray-300 cursor-pointer">
             {image ? (
               <img
-                src={URL.createObjectURL(image)}
+                src={image}
                 alt="Selected Profile Image"
                 className="rounded-full w-full h-full object-cover"
               />
             ) : (
               <span className="text-gray-500 flex items-center justify-center h-full">
-                {image === null ? <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" id="profile"><circle cx="12" cy="12" r="11" fill="#000" opacity=".4"></circle><path fill="#000" fill-rule="evenodd" d="M12 11C13.6569 11 15 9.65685 15 8C15 6.34315 13.6569 5 12 5C10.3431 5 9 6.34315 9 8C9 9.65685 10.3431 11 12 11ZM10 13C8.34315 13 7 14.3431 7 16C7 17.6569 8.34315 19 10 19H14C15.6569 19 17 17.6569 17 16C17 14.3431 15.6569 13 14 13H10Z" clip-rule="evenodd"></path></svg>: "Select Profile Image"}
+                {image === null ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="100%"
+                    height="100%"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    id="profile"
+                  >
+                    <circle cx="12" cy="12" r="11" fill="#000" opacity=".4"></circle>
+                    <path
+                      fill="#000"
+                      fillRule="evenodd"
+                      d="M12 11C13.6569 11 15 9.65685 15 8C15 6.34315 13.6569 5 12 5C10.3431 5 9 6.34315 9 8C9 9.65685 10.3431 11 12 11ZM10 13C8.34315 13 7 14.3431 7 16C7 17.6569 8.34315 19 10 19H14C15.6569 19 17 17.6569 17 16C17 14.3431 15.6569 13 14 13H10Z"
+                      clipRule="evenodd"
+                    ></path>
+                  </svg>
+                ) : (
+                  "Select Profile Image"
+                )}
               </span>
             )}
           </div>
           <input
-      type="file"
-      id="imageInput"
-      accept="image/*"
-      onChange={handleFileChange}
-      className="hidden"
-    />
+            type="file"
+            id="imageInput"
+            accept="image/*"
+            onChange={handleFileChange}
+            className="hidden"
+          />
         </div>
         <form className="grow p-12" onSubmit={(e) => handleSubmit(e)}>
-          
           <div className="grid grid-cols-2 gap-4">
             {inputFields.map((field, index) => (
               <div key={field.id + index} className="flex w-full flex-col">
@@ -220,9 +235,9 @@ const convertImageToBase64 = (image) => {
                 <input
                   type="text"
                   className="w-full py-2 px-3 rounded border border-solid border-gray-300 text-gray-800 text-sm"
-                  name={field.name}
+                  name={field?.name}
                   disabled={field.isDisabled}
-                  value={formData[field.name]}
+                  value={formData[field?.name]}
                   onChange={(e) => handleChange(e)}
                 />
               </div>
