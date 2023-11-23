@@ -16,7 +16,7 @@ const LogOutModal = ({ visible, onClose }) => {
         localStorage.removeItem('passToken')
         localStorage.removeItem('email')
         localStorage.removeItem('ally-supports-cache')
-
+        localStorage.removeItem('isStaffLogin')
        
 
         onClose()

@@ -69,6 +69,7 @@ export const CategoryManagerLogin = () => {
       if (response.ok) {
         const token = data.access_token
         localStorage.setItem("access_token", token);
+        localStorage.setItem('isStaffLogin',true);
         const role = data.roles[0]
         if (role) {
           redirect(role)
