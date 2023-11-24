@@ -63,18 +63,18 @@ const CmAndSellerTable = () => {
                 <tbody>
                     {Array.isArray(list) &&
                         list?.map((item, index) => {
-                            const { _id, name, email, userName, phone, onboardCount } = item;
+                            const { _id, emp_id, name, email, userName, phone, onboardCount, pendingSeller, brandCount } = item;
 
                             return (
                                 <tr key={_id}>
-                                    <td className="px-4 py-2">{index}</td>
-                                    <td className="px-4 py-2">{ }</td>
+                                    <td className="px-4 py-2">{index + 1}</td>
+                                    <td className="px-4 py-2">{emp_id}</td>
                                     <td className="px-4 py-2">{name} ({userName})</td>
                                     <td className="px-4 py-2">{phone}</td>
                                     <td className="px-4 py-2">{email}</td>
                                     <td className="px-4 py-2">{onboardCount}</td>
-                                    <td className="px-4 py-2">{onboardCount}</td>
-                                    <td className="px-4 py-2">{onboardCount}</td>
+                                    <td className="px-4 py-2">{pendingSeller}</td>
+                                    <td className="px-4 py-2">{brandCount}</td>
                                     <td className="px-4 py-2">
                                         <div className='flex '>
                                             {/* <EyeButton
