@@ -258,6 +258,9 @@ const Orders = () => {
                                     <th scope="col" class="px-2 py-3">
                                         Order Date
                                     </th>
+                                    <th scope="col" class="px-2 py-3">
+                                       Actions
+                                    </th>
                                     <th scope="col" class="px-2 py-3"></th>
                                 </tr>
                             </thead>
