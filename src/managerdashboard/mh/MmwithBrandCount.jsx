@@ -21,7 +21,7 @@ const MmwithBrandCount = () => {
         setIsDataChange((preValue) => !preValue)
     }
     const handleClick = useCallback((id) => {
-        const url = `/category-head-dashboard/associate-seller/${id}`
+        const url = `/marketing-head-dashboard/associate-brands/${id}`
         navigate(url);
     }, [])
     return (
@@ -31,7 +31,7 @@ const MmwithBrandCount = () => {
                     <thead className="bg-gray-100 text-xs font-medium uppercase text-[#666666]">
                         <tr>
                             <th scope="col" className="px-6 py-2">
-                                CM Name
+                                MM Name
                             </th>
                             <th scope="col" className="px-6 py-2">
                                 No: Of Brands
@@ -61,7 +61,7 @@ const MmwithBrandCount = () => {
                                         </td>
                                         <td className="px-6 py-2">
                                             <MhAssignButton
-                                                cmId={_id}
+                                                mmId={_id}
                                                 // count={onboardCount}
                                                 onClick={handleRefresh}
                                             />

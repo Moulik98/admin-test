@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import Select from 'react-select';
 import { getToken } from '../../hook/getToken'
 import getList from '../getList'
-const MhAssignSellerModal = ({ isOpen, onClose, cmId }) => {
+const MhAssignSellerModal = ({ isOpen, onClose, mmId }) => {
 
     const [isSaving, setIsSaving] = useState(false)
     const [selectedOption, setSelectedOption] = useState(null);
@@ -14,12 +14,12 @@ const MhAssignSellerModal = ({ isOpen, onClose, cmId }) => {
 
     const [list, setList] = useState([])
     useEffect(() => {
-        const url = `${process.env.REACT_APP_URL}/v1/category-head/off-boarded-seller`
+        const url = `${process.env.REACT_APP_URL}/v1/mh/get-brands`
         const token = getToken()
         getList(url, token).then((data) => {
-            setList(data.offboardedseller)
+            setList(data.brands)
         })
-    }, [isOpen, cmId])
+    }, [isOpen, mmId])
 
     const handleSubmit = async (e) => {
         setIsSaving(true)
@@ -28,8 +28,8 @@ const MhAssignSellerModal = ({ isOpen, onClose, cmId }) => {
             const url = `${process.env.REACT_APP_URL}/v1/category-head/onboard-cm-seller`
             const token = getToken()
             const body = {
-                cm_id: cmId,
-                seller_id: selectedOption.value
+                mm_id: mmId,
+                brand_id: selectedOption.value
             }
             console.log('body', body);
             const response = await fetch(url, {
@@ -79,7 +79,7 @@ const MhAssignSellerModal = ({ isOpen, onClose, cmId }) => {
                                 onChange={handleChange}
                                 options={list?.map(item => ({
                                     value: item._id,
-                                    label: (item?.fullname ? item.fullname : '') + (item.store_name ? ` (${item.store_name})` : '') + (item.seller_code ? `-(${item.seller_code})` : ''),
+                                    label: (item?.brand_name ? item.brand_name : '')
                                 }))}
                             />
                         </div>
