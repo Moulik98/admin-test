@@ -267,7 +267,7 @@ const MarHead = [
         />
       </svg>
     ),
-    link: "/qa-profile",
+    link: "/mh-profile",
   },
   {
     title: "Approved Seller",
@@ -350,7 +350,7 @@ const MarManagar = [
         />
       </svg>
     ),
-    link: "/qa-profile",
+    link: "/mm-profile",
   },
   {
     title: "Approved Seller",
