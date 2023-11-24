@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SideBar from "../Sidebar";
 import Loader from "../Loader";
 import toast from "react-hot-toast";
-import { categoryManagerMenu } from "../../constant";
+import { QAList,MarHead } from "../../constant";
 import { Link } from "react-router-dom";
 
 const inputFields = [
@@ -181,7 +181,7 @@ const QaProfile = () => {
   return (
     <main className="max-w-full flex">
       <div className="sidebar bg-[#00388c] h-screen w-fit sticky top-0">
-        <SideBar menu={categoryManagerMenu} />
+        <SideBar menu={MarHead} />
       </div>
       <div className="flex flex-col">
       <p className="text-2xl flex justify-start p-4 ">Profile Update</p>
@@ -245,7 +245,7 @@ const QaProfile = () => {
                 />
               </div>
             ))}
-            <Link className="flex justify-start text-sm text-blue-600" to="/CM-change-password">
+            <Link className="flex justify-start text-sm text-blue-600" to="/mh-change-password">
               <button>Change Password</button>
             </Link>
           </div>

@@ -63,6 +63,10 @@ import MMDash from "../managerdashboard/mm/MMdash";
 import MHDash from "../managerdashboard/mh/MHdash";
 import ChPassword from "../managerdashboard/ch/Chpassword";
 import StaffLayout from "./StaffLayout.jsx";
+import MHProfile from "../managerdashboard/mh/MHProfile.jsx";
+import MMProfile from "../managerdashboard/mm/MMProfile.jsx";
+import MHPassword from "../managerdashboard/mh/MHpassword.jsx";
+import MMPassword from "../managerdashboard/mm/MMpassword.jsx";
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
   return children(location);
@@ -308,6 +312,22 @@ const MainRoutes = () => {
             <Route
               path="/mh-dashboard"
               element={<ProtectedStaffRoute element={MHDash}/>}
+            />
+             <Route
+              path="/mh-profile"
+              element={<ProtectedStaffRoute element={MHProfile}/>}
+            />
+               <Route
+              path="/mh-change-password"
+              element={<ProtectedStaffRoute element={MHPassword}/>}
+            />
+              <Route
+              path="/mm-profile"
+              element={<ProtectedStaffRoute element={MMProfile}/>}
+            />
+              <Route
+              path="/mm-change-password"
+              element={<ProtectedStaffRoute element={MMPassword}/>}
             />
           </Routes>
         )}
