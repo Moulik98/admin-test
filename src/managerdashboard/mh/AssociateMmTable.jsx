@@ -4,6 +4,9 @@ import MergeButton from './MergeButton';
 import EyeButton from './EyeButton';
 import { useNavigate } from 'react-router-dom';
 import { getToken } from '../../hook/getToken';
+import Pagination from '../../Pagination';
+
+// ... (import statements remain unchanged)
 
 const AssociateMmTable = ({ cmName, id }) => {
   const navigate = useNavigate();
@@ -15,7 +18,7 @@ const AssociateMmTable = ({ cmName, id }) => {
       const accessToken = getToken();
 
       const response = await fetch(
-        `${process.env.REACT_APP_URL}/v1/category-head/single-cm/${id}`,
+        `${process.env.REACT_APP_URL}/v1/mh/get-mm-list/${id}`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -31,8 +34,8 @@ const AssociateMmTable = ({ cmName, id }) => {
 
       const data = await response.json();
       // Check if 'sellers' property exists in the response
-      setApiData(data?.response?.sellers);
-      console.log(data?.response?.sellers);
+      setApiData(data);
+      console.log(data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -57,31 +60,19 @@ const AssociateMmTable = ({ cmName, id }) => {
               Sl. No
             </th>
             <th scope="col" className="px-4 py-2">
-              Full Name
+              Product Name
             </th>
             <th scope="col" className="px-4 py-2">
-              Onboarding Date
+              Product External ID
             </th>
             <th scope="col" className="px-4 py-2">
-              Approved Brands
+              Category Tags
             </th>
             <th scope="col" className="px-4 py-2">
-              Pending Brands
+              Utility Tags
             </th>
             <th scope="col" className="px-4 py-2">
-              Approved Products
-            </th>
-            <th scope="col" className="px-4 py-2">
-              Draft Products
-            </th>
-            <th scope="col" className="px-4 py-2">
-              Seller Status
-            </th>
-            <th scope="col" className="px-4 py-2">
-              Approved Product Content
-            </th>
-            <th scope="col" className="px-4 py-2">
-              Pending Product Content
+              Brand
             </th>
             <th scope="col" className="px-4 py-2">
               Actions
@@ -90,34 +81,44 @@ const AssociateMmTable = ({ cmName, id }) => {
         </thead>
         <tbody>
           {Array.isArray(apiData) &&
-            apiData?.map((item, index) => {
+            apiData.map((item, index) => {
               const {
                 _id,
-                fullname,
-                onboarding_date,
-                approvedBrand,
-                pendingBrand,
-                approvedProduct,
-                draftProduct,
-                seller_status,
-                approvedProductContent,
-                pendingProductContent,
+                item_name,
+                product_external_id,
+                category_tags,
+                utility_tags,
+                brand,
               } = item;
 
               return (
                 <tr key={_id}>
                   <td className="px-4 py-2">{index + 1}</td>
-                  <td className="px-4 py-2">{fullname}</td>
+                  <td className="px-4 py-2">{item_name}</td>
+                  <td className="px-4 py-2">{product_external_id}</td>
                   <td className="px-4 py-2">
-                    {format(new Date(onboarding_date), 'yyyy-MM-dd')}
+                    {category_tags && category_tags.length > 0
+                      ? category_tags.join(', ')
+                      : 'N/A'}
                   </td>
-                  <td className="px-4 py-2">{approvedBrand}</td>
-                  <td className="px-4 py-2">{pendingBrand}</td>
-                  <td className="px-4 py-2">{approvedProduct}</td>
-                  <td className="px-4 py-2">{draftProduct}</td>
-                  <td className="px-4 py-2">{seller_status}</td>
-                  <td className="px-4 py-2">{approvedProductContent}</td>
-                  <td className="px-4 py-2">{pendingProductContent}</td>
+                  <td className="px-4 py-2">
+                    {utility_tags && utility_tags.length > 0
+                      ? utility_tags.join(', ')
+                      : 'N/A'}
+                  </td>
+                  <td className="px-4 py-2">
+                    {/* Display brand properties, you can customize this part */}
+                    <div>
+                      {brand && brand.brand_name}{' '}
+                      {brand && (
+                        <img
+                          src={brand.brand_logo_url}
+                          alt={brand && brand.brand_name}
+                          style={{ width: '20px', height: '20px' }}
+                        />
+                      )}
+                    </div>
+                  </td>
                   <td className="px-4 py-2">
                     <div className="flex gap-x-2 px-4">
                       <EyeButton id={_id} onClick={() => handleClick(_id)} />
@@ -134,3 +135,4 @@ const AssociateMmTable = ({ cmName, id }) => {
 };
 
 export default AssociateMmTable;
+

@@ -12,7 +12,8 @@ const CmAndSellerTable = () => {
     const url = `${process.env.REACT_APP_URL}/v1/mh/get-mm-list`;
     const token = getToken();
     getList(url, token).then((data) => {
-      setList(data.marketing_manager);
+      setList(data.marketingManagers);
+      console.log(data.marketingManagers)
     });
   }, []);
 
@@ -67,8 +68,9 @@ const CmAndSellerTable = () => {
                 email,
                 userName,
                 phone,
-                onboardCount,
+                brand_count,
                 emp_id,
+                total_product_count
               } = item;
 
               return (
@@ -80,13 +82,10 @@ const CmAndSellerTable = () => {
                   </td>
                   <td className="px-4 py-2">{phone}</td>
                   <td className="px-4 py-2">{email}</td>
-                  <td className="px-4 py-2">{onboardCount}</td>
-                  <td className="px-4 py-2">{onboardCount}</td>
+                  <td className="px-4 py-2">{brand_count}</td>
+                  <td className="px-4 py-2">{total_product_count}</td>
                   <td className="px-4 py-2">
                     <div className="flex ">
-                      {/* <EyeButton
-                                                onClick={handleClick}
-                                            /> */}
                       <EyeButton id={_id} onClick={handleClick} />
                     </div>
                   </td>
