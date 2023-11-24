@@ -288,7 +288,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                 <div className="w-full h-full p-2 cursor-pointer">
                   <img
                     className="w-full h-full object-contain"
-                    src={attachMent.gstImageUrl}
+                    src='https://res.cloudinary.com/genx21/image/upload/v1694692016/zngnznqxvjtrpvn45jee.webp'
                     alt=""
                   />
                 </div>
@@ -307,7 +307,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                 <div className="w-full h-full p-2">
                   <img
                     className="w-full h-full object-contain"
-                    src={attachMent.panImageUrl}
+                    src='https://res.cloudinary.com/genx21/image/upload/v1694692016/zngnznqxvjtrpvn45jee.webp'
                     alt=""
                   />
                 </div>
