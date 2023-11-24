@@ -106,7 +106,7 @@ const ApproveSellerList = () => {
   useEffect(() => {
     const filterData = async () => {
       try {
-        const apiUrl = `https://two1genx-render.onrender.com/v1/verifySeller/getApprovedData?sellerType=${sellerType}&sort=desc`;
+        const apiUrl = `${process.env.REACT_APP_URL}/v1/verifySeller/getApprovedData?sellerType=${sellerType}&sort=desc`;
         const response = await fetch(apiUrl);
         const data = await response.json();
         setData(data);
@@ -203,7 +203,13 @@ const ApproveSellerList = () => {
                 <thead class=" text-xs  uppercase text-gray-900 font-semibold border-b border-solid border-gray-200 ">
                   <tr>
                     <th scope="col" class=" px-4 py-3">
+                      SL No
+                    </th>
+                    <th scope="col" class=" px-4 py-3">
                       Seller Name
+                    </th>
+                    <th scope="col" class=" px-4 py-3">
+                      Seller Code
                     </th>
                     <th scope="col" class="px-4 py-3">
                       Selller Email
@@ -228,10 +234,11 @@ const ApproveSellerList = () => {
                 </thead>
                 <tbody>
                   {Array.isArray(data) &&
-                    data.map((item, index) => (
+                    data?.map((item, index) => (
                       <TableRow
                         key={index}
                         data={item}
+                        index={index}
                         onDelete={handleRefresh}
                       >
                         <Sellerdetails _id={item._id} />

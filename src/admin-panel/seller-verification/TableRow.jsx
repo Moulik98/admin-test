@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AttachmentModal from "./AttachmentModal";
-const TableRow = ({ data, onDelete }) => {
-  const { fullname, email, isVerify, store_name, _id } = data;
+const TableRow = ({ data, onDelete, index }) => {
+  const { fullname, email, isVerify, store_name, _id, seller_code } = data;
   const [viewAttachment, setViewAttachment] = useState(false);
 
   const [showDeletePopup, setShowDeletePopup] = useState(false);
@@ -73,8 +73,16 @@ const TableRow = ({ data, onDelete }) => {
         scope="row"
         className="whitespace-nowrap px-4 py-2 text-xs font-medium text-gray-900"
       >
+        {index + 1}
+      </td>
+      <td
+        scope="row"
+        className="whitespace-nowrap px-4 py-2 text-xs font-medium text-gray-900"
+      >
         {fullname}
       </td>
+      <td className="px-4 py-2 text-xs">{seller_code}</td>
+
       <td className="px-4 py-2 text-xs">{email}</td>
       <td className="px-4 py-2 text-xs">{store_name}</td>
       <td
@@ -82,9 +90,8 @@ const TableRow = ({ data, onDelete }) => {
         className="whitespace-nowrap px-4 py-2 text-xs font-medium text-gray-900"
       >
         <div
-          className={`flex justify-center items-center rounded-full py-1 px-2 text-xs text-white ${
-            isVerify ? "bg-indigo-500" : "bg-indigo-900"
-          }`}
+          className={`flex justify-center items-center rounded-full py-1 px-2 text-xs text-white ${isVerify ? "bg-indigo-500" : "bg-indigo-900"
+            }`}
         >
           {`${isVerify ? "Approved" : "Declined"}`}
         </div>
