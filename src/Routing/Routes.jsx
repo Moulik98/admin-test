@@ -68,6 +68,7 @@ import MMProfile from "../managerdashboard/mm/MMProfile.jsx";
 import MHPassword from "../managerdashboard/mh/MHpassword.jsx";
 import MMPassword from "../managerdashboard/mm/MMpassword.jsx";
 import AssociateBrandsWithMm from "../managerdashboard/mh/AssociateBrandsWithMm.jsx";
+import MHAssignSeller from "../managerdashboard/mh/MHAssignSeller.jsx";
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
   return children(location);
@@ -333,6 +334,10 @@ const MainRoutes = () => {
               <Route
               path="/mm-change-password"
               element={<ProtectedStaffRoute element={MMPassword}/>}
+            />
+            <Route
+              path="/mh-assign-brands"
+              element={<ProtectedStaffRoute element={MHAssignSeller}/>}
             />
           </Routes>
         )}

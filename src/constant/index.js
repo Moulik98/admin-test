@@ -287,7 +287,7 @@ const MarHead = [
         />
       </svg>
     ),
-    link: "/assign-brands",
+    link: "/mh-assign-brands",
   }
 ];
 
