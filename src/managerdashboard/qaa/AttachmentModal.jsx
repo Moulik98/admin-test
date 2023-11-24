@@ -209,7 +209,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                     :
                   </div>
                   <p className="text-sm text-right font-normal mx-1">
-                    {cm.name}
+                  {cm && cm.name ? cm.name : "N/A"}
                   </p>
                 </div>
               </div>
