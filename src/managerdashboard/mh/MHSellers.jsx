@@ -12,7 +12,7 @@ const MHSellers = ({approvedSellers,pendingSellers}) => {
         <div className='flex gap-5 '>
 
             <div className='grow w-full p-5 flex flex-col gap-5 border border-solid border-[#EEE] rounded-xl'>
-                <p className='text-base text-[#383E50] font-semibold'>Onboarded Sellers</p>
+                <p className='text-base text-[#383E50] font-semibold'>Onboarded Brands</p>
              <SellerTable sellers={approvedSellers} />
             </div>
             {/* //2nd box */}
