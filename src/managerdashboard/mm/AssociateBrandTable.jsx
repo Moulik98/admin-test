@@ -5,7 +5,7 @@ import EyeButton from './EyeButton';
 import { useNavigate } from 'react-router-dom';
 import { getToken } from '../../hook/getToken';
 
-const AssociateSellerTable = ({ cmName, id }) => {
+const AssociateBrandTable = ({ cmName, id }) => {
   const navigate = useNavigate();
   const [apiData, setApiData] = useState([]);
 
@@ -133,4 +133,4 @@ const AssociateSellerTable = ({ cmName, id }) => {
   );
 };
 
-export default AssociateSellerTable;
+export default AssociateBrandTable;

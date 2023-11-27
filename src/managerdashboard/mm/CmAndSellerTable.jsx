@@ -19,12 +19,13 @@ const CmAndSellerTable = () => {
 
 
     const handleClick = useCallback((id) => {
-        const url = `/category-head-dashboard/associate-seller/${id}`
+        const url = `/MM-dashboard/associate-brand/${id}`
         navigate(url);
         console.log('id', id);
     }, [])
     return (
         <div className="relative  overflow-hidden">
+        
             <h4 className='text-left text-xl text-[#383E50] font-medium py-2'>List of Brands</h4>
             <table className="w-full text-left text-xs">
                 <thead className="bg-gray-100 text-xs font-medium uppercase text-[#666666]">
