@@ -14,7 +14,7 @@ const MhAssignSellerModal = ({ isOpen, onClose, mmId }) => {
 
     const [list, setList] = useState([])
     useEffect(() => {
-        const url = `${process.env.REACT_APP_URL}/v1/mh/get-brands`
+        const url = `${process.env.REACT_APP_URL}/v1/mh/get-ofboard-brands`
         const token = getToken()
         getList(url, token).then((data) => {
             setList(data.brands)
@@ -25,7 +25,7 @@ const MhAssignSellerModal = ({ isOpen, onClose, mmId }) => {
         setIsSaving(true)
         e.preventDefault()
         try {
-            const url = `${process.env.REACT_APP_URL}/v1/category-head/onboard-cm-seller`
+            const url = `${process.env.REACT_APP_URL}/v1/mh/onboard-brand`
             const token = getToken()
             const body = {
                 mm_id: mmId,
@@ -44,7 +44,7 @@ const MhAssignSellerModal = ({ isOpen, onClose, mmId }) => {
                 toast.success('Seller Assigned Successfully')
                 onClose()
             }
-            const resData = await response.JSON()
+            const resData = await response.json();
             console.log(resData)
         } catch (err) {
             console.log(err)
@@ -85,7 +85,7 @@ const MhAssignSellerModal = ({ isOpen, onClose, mmId }) => {
                         </div>
 
                         <div className='mt-10 flex justify-end'>
-                            <button disabled={isSaving} type='submit' className='py-2 px-6 rounded bg-blue-500 text-white'>Assign Seller</button>
+                            <button disabled={isSaving} type='submit' className='py-2 px-6 rounded bg-blue-500 text-white'>Assign MM</button>
                         </div>
                     </div>
                 </form>

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import AssignSellerModal from './MhAssignSellerModal'
 
-const MhAssignButton = ({ cmId, count, onClick }) => {
+const MhAssignButton = ({ mmId, count, onClick }) => {
     const [isOpen, setIsOpen] = useState(false)
     const handleClick = () => {
         setIsOpen(true)
@@ -13,13 +13,13 @@ const MhAssignButton = ({ cmId, count, onClick }) => {
             <button
                 onClick={() => handleClick()}
                 type='button' className='py-2 px-4 rounded bg-blue-500 border text-white'>
-                Assign Seller
+                Assign MM
             </button>
             {
                 isOpen ?
                     <AssignSellerModal
                         isOpen={isOpen}
-                        cmId={cmId}
+                        mmId={mmId}
                         onClose={() => {
                             setIsOpen(false)
                             onClick()

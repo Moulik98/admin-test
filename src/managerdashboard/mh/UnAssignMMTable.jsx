@@ -6,10 +6,10 @@ import { getToken } from "../../hook/getToken";
 const UnAssignMMTable = () => {
   const [list, setList] = useState([]);
   useEffect(() => {
-    const url = `${process.env.REACT_APP_URL}/v1/category-head/off-boarded-seller`;
+    const url = `${process.env.REACT_APP_URL}/v1/mh/get-ofboard-brands`;
     const token = getToken();
     getList(url, token).then((data) => {
-      setList(data.offboardedseller);
+      setList(data.brands);
     });
   }, []);
 
@@ -25,50 +25,28 @@ const UnAssignMMTable = () => {
               SL. No
             </th>
             <th scope="col" className="px-6 py-2">
-              OnBoard Date
+              Brand Name
             </th>
             <th scope="col" className="px-6 py-2">
-              Brand NAme
+              Brand Logo
             </th>
             <th scope="col" className="px-6 py-2">
-              Business Type
-            </th>
-            <th scope="col" className="px-6 py-2">
-              PAN
-            </th>
-            <th scope="col" className="px-6 py-2">
-              GSTN
-            </th>
-            <th scope="col" className="px-6 py-2">
-              Contact No
+              Product Count
             </th>
           </tr>
         </thead>
         <tbody>
           {Array.isArray(list) &&
             list?.map((item, index) => {
-              const {
-                _id,
-                createdAt,
-                fullname,
-                seller_code,
-                sellerType,
-                pan_number,
-                gst_number,
-                phone,
-              } = item;
-              const date = format(new Date(createdAt), "dd-MM-yyyy");
+              const { _id, brand_name, brand_logo_url, product_count } = item;
               return (
                 <tr key={_id}>
                   <td className="px-6 py-2">{index + 1}</td>
-                  <td className="px-6 py-2">{date}</td>
+                  <td className="px-6 py-2">{brand_name}</td>
                   <td className="px-6 py-2">
-                    {fullname}({seller_code})
+                    <img src={brand_logo_url} alt={`${brand_name} Logo`} className="w-8 h-8"/>
                   </td>
-                  <td className="px-6 py-2">{sellerType}</td>
-                  <td className="px-6 py-2">{pan_number}</td>
-                  <td className="px-6 py-2">{gst_number}</td>
-                  <td className="px-6 py-2">{phone}</td>
+                  <td className="px-6 py-2">{product_count}</td>
                 </tr>
               );
             })}
