@@ -78,7 +78,7 @@ const ManagerDashboard = () => {
         <section className="flex flex-row justify-between py-5 items-center">
           <div>
             <h1 className=" text-2xl md:text-3xl text-[#383E50] font-semibold leading-10">
-              Dashboard
+              CM  Dashboard
             </h1>
             <p className="text-sm leading-6 font-normal">
               Whole data about your business here
