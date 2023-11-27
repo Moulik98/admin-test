@@ -9,10 +9,10 @@ const CmAndSellerTable = () => {
     const navigate = useNavigate()
     const [list, setList] = useState([]);
     useEffect(() => {
-        const url = `${process.env.REACT_APP_URL}/v1/mh/get-mm-list`;
+        const url = `${process.env.REACT_APP_URL}/v1/mm/mm_dashboard`;
         const token = getToken();
         getList(url, token).then((data) => {
-            setList(data.marketing_manager)
+            setList(data.brands)
         })
 
     }, [])
@@ -41,17 +41,13 @@ const CmAndSellerTable = () => {
                         </th>
 
                         <th scope="col" className="px-4 py-2">
-                            Seller(Name & Id)
+                            CM Name & Id
                         </th>
                         <th scope="col" className="px-4 py-2">
-                            CM(Name & Id)
+                            CM Contact No
                         </th>
                         <th scope="col" className="px-4 py-2">
-                            Category Tags
-                        </th>
-                        
-                        <th scope="col" className="px-4 py-2">
-                            Utility Tags
+                            CM Email
                         </th>
                         <th scope="col" className="px-4 py-2">
                             Actions
@@ -60,30 +56,27 @@ const CmAndSellerTable = () => {
                 </thead>
                 <tbody>
                     {Array.isArray(list) &&
-                        list?.map((item, index) => {
-                            const { _id, name, email, userName, phone, onboardCount,emp_id } = item;
+                        list.map((item, index) => {
+                            const { _id, brand_name, product_count, cm_data } = item;
 
                             return (
                                 <tr key={_id}>
-                                    <td className="px-4 py-2">{index+1}</td>
-                                    <td className="px-4 py-2">{emp_id}</td>
-                                    <td className="px-4 py-2">{name} ({userName})</td>
-                                    <td className="px-4 py-2">{phone}</td>
-                                    <td className="px-4 py-2">{email}</td>
-                                    <td className="px-4 py-2">{onboardCount}</td>
+                                    <td className="px-4 py-2">{index + 1}</td>
+                                    <td className="px-4 py-2">{brand_name}</td>
+                                    <td className="px-4 py-2">{product_count}</td>
+                                    <td className="px-4 py-2">{`${cm_data.name} (${cm_data.userName})`}</td>
+                                    <td className="px-4 py-2">{cm_data.phone}</td>
+                                    <td className="px-4 py-2">{cm_data.email}</td>
                                     <td className="px-4 py-2">
                                         <div className='flex '>
-                                            {/* <EyeButton
-                                                onClick={handleClick}
-                                            /> */}
                                             <EyeButton
                                                 id={_id}
-                                                onClick={handleClick}
+                                                onClick={() => handleClick(_id)}  // Pass _id to the handleClick function
                                             />
                                         </div>
                                     </td>
                                 </tr>
-                            )
+                            );
                         })}
                 </tbody>
             </table>

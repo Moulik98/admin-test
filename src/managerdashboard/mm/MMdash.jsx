@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { MarManagar } from '../../constant'
-// import CmAndSellerTable from './CmAndSellerTable'
-import Stats from '../mh/Stats'
 import SideBar from '../Sidebar'
 import NavigateBack from '../NavigateBack'
 import CmAndSellerTable from './CmAndSellerTable'
 import LogOutModal from '../Logout'
+import MMStats from './MMStat'
 
 const MMdash = () => {
 
@@ -43,7 +42,7 @@ const MMdash = () => {
 
                     </div>
                 </section>
-                <Stats />
+                <MMStats/>
 
                 <section className='flex flex-col'>
                     <CmAndSellerTable />
