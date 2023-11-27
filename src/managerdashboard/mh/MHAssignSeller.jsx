@@ -3,7 +3,7 @@ import MmwithBrandCount from './MmwithBrandCount'
 import { MarHead, } from '../../constant'
 import SideBar from '../Sidebar'
 import NavigateBack from '../NavigateBack'
-// import UnAssignSellerTable from './UnAssignSellerTable'
+import UnAssignMMTable from './UnAssignMMTable'
 const MHAssignSeller = () => {
     return (
         <main className='w-full flex flex-row gap-x-5'>
@@ -28,9 +28,9 @@ const MHAssignSeller = () => {
                 <section className='flex flex-col'>
                     <MmwithBrandCount />
                 </section>
-                {/* <section className='flex flex-col'>
-                    <UnAssignSellerTable />
-                </section> */}
+                <section className='flex flex-col'>
+                    <UnAssignMMTable />
+                </section>
             </div>
         </main>
     )
