@@ -32,7 +32,7 @@ const PendingTable = ({ sellers }) => {
           <tbody>
             {Array.isArray(sellers) &&
               sellers?.map((item) => {
-                const date = format(new Date(item?.createdAt), 'dd MM yyyy')
+                const date = format(new Date(item?.createdAt), 'dd/MM/yyyy')
                 return (
                   <tr key={item._id}>
                     <td className="px-2 py-3">{date}</td>
