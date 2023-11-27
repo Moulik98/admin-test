@@ -13,7 +13,7 @@ const SellerTable = ({ sellers }) => {
                 Onboarding Date
               </th>
               <th scope="col" className="px-2 py-3">
-                Seller Namae(Code)
+                Seller Name(Code)
               </th>
               <th scope="col" className="px-2 py-3">
                 Business Type{" "}
