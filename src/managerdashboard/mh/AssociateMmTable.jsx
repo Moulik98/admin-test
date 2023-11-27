@@ -1,12 +1,11 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { format } from 'date-fns';
-import MergeButton from './MergeButton';
-import EyeButton from './EyeButton';
-import { useNavigate } from 'react-router-dom';
-import { getToken } from '../../hook/getToken';
-import Pagination from '../../Pagination';
-
-// ... (import statements remain unchanged)
+import React, { useEffect, useState, useCallback } from "react";
+import { format } from "date-fns";
+import MergeButton from "./MergeButton";
+import EyeButton from "./EyeButton";
+import { useNavigate } from "react-router-dom";
+import { getToken } from "../../hook/getToken";
+import Pagination from "../../Pagination";
+import Description from "../../Description";
 
 const AssociateMmTable = ({ cmName, id }) => {
   const navigate = useNavigate();
@@ -14,15 +13,13 @@ const AssociateMmTable = ({ cmName, id }) => {
 
   const fetchData = async () => {
     try {
-      // Retrieve the access token from local storage
       const accessToken = getToken();
 
       const response = await fetch(
         `${process.env.REACT_APP_URL}/v1/mh/get-mm-list/${id}`,
         {
           headers: {
-            'Content-Type': 'application/json',
-            // Include the access token in the Authorization header
+            "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
           },
         }
@@ -33,11 +30,9 @@ const AssociateMmTable = ({ cmName, id }) => {
       }
 
       const data = await response.json();
-      // Check if 'sellers' property exists in the response
       setApiData(data);
-      console.log(data);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error("Error fetching data:", error);
     }
   };
 
@@ -47,7 +42,7 @@ const AssociateMmTable = ({ cmName, id }) => {
 
   const handleClick = useCallback((id) => {
     const url = `/category-head-dashboard/associate-seller/${id}`;
-    console.log('url', url);
+    console.log("url", url);
     // navigate(url);
   }, []);
 
@@ -60,10 +55,13 @@ const AssociateMmTable = ({ cmName, id }) => {
               Sl. No
             </th>
             <th scope="col" className="px-4 py-2">
+              Brand
+            </th>
+            <th scope="col" className="px-4 py-2">
               Product Name
             </th>
             <th scope="col" className="px-4 py-2">
-              Product External ID
+              Product ID
             </th>
             <th scope="col" className="px-4 py-2">
               Category Tags
@@ -71,9 +69,7 @@ const AssociateMmTable = ({ cmName, id }) => {
             <th scope="col" className="px-4 py-2">
               Utility Tags
             </th>
-            <th scope="col" className="px-4 py-2">
-              Brand
-            </th>
+
             <th scope="col" className="px-4 py-2">
               Actions
             </th>
@@ -81,48 +77,80 @@ const AssociateMmTable = ({ cmName, id }) => {
         </thead>
         <tbody>
           {Array.isArray(apiData) &&
-            apiData.map((item, index) => {
+            apiData.map((brand, brandIndex) => {
               const {
-                _id,
-                item_name,
-                product_external_id,
-                category_tags,
-                utility_tags,
-                brand,
-              } = item;
+                _id: brandId,
+                brand_name,
+                brand_logo_url,
+                products,
+              } = brand;
+
+              // Combine product names, external IDs, category tags, and utility tags
+              const combinedProductInfo = products.reduce(
+                (acc, product, productIndex) => {
+                  const {
+                    item_name,
+                    product_external_id,
+                    category_tags,
+                    utility_tags,
+                  } = product;
+
+                  if (productIndex > 0) {
+                    acc.productNames += ",";
+                    acc.externalIds.push(", ");
+                    acc.categoryTags.push(", ");
+                    acc.utilityTags.push(", ");
+                  }
+
+                  acc.productNames += item_name;
+                  acc.externalIds.push(product_external_id);
+                  acc.categoryTags.push(...(category_tags || []));
+                  acc.utilityTags.push(...(utility_tags || []));
+
+                  return acc;
+                },
+                {
+                  productNames: "",
+                  externalIds: [],
+                  categoryTags: [],
+                  utilityTags: [],
+                }
+              );
 
               return (
-                <tr key={_id}>
-                  <td className="px-4 py-2">{index + 1}</td>
-                  <td className="px-4 py-2">{item_name}</td>
-                  <td className="px-4 py-2">{product_external_id}</td>
+                <tr key={brandId}>
+                  <td className="px-4 py-2">{brandIndex + 1}</td>
                   <td className="px-4 py-2">
-                    {category_tags && category_tags.length > 0
-                      ? category_tags.join(', ')
-                      : 'N/A'}
-                  </td>
-                  <td className="px-4 py-2">
-                    {utility_tags && utility_tags.length > 0
-                      ? utility_tags.join(', ')
-                      : 'N/A'}
-                  </td>
-                  <td className="px-4 py-2">
-                    {/* Display brand properties, you can customize this part */}
-                    <div>
-                      {brand && brand.brand_name}{' '}
-                      {brand && (
-                        <img
-                          src={brand.brand_logo_url}
-                          alt={brand && brand.brand_name}
-                          style={{ width: '20px', height: '20px' }}
-                        />
-                      )}
+                    <div className="flex">
+                      {brand_name}{" "}
+                      <img
+                        src={brand_logo_url}
+                        alt={brand_name}
+                        style={{ width: "20px", height: "20px" }}
+                      />
                     </div>
                   </td>
                   <td className="px-4 py-2">
+                    <Description description={combinedProductInfo.productNames}/>
+                  </td>
+                  <td className="px-4 py-2">
+                  <Description description={combinedProductInfo.externalIds.join(",")}/>
+                  </td>
+                  <td className="px-4 py-2">
+                  <Description description={combinedProductInfo.categoryTags.join(",")}/>
+                  </td>
+                  <td className="px-4 py-2">
+                  <Description description={combinedProductInfo.utilityTags.join(",")}/>
+                  </td>
+
+                  <td className="px-4 py-2">
                     <div className="flex gap-x-2 px-4">
-                      <EyeButton id={_id} onClick={() => handleClick(_id)} />
-                      <MergeButton sellerId={_id} />
+                      <EyeButton
+                        id={brandId}
+                        onClick={() => handleClick(brandId)}
+                      />
+                      {/* Assuming MergeButton requires brandId */}
+                      <MergeButton brandId={brandId} />
                     </div>
                   </td>
                 </tr>
@@ -135,4 +163,3 @@ const AssociateMmTable = ({ cmName, id }) => {
 };
 
 export default AssociateMmTable;
-
