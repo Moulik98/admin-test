@@ -25,7 +25,7 @@ const CmAndSellerTable = () => {
     }, [])
     return (
         <div className="relative  overflow-hidden">
-        
+
             <h4 className='text-left text-xl text-[#383E50] font-medium py-2'>List of Brands</h4>
             <table className="w-full text-left text-xs">
                 <thead className="bg-gray-100 text-xs font-medium uppercase text-[#666666]">
@@ -65,9 +65,9 @@ const CmAndSellerTable = () => {
                                     <td className="px-4 py-2">{index + 1}</td>
                                     <td className="px-4 py-2">{brand_name}</td>
                                     <td className="px-4 py-2">{product_count}</td>
-                                    <td className="px-4 py-2">{`${cm_data.name} (${cm_data.userName})`}</td>
-                                    <td className="px-4 py-2">{cm_data.phone}</td>
-                                    <td className="px-4 py-2">{cm_data.email}</td>
+                                    <td className="px-4 py-2">{`${cm_data?.name} (${cm_data?.userName})`}</td>
+                                    <td className="px-4 py-2">{cm_data?.phone}</td>
+                                    <td className="px-4 py-2">{cm_data?.email}</td>
                                     <td className="px-4 py-2">
                                         <div className='flex '>
                                             <EyeButton
