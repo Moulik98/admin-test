@@ -37,13 +37,13 @@ const CancelReasonModal = ({ isOpen, onClose, id }) => {
                     {
                         data?.reasons?.map((item, index) => {
                             return (
-                                <li key={index}>{item}</li>
+                                <li className='p-2 text-base' key={index}>{item}</li>
                             )
                         })
                     }
                 </ul>
                 <h4 className='text-left text-xl text-[#383E50] font-medium py-2'>Note</h4>
-                <p>{data?.content}</p>
+                <p className='text-base'>{data?.content}</p>
             </div>
         </div>
     )
