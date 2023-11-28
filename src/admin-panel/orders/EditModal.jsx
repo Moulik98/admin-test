@@ -10,6 +10,8 @@ const EditModal = ({ order_id, visible, onClose }) => {
         setSelectedOption(e.target.value);
     };
 
+    // Set a default option
+    const defaultOption = "--select--";
     const statusOptions = [
         "shipped",
         "out_for_delivery",
@@ -23,9 +25,9 @@ const EditModal = ({ order_id, visible, onClose }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const apiUrl = process.env.REACT_APP_URL + `/v1/orders/update-order-status`
-        const requestBody ={
-            user_order_id : order_id,
-            order_status : selectedOption
+        const requestBody = {
+            user_order_id: order_id,
+            order_status: selectedOption
         }
         try {
             const response = await fetch(apiUrl, {
@@ -37,10 +39,10 @@ const EditModal = ({ order_id, visible, onClose }) => {
                 body: JSON.stringify(requestBody)
             });
             const data = await response.json();
-            if(response.ok){
+            if (response.ok) {
                 toast.success(data.message)
                 onClose();
-            }else{
+            } else {
                 toast.error(data.message)
             }
 
@@ -51,7 +53,7 @@ const EditModal = ({ order_id, visible, onClose }) => {
     if (visible)
         return (
             <div className=" fixed inset-0 overflow-x-hidden overflow-y-scroll bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center my-auto p-4">
-                <div className="w-80 flex flex-col bg-white rounded py-1 px-4">
+                <div className="w-96 flex flex-col bg-white rounded py-1 px-4">
                     <div className="flex justify-end">
                         <button className=" float-right text-3xl leading-none font-semibold"
                             type="button"
@@ -63,24 +65,25 @@ const EditModal = ({ order_id, visible, onClose }) => {
                     </div>
                     <form onSubmit={handleSubmit}>
                         <div className="flex flex-col gap-2">
-                        <label className='text-lg ' htmlFor="orderId">Order ID:</label>
-                        <input
-                            className='border p-1'
-                            type="text"
-                            id="orderId"
-                            value={order_id}
+                            <label className='text-lg ' htmlFor="orderId">Order ID:</label>
+                            <input
+                                className='border p-1'
+                                type="text"
+                                id="orderId"
+                                value={order_id}
 
-                        />
+                            />
                         </div>
                         <div className="flex flex-col gap-2">
-                        <label className='text-lg' htmlFor="dropdown">Dropdown:</label>
-                        <select id="dropdown" value={selectedOption} className='border p-1' onChange={handleDropdownChange}>
-                            {statusOptions.map((option, index) => (
-                                <option key={index} value={option}>
-                                   {option.replace(/_/g, " ")}{/* Replacing underscores with spaces */}
-                                </option>
-                            ))}
-                        </select>
+                            <label className='text-lg' htmlFor="dropdown">Order Status:</label>
+                            <select id="dropdown" value={selectedOption} className='border p-1' onChange={handleDropdownChange}>
+                            <option value="" disabled hidden>{defaultOption}</option>
+                                {statusOptions.map((option, index) => (
+                                    <option key={index} value={option}>
+                                        {option.replace(/_/g, " ")}{/* Replacing underscores with spaces */}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                         <div className="flex justify-center items-center py-2">
                             <button className="bg-blue-900 px-4 py-2 text-white" type='submit' >
