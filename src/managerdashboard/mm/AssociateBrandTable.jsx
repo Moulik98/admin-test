@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { format } from 'date-fns';
-import MergeButton from './MergeButton';
-import EyeButton from './EyeButton';
-import { useNavigate } from 'react-router-dom';
-import { getToken } from '../../hook/getToken';
+import React, { useEffect, useState, useCallback } from "react";
+import { format } from "date-fns";
+import MergeButton from "./MergeButton";
+import EyeButton from "./EyeButton";
+import { useNavigate } from "react-router-dom";
+import { getToken } from "../../hook/getToken";
 
 const AssociateBrandTable = ({ cmName, id }) => {
   const navigate = useNavigate();
@@ -15,15 +15,17 @@ const AssociateBrandTable = ({ cmName, id }) => {
       const accessToken = getToken();
 
       const response = await fetch(
-        `${process.env.REACT_APP_URL}/v1/category-head/single-cm/${id}`,
+        `${process.env.REACT_APP_URL}/v1/mm/get-products/${id}`,
         {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             // Include the access token in the Authorization header
             Authorization: `Bearer ${accessToken}`,
           },
         }
       );
+
+      console.log(id);
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -31,10 +33,10 @@ const AssociateBrandTable = ({ cmName, id }) => {
 
       const data = await response.json();
       // Check if 'sellers' property exists in the response
-      setApiData(data?.response?.sellers);
-      console.log(data?.response?.sellers);
+      setApiData(data);
+      console.log(data);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error("Error fetching data:", error);
     }
   };
 
@@ -44,7 +46,7 @@ const AssociateBrandTable = ({ cmName, id }) => {
 
   const handleClick = useCallback((id) => {
     const url = `/category-head-dashboard/associate-seller/${id}`;
-    console.log('url', url);
+    console.log("url", url);
     // navigate(url);
   }, []);
 
@@ -57,31 +59,10 @@ const AssociateBrandTable = ({ cmName, id }) => {
               Sl. No
             </th>
             <th scope="col" className="px-4 py-2">
-              Full Name
+              Product Name
             </th>
             <th scope="col" className="px-4 py-2">
-              Onboarding Date
-            </th>
-            <th scope="col" className="px-4 py-2">
-              Approved Brands
-            </th>
-            <th scope="col" className="px-4 py-2">
-              Pending Brands
-            </th>
-            <th scope="col" className="px-4 py-2">
-              Approved Products
-            </th>
-            <th scope="col" className="px-4 py-2">
-              Draft Products
-            </th>
-            <th scope="col" className="px-4 py-2">
-              Seller Status
-            </th>
-            <th scope="col" className="px-4 py-2">
-              Approved Product Content
-            </th>
-            <th scope="col" className="px-4 py-2">
-              Pending Product Content
+              Category
             </th>
             <th scope="col" className="px-4 py-2">
               Actions
@@ -93,31 +74,22 @@ const AssociateBrandTable = ({ cmName, id }) => {
             apiData?.map((item, index) => {
               const {
                 _id,
-                fullname,
+                item_name,
                 onboarding_date,
-                approvedBrand,
-                pendingBrand,
-                approvedProduct,
-                draftProduct,
-                seller_status,
-                approvedProductContent,
-                pendingProductContent,
+                parent_category_name,
+                sub_category_name,
+                child_category_name,
               } = item;
 
               return (
                 <tr key={_id}>
                   <td className="px-4 py-2">{index + 1}</td>
-                  <td className="px-4 py-2">{fullname}</td>
+                  <td className="px-4 py-2">{item_name}</td>
+
                   <td className="px-4 py-2">
-                    {format(new Date(onboarding_date), 'yyyy-MM-dd')}
+                    {parent_category_name} - {sub_category_name} -{" "}
+                    {child_category_name}
                   </td>
-                  <td className="px-4 py-2">{approvedBrand}</td>
-                  <td className="px-4 py-2">{pendingBrand}</td>
-                  <td className="px-4 py-2">{approvedProduct}</td>
-                  <td className="px-4 py-2">{draftProduct}</td>
-                  <td className="px-4 py-2">{seller_status}</td>
-                  <td className="px-4 py-2">{approvedProductContent}</td>
-                  <td className="px-4 py-2">{pendingProductContent}</td>
                   <td className="px-4 py-2">
                     <div className="flex gap-x-2 px-4">
                       <EyeButton id={_id} onClick={() => handleClick(_id)} />
