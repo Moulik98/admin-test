@@ -45,13 +45,11 @@ const DeclinedSeller = () => {
                 Sl. NO
               </th>
               <th scope="col" className="px-4 py-2">
-                Seller Declined
+                Onboarding Date
               </th>
-
               <th scope="col" className="px-4 py-2">
-                Seller Code
+                Seller Name(Code)
               </th>
-
               <th scope="col" className="px-4 py-2">
                 Contact No
               </th>
@@ -65,7 +63,7 @@ const DeclinedSeller = () => {
                 Store Name
               </th>
               <th scope="col" className="px-4 py-2">
-                Actions (View Details)
+                Reason (View Details)
               </th>
             </tr>
           </thead>
