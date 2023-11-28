@@ -43,6 +43,7 @@ const AssociateBrandsWithMm = () => {
                     <AssociateSellerTable
                         id={id}
                         list={list}
+
                         cmName={cmName}
                     />
                 </section>

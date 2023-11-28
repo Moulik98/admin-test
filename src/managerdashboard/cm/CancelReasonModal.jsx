@@ -31,7 +31,7 @@ const CancelReasonModal = ({ isOpen, onClose, id }) => {
             onClick={(e) => handleClick(e)}
             id='container'
             className='fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center'>
-            <div className='w-2/5 bg-white  p-10 rounded-xl'>
+            <div className='w-2/5 bg-white  p-10 rounded'>
                 <h4 className='text-left text-xl text-[#383E50] font-medium py-2'>Reason for Declining</h4>
                 <ul className='list-disc'>
                     {
