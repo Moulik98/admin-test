@@ -67,12 +67,16 @@ import MHProfile from "../managerdashboard/mh/MHProfile.jsx";
 import MMProfile from "../managerdashboard/mm/MMProfile.jsx";
 import MHPassword from "../managerdashboard/mh/MHpassword.jsx";
 import MMPassword from "../managerdashboard/mm/MMpassword.jsx";
+
+import ManageCancellation from "../admin-panel/manage-cancellation/ManageCancellation.jsx";
+
 import AssociateBrandsWithMm from "../managerdashboard/mh/AssociateBrandsWithMm.jsx";
 import MHAssignSeller from "../managerdashboard/mh/MHAssignSeller.jsx";
 import AssociateMmTable from "../managerdashboard/mh/AssociateMmTable.jsx";
 import AssociateBrandTable from "../managerdashboard/mm/AssociateBrandTable.jsx";
 import AssociateBrand from "../managerdashboard/mm/AssociateBrand.jsx";
 import AssociateBrandsProducts from "../managerdashboard/mh/AssociateBrandsProducts.jsx";
+
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
   return children(location);
@@ -190,6 +194,10 @@ const MainRoutes = () => {
             <Route
               path="/awardlist"
               element={<ProtectedRoute element={AwardList} />}
+            />
+            <Route
+              path="/manage-cancellation"
+              element={<ProtectedRoute element={ManageCancellation} />}
             />
             <Route
               path="/countrylist"
