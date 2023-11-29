@@ -67,6 +67,7 @@ import MHProfile from "../managerdashboard/mh/MHProfile.jsx";
 import MMProfile from "../managerdashboard/mm/MMProfile.jsx";
 import MHPassword from "../managerdashboard/mh/MHpassword.jsx";
 import MMPassword from "../managerdashboard/mm/MMpassword.jsx";
+import ManageCancellation from "../admin-panel/manage-cancellation/ManageCancellation.jsx";
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
   return children(location);
@@ -184,6 +185,10 @@ const MainRoutes = () => {
             <Route
               path="/awardlist"
               element={<ProtectedRoute element={AwardList} />}
+            />
+            <Route
+              path="/manage-cancellation"
+              element={<ProtectedRoute element={ManageCancellation} />}
             />
             <Route
               path="/countrylist"

@@ -61,8 +61,8 @@ const DeclineReasonModal = ({ isOpen, onClose, onSubmit, id }) => {
   };
 
   return (
-    <div className={`modal ${isOpen ? "open" : ""} fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center`}>
-      <div className="modal-content bg-white p-4 w-1/2 h-2/3 rounded-lg shadow-lg">
+    <div className={`modal ${isOpen ? "open" : ""}  bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center`}>
+      <div className="modal-content bg-white p-4 w-full h-2/3 shadow-lg">
         <h2 className="text-2xl font-bold mb-4">Choose Decline Reasons</h2>
         {declineReasons.map((reason, index) => (
           <label key={index} className="flex items-center mb-2">
