@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { format } from "date-fns";
+import React, { useEffect, useState } from "react";
 import MergeButton from "./MergeButton";
-import EyeButton from "./EyeButton";
 import { useNavigate } from "react-router-dom";
 import { getToken } from "../../hook/getToken";
+import TagButton from "./TagButton";
 
 const AssociateBrandTable = ({ cmName, id }) => {
   const navigate = useNavigate();
@@ -42,12 +41,6 @@ const AssociateBrandTable = ({ cmName, id }) => {
 
   useEffect(() => {
     fetchData();
-  }, []);
-
-  const handleClick = useCallback((id) => {
-    const url = `/category-head-dashboard/associate-seller/${id}`;
-    console.log("url", url);
-    // navigate(url);
   }, []);
 
   return (
@@ -92,7 +85,7 @@ const AssociateBrandTable = ({ cmName, id }) => {
                   </td>
                   <td className="px-4 py-2">
                     <div className="flex gap-x-2 px-4">
-                      <EyeButton id={_id} onClick={() => handleClick(_id)} />
+                      <TagButton id={_id} />
                       <MergeButton sellerId={_id} />
                     </div>
                   </td>
