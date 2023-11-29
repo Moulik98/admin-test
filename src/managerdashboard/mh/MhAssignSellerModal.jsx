@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import Select from 'react-select';
 import { getToken } from '../../hook/getToken'
 import getList from '../getList'
-const AssignSellerModal = ({ isOpen, onClose, cmId }) => {
+const MhAssignSellerModal = ({ isOpen, onClose, mmId }) => {
 
     const [isSaving, setIsSaving] = useState(false)
     const [selectedOption, setSelectedOption] = useState(null);
@@ -14,22 +14,22 @@ const AssignSellerModal = ({ isOpen, onClose, cmId }) => {
 
     const [list, setList] = useState([])
     useEffect(() => {
-        const url = `${process.env.REACT_APP_URL}/v1/category-head/off-boarded-seller`
+        const url = `${process.env.REACT_APP_URL}/v1/mh/get-ofboard-brands`
         const token = getToken()
         getList(url, token).then((data) => {
-            setList(data.offboardedseller)
+            setList(data.brands)
         })
-    }, [isOpen, cmId])
+    }, [isOpen, mmId])
 
     const handleSubmit = async (e) => {
         setIsSaving(true)
         e.preventDefault()
         try {
-            const url = `${process.env.REACT_APP_URL}/v1/category-head/onboard-cm-seller`
+            const url = `${process.env.REACT_APP_URL}/v1/mh/onboard-brand`
             const token = getToken()
             const body = {
-                cm_id: cmId,
-                seller_id: selectedOption.value
+                mm_id: mmId,
+                brand_id: selectedOption.value
             }
             console.log('body', body);
             const response = await fetch(url, {
@@ -44,7 +44,7 @@ const AssignSellerModal = ({ isOpen, onClose, cmId }) => {
                 toast.success('Seller Assigned Successfully')
                 onClose()
             }
-            const resData = await response.JSON()
+            const resData = await response.json();
             console.log(resData)
         } catch (err) {
             console.log(err)
@@ -70,7 +70,7 @@ const AssignSellerModal = ({ isOpen, onClose, cmId }) => {
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <div className='flex flex-col'>
                         <div className='flex justify-between items-center'>
-                            <h1 className='text-2xl text-black'>Assign Seller to Category Manager</h1>
+                            <h1 className='text-2xl text-black'>Assign Brand to Marketing Manager</h1>
                             <button onClick={() => onClose()} className='text-2xl text-black'>X</button>
                         </div>
                         <div className='mt-10'>
@@ -79,13 +79,13 @@ const AssignSellerModal = ({ isOpen, onClose, cmId }) => {
                                 onChange={handleChange}
                                 options={list?.map(item => ({
                                     value: item._id,
-                                    label: (item?.fullname ? item.fullname : '') + (item.store_name ? ` (${item.store_name})` : '') + (item.seller_code ? `-(${item.seller_code})` : ''),
+                                    label: (item?.brand_name ? item.brand_name : '')
                                 }))}
                             />
                         </div>
 
                         <div className='mt-10 flex justify-end'>
-                            <button disabled={isSaving} type='submit' className='py-2 px-6 rounded bg-blue-500 text-white'>Assign Seller</button>
+                            <button disabled={isSaving} type='submit' className='py-2 px-6 rounded bg-blue-500 text-white'>Assign MM</button>
                         </div>
                     </div>
                 </form>
@@ -95,4 +95,4 @@ const AssignSellerModal = ({ isOpen, onClose, cmId }) => {
     )
 }
 
-export default AssignSellerModal
+export default MhAssignSellerModal

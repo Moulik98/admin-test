@@ -33,9 +33,9 @@ const AttachmentModal = ({ onClose, visible, id }) => {
 
       if (response.ok) {
         const data = await response.json();
-        SetAttachMent(data.sellerInfo);
-        SetCm(data.cmAdmins[0]) // Assuming you are getting an array with a single item
-        console.log(data.cmAdmins[0]);
+        SetAttachMent(data?.sellerInfo);
+        SetCm(data?.cmAdmins[0]) // Assuming you are getting an array with a single item
+        console.log(data);
       } else {
         throw new Error("Failed to fetch data");
       }
@@ -209,7 +209,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                     :
                   </div>
                   <p className="text-sm text-right font-normal mx-1">
-                    {cm.name}
+                  {cm && cm.name ? cm.name : "N/A"}
                   </p>
                 </div>
               </div>
@@ -288,8 +288,8 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                 <div className="w-full h-full p-2 cursor-pointer">
                   <img
                     className="w-full h-full object-contain"
-                    src={attachMent.gstImageUrl}
-                    alt=""
+                    src="https://res.cloudinary.com/genx21/image/upload/v1694692016/zngnznqxvjtrpvn45jee.webp"
+                    alt="image"
                   />
                 </div>
                 {gstModal && attachMent.gstImageUrl && (
@@ -307,7 +307,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                 <div className="w-full h-full p-2">
                   <img
                     className="w-full h-full object-contain"
-                    src={attachMent.panImageUrl}
+                    src='https://res.cloudinary.com/genx21/image/upload/v1694692016/zngnznqxvjtrpvn45jee.webp'
                     alt=""
                   />
                 </div>

@@ -1,48 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
+import { getToken } from '../../hook/getToken';
+import  getList  from '../getList'; // Assuming you have an API function to fetch total stats
 
+const MMStats = () => {
+    const [totalStats, setTotalStats] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
-const StatsCard = ({ img, heading, number, title, style }) => {
-  return (
-    <div className="w-full  flex flex-row gap-5  bg-[#FFF] border border-solid border-[#EEE] rounded-xl p-5">
-      <div className={`${style} w-8 h-8 flex  px-4 pt-4 pb-10 rounded-3xl`}>
-        <img className="object-cover" src={img} />
-      </div>
-      <div className="flex flex-col">
-        <h3 className="text-base text-[#383E50] font-semibold leading-5">
-          {heading}
-        </h3>
-        <p className="text-2xl text-[#4F5D77] font-semibold leading-6 py-2">
-          {number}
-        </p>
-        <p className="text-sm text-[#6C757D] leading-5">{title}</p>
-      </div>
-    </div>
-  );
+    useEffect(() => {
+        setIsLoading(true);
+        const url = `${process.env.REACT_APP_URL}/v1/mm/mm_dashboard`;
+        const token = getToken();
+
+        getList(url, token) // Assuming you have an API function to fetch total stats
+            .then(data => {
+                setTotalStats(data);
+            })
+            .catch(err => {
+                console.error(err);
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
+    }, []);
+
+    if (isLoading) {
+        return <div className="flex justify-center"><img className="h-16 w-16" src="../../assets/admin-panel/loading.gif" alt="" /></div>;
+    }
+
+    return (
+        <section className='grid grid-cols-4 gap-5 my-10'>
+            <div className=' ring-1 bg-white rounded-xl shadow-md  hover:shadow-2xl p-5 cursor-pointer'>
+                <p className='text-base text-gray-500'>Total Brands</p>
+                <p className='text-3xl font-semibold'>{totalStats?.totalBrandCount}</p>
+            </div>
+            <div className=' ring-1 bg-white rounded-xl shadow-md  hover:shadow-2xl p-5 cursor-pointer'>
+                <p className='text-base text-gray-500'>Total Products</p>
+                <p className='text-3xl font-semibold'>{totalStats?.totalProductCount}</p>
+            </div>
+        </section>
+    );
 };
 
-const MMStat = ({approvednumber,pendingnumber}) => {
-
-  return (
-    <section className=" flex flex-row gap-5">
-      <div className="shrink-0 w-[58%]">
-        <StatsCard
-          img={`/assets/admin-panel/seller.png`}
-          heading={`Onboarded Seller`}
-        number={approvednumber}
-          title={`Seller Onboarded`}
-          style={`bg-[#08817833]`}
-        />
-      </div>
-
-      <StatsCard
-        img={`/assets/dashboard/earning.svg`}
-        heading={`Pending`}
-        number={pendingnumber}
-        title={`Seller who are in the process of being onboarded`}
-        style={`bg-[#0DCA8C33]`}
-      />
-    </section>
-  );
-};
-
-export default MMStat;
+export default MMStats;

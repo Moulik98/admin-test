@@ -13,8 +13,8 @@ const ManagerDashboard = () => {
   const [approvedcount, setApprovedCount] = useState()
   const [pendingCount, setPendingCount] = useState()
   const token = localStorage.getItem("access_token");
-  const [showLogoutModal, setShowLogoutModal] = useState(false);  
- 
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+
 
   const fetchData = async () => {
     const url =
@@ -62,7 +62,7 @@ const ManagerDashboard = () => {
 
 
   const handleLogout = () => {
-      setShowLogoutModal(true);
+    setShowLogoutModal(true);
   };
   const handleClose = () => {
     setShowLogoutModal(false);
@@ -78,7 +78,7 @@ const ManagerDashboard = () => {
         <section className="flex flex-row justify-between py-5 items-center">
           <div>
             <h1 className=" text-2xl md:text-3xl text-[#383E50] font-semibold leading-10">
-              Dashboard
+              CM  Dashboard
             </h1>
             <p className="text-sm leading-6 font-normal">
               Whole data about your business here

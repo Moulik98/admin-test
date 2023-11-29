@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // import AttachmentModal from './AttachmentModal'
-const TableRow = ({ data, onDelete, onViewDetails }) => {
-  const { fullname, email, isVerify, store_name, sellerType, _id, seller_id } =
+const TableRow = ({ data, onDelete, onViewDetails, index }) => {
+  const { fullname, email, isVerify, store_name, sellerType, _id, seller_id, seller_code } =
     data;
   const [showDeletePopup, setShowDeletePopup] = useState(false);
 
@@ -63,12 +63,14 @@ const TableRow = ({ data, onDelete, onViewDetails }) => {
   };
   return (
     <tr className="border-b border-solid border-gray-200 hover:bg-gray-50  text-[#222222]">
+      <td className="px-4 py-2 text-xs">{index + 1}</td>
       <td
         scope="row"
         className="whitespace-nowrap px-4 py-2 text-xs font-medium text-gray-900"
       >
         {fullname}
       </td>
+      <td className="px-4 py-2 text-xs">{seller_code}</td>
       <td className="px-4 py-2 text-xs">{email}</td>
       <td className="px-4 py-2 text-xs capitalize">{sellerType}</td>
       <td className="px-4 py-2 text-xs capitalize">{store_name}</td>
