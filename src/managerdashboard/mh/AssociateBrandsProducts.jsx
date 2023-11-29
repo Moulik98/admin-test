@@ -2,22 +2,23 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { getToken } from '../../hook/getToken'
 import getList from '../getList'
-import AssociateSellerTable from './AssociateMmTable'
 import SideBar from '../Sidebar'
 import { MarHead } from '../../constant'
 import NavigateBack from '../NavigateBack'
-const AssociateBrandsWithMm = () => {
+import AssociateBrandProductTable from './AssociateBrandProductTable'
+const AssociateBrandsProducts = () => {
     const { id } = useParams()
     const [list, setList] = useState([])
-    const [mmName, setMmName] = useState('')
+    const [brandName, setBrandName] = useState('')
 
     useEffect(() => {
-        const url = `${process.env.REACT_APP_URL}/v1/mh/single-mm-brand/${id}`
+        const url = `${process.env.REACT_APP_URL}/v1/mh/get-products/${id}`
         const token = getToken()
         getList(url, token).then(data => {
-            console.log('single-mm-brand', data);
-            setList(data?.brands)
-            setMmName(data?.mm_name)
+            console.log('single-mm-brand-products', data);
+            setList(data.products)
+            setBrandName(data?.brand_name)
+
         })
     }, [id])
     return (
@@ -32,7 +33,7 @@ const AssociateBrandsWithMm = () => {
                 <section className='flex flex-row justify-between py-5 items-center'>
                     <div className='flex space-x-2 items-center'>
                         <NavigateBack />
-                        <h1 className=' text-2xl text-[#383E50] font-semibold leading-10 text-left'>MM {mmName} associated with following brands</h1>
+                        <h1 className=' text-2xl text-[#383E50] font-semibold leading-10 text-left'>Associated Products With Brand {brandName}</h1>
 
                     </div>
                     {/* <div className='flex flex-row gap-5'>
@@ -41,10 +42,10 @@ const AssociateBrandsWithMm = () => {
                     </div> */}
                 </section>
                 <section className='w-full flex flex-col'>
-                    <AssociateSellerTable
+                    <AssociateBrandProductTable
                         id={id}
                         list={list}
-
+                        brandName={brandName}
                     />
                 </section>
             </div>
@@ -52,4 +53,4 @@ const AssociateBrandsWithMm = () => {
     )
 }
 
-export default AssociateBrandsWithMm;
+export default AssociateBrandsProducts;

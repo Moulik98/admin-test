@@ -72,6 +72,7 @@ import MHAssignSeller from "../managerdashboard/mh/MHAssignSeller.jsx";
 import AssociateMmTable from "../managerdashboard/mh/AssociateMmTable.jsx";
 import AssociateBrandTable from "../managerdashboard/mm/AssociateBrandTable.jsx";
 import AssociateBrand from "../managerdashboard/mm/AssociateBrand.jsx";
+import AssociateBrandsProducts from "../managerdashboard/mh/AssociateBrandsProducts.jsx";
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
   return children(location);
@@ -115,7 +116,7 @@ const MainRoutes = () => {
     return (
       isStaffLogin && (
         <StaffLayout
-          
+
           content={<Element />}
           handleLogout={handleLogout}
         />
@@ -273,13 +274,17 @@ const MainRoutes = () => {
               path="/marketing-head-dashboard/associate-brands/:id"
               element={<ProtectedStaffRoute element={AssociateBrandsWithMm} />}
             />
-              <Route
-              path="/category-head-profile"
-              element={<ProtectedStaffRoute element={ChProfile}/>}
+            <Route
+              path="/marketing-head-dashboard/associate-brands/products/:id"
+              element={<ProtectedStaffRoute element={AssociateBrandsProducts} />}
             />
-                 <Route
+            <Route
+              path="/category-head-profile"
+              element={<ProtectedStaffRoute element={ChProfile} />}
+            />
+            <Route
               path="/category-head-password-change"
-              element={<ProtectedStaffRoute element={ChPassword}/>}
+              element={<ProtectedStaffRoute element={ChPassword} />}
             />
 
             <Route
@@ -288,8 +293,8 @@ const MainRoutes = () => {
             />
             <Route path="/qaapprover-dashboard" element={<ProtectedStaffRoute element={QAADashboard} />} />
             <Route path="/CM-Info" element={<ProtectedStaffRoute element={Profile} />} />
-            <Route path="/declined-seller" element={<ProtectedStaffRoute element={DeclinedSeller}/>} />
-            <Route path="/CM-change-password" element={<ProtectedStaffRoute element={CmPassword}/>} />
+            <Route path="/declined-seller" element={<ProtectedStaffRoute element={DeclinedSeller} />} />
+            <Route path="/CM-change-password" element={<ProtectedStaffRoute element={CmPassword} />} />
             <Route
               path="/manage-roles"
               element={<ProtectedRoute element={ManageRoles} />}
@@ -300,50 +305,50 @@ const MainRoutes = () => {
             />
             <Route
               path="/qa-profile"
-              element={<ProtectedStaffRoute element={QaProfile}/>}
+              element={<ProtectedStaffRoute element={QaProfile} />}
             />
             <Route
               path="/pending-seller"
-              element={<ProtectedStaffRoute element={PendingSeller}/>}
+              element={<ProtectedStaffRoute element={PendingSeller} />}
             />
             <Route
               path="/decline-seller"
-              element={<ProtectedStaffRoute element={DeclineSellers}/>}
+              element={<ProtectedStaffRoute element={DeclineSellers} />}
             />
             <Route
               path="/change-password"
-              element={<ProtectedStaffRoute element={Qapassword}/>}
+              element={<ProtectedStaffRoute element={Qapassword} />}
             />
             <Route
               path="/mm-dashboard"
-              element={<ProtectedStaffRoute element={MMDash}/>}
+              element={<ProtectedStaffRoute element={MMDash} />}
             />
             <Route
               path="/mh-dashboard"
-              element={<ProtectedStaffRoute element={MHDash}/>}
+              element={<ProtectedStaffRoute element={MHDash} />}
             />
-             <Route
+            <Route
               path="/mh-profile"
-              element={<ProtectedStaffRoute element={MHProfile}/>}
+              element={<ProtectedStaffRoute element={MHProfile} />}
             />
-               <Route
+            <Route
               path="/mh-change-password"
-              element={<ProtectedStaffRoute element={MHPassword}/>}
+              element={<ProtectedStaffRoute element={MHPassword} />}
             />
-              <Route
+            <Route
               path="/mm-profile"
-              element={<ProtectedStaffRoute element={MMProfile}/>}
+              element={<ProtectedStaffRoute element={MMProfile} />}
             />
-              <Route
+            <Route
               path="/mm-change-password"
-              element={<ProtectedStaffRoute element={MMPassword}/>}
+              element={<ProtectedStaffRoute element={MMPassword} />}
             />
             <Route
               path="/mh-assign-brands"
-              element={<ProtectedStaffRoute element={MHAssignSeller}/>}
+              element={<ProtectedStaffRoute element={MHAssignSeller} />}
             />
 
-<Route
+            <Route
               path="/MM-dashboard/associate-brand/:id"
               element={<ProtectedStaffRoute element={AssociateBrand} />}
             />
