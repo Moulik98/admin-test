@@ -3,11 +3,13 @@ import { User } from '../user/User'
 import { Link } from 'react-router-dom'
 import TableRow from './TableRow';
 import toast from 'react-hot-toast';
+import AddReasonModal from './AddReasonModal';
 
 const ManageCancellation = () => {
     const [reasons, setReasons] = useState([]);
     const [selectedType, setSelectedType] = useState('');
     const [newReason, setNewReason] = useState('');
+    const [showModal, setShowModal] = useState(false);
 
     const token = localStorage.getItem("access_token")
     //Fetching Cancel Reason List 
@@ -31,44 +33,10 @@ const ManageCancellation = () => {
         handleReasons()
     }, [])
 
-    const handleChange = (event) => {
-        setSelectedType(event.target.value);
+    const handleClose = () => {
+        setShowModal(false)
     }
 
-
-    //add cancellation reasons
-    const addReason = async () => {
-        try {
-          const url = process.env.REACT_APP_URL + '/v1/cancellation-reason/add';
-          const requestBody = {
-            cancellation_reasons: newReason,
-            reason_for: selectedType,
-          }
-          const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify(requestBody),
-          });
-          const data = await response.json()
-    
-          if (response.ok) {
-            // Handle success, maybe update the reasons list or show a success message
-            toast.success(data.message)
-            console.log('Cancellation reason added successfully');
-            setNewReason(''); // Reset the input field after successful addition
-          } else {
-            // Handle error, maybe show an error message
-            toast.error(data.message);
-            console.error('Failed to add cancellation reason');
-          }
-        } catch (error) {
-          // Handle exceptions
-          console.error('Error:', error.message);
-        }
-      };
 
     return (
         <div>
@@ -85,30 +53,17 @@ const ManageCancellation = () => {
                     </div>
                 </div>
             </section>
+
             <section>
-                <section>
-                    <div className="flex justify-start gap-x-2">
-                        <label for="cancellationReason">Cancellation Reason:</label>
-                        <input 
-                        className='border rounded'
-                         type="text" 
-                         id="cancellationReason" 
-                         name="cancellationReason"
-                         value={newReason}
-                         onChange={(e) => setNewReason(e.target.value)} />
-                        <select
-                            value={selectedType}
-                            onChange={handleChange}
-                            className="border rounded"
-                        >
-                            <option value="">Select Type</option>
-                            {[...new Set(reasons.map((item) => item.reason_for))].map((type, index) => (
-                                <option key={index}>{type}</option>
-                            ))}
-                        </select>
-                        <button className="bg-blue-600 px-2 py-1 text-white rounded" onClick={addReason}>Add</button>
-                    </div>
-                </section>
+                <div className="flex" onClick={() => setShowModal(true)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <p>Add Cancellation Reason</p>
+                </div>
+                {showModal && (
+                    <AddReasonModal reasons={reasons} onClose={handleClose} visible={showModal}/>
+                )}
             </section>
             <div class="relative overflow-x-auto p-5">
                 <table class="w-full text-left text-xs">
