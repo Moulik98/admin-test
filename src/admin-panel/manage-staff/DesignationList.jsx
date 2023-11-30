@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
+import _debounce from 'lodash/debounce';
 import { Link } from "react-router-dom";
 import AssignedStaffs from "./AssignedStaffs";
-import StaffModal from "./StaffModal";
 
 const DesignationList = () => {
   const [staffs, setStaffs] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const fetchStaffList = async () => {
+  const fetchStaffList = async (url) => {
     const token = localStorage.getItem("access_token");
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_URL}/v1/category-manager/getCmList`,
+        url,
         {
           method: "GET",
           headers: {
@@ -29,13 +28,26 @@ const DesignationList = () => {
   };
 
   useEffect(() => {
-    fetchStaffList();
+    const url = `${process.env.REACT_APP_URL}/v1/category-manager/getCmList`;
+    fetchStaffList(url);
   }, []);
 
-  const handleClose = () => {
-    setShowModal(false);
-  };
+
   console.log("staffs >>>", staffs);
+  const [searchTerm, setSearchTerm] = useState("");
+  const handleChange = async (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const debouncedFetchStaffList = _debounce(async (term) => {
+    const url = `${process.env.REACT_APP_URL}/v1/category-manager/getCmList?search=${term}`;
+    await fetchStaffList(url);
+  }, 100); // Change the debounce delay as needed (e.g., 300ms)
+
+  useEffect(() => {
+    debouncedFetchStaffList(searchTerm);
+  }, [searchTerm]);
+
   return (
     <div className="">
       <div>
@@ -65,31 +77,31 @@ const DesignationList = () => {
         <div className="flex justify-end my-4 ">
           <div className="flex flex-col">
             <Link to="/manage-staff">
-            <div
-              className="flex items-center "
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-4 h-4"
+              <div
+                className="flex items-center "
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-4 h-4"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
 
-              <p className="text-xs">Add Staff Members</p>
-          
-            </div>
+                <p className="text-xs">Add Staff Members</p>
+
+              </div>
             </Link>
           </div>
         </div>
-        <form className="flex items-center">
+        <form onSubmit={e => e.preventDefault()} className="flex items-center">
           <label className="mr-2">Search Staff</label>
           <div className="flex flex-col relative">
             <div className="flex items-center p-1 gap-x-1 rounded-lg border border-solid border-[#9D9D9D]">
@@ -111,6 +123,7 @@ const DesignationList = () => {
                 className="py-1 px-1 outline-0"
                 placeholder="Search Staff Members"
                 type="text"
+                onChange={(e) => handleChange(e)}
               />
             </div>
           </div>
@@ -121,16 +134,16 @@ const DesignationList = () => {
           <table class="w-full text-left text-xs">
             <thead class="bg-gray-100 text-xs font-medium uppercase text-[#666666]">
               <tr>
-              <th scope="col" class="px-2 py-3">
+                <th scope="col" class="px-2 py-3">
                   Sl No
                 </th>
-              <th scope="col" class="px-2 py-3">
+                <th scope="col" class="px-2 py-3">
                   Employee ID
                 </th>
                 <th scope="col" class="px-2 py-3">
                   Name
                 </th>
-              
+
                 <th scope="col" class="px-2 py-3">
                   Contact No
                 </th>
@@ -149,7 +162,7 @@ const DesignationList = () => {
               </tr>
             </thead>
             <tbody>
-              {staffs?.map((item,index) => (
+              {staffs?.map((item, index) => (
                 <AssignedStaffs key={item._id} data={item} index={index} />
               ))}
             </tbody>
