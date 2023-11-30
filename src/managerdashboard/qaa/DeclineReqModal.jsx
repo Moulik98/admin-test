@@ -28,6 +28,7 @@ const DeclineReasonModal = ({ isOpen, onClose, onSubmit, id }) => {
     };
     fetchDeclineReasons();
   }, []);
+  console.log(declineReasons, 'decline reasons');
 
   const handleCheckboxChange = (reason) => {
     if (selectedReasons.includes(reason)) {
@@ -87,12 +88,12 @@ const DeclineReasonModal = ({ isOpen, onClose, onSubmit, id }) => {
             <label key={index} className="flex items-center">
               <input
                 type="checkbox"
-                value={reason.cancellation_reason}
-                checked={selectedReasons.includes(reason.cancellation_reason)}
-                onChange={() => handleCheckboxChange(reason.cancellation_reason)}
+                value={reason.cancellation_reasons}
+                checked={selectedReasons.includes(reason.cancellation_reasons)}
+                onChange={() => handleCheckboxChange(reason.cancellation_reasons)}
                 className="mr-2"
               />
-              {reason.cancellation_reason}
+              {reason.cancellation_reasons}
             </label>
           ))}
         </div>
