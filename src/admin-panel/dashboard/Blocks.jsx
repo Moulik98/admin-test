@@ -60,7 +60,7 @@ export const Blocks = () => {
       
         <div className="flex space-x-4">
           <div className="flex-1 pl-8 pr-14 py-4 text-left bg-white hover:bg-blue-100 border border-blue-300 rounded-md hover:shadow-2xl shadow-lg">
-            <p className="text-lg">B2B user</p>
+          <Link to='/b2buser' className="text-lg">Orders</Link>
             <div className="flex gap-2">
               <p className="text-xl font-bold">{orderData.b2b_active_count}</p>
               <svg
@@ -92,7 +92,7 @@ export const Blocks = () => {
             </div>
           </div>
           <div className="flex-1 pl-8 pr-14 py-4 text-left bg-white hover:bg-blue-100 border border-blue-300 rounded-md hover:shadow-2xl shadow-lg">
-            <p className="text-lg">Sellers</p>{" "}
+          <Link to='/seller/sellerlist' className="text-lg">Sellers</Link>{" "}
             <div className="flex gap-2">
               <p className="text-xl font-bold">{orderData.seller_count}</p>
               <svg
