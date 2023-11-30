@@ -52,7 +52,7 @@ const AddReasonModal = ({reasons,visible,onClose}) => {
                     <h1 className='text-xl font-bold text-center'>Add Cancellation Reason</h1>
                     <label className='text-start' for="cancellationReason">Cancellation Reason:</label>
                     <input
-                        className='border rounded'
+                        className='border rounded p-1'
                         type="text"
                         id="cancellationReason"
                         name="cancellationReason"
@@ -61,7 +61,7 @@ const AddReasonModal = ({reasons,visible,onClose}) => {
                     <select
                         value={selectedType}
                         onChange={handleChange}
-                        className="border rounded"
+                        className="border rounded p-1"
                     >
                         <option value="">Select Type</option>
                         {[...new Set(reasons.map((item) => item.reason_for))].map((type, index) => (
