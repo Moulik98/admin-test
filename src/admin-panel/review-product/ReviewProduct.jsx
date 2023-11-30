@@ -38,7 +38,7 @@ const ReviewProduct = () => {
         <main>
             <div className='pr-7'>
                 <section>
-                    <div className='max-w-5xl mx-auto flex justify-between py-5'>
+                    <div className='w-full flex justify-between py-5'>
                         <a href='/reviewproduct' className='text-2xl text-gray-900 font-semibold'>Review Product List</a>
                         <div className='flex gap-x-10'>
                             <form className="flex items-center">
@@ -75,7 +75,7 @@ const ReviewProduct = () => {
                 {/* // table section */}
                 <section>
                     <div class="relative overflow-x-auto rounded-t-lg">
-                        <table class="max-w-7xl text-left text-xs">
+                        <table class="w-full  text-left text-xs">
                             <thead class="bg-[#e5f2f4] text-xs font-normal Captilise text-gray-900 ">
                                 <tr>
                                     <th scope="col" class="px-2 py-2">Sl no</th>

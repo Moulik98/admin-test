@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SideBar from "../Sidebar";
 import Loader from "../Loader";
 import toast from "react-hot-toast";
-import { QAList,MarHead } from "../../constant";
+import { QAList, MarHead } from "../../constant";
 import { Link } from "react-router-dom";
 
 const inputFields = [
@@ -66,7 +66,7 @@ const QaProfile = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      
+
       if (response.ok) {
         const data = await response.json();
         setCMInfo(data.sellerDetails);
@@ -184,81 +184,81 @@ const QaProfile = () => {
         <SideBar menu={MarHead} />
       </div>
       <div className="flex flex-col">
-      <p className="text-2xl flex justify-start p-4 ">Profile Update</p>
-      <div className="flex items-top justify-center">
-        <div className="ml-40 mt-28" onClick={handleImageClick}>
-        
-          <div className="rounded-full w-48 h-48 object-cover border border-dashed border-gray-300 cursor-pointer">
-            {image ? (
-              <img
-                src={image}
-                alt="Selected Profile Image"
-                className="rounded-full w-full h-full object-cover"
-              />
-            ) : (
-              <span className="text-gray-500 flex items-center justify-center h-full">
-                {image === null ? (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="100%"
-                    height="100%"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    id="profile"
-                  >
-                    <circle cx="12" cy="12" r="11" fill="#000" opacity=".4"></circle>
-                    <path
-                      fill="#000"
-                      fillRule="evenodd"
-                      d="M12 11C13.6569 11 15 9.65685 15 8C15 6.34315 13.6569 5 12 5C10.3431 5 9 6.34315 9 8C9 9.65685 10.3431 11 12 11ZM10 13C8.34315 13 7 14.3431 7 16C7 17.6569 8.34315 19 10 19H14C15.6569 19 17 17.6569 17 16C17 14.3431 15.6569 13 14 13H10Z"
-                      clipRule="evenodd"
-                    ></path>
-                  </svg>
-                ) : (
-                  "Select Profile Image"
-                )}
-              </span>
-            )}
-          </div>
-          <input
-            type="file"
-            id="imageInput"
-            accept="image/*"
-            onChange={handleFileChange}
-            className="hidden"
-          />
-        </div>
-        <form className="grow p-12" onSubmit={(e) => handleSubmit(e)}>
-          <div className="grid grid-cols-2 gap-4">
-            {inputFields.map((field, index) => (
-              <div key={field.id + index} className="flex w-full flex-col">
-                <label className="text-sm flex text-left text-gray-500 py-2">
-                  {field.label}
-                </label>
-                <input
-                  type="text"
-                  className="w-full py-2 px-3 rounded border border-solid border-gray-300 text-gray-800 text-sm"
-                  name={field?.name}
-                  disabled={field.isDisabled}
-                  value={formData[field?.name]}
-                  onChange={(e) => handleChange(e)}
+        <p className="text-2xl flex justify-start p-4 ">MH Profile Update</p>
+        <div className="flex items-top justify-center">
+          <div className="ml-40 mt-28" onClick={handleImageClick}>
+
+            <div className="rounded-full w-48 h-48 object-cover border border-dashed border-gray-300 cursor-pointer">
+              {image ? (
+                <img
+                  src={image}
+                  alt="Selected Profile Image"
+                  className="rounded-full w-full h-full object-cover"
                 />
-              </div>
-            ))}
-            <Link className="flex justify-start text-sm text-blue-600" to="/mh-change-password">
-              <button>Change Password</button>
-            </Link>
+              ) : (
+                <span className="text-gray-500 flex items-center justify-center h-full">
+                  {image === null ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="100%"
+                      height="100%"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      id="profile"
+                    >
+                      <circle cx="12" cy="12" r="11" fill="#000" opacity=".4"></circle>
+                      <path
+                        fill="#000"
+                        fillRule="evenodd"
+                        d="M12 11C13.6569 11 15 9.65685 15 8C15 6.34315 13.6569 5 12 5C10.3431 5 9 6.34315 9 8C9 9.65685 10.3431 11 12 11ZM10 13C8.34315 13 7 14.3431 7 16C7 17.6569 8.34315 19 10 19H14C15.6569 19 17 17.6569 17 16C17 14.3431 15.6569 13 14 13H10Z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                  ) : (
+                    "Select Profile Image"
+                  )}
+                </span>
+              )}
+            </div>
+            <input
+              type="file"
+              id="imageInput"
+              accept="image/*"
+              onChange={handleFileChange}
+              className="hidden"
+            />
           </div>
-          <div className="flex justify-center mt-5">
-            <button
-              type="submit"
-              className="py-2 px-6 rounded bg-blue-500 text-white"
-            >
-              {isMutating ? <Loader /> : "Update"}
-            </button>
-          </div>
-        </form>
-      </div>
+          <form className="grow p-12" onSubmit={(e) => handleSubmit(e)}>
+            <div className="grid grid-cols-2 gap-4">
+              {inputFields.map((field, index) => (
+                <div key={field.id + index} className="flex w-full flex-col">
+                  <label className="text-sm flex text-left text-gray-500 py-2">
+                    {field.label}
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full py-2 px-3 rounded border border-solid border-gray-300 text-gray-800 text-sm"
+                    name={field?.name}
+                    disabled={field.isDisabled}
+                    value={formData[field?.name]}
+                    onChange={(e) => handleChange(e)}
+                  />
+                </div>
+              ))}
+              <Link className="flex justify-start text-sm text-blue-600" to="/mh-change-password">
+                <button>Change Password</button>
+              </Link>
+            </div>
+            <div className="flex justify-center mt-5">
+              <button
+                type="submit"
+                className="py-2 px-6 rounded bg-blue-500 text-white"
+              >
+                {isMutating ? <Loader /> : "Update"}
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </main>
   );

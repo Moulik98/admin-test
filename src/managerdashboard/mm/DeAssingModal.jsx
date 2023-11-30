@@ -42,8 +42,8 @@ const DeAssingModal = ({ onClose, cmId, sellerId, sellerName, cmName }) => {
         >
             <div className='w-2/5 rounded bg-white '>
                 <div className={` items-center justify-center  flex flex-col`}>
-                    <div className='font-medium text-gray-900  text-base mt-7'>Are you sure you want to deassign the<span className='font-bold'> Brand {sellerName}</span></div>
-                    <div className='font-medium text-gray-900  text-base '> from  <span className='font-bold'>MM {cmName}</span> ?</div>
+                    <div className='font-medium text-gray-900  text-base mt-7'>Are you sure you want to deassign the<span className='font-bold'> Seller {sellerName}</span></div>
+                    <div className='font-medium text-gray-900  text-base '> from  <span className='font-bold'>CM {cmName}</span> ?</div>
                     <div className='flex gap-x-5 my-7'>
                         <button disabled={isPending}
                             onClick={() => onClose()} className='py-2 px-14 bg-white text-gray-900 rounded-full border border-solid border-gray-900'>No</button>

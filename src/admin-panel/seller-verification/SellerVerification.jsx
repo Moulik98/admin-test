@@ -139,12 +139,12 @@ const SellerVerification = () => {
               <input
                 className="w-52 py-1 px-1 bg-gray-100 outline-0"
                 onChange={(event) => {
-                    handleInputChange(event);
-                  }}
+                  handleInputChange(event);
+                }}
                 type="text"
               />
-                {/* Dropdown */}
-                {showDropdown && searchResults.length > 0 && (
+              {/* Dropdown */}
+              {showDropdown && searchResults.length > 0 && (
                 <div className="relative">
                   <div className="z-10 absolute top-full max-h-60 -left-60 w-60 mt-6 bg-white border border-solid border-[#9D9D9D] rounded-md shadow-md overflow-y-scroll search-scrollbar">
                     <ul>
@@ -182,7 +182,13 @@ const SellerVerification = () => {
                 <thead class=" text-xs  uppercase text-gray-900 font-semibold border-b border-solid border-gray-200 ">
                   <tr>
                     <th scope="col" class=" px-4 py-3">
+                      SL No
+                    </th>
+                    <th scope="col" class=" px-4 py-3">
                       Seller Name
+                    </th>
+                    <th scope="col" class=" px-4 py-3">
+                      Seller Code
                     </th>
                     <th
                       scope="col"
@@ -211,6 +217,7 @@ const SellerVerification = () => {
                     <TableRow
                       key={index}
                       data={item}
+                      index={index}
                       onDelete={handleRefresh}
                     />
                   ))}

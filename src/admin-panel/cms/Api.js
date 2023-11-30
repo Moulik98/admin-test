@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://two1genx-render.onrender.com';
+const API_BASE_URL = 'https://api.21genx.com:5000';
 
 const accessToken = localStorage.getItem('access_token')
 // Function to fetch privacy data from the API

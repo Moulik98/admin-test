@@ -9,23 +9,24 @@ const CmAndSellerTable = () => {
     const navigate = useNavigate()
     const [list, setList] = useState([]);
     useEffect(() => {
-        const url = `${process.env.REACT_APP_URL}/v1/category-head/cm-seller-count`;
+        const url = `${process.env.REACT_APP_URL}/v1/mm/mm_dashboard`;
         const token = getToken();
         getList(url, token).then((data) => {
-            setList(data.cmSellerCounts)
+            setList(data.brands)
         })
 
     }, [])
 
 
     const handleClick = useCallback((id) => {
-        const url = `/category-head-dashboard/associate-seller/${id}`
+        const url = `/MM-dashboard/associate-brand/${id}`
         navigate(url);
         console.log('id', id);
     }, [])
     return (
         <div className="relative  overflow-hidden">
-            <h4 className='text-left text-xl text-[#383E50] font-medium py-2'>List of CMs</h4>
+
+            <h4 className='text-left text-xl text-[#383E50] font-medium py-2'>List of Brands</h4>
             <table className="w-full text-left text-xs">
                 <thead className="bg-gray-100 text-xs font-medium uppercase text-[#666666]">
                     <tr>
@@ -33,61 +34,50 @@ const CmAndSellerTable = () => {
                             Sl. NO
                         </th>
                         <th scope="col" className="px-4 py-2">
-                            EmpCode
+                            Brands
                         </th>
 
                         <th scope="col" className="px-4 py-2">
-                            CM (username)
+                            Products
                         </th>
 
                         <th scope="col" className="px-4 py-2">
-                            Contact No
+                            CM Name & Id
                         </th>
                         <th scope="col" className="px-4 py-2">
-                            Mail Id
+                            CM Contact No
                         </th>
                         <th scope="col" className="px-4 py-2">
-                            Onboad Sellers
+                            CM Email
                         </th>
                         <th scope="col" className="px-4 py-2">
-                            Pending Sellers
-                        </th>
-                        <th scope="col" className="px-4 py-2">
-                            Onboard Brands
-                        </th>
-                        <th scope="col" className="px-4 py-2">
-                            Actions (View Details)
+                            Actions
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     {Array.isArray(list) &&
-                        list?.map((item, index) => {
-                            const { _id, emp_id, name, email, userName, phone, onboardCount, pendingSeller, brandCount } = item;
+                        list.map((item, index) => {
+                            const { _id, brand_name, product_count, cm_data } = item;
 
                             return (
                                 <tr key={_id}>
                                     <td className="px-4 py-2">{index + 1}</td>
-                                    <td className="px-4 py-2">{emp_id}</td>
-                                    <td className="px-4 py-2">{name} ({userName})</td>
-                                    <td className="px-4 py-2">{phone}</td>
-                                    <td className="px-4 py-2">{email}</td>
-                                    <td className="px-4 py-2">{onboardCount}</td>
-                                    <td className="px-4 py-2">{pendingSeller}</td>
-                                    <td className="px-4 py-2">{brandCount}</td>
+                                    <td className="px-4 py-2">{brand_name}</td>
+                                    <td className="px-4 py-2">{product_count}</td>
+                                    <td className="px-4 py-2">{`${cm_data?.name} (${cm_data?.userName})`}</td>
+                                    <td className="px-4 py-2">{cm_data?.phone}</td>
+                                    <td className="px-4 py-2">{cm_data?.email}</td>
                                     <td className="px-4 py-2">
                                         <div className='flex '>
-                                            {/* <EyeButton
-                                                onClick={handleClick}
-                                            /> */}
                                             <EyeButton
                                                 id={_id}
-                                                onClick={handleClick}
+                                                onClick={() => handleClick(_id)}  // Pass _id to the handleClick function
                                             />
                                         </div>
                                     </td>
                                 </tr>
-                            )
+                            );
                         })}
                 </tbody>
             </table>
