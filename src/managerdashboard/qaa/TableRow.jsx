@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import AttachmentModal from "./AttachmentModal";
 
 const TableRow = ({ data, index }) => {
-  const { _id, fullname, store_name,sellerType, isVerify ,seller_code} = data.seller;
-  const {onboarded_date } = data
-  const { name } = data.cm;
-  const [viewAttachment, setViewAttachment] = useState(false);
-  const [showDeletePopup, setShowDeletePopup] = useState(false);
+  const { cm, seller, onboarded_date } = data;
+  const { _id, fullname, store_name, sellerType, isVerify, seller_code } = seller
+  let name = '';
+  if (cm) {
+    name = cm.name;
+  }
 
-  console.log(viewAttachment)
+  const [viewAttachment, setViewAttachment] = useState(false);
+
 
   const handleClose = (value) => {
     if (value === "close") {
@@ -18,15 +20,11 @@ const TableRow = ({ data, index }) => {
       setViewAttachment(false);
     }
   };
-  
-  const handleDelete = () => {
-    // Show the delete confirmation popup
-    setShowDeletePopup(true);
-  };
+
 
   return (
     <tr key={_id}>
-      <td className="px-4 py-2">{index+1}</td>
+      <td className="px-4 py-2">{index + 1}</td>
       <td className="px-4 py-2">{fullname}</td>
       <td className="px-4 py-2">{new Date(onboarded_date).toDateString()}</td>
       <td className="px-4 py-2">{seller_code}</td>
@@ -35,9 +33,8 @@ const TableRow = ({ data, index }) => {
       <td className="px-4 py-2">{name}</td>
       <td className="px-4 py-2">
         <div
-          className={`flex justify-center items-center rounded-full py-1 px-2 capitalize text-xs text-white ${
-            isVerify === "approved" ? "bg-indigo-500" : "bg-indigo-900"
-          }`}
+          className={`flex justify-center items-center rounded-full py-1 px-2 capitalize text-xs text-white ${isVerify === "approved" ? "bg-indigo-500" : "bg-indigo-900"
+            }`}
         >
           {isVerify}
         </div>
@@ -71,7 +68,7 @@ const TableRow = ({ data, index }) => {
           visible={viewAttachment}
           id={_id}
           onClose={handleClose}
-          
+
         />
       )}
     </tr>
