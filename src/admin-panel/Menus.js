@@ -160,6 +160,11 @@ const Menus = [
     link: "awardlist",
   },
   {
+    title: "Manage Cancellation",
+    src: blog,
+    link: "manage-cancellation",
+  },
+  {
     title: "General Settings",
     src: generalSetting,
     link: "general-setting",
