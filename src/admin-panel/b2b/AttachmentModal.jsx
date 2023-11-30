@@ -102,7 +102,9 @@ const AttachmentModal = ({ onClose, visible, id }) => {
   };
 
   const handleDecline = () => {
-    setShowDeclineReasonModal(true); // Show the decline reason modal
+  
+      setShowDeclineReasonModal(true);
+    // Delay for 1 second (adjust as needed) // Show the decline reason modal
   };
 
   const submitDeclineReason = () => {
@@ -111,7 +113,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
     }
   };
   const handleClosePdf = (e) => {
-    console.log("hii");
+   
     if (e.target.id === "container") {
       setPdfModal(false);
       setGstModal(false);
@@ -297,15 +299,16 @@ const AttachmentModal = ({ onClose, visible, id }) => {
               Decline
             </button>
 
-            {showDeclineReasonModal && (
-              <DeclineReasonModal
-                id={id}
-                onClose={() => setShowDeclineReasonModal(false)}
-                onSubmit={submitDeclineReason}
-                onChange={(e) => setDeclineReason(e.target.value)}
-              />
-            )}
           </div>
+
+          <div className={` ${showDeclineReasonModal ? 'show' : ''}`}>
+        <DeclineReasonModal
+          id={id}
+          onClose={() => setShowDeclineReasonModal(false)}
+          onSubmit={submitDeclineReason}
+          onChange={(e) => setDeclineReason(e.target.value)}
+        />
+      </div>
         </div>
       </div>
     );

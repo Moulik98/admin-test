@@ -43,7 +43,7 @@ export const Upblock = () => {
       {orderData && (
         <div className="flex space-x-4">
           <div className="flex-1 pl-8 pr-14 py-4 text-left bg-pink-100 border border-blue-200 rounded-md hover:shadow-2xl shadow-lg">
-            <p className="text-lg">Products</p>
+          <Link to='/allproduct' className="text-lg">Products</Link>
             <div className="flex gap-2">
               <p className="text-xl font-bold">{orderData?.product_count}</p>
               <svg
@@ -68,7 +68,7 @@ export const Upblock = () => {
             </div>
           </div>
           <div className="flex-1 pl-8 pr-14 py-4 text-left bg-yellow-100 border border-blue-200 rounded-md hover:shadow-2xl shadow-lg">
-            <p className="text-lg">Customers</p>{" "}
+          <Link to='/customers' className="text-lg">Customers</Link>{" "}
             <div className="flex gap-2">
               <p className="text-xl font-bold">{orderData?.total_active_count}</p>
               <svg
