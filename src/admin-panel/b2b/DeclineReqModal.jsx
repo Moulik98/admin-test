@@ -1,17 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const DeclineReasonModal = ({ isOpen, onClose, onSubmit, id }) => {
   const [selectedReasons, setSelectedReasons] = useState([]);
   const [message, setMessage] = useState("");
-
+  const [declineReasons, setDeclineReasons] = useState([]);
   const token = localStorage.getItem("access_token");
 
-  const declineReasons = [
-    "PAN number not properly visible.",
-    "PAN document invalid.",
-    "GST number not properly visible.",
-    "GST document invalid."
-  ];
+  useEffect(() => {
+    const fetchDeclineReasons = async () => {
+      try {
+        const url = `${process.env.REACT_APP_URL}/v1/cancellation-reason/get/?reason_for=b2b&isActive=true`;
+        const response = await fetch(url, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await response.json();
+        console.log('decline reasons', data.data);
+        if (response.ok) {
+          setDeclineReasons(data.data);
+        } else {
+          throw new Error("Failed to fetch decline reasons");
+        }
+      } catch (error) {
+        console.error("Error fetching decline reasons:", error);
+      }
+    };
+    fetchDeclineReasons();
+  }, []);
 
   const handleCheckboxChange = (reason) => {
     if (selectedReasons.includes(reason)) {
@@ -60,22 +77,26 @@ const DeclineReasonModal = ({ isOpen, onClose, onSubmit, id }) => {
     }
   };
 
+  if (!isOpen) return null;
   return (
     <div className={`modal ${isOpen ? "open" : ""}  bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center`}>
       <div className="modal-content bg-white p-4 w-full h-2/3 shadow-lg">
         <h2 className="text-2xl font-bold mb-4">Choose Decline Reasons</h2>
-        {declineReasons.map((reason, index) => (
-          <label key={index} className="flex items-center mb-2">
-            <input
-              type="checkbox"
-              value={reason}
-              checked={selectedReasons.includes(reason)}
-              onChange={() => handleCheckboxChange(reason)}
-              className="mr-2"
-            />
-            {reason}
-          </label>
-        ))}
+        <div className="grid grid-cols-2 gap-2">
+          {declineReasons.map((reason, index) => (
+            <label key={index} className="flex items-center mb-2">
+              <input
+                type="checkbox"
+                value={reason.cancellation_reasons}
+                checked={selectedReasons.includes(reason.cancellation_reasons)}
+                onChange={() => handleCheckboxChange(reason.cancellation_reasons)}
+                className="mr-2"
+              />
+              {reason.cancellation_reasons}
+            </label>
+          ))}
+        </div>
+
         <h2 className="text-2xl font-bold my-4">Enter a Message</h2>
         <textarea
           onChange={handleTextareaChange}

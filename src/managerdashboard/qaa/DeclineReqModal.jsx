@@ -1,17 +1,33 @@
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
 const DeclineReasonModal = ({ isOpen, onClose, onSubmit, id }) => {
   const [selectedReasons, setSelectedReasons] = useState([]);
   const [message, setMessage] = useState("");
-
+  const [declineReasons, setDeclineReasons] = useState([]);
   const token = localStorage.getItem("access_token");
 
-  const declineReasons = [
-    "PAN number not properly visible.",
-    "PAN document invalid.",
-    "GST number not properly visible.",
-    "GST document invalid."
-  ];
+  useEffect(() => {
+    const fetchDeclineReasons = async () => {
+      try {
+        const url = `${process.env.REACT_APP_URL}/v1/cancellation-reason/get/?reason_for=seller&isActive=true`;
+        const response = await fetch(url, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await response.json();
+        console.log('decline reasons', data);
+        if (response.ok) {
+          setDeclineReasons(data.data);
+        } else {
+          throw new Error("Failed to fetch decline reasons");
+        }
+      } catch (error) {
+        console.error("Error fetching decline reasons:", error);
+      }
+    };
+    fetchDeclineReasons();
+  }, []);
 
   const handleCheckboxChange = (reason) => {
     if (selectedReasons.includes(reason)) {
@@ -60,25 +76,23 @@ const DeclineReasonModal = ({ isOpen, onClose, onSubmit, id }) => {
     }
   };
 
-  // Calculate the number of columns and rows
-  const columns = 2;
-  const rows = Math.ceil(declineReasons.length / columns);
+
 
   return (
     <div>
       <div className="modal-content bg-white p-4 h-2/3 rounded-lg shadow-lg">
         <h2 className="text-xl font-bold mb-4">Choose Decline Reasons</h2>
-        <div className="grid grid-cols-2 gap-4">
-          {declineReasons.map((reason, index) => (
+        <div className="grid grid-cols-2 gap-2">
+          {declineReasons?.map((reason, index) => (
             <label key={index} className="flex items-center">
               <input
                 type="checkbox"
-                value={reason}
-                checked={selectedReasons.includes(reason)}
-                onChange={() => handleCheckboxChange(reason)}
+                value={reason.cancellation_reason}
+                checked={selectedReasons.includes(reason.cancellation_reason)}
+                onChange={() => handleCheckboxChange(reason.cancellation_reason)}
                 className="mr-2"
               />
-              {reason}
+              {reason.cancellation_reason}
             </label>
           ))}
         </div>

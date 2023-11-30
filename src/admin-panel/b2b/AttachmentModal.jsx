@@ -102,8 +102,8 @@ const AttachmentModal = ({ onClose, visible, id }) => {
   };
 
   const handleDecline = () => {
-  
-      setShowDeclineReasonModal(true);
+
+    setShowDeclineReasonModal(true);
     // Delay for 1 second (adjust as needed) // Show the decline reason modal
   };
 
@@ -113,7 +113,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
     }
   };
   const handleClosePdf = (e) => {
-   
+
     if (e.target.id === "container") {
       setPdfModal(false);
       setGstModal(false);
@@ -302,13 +302,15 @@ const AttachmentModal = ({ onClose, visible, id }) => {
           </div>
 
           <div className={` ${showDeclineReasonModal ? 'show' : ''}`}>
-        <DeclineReasonModal
-          id={id}
-          onClose={() => setShowDeclineReasonModal(false)}
-          onSubmit={submitDeclineReason}
-          onChange={(e) => setDeclineReason(e.target.value)}
-        />
-      </div>
+
+            <DeclineReasonModal
+              id={id}
+              isOpen={showDeclineReasonModal}
+              onClose={() => setShowDeclineReasonModal(false)}
+              onSubmit={submitDeclineReason}
+              onChange={(e) => setDeclineReason(e.target.value)}
+            />
+          </div>
         </div>
       </div>
     );
