@@ -83,7 +83,7 @@ const DeclineReasonModal = ({ isOpen, onClose, onSubmit, id }) => {
       <div className="modal-content bg-white p-4 w-full h-2/3 shadow-lg">
         <h2 className="text-2xl font-bold mb-4">Choose Decline Reasons</h2>
         <div className="grid grid-cols-2 gap-2">
-          {declineReasons.map((reason, index) => (
+          {declineReasons?.map((reason, index) => (
             <label key={index} className="flex items-center mb-2">
               <input
                 type="checkbox"
