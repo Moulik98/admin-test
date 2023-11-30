@@ -134,6 +134,12 @@ const Menus = [
     isOpen: false, // Add isOpen property
   },
   {
+    title: "Distributor",
+    src: seller,
+    link: "distributorship",
+    isOpen: false, // Add isOpen property
+  },
+  {
     title: "Customers",
     src: seller,
     link: "customers",

@@ -73,6 +73,7 @@ import AssociateMmTable from "../managerdashboard/mh/AssociateMmTable.jsx";
 import AssociateBrandTable from "../managerdashboard/mm/AssociateBrandTable.jsx";
 import AssociateBrand from "../managerdashboard/mm/AssociateBrand.jsx";
 import AssociateBrandsProducts from "../managerdashboard/mh/AssociateBrandsProducts.jsx";
+import Distributor from "../admin-panel/distributor/Distributor.jsx";
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
   return children(location);
@@ -166,6 +167,10 @@ const MainRoutes = () => {
             <Route
               path="/seller/sellerverification"
               element={<ProtectedRoute element={SellerVerification} />}
+            />
+            <Route
+              path="/distributorship"
+              element={<ProtectedRoute element={Distributor} />}
             />
             <Route
               path="/allproduct"
