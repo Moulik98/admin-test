@@ -6,7 +6,7 @@ import Pagination from "../../Pagination"; // Import the Pagination component
 import { getToken } from "../../hook/getToken";
 
 const Distributor = () => {
-  const [verificationList, SetVerificationList] = useState();
+  const [verificationList, setVerificationList] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [totalItems, setTotalItems] = useState(0);
@@ -29,7 +29,7 @@ const Distributor = () => {
 
       const data = await response.json();
       console.log(data);
-      SetVerificationList(data?.data);
+      setVerificationList(data?.data);
       setTotalItems(data?.data);
     } catch (error) {
       console.log(error);
@@ -119,7 +119,7 @@ const Distributor = () => {
         // Ensure that data is an object
      
 
-        SetVerificationList(data?.data); // Wrap the object in an array if needed
+        setVerificationList(data?.data); // Wrap the object in an array if needed
         setShowDropDown(false);
       }
     } catch (error) {
