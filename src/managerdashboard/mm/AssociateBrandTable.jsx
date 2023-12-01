@@ -58,7 +58,7 @@ const AssociateBrandTable = ({ cmName, id }) => {
               Category
             </th>
             <th scope="col" className="px-4 py-2">
-              Actions
+              TAGs
             </th>
           </tr>
         </thead>
@@ -86,7 +86,6 @@ const AssociateBrandTable = ({ cmName, id }) => {
                   <td className="px-4 py-2">
                     <div className="flex gap-x-2 px-4">
                       <TagButton id={_id} />
-                      <MergeButton sellerId={_id} />
                     </div>
                   </td>
                 </tr>
