@@ -41,7 +41,7 @@ const TableRow = ({ data, onDelete }) => {
             onClick={() => setViewAttachment(true)}
             class="flex p-1 border-b-2 rounded-lg items-center cursor-pointer"
           >
-            Review
+            view
           </div>
           
           {viewAttachment && (

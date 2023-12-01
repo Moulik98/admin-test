@@ -76,7 +76,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
           <div className="flex justify-between py-2 gap-10 ">
             <div className="w-1/2 flex justify-between">
               <h1 className="text-base font-semibold text-[#143250]">
-                Gst No:
+                GST No:
               </h1>
               <p className="text-sm text-right font-normal mx-1">
                 {attachMent?.gstn}
@@ -84,7 +84,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
             </div>
             <div className="w-1/2 flex justify-between">
               <h1 className="text-base font-semibold text-[#143250]">
-                Pan No:
+                PAN No:
               </h1>
               <p className="text-sm text-right font-normal mx-1">
                 {attachMent?.pan}
