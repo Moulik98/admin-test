@@ -208,6 +208,9 @@ const Distributor = () => {
                   <th scope="col" className=" px-4 py-3">
                     Company Name
                   </th>
+                  <th scope="col" className=" px-4 py-3">
+                   Brand Name
+                  </th>
                   <th scope="col" className="px-4 py-3">
                     Full Name
                   </th>

@@ -6,7 +6,7 @@ const TableRow = ({ data, onDelete }) => {
     name,
    gstn,pan,
     createdAt,
-  
+    brand_name,
     _id,
     
     
@@ -30,6 +30,7 @@ const TableRow = ({ data, onDelete }) => {
      <td className="px-4 py-2">{formattedDate}</td>
       
       <td className="px-4 py-2">{company_name}</td>
+      <td className="px-4 py-2">{brand_name}</td>
       <td className="px-4 py-2">
         {name}
       </td>
