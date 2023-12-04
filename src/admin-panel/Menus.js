@@ -128,6 +128,19 @@ const Menus = [
     isOpen: false, // Add isOpen property
   },
   {
+    title: "Manage Pages",
+    src: seller,
+    link: "seller/sellerlist",
+    subMenus: [
+      {
+        title: "Hot Deals",
+        src: "parent",
+        link: "/hot-deal",
+      }
+    ],
+    isOpen: false, // Add isOpen property
+  },
+  {
     title: "B2B User",
     src: seller,
     link: "b2buser",

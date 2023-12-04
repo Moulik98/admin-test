@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import OrdersTableRow from '../orders/OrdersTableRow';
 import Pagination from '../../Pagination';
 import { Link } from "react-router-dom";
+import { getToken } from '../../hook/getToken';
 
 const status = [
     {
@@ -34,7 +35,7 @@ const OrdersTable = () => {
     const [orderList, setOrderList] = useState([]);
 
     async function fetchOrderData(data) {
-        const token = localStorage.getItem('access_token');
+        const token = getToken();
         try {
             const response = await fetch(`${process.env.REACT_APP_URL}/v1/order/getAllOrders/admin?page=1&limit=5&sort_date=desc`, {
                 method: 'POST',
@@ -75,6 +76,7 @@ const OrdersTable = () => {
                                     <th scope="col" className="px-2 py-3">Amount</th>
                                     <th scope="col" className="px-2 py-3">Order Date</th>
                                     <th scope="col" className="px-2 py-3"></th>
+                                    <th scope="col" className="px-2 py-3">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>

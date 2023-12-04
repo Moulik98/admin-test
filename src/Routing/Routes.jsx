@@ -78,6 +78,7 @@ import AssociateBrand from "../managerdashboard/mm/AssociateBrand.jsx";
 import AssociateBrandsProducts from "../managerdashboard/mh/AssociateBrandsProducts.jsx";
 
 import Distributor from "../admin-panel/distributor/Distributor.jsx";
+import Hotdeal from "../admin-panel/manage/hotDeal/Hotdeal.jsx";
 const PreserveLocation = ({ children }) => {
   const location = useLocation();
   return children(location);
@@ -269,6 +270,10 @@ const MainRoutes = () => {
               path="/startup-cms"
               element={<ProtectedRoute element={Banners} />}
             />
+            <Route
+              path="/hot-deal"
+              element={<ProtectedRoute element={Hotdeal} />}
+            />
             {/* Manage Staff */}
             <Route
               path="/category-manager-dashboard"
@@ -360,11 +365,11 @@ const MainRoutes = () => {
               path="/mh-assign-brands"
               element={<ProtectedStaffRoute element={MHAssignSeller} />}
             />
-
             <Route
               path="/MM-dashboard/associate-brand/:id"
               element={<ProtectedStaffRoute element={AssociateBrand} />}
             />
+            
           </Routes>
         )}
       </PreserveLocation>
