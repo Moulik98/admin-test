@@ -25,7 +25,7 @@ export const CategoryManagerLogin = () => {
         navigate('/digitalmarketing-manager-dashboard')
         break;
       case 'QAA':
-        navigate('/qaapprover-dashboard')
+        navigate('/pending-seller')
         break;
       case 'MM':
         navigate('/mm-dashboard')
