@@ -9,7 +9,6 @@ const QA = () => {
   const token = localStorage.getItem("access_token");
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
-
   const fetchPendingSellers = async () => {
     const url =
       process.env.REACT_APP_URL +
@@ -52,10 +51,20 @@ const QA = () => {
             </h1>
           </div>
           <div className="flex items-center" onClick={handleLogout}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
+              />
             </svg>
-
           </div>
           <LogOutModal visible={showLogoutModal} onClose={handleModalClose} />
         </section>
@@ -76,10 +85,15 @@ const QA = () => {
                 </tr>
               </thead>
               <tbody>
-                {Array.isArray(pendingSellers) &&
-                  pendingSellers?.map((item, index) => {
-                    return <TableRow key={item._id} data={item} index={index} />;
-                  })}
+                {Array.isArray(pendingSellers) && pendingSellers.length > 0 ? (
+                  pendingSellers.map((item, index) => (
+                    <TableRow key={item._id} data={item} index={index} />
+                  ))
+                ) : (
+                  <tr>
+                    <td>No pending sellers</td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
