@@ -4,11 +4,12 @@ import { QAList } from "../../constant";
 import TableRow from "./TableRow";
 import LogOutModal from "../Logout";
 import QaStats from "./QaStats";
+import { getToken } from "../../hook/getToken";
 
 const PendingSellers= () => {
   const [pendingSellers, setPendingSellers] = useState([]);
   const [showLogoutModal, setShowLogoutModal] = useState(false); 
-  const token = localStorage.getItem("access_token");
+  const token = getToken()
 
 
 
