@@ -68,6 +68,7 @@ const QA = () => {
           </div>
           <LogOutModal visible={showLogoutModal} onClose={handleModalClose} />
         </section>
+       
         <section className="flex flex-col border">
           <div className="overflow-x-auto">
             <table className="min-w-full table-auto">
