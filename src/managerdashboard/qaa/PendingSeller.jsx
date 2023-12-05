@@ -7,18 +7,10 @@ import QaStats from "./QaStats";
 
 const PendingSellers= () => {
   const [pendingSellers, setPendingSellers] = useState([]);
-  const [viewAttachment, setViewAttachment] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false); 
   const token = localStorage.getItem("access_token");
 
-  const handleClose = (value) => {
-    if (value === "close") {
-      setViewAttachment(false);
-    }
-    if (value === "verify") {
-      setViewAttachment(false);
-    }
-  };
+
 
   const fetchPendingSellers = async () => {
     const url =
