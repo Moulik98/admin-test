@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import SideBar from "../Sidebar";
 import { QAList } from "../../constant";
 import TableRow from "./TableRow";
-import AttachmentModal from "./AttachmentModal"; // Import the TableRow component
 import LogOutModal from "../Logout";
 import QaStats from "./QaStats";
 
