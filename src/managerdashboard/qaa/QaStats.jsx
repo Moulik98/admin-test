@@ -12,7 +12,7 @@ const QaStats = () => {
         getList(url, token)
             .then(data => {
                 setStatData(data.stats);
-                console.log(data.stats);
+               
             })
             .catch(err => {
                 console.log(err);
