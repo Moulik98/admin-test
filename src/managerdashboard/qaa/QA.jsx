@@ -86,15 +86,10 @@ const QA = () => {
                 </tr>
               </thead>
               <tbody>
-                {Array.isArray(pendingSellers) && pendingSellers.length > 0 ? (
-                  pendingSellers.map((item, index) => (
-                    <TableRow key={item._id} data={item} index={index} />
-                  ))
-                ) : (
-                  <tr>
-                    <td>No pending sellers</td>
-                  </tr>
-                )}
+                {Array.isArray(pendingSellers) &&
+                  pendingSellers?.map((item, index) => {
+                    return <TableRow key={item._id} data={item} index={index} />;
+                  })}
               </tbody>
             </table>
           </div>
