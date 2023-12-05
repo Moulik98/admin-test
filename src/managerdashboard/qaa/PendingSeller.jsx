@@ -4,6 +4,7 @@ import { QAList } from "../../constant";
 import TableRow from "./TableRow";
 import AttachmentModal from "./AttachmentModal"; // Import the TableRow component
 import LogOutModal from "../Logout";
+import QaStats from "./QaStats";
 
 const PendingSellers= () => {
   const [pendingSellers, setPendingSellers] = useState([]);
@@ -69,6 +70,7 @@ const handleModalClose = () => {
             </div>
             <LogOutModal visible={showLogoutModal} onClose={handleModalClose} />
         </section>
+        <QaStats/>
         <section className="flex flex-col border">
           <div className="overflow-x-auto">
             <table className="min-w-full table-auto">
