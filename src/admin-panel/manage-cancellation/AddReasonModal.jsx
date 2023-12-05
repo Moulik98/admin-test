@@ -26,6 +26,7 @@ const AddReasonModal = ({reasons,visible,onClose}) => {
             if (response.ok) {
                 // Handle success, maybe update the reasons list or show a success message
                 toast.success(data.message)
+                onClose()
                 console.log('Cancellation reason added successfully');
                 setNewReason(''); // Reset the input field after successful addition
             } else {
