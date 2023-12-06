@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Table } from "./Table";
 import { useParams } from "react-router-dom";
 
-
-
 const Sellerdetails = () => {
   const [data, setData] = useState({});
 
@@ -19,6 +17,7 @@ const Sellerdetails = () => {
 
         const jsonData = await response.json();
         setData(jsonData);
+        console.log(jsonData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -26,7 +25,6 @@ const Sellerdetails = () => {
 
     fetchData();
   }, [id]); // Add 'id' as a dependency to useEffect
-
 
   return (
     <div className="pr-6 py-10 text-sm font-semibold">
@@ -54,7 +52,9 @@ const Sellerdetails = () => {
       </div>
 
       <div className="flex gap-10 py-5 text-sm text-base ">
-        <div><img/></div>
+        <div>
+          <img />
+        </div>
         <div className="flex flex-col items-start">
           <p>Seller ID# : {data?.seller_id} </p>
           <p>Store Name : {data?.store_name} </p>
@@ -64,16 +64,22 @@ const Sellerdetails = () => {
           <p>Pan Number : {data?.pan_number} </p>
           <p>Shop Address : {data?.sellerAddress}</p>
         </div>
-        <div className="flex flex-col items-start">
-          
+        <div className="flex flex-col items-start capitalize">
           <p>Total Products : {data?.productCount}</p>
           <p>Joined : {data?.joinedDuration}</p>
+          <p>CM Name : {data?.cm_name}</p>
+          <p>seller type : {data?.sellerType}</p>
+          <p>seller code : {data?.seller_code}</p>
           <button className=" rounded" disabled={!data?.isVerify}>
-  Seller Status: <span className={`bg-${data?.isVerify ? 'green' : 'gray'}-500 px-1 rounded-sm`}>{data?.isVerify ? 'Verified' : 'Pending'}</span>
-</button>
-
-
-
+            Seller Status:{" "}
+            <span
+              className={`bg-${
+                data?.isVerify ? "green" : "gray"
+              }-500 px-1 rounded-sm`}
+            >
+              {data?.isVerify ? "Verified" : "Pending"}
+            </span>
+          </button>
         </div>
       </div>
 
