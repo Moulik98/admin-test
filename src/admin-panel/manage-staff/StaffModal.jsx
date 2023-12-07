@@ -98,7 +98,7 @@ const StaffModal = ({ id, visible, onClose, modalName }) => {
 
           <div className="flex flex-col w-full justify-start">
             <p className="text-sm text-start text-gray-900 py-1 uppercase ">
-              Role/Designation Name
+              Role / Designation Name
             </p>
             <input
               className="border p-1"
@@ -110,7 +110,7 @@ const StaffModal = ({ id, visible, onClose, modalName }) => {
           </div>
           <div className="flex flex-col w-full justify-start">
             <p className="text-sm text-start text-gray-900 py-1 uppercase ">
-              Role/Designation Shortform
+              Role / Designation Shortform
             </p>
             <input
               className="border p-1"
