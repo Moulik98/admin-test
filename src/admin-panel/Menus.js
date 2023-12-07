@@ -22,7 +22,7 @@ const Menus = [
   {
     title: "Manage User",
     src: manageUser,
-    link: "manage-user",
+    link: "designation-list",
     subMenus: [
       {
         title: "Manage Staff",
