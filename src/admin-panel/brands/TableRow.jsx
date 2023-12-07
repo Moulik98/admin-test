@@ -11,7 +11,9 @@ const TableRow = ({ data, onDelete }) => {
     brand_desc,
     _id,
     brand_logo_url,
-    seller
+    seller,
+    cm_data,
+    mm_data
     
   } = data;
   const formattedDate = new Date(createdAt).toLocaleDateString();
@@ -69,9 +71,11 @@ const TableRow = ({ data, onDelete }) => {
       </td>
       <td className="px-4 py-2">{brand_name}</td>
       <td className="px-4 py-2">
-        {trademark_office} <br /> {trademark_reg_no}
+      <Description description={`${trademark_office} ${trademark_reg_no}`} />
       </td>
       <td className="px-4 py-2">{seller?.fullname}</td>
+      <td className="px-4 py-2">{cm_data?.name}</td>
+      <td className="px-4 py-2">{mm_data?.name}</td>
       <td className="px-4 py-2"><Description description={brand_desc} /></td>
       <td className="text-center px-4 py-2">
         {status === "Approved" ? (
@@ -94,7 +98,7 @@ const TableRow = ({ data, onDelete }) => {
             onClick={() => setViewAttachment(true)}
             class="flex p-1 border-b-2 rounded-lg items-center cursor-pointer"
           >
-            Review
+            view
           </div>
           
           {viewAttachment && (

@@ -210,6 +210,12 @@ export const Brands = () => {
                     Seller
                   </th>
                   <th scope="col" className=" px-4 py-3">
+                    CM
+                  </th>
+                  <th scope="col" className=" px-4 py-3">
+                    MM
+                  </th>
+                  <th scope="col" className=" px-4 py-3">
                     Description
                   </th>
                   <th scope="col" className="text-center px-4 py-3 ">
