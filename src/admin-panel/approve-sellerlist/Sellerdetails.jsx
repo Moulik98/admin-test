@@ -61,10 +61,11 @@ const Sellerdetails = () => {
         </div>
         <div className="flex flex-col items-start capitalize">
           <p className="text-gray-800">Total Products : {data?.productCount}</p>
-          <p className="text-gray-800">Joined : {data?.joinedDuration}</p>
+          <p className="text-gray-800">Onboarded: {data?.joinedDuration}</p>
           <p className="text-gray-800">CM Name : {data?.cm_name}</p>
           <p>seller type : {data?.sellerType}</p>
           <p>seller code : {data?.seller_code}</p>
+          <p>seller Contact No : {data?.phone}</p>
           <button
             className={`rounded ${
               data?.isVerify ? "bg-green-500" : "bg-gray-500"
