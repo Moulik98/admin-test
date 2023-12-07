@@ -49,20 +49,20 @@ const Sellerdetails = () => {
         </div>
       </div>
 
-      <div className="flex gap-10 py-5 text-sm text-base">
+      <div className="flex gap-10 py-5 text-sm text-base text-gray-800">
         <div className="flex flex-col items-start">
-          <p className="text-gray-800">Seller ID# : {data?.seller_id} </p>
-          <p className="text-gray-800">Store Name : {data?.store_name} </p>
+          <p>Seller ID# : {data?.seller_id} </p>
+          <p>Store Name : {data?.store_name} </p>
           <p>Full Name : {data?.fullname}</p>
           <p>Email : {data?.email}</p>
           <p>GST Number : {data?.gst_number}</p>
           <p>Pan Number : {data?.pan_number} </p>
           <p>Shop Address : {data?.sellerAddress}</p>
         </div>
-        <div className="flex flex-col items-start capitalize">
-          <p className="text-gray-800">Total Products : {data?.productCount}</p>
-          <p className="text-gray-800">Onboarded: {data?.joinedDuration}</p>
-          <p className="text-gray-800">CM Name : {data?.cm_name}</p>
+        <div className="flex flex-col items-start capitalize text-gray-800">
+          <p>Total Products : {data?.productCount}</p>
+          <p>Onboarded: {data?.joinedDuration}</p>
+          <p>CM Name : {data?.cm_name}</p>
           <p>seller type : {data?.sellerType}</p>
           <p>seller code : {data?.seller_code}</p>
           <p>seller Contact No : {data?.phone}</p>
