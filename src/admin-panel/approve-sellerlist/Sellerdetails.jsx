@@ -85,7 +85,7 @@ const Sellerdetails = () => {
           <tr className="font-normal">
             <th className="p-2">sl no</th>
             <th className="p-2">product image</th>
-            <th className="p-2">product name</th>
+            <th className="p-2">product name(ID)</th>
             <th className="p-2">product description</th>
             <th className="p-2">parent category</th>
             <th className="p-2">sub category</th>
@@ -100,7 +100,7 @@ const Sellerdetails = () => {
                 id={e?._id}
                 srNo={index + 1}
                 productImage={e?.main_img}
-                productName={e?.item_name}
+                productName={`${e?.item_name}(${e?.product_id})`}
                 productDescription={e?.product_description}
                 parentCategory={e?.parentCategoryName}
                 subCategory={e?.subCategoryName}
