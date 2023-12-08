@@ -1,8 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import SideBar from "../Sidebar";
-import { categoryManagerMenu, categoryMenu } from "../../constant";
+import { categoryManagerMenu} from "../../constant";
 import toast from "react-hot-toast";
+
 
 export const SignupForm = () => {
   const [responseMessage, setResponseMessage] = useState([]);
@@ -68,13 +69,16 @@ export const SignupForm = () => {
       if (response.ok) {
         setResponseMessage(responseData.message);
         setSuccess(true);
+        toast.success(responseData.messages)
       } else {
         setResponseMessage(responseData.message);
         setSuccess(responseData.success);
+        toast.error(responseData.messages);
       }
     } catch (error) {
       console.error("Error during signup:", error);
       setResponseMessage("An error occurred during registration.");
+      toast.error(responseMessage);
     }
   }
 
@@ -87,6 +91,7 @@ export const SignupForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log("Submit button clicked")
     const passwordRegx =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,15}$/;
     const gstRegx =
@@ -146,11 +151,13 @@ export const SignupForm = () => {
     const url =
       process.env.REACT_APP_URL +
       "/v1/category-manager/sellerCompleteSignupByCm"; // Fixed the URL by adding a slash before the endpoint
-
-    if (isValidPassword && isValidGst && isValidPan) {
+    
+     
+    
+     
       Signup(url, formData, access_token);
-      console.log("signup", access_token);
-    }
+      console.log("signup", formData);
+   
   };
 
   return (
