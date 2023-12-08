@@ -1,7 +1,6 @@
 import React from "react";
-import Description from "../../Description";
 
-export const Table = ({srNo,product_id,productImage,productName,productDescription,parentCategory,subCategory,childCategory}) => {
+ const Table = ({srNo,product_id,productImage,productName,productDescription,parentCategory,subCategory,childCategory}) => {
   return (
     <tr className="overflow-hidden border-b-2 rounded-b-3xl text-left bg-white transition duration-300 ease-in-out">
       <td className="whitespace-nowrap px-6 py-2 text-xs font-light text-gray-900">
@@ -14,7 +13,7 @@ export const Table = ({srNo,product_id,productImage,productName,productDescripti
         {productName}
       </td>
       <td className=" px-6 py-2 text-xs font-light  text-gray-900">
-        <Description description={productDescription} />
+       {productDescription} 
       </td>
       <td className="px-6 py-2 text-xs font-light  text-gray-90">
         {parentCategory}
@@ -28,3 +27,4 @@ export const Table = ({srNo,product_id,productImage,productName,productDescripti
     </tr>
   );
 };
+export default Table

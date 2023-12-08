@@ -1,11 +1,11 @@
 
 import React, { useState, useEffect } from "react";
-import { Table } from "./Table";
+import  Table  from "./Table";
 import { useParams } from "react-router-dom";
-
 const Sellerdetails = () => {
   const [data, setData] = useState({});
   const { id } = useParams();
+  const [table, setTable]=useState({})
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,6 +17,33 @@ const Sellerdetails = () => {
         const jsonData = await response.json();
         setData(jsonData);
         console.log(jsonData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+  const accessToken =localStorage.getItem("access_token");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+
+        const response = await fetch(
+          `${process.env.REACT_APP_URL}/v1/verifySeller/seller-product/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              // Add other headers if needed
+            },
+          }
+        );
+
+        const jsonData = await response.json();
+        setTable(jsonData);
+        console.log('hii',jsonData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -86,25 +113,25 @@ const Sellerdetails = () => {
             <th className="p-2">sl no</th>
             <th className="p-2">product image</th>
             <th className="p-2">product name(ID)</th>
-            <th className="p-2">product description</th>
+            <th className="p-2">Total Variations</th>
             <th className="p-2">parent category</th>
             <th className="p-2">sub category</th>
             <th className="p-2">child category</th>
           </tr>
         </thead>
         <tbody>
-          {data.productData &&
-            data.productData.map((e, index) => (
+          {table.data &&
+            table.data.map((e, index) => (
               <Table
-                key={e?._id}
-                id={e?._id}
+                key={e?.product_external_id}
+                id={e?.product_external_id}
                 srNo={index + 1}
-                productImage={e?.main_img}
-                productName={`${e?.item_name}(${e?.product_id})`}
-                productDescription={e?.product_description}
-                parentCategory={e?.parentCategoryName}
-                subCategory={e?.subCategoryName}
-                childCategory={e?.childCategoryName}
+                productImage={e?.product_image}
+                productName={`${e?.item_name}(${e?.product_external_id})`}
+                productDescription={e?.variation_count}
+                parentCategory={e?.parent_category}
+                subCategory={e?.sub_category}
+                childCategory={e?.child_category}
               />
             ))}
         </tbody>
