@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PdfViewModal from "./PdfViewModal";
 import DeclineReasonModal from "./DeclineReqModal";
+import toast from "react-hot-toast";
 
 const AttachmentModal = ({ onClose, visible, id }) => {
   const [pdfModal, setPdfModal] = useState(false);
@@ -112,6 +113,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
 
   const handleVerify = () => {
     makePutRequest(id);
+      toast.success('Verified Successfully')
   };
 
   const handleDecline = () => {
@@ -122,6 +124,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
     if (declineReason) {
       makeDeclineRequest(id, declineReason); // Pass the decline reason to the decline request function
     }
+    toast.success('Reason Submitted Successfully')
   };
 
   const handleClosePdf = (e) => {
