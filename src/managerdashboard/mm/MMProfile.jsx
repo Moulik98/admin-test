@@ -184,7 +184,7 @@ const MMProfile = () => {
         <SideBar menu={MarManagar} />
       </div>
       <div className="flex flex-col">
-      <p className="text-2xl flex justify-start p-4 ">Profile Update</p>
+      <p className="text-2xl flex justify-start p-4 "> Marketing Manager Profile</p>
       <div className="flex items-top justify-center">
         <div className="ml-40 mt-28" onClick={handleImageClick}>
         
