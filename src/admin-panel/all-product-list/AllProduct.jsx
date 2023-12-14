@@ -228,7 +228,7 @@ const AllProduct = () => {
   }, [approval, review, awardsName, sellerName, countryName, parent, sub, child]);
 
   return (
-    <div className=" py-10 text-xs font-semibold w-full pr-5">
+    <div className=" py-10 text-xs w-full pr-5">
       {/* {childModal && (
         <AwardListModal visible={childModal} onClose={handleClose} />
       )} */}
