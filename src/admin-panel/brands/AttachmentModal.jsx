@@ -132,7 +132,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
 
           <div className="px-4 py-2 gap-2">
             <h1 className="text-base font-semibold text-[#143250]">
-              Product Images :
+              Trademark Certificate :
             </h1>
             <div className="flex">
               {Array.isArray(attachMent.product_image_url) ? (
@@ -144,11 +144,11 @@ const AttachmentModal = ({ onClose, visible, id }) => {
                     alt={`Product ${index}`}
                   />
                 ))
-              ) : (
+              ) : (            
                 <img
                   className="w-12 h-16"
-                  src={attachMent.product_image_url}
-                  alt="Product"
+                  src={attachMent?.product_image_url || 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fthumbnails%2F022%2F059%2F000%2Fsmall%2Fno-image-available-icon-vector.jpg&tbnid=GQf2TB5qj81_7M&vet=12ahUKEwjZxJ_3xY6DAxXZb2wGHXdWDukQMygDegQIARA6..i&imgrefurl=https%3A%2F%2Fwww.vecteezy.com%2Ffree-vector%2Fno-image-available&docid=SJxz-cOxPHPFpM&w=200&h=200&q=no%20image&ved=2ahUKEwjZxJ_3xY6DAxXZb2wGHXdWDukQMygDegQIARA6'}
+                  alt=""
                 />
               )}
             </div>
@@ -251,7 +251,7 @@ const AttachmentModal = ({ onClose, visible, id }) => {
               </p>
             </div>
           </div>
-          <div className="flex justify-between py-2 gap-5 ">
+          <div className="flex justify-between py-2 gap-10 ">
             <div className="w-1/2 flex justify-between">
               <h1 className="text-base font-semibold text-[#143250]">
                 Trade Mark Office:
@@ -262,14 +262,14 @@ const AttachmentModal = ({ onClose, visible, id }) => {
             </div>
             <div className="w-1/2 flex justify-between">
               <h1 className="text-base font-semibold text-[#143250]">
-                Trademark Type:
+                {/* Trademark Type: */}
               </h1>
               <p className="text-sm text-right font-normal mx-1">
                 {attachMent?.trademark_type}
               </p>
             </div>
           </div>
-          <div className="flex justify-between py-2 gap-5 ">
+          <div className="flex justify-between py-2 gap-10 ">
             <div className="flex">
               <h1 className="text-base font-semibold text-[#143250]">
                 Description:
