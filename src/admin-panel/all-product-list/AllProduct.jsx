@@ -563,7 +563,7 @@ const AllProduct = () => {
                 </th>
                 <th
                   scope="col"
-                  className="px-4 py-2 text-left text-xs font-normal text-gray-900"
+                  className="px-4 py-2 text-center text-xs font-normal text-gray-900"
                 >
                   Name
                 </th>

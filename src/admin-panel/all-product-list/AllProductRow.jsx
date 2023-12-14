@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./products.css";
 
 const AllProductRow = ({ variationId, slNo, name, img, sellerName, parentCategory, subCategory, childCategory, country, award, approved, id, review, handleEdit, action, selectedOptions, }) => {
-
+console.log("All product list >>>>", name)
 
   const [isConfirmationVisible, setIsConfirmationVisible] = useState(false);
 

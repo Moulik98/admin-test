@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ApproveModal from './ApproveModal'
 import RaiseQueryModal from './RaiseQueryModal'
 const TableRow = ({ data, index, handleRefresh }) => {
-    const { product_images, seller, product_description, parent_category, sub_category, child_category, approval_status, _id
+    const { product_images, seller,item_name, product_description, parent_category, sub_category, child_category, approval_status, _id
     } = data
 
     // state for Review Modal
@@ -22,6 +22,11 @@ const TableRow = ({ data, index, handleRefresh }) => {
     const slicedContent = product_description?.slice(0, limit);
     const displayContent = expanded ? product_description : slicedContent;
 
+    const [expandName, setExpandName] = useState(false);
+    const limitName =30;
+    const slicedName = item_name?.slice(0,limitName);
+    const displayName = expandName ? item_name : slicedName;
+
     return (
         <tr class="border-b border-solid border-gray-200 bg-white hover:bg-gray-50 text-[#333333]">
             <td scope="row" class="whitespace-nowrap px-2 py-2  ">{index + 1}</td>
@@ -30,7 +35,19 @@ const TableRow = ({ data, index, handleRefresh }) => {
                     <img className='w-full h-full object-fill' src={product_images[0]?.main_img} alt='product_img' />
                 </div>
             </td>
-            <td class="px-2 py-2">{seller[0]?.fullname}</td>
+            <td class="px-2 py-2"> 
+               {displayName}
+                {!expandName && item_name?.length > limitName && "..."}
+                {item_name?.length > limitName && (
+                    <span
+                        style={{ whiteSpace: "nowrap" }}
+                        className="text-xs text-[#0773DF] cursor-pointer px-2 py-2"
+                        onClick={() => setExpandName((preValue) => !preValue)}
+                    >
+                        {expandName ? "View Less" : "View More"}
+                    </span>
+                )}
+                </td>
             <td class="px-2 py-2 capitalize">
                 {displayContent}
                 {!expanded && product_description?.length > limit && "..."}
