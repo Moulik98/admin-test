@@ -62,10 +62,30 @@ const BrandModal = ({ visible, onClose, id, modalName }) => {
 
   return (
     <div className="fixed inset-0 z-50 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
-      <div
-        ref={modalRef}
-        className="bg-white p-2 text-xs rounded-lg shadow-lg"
-      >
+      <button
+          className="absolute top-16 right-96 p-2 cursor-pointer"
+          onClick={onClose}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            className="h-6 w-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      
+      <div ref={modalRef} className="bg-white p-2 text-xs rounded-lg shadow-lg relative">
+        {/* Close button in the top-right position */}
+
+        {/* Modal content */}
         <table className="table-auto w-full sm:w-auto">
           <thead>
             <tr>

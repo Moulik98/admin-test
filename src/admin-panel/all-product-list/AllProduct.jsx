@@ -59,7 +59,6 @@ const AllProduct = () => {
   };
   console.log(parent);
 
-
   const handleSubChange = (event) => {
     setSub(event.target.value); // Update the state with the new value
   };
@@ -114,9 +113,7 @@ const AllProduct = () => {
 
   const [seller, SetSeller] = useState([]);
   useEffect(() => {
-    fetch(
-      `${process.env.REACT_APP_URL}/v1/verifySeller/getSellerName`
-    )
+    fetch(`${process.env.REACT_APP_URL}/v1/verifySeller/getSellerName`)
       .then((res) => res.json())
       .then((data) => {
         SetSeller(data);
@@ -152,13 +149,11 @@ const AllProduct = () => {
     }));
   };
 
-
-
   useEffect(() => {
     const baseUrl = `${process.env.REACT_APP_URL}/v1/products/get-products-list/name?page=${currentPage}&limit=${pageSize}`;
     // console.log(baseUrl);
     const handleApiError = (error) => {
-      console.error('API Error:', error);
+      console.error("API Error:", error);
       // Perform any necessary error handling, such as showing an error message to the user
     };
 
@@ -167,14 +162,14 @@ const AllProduct = () => {
     fetch(baseUrl)
       .then((res) => {
         if (!res.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         return res.json();
       })
       .then((data) => {
         setTotalItems(data.totalCount);
         setProducts(data?.productList);
-        console.log('data?productList', data?.productList);
+        console.log("data?productList", data?.productList);
       })
       .catch((error) => {
         handleApiError(error);
@@ -186,8 +181,8 @@ const AllProduct = () => {
 
   useEffect(() => {
     const filterParams = {
-      'filter[approval_status][$eq]': approval,
-      'filter[review_status][$eq]': review,
+      "filter[approval_status][$eq]": approval,
+      "filter[review_status][$eq]": review,
       award: awardsName,
       seller: sellerName,
       country: countryName,
@@ -197,10 +192,13 @@ const AllProduct = () => {
     };
 
     const queryParams = Object.keys(filterParams)
-      .filter((key) => filterParams[key] !== '')
-      .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(filterParams[key])}`);
+      .filter((key) => filterParams[key] !== "")
+      .map(
+        (key) =>
+          `${encodeURIComponent(key)}=${encodeURIComponent(filterParams[key])}`
+      );
 
-    const queryString = queryParams.join('&');
+    const queryString = queryParams.join("&");
 
     const baseUrl = `${process.env.REACT_APP_URL}/v1/products/get-products-list/name`;
 
@@ -211,7 +209,7 @@ const AllProduct = () => {
     fetch(filteredUrl)
       .then((response) => {
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         return response.json();
       })
@@ -225,7 +223,16 @@ const AllProduct = () => {
       .finally(() => {
         setIsLoading(false); // Set loading state to false
       });
-  }, [approval, review, awardsName, sellerName, countryName, parent, sub, child]);
+  }, [
+    approval,
+    review,
+    awardsName,
+    sellerName,
+    countryName,
+    parent,
+    sub,
+    child,
+  ]);
 
   return (
     <div className=" py-10 text-xs w-full pr-5">
@@ -454,8 +461,6 @@ const AllProduct = () => {
 
       <div className="flex justify-end">
         <div className="border flex p-2 gap-3 bg-slate-100">
-
-
           <div className=" relative">
             {/* SVG */}
 
@@ -574,7 +579,9 @@ const AllProduct = () => {
                   className="px-4 py-2 text-left text-xs font-normal text-gray-900"
                 >
                   <div
-                    className={`${selectedOptions?.parent ? "block" : "hidden"}`}
+                    className={`${
+                      selectedOptions?.parent ? "block" : "hidden"
+                    }`}
                   >
                     Parent Category
                   </div>
@@ -604,8 +611,9 @@ const AllProduct = () => {
                   className="px-4 py-2 text-left text-xs font-normal text-gray-900"
                 >
                   <div
-                    className={`${selectedOptions?.country ? "block" : "hidden"
-                      }`}
+                    className={`${
+                      selectedOptions?.country ? "block" : "hidden"
+                    }`}
                   >
                     Country
                   </div>
@@ -615,7 +623,9 @@ const AllProduct = () => {
                   className="px-4 py-2 text-left text-xs font-normal text-gray-900"
                 >
                   <div
-                    className={`${selectedOptions?.awards ? "block" : "hidden"}`}
+                    className={`${
+                      selectedOptions?.awards ? "block" : "hidden"
+                    }`}
                   >
                     Awards
                   </div>
@@ -670,7 +680,7 @@ const AllProduct = () => {
           </table>
         </div>
       </section>
-      <div className='flex justify-end items-center py-5'>
+      <div className="flex justify-end items-center py-5">
         <Pagination
           currentPage={currentPage}
           totalItems={totalItems}
