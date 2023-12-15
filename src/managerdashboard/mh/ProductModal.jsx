@@ -62,8 +62,13 @@ const ProductModal = ({ visible, onClose, id, modalName }) => {
 
   return (
     <div className="fixed inset-0 z-50 text-xs bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
-       <button
-          className="absolute top-32 right-48 p-2 cursor-pointer"
+      <div
+        ref={modalRef}
+        className="bg-white p-1 rounded-lg shadow-lg w-2/3 relative"
+      >
+        {/* Close button in the top-right position */}
+        <button
+          className="absolute top-2 right-2 p-2 cursor-pointer"
           onClick={onClose}
         >
           <svg
@@ -81,16 +86,10 @@ const ProductModal = ({ visible, onClose, id, modalName }) => {
             />
           </svg>
         </button>
-      
-      
-      <div
-        ref={modalRef}
-        className="bg-white p-1 rounded-lg shadow-lg w-2/3 relative"
-      >
-        {/* Close button in the top-right position */}
-       
 
-        <h2 className="text-lg font-semibold mb-4 text-center">Product Details</h2>
+        <h2 className="text-lg font-semibold mb-4 text-center">
+          Product Details
+        </h2>
         <table className="w-full border-collapse">
           <thead>
             <tr>

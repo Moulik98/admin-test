@@ -62,8 +62,14 @@ const BrandModal = ({ visible, onClose, id, modalName }) => {
 
   return (
     <div className="fixed inset-0 z-50 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
-      <button
-          className="absolute top-16 right-96 p-2 cursor-pointer"
+      <div
+        ref={modalRef}
+        className="bg-white p-2 text-xs rounded-lg shadow-lg relative"
+      >
+        {/* Close button in the top-right position */}
+
+        <button
+          className="absolute top-2 right-2 p-2 cursor-pointer"
           onClick={onClose}
         >
           <svg
@@ -81,9 +87,6 @@ const BrandModal = ({ visible, onClose, id, modalName }) => {
             />
           </svg>
         </button>
-      
-      <div ref={modalRef} className="bg-white p-2 text-xs rounded-lg shadow-lg relative">
-        {/* Close button in the top-right position */}
 
         {/* Modal content */}
         <table className="table-auto w-full sm:w-auto">
@@ -106,7 +109,9 @@ const BrandModal = ({ visible, onClose, id, modalName }) => {
                     className="w-8 sm:w-8 h-auto"
                   />
                 </td>
-                <td className="border px-2 sm:px-4 py-2">{brand.product_count}</td>
+                <td className="border px-2 sm:px-4 py-2">
+                  {brand.product_count}
+                </td>
                 <td className="border px-2 sm:px-4 py-2">{brand.mm_name}</td>
               </tr>
             ))}
