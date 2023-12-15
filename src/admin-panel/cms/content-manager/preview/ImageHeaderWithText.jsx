@@ -11,7 +11,7 @@ const ImageHeaderWithText = ({ data }) => {
                 style={`text-2xl text-black font-semibold`}
             />
             <ShowImage
-                style={`w-full h-[30rem]`}
+                style={`w-full h-[35rem]`}
                 alt={`left-image`}
                 image={image}
             />
