@@ -4,6 +4,7 @@ import Loader from "../Loader";
 import toast from "react-hot-toast";
 import { categoryManagerMenu } from "../../constant";
 import { Link } from "react-router-dom";
+import { getToken } from "../../hook/getToken";
 
 const inputFields = [
   {
@@ -55,7 +56,7 @@ const QaProfile = () => {
   });
   const [image, setImage] = useState(null);
 
-  const token = localStorage.getItem("access_token");
+  const token = getToken();
 
   const CategotyManager = async () => {
     try {
