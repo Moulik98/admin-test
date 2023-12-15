@@ -68,7 +68,7 @@ const ProductModal = ({ visible, onClose, id, modalName }) => {
       >
         {/* Close button in the top-right position */}
         <button
-          className="absolute top-2 right-2 p-2 cursor-pointer"
+          className="absolute top-0 right-0 bg-slate-200 p-1 cursor-pointer"
           onClick={onClose}
         >
           <svg

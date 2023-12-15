@@ -67,9 +67,8 @@ const BrandModal = ({ visible, onClose, id, modalName }) => {
         className="bg-white p-2 text-xs rounded-lg shadow-lg relative"
       >
         {/* Close button in the top-right position */}
-
         <button
-          className="absolute top-2 right-2 p-2 cursor-pointer"
+          className="absolute top-0 bg-slate-200  right-0 p-1 cursor-pointer"
           onClick={onClose}
         >
           <svg
@@ -89,7 +88,7 @@ const BrandModal = ({ visible, onClose, id, modalName }) => {
         </button>
 
         {/* Modal content */}
-        <table className="table-auto w-full sm:w-auto">
+        <table className="table-auto w-full mr-4 sm:w-auto">
           <thead>
             <tr>
               <th className="px-2 sm:px-4 py-2">Brand Name</th>
