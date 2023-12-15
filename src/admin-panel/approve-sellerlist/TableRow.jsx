@@ -30,7 +30,7 @@ const TableRow = ({ data, onDelete, onViewDetails, index }) => {
       if (response.ok) {
         const responseData = await response.json();
         onDelete();
-        console.log("Delete request successful:", responseData);
+      
       } else {
         throw new Error("Delete request failed");
       }

@@ -13,7 +13,7 @@ const MhAssignButton = ({ mmId, count, onClick }) => {
             <button
                 onClick={() => handleClick()}
                 type='button' className='py-2 px-4 rounded bg-blue-500 border text-white'>
-                Assign MM
+                Assign Brand
             </button>
             {
                 isOpen ?
