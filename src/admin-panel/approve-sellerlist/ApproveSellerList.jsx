@@ -220,8 +220,11 @@ const ApproveSellerList = () => {
                     <th scope="col" class=" px-4 py-3">
                       Store Name
                     </th>
+                    <th scope="col" class=" px-4 py-3">
+                      CM Name
+                    </th>
                     <th scope="col" class="text-left px-4 py-3 ">
-                      Seller ID
+                      CM ID
                     </th>
                     <th
                       scope="col"
