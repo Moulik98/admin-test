@@ -5,15 +5,15 @@ import Heading from './Heading'
 const LeftImageWithText = ({ data }) => {
     const { image, body_text, headline, sub_headline } = data
     return (
-        <div className='grid grid-cols-2 gap-5'>
-            <div>
+        <div className='flex flex-row gap-5'>
+            <div className='w-2/5'>
                 <ShowImage
-                    style={`w-full h-96`}
+                    style={`w-full h-72`}
                     alt={`left-image`}
                     image={image}
                 />
             </div>
-            <div className='px-10'>
+            <div className='flex-1 px-10'>
                 <Heading
                     headline={headline}
                     style={`text-2xl text-black font-semibold `}
