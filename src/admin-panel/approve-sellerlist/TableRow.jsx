@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // import AttachmentModal from './AttachmentModal'
 const TableRow = ({ data, onDelete, onViewDetails, index }) => {
-  const { fullname, email, isVerify, store_name, sellerType, _id, seller_id, seller_code } =
+  const { fullname, email, emp_id, store_name, sellerType, _id, cm_name, seller_code } =
     data;
   const [showDeletePopup, setShowDeletePopup] = useState(false);
 
@@ -74,7 +74,8 @@ const TableRow = ({ data, onDelete, onViewDetails, index }) => {
       <td className="px-4 py-2 text-xs">{email}</td>
       <td className="px-4 py-2 text-xs capitalize">{sellerType}</td>
       <td className="px-4 py-2 text-xs capitalize">{store_name}</td>
-      <td className="px-4 py-2 text-xs">{seller_id}</td>
+      <td className="px-4 py-2 text-xs">{cm_name}</td>
+      <td className="px-4 py-2 text-xs">{emp_id}</td>
       <td className="px-4 py-2 text-xs">
         <div className="flex justify-around">
           <div
