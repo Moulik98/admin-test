@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./products.css";
+import { getToken } from "../../hook/getToken";
 
 const AllProductRow = ({ variationId, slNo, name, img, sellerName, parentCategory, subCategory, childCategory, country, award, approved, id, review, handleEdit, action, selectedOptions, }) => {
 console.log("All product list >>>>", name)
@@ -11,7 +12,7 @@ console.log("All product list >>>>", name)
 
   const handleDelete = () => {
     const url = `${process.env.REACT_APP_URL}/v1/products/remove/${id}`; // Replace with your API endpoint
-    const access_token = localStorage.getItem("access_token");
+    const access_token = getToken();
     fetch(url, {
       method: "POST",
       headers: {

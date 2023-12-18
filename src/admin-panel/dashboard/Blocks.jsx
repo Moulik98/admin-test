@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { getToken } from "../../hook/getToken";
 
 export const Blocks = () => {
   const [orderData, setOrderData] = useState(null);
@@ -9,7 +10,7 @@ export const Blocks = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const accessToken = localStorage.getItem("access_token"); // Replace with your actual access token
+        const accessToken = getToken(); // Replace with your actual access token
         const headers = {
           Authorization: `Bearer ${accessToken}`,
         };
@@ -36,7 +37,7 @@ export const Blocks = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch("https://two1genx-render.onrender.com/v1/categories/get/count");
+        const response = await fetch(`${process.env.REACT_APP_URL}/v1/categories/get/count`);
         if (response.ok) {
           const jsonData = await response.json();
           setTopCategories(jsonData);

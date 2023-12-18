@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ImgPreviewModal from './ImgPreviewModal';
+import { getToken } from '../../hook/getToken';
 
 const ReviewModal = ({ visible, onClose, id }) => {
     const [imgPreviewModal, setImgPreviewModal] = useState(false)
@@ -24,7 +25,7 @@ const ReviewModal = ({ visible, onClose, id }) => {
             throw new Error('An error occurred');
         }
     }
-    const access_token = localStorage.getItem("access_token");
+    const access_token = getToken();
     async function UpdateStatus(id, body) {
         try {
             const requestOptions = {

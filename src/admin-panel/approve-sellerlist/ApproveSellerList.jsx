@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { User } from "../user/User";
 import TableRow from "./TableRow";
 import Sellerdetails from "./Sellerdetails";
+import { getToken } from "../../hook/getToken";
 
 const ApproveSellerList = () => {
   const [data, setData] = useState(null);
@@ -70,7 +71,7 @@ const ApproveSellerList = () => {
   const handleSelect = async (sellerId) => {
     try {
       console.log("seller id", sellerId);
-      const token = localStorage.getItem("access_token");
+      const token = getToken();
       const response = await fetch(
         `${process.env.REACT_APP_URL}/v1/verifySeller/getSingleApprovedData/${sellerId}`,
         {
