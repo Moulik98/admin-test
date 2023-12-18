@@ -20,7 +20,7 @@ const SubCategoriesRow = ({ srNo,img, parent, sub,  desc, id,status }) => {
     const token = localStorage.getItem('access_token')
 
     // Send a request to the API with the selected option
-    fetch(`https://two1genx-render.onrender.com/v1/categories/status-update/${id}`, {
+    fetch(`${process.env.REACT_APP_URL}/v1/categories/status-update/${id}`, {
       method: 'POST',
       body: JSON.stringify({ id, status: selectedOption }),
       headers: {
