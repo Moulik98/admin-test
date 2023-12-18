@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import ReviewModal from './ReviewModal'
 import RaiseQueryModal from './RaiseQueryModal'
+import { Link } from 'react-router-dom'
 const TableRow = ({ data, index, handleRefresh }) => {
-    const { product_images,item_name, seller, product_description, parent_category, sub_category, child_category, review_status, _id } = data
-    console.log("Review Product data >>>>>",data);
+    const { product_images, item_name, seller, product_description, parent_category, sub_category, child_category, review_status, _id, variation_group_id } = data
+    console.log("Review Product data >>>>>", data);
     // state for Review Modal
     const [reviewModal, setReviewModal] = useState(false)
     //state for Querry Modal
@@ -13,15 +14,15 @@ const TableRow = ({ data, index, handleRefresh }) => {
         setQuerryModal(false)
         setReviewModal(false)
     }
-  
+
     const [expanded, setExpanded] = useState(false);
     const limit = 60;
     const slicedContent = product_description?.slice(0, limit);
     const displayContent = expanded ? product_description : slicedContent;
 
     const [expandName, setExpandName] = useState(false);
-    const limitName =30;
-    const slicedName = item_name?.slice(0,limitName);
+    const limitName = 30;
+    const slicedName = item_name?.slice(0, limitName);
     const displayName = expandName ? item_name : slicedName;
 
     console.log(reviewModal);
@@ -34,7 +35,7 @@ const TableRow = ({ data, index, handleRefresh }) => {
                 </div>
             </td>
             <td class="px-2 py-2">
-            {displayName}
+                {displayName}
                 {!expandName && item_name?.length > limitName && "..."}
                 {item_name?.length > limitName && (
                     <span
@@ -45,7 +46,7 @@ const TableRow = ({ data, index, handleRefresh }) => {
                         {expandName ? "View Less" : "View More"}
                     </span>
                 )}
-           
+
             </td>
             <td class="px-2 py-2 capitalize max-w-sm nowrap-whitespace">
                 {displayContent}
@@ -100,6 +101,12 @@ const TableRow = ({ data, index, handleRefresh }) => {
                         />
                     }
                 </div>
+            </td>
+            <td className="whitespace-nowrap px-4 py-2 text-xs font-light text-gray-900 ">
+                <Link
+                    to={`/preview-content-manager?product_id=${_id}&variation_group_id=${variation_group_id}`}
+                    className="py-2 px-4 rounded-md bg-blue-500 text-white"
+                >Preview</Link>
             </td>
             <td class="px-2 py-2">
                 <div className={`px-4 py-1 rounded  text-center capitalize text-white ${review_status === 'reviewed' ? 'bg-green-500' : 'bg-gray-500'}`}>

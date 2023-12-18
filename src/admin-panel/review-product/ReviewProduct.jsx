@@ -86,6 +86,12 @@ const ReviewProduct = () => {
                                     <th scope="col" class="px-2 py-2">Sub Category</th>
                                     <th scope="col" class="px-2 py-2">Child Category</th>
                                     <th scope="col" class="px-2 py-2">Action</th>
+                                    <th
+                                        scope="col"
+                                        className="px-4 py-2 text-left text-xs font-normal text-gray-900"
+                                    >
+                                        A+ Content
+                                    </th>
                                     <th scope="col" class="px-2 py-2">
                                         Status
                                     </th>
@@ -95,6 +101,7 @@ const ReviewProduct = () => {
                                 {
                                     productList && productList.map((item, index) => (
                                         <TableRow
+                                            key={item._id}
                                             data={item}
                                             index={index}
                                             handleRefresh={handleRefresh}
