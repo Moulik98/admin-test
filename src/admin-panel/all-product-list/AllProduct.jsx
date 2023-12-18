@@ -579,9 +579,8 @@ const AllProduct = () => {
                   className="px-4 py-2 text-left text-xs font-normal text-gray-900"
                 >
                   <div
-                    className={`${
-                      selectedOptions?.parent ? "block" : "hidden"
-                    }`}
+                    className={`${selectedOptions?.parent ? "block" : "hidden"
+                      }`}
                   >
                     Parent Category
                   </div>
@@ -611,9 +610,8 @@ const AllProduct = () => {
                   className="px-4 py-2 text-left text-xs font-normal text-gray-900"
                 >
                   <div
-                    className={`${
-                      selectedOptions?.country ? "block" : "hidden"
-                    }`}
+                    className={`${selectedOptions?.country ? "block" : "hidden"
+                      }`}
                   >
                     Country
                   </div>
@@ -623,9 +621,8 @@ const AllProduct = () => {
                   className="px-4 py-2 text-left text-xs font-normal text-gray-900"
                 >
                   <div
-                    className={`${
-                      selectedOptions?.awards ? "block" : "hidden"
-                    }`}
+                    className={`${selectedOptions?.awards ? "block" : "hidden"
+                      }`}
                   >
                     Awards
                   </div>
@@ -642,12 +639,7 @@ const AllProduct = () => {
                 >
                   Approval
                 </th>
-                <th
-                  scope="col"
-                  className="px-4 py-2 text-left text-xs font-normal text-gray-900"
-                >
-                  A+ Content
-                </th>
+
                 <th
                   scope="col"
                   className="px-4 py-2 text-left text-xs font-normal text-gray-900"

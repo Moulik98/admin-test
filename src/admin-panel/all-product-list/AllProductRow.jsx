@@ -4,7 +4,7 @@ import "./products.css";
 import { getToken } from "../../hook/getToken";
 
 const AllProductRow = ({ variationId, slNo, name, img, sellerName, parentCategory, subCategory, childCategory, country, award, approved, id, review, handleEdit, action, selectedOptions, }) => {
-console.log("All product list >>>>", name)
+  console.log("All product list >>>>", name)
 
   const [isConfirmationVisible, setIsConfirmationVisible] = useState(false);
 
@@ -118,12 +118,7 @@ console.log("All product list >>>>", name)
             }`}
         </div>
       </td>
-      <td className="whitespace-nowrap px-4 py-2 text-xs font-light text-gray-900 ">
-        <Link
-          to={`/preview-content-manager?product_id=${id}&variation_group_id=${variationId}`}
-          className="py-2 px-4 rounded-md bg-blue-500 text-white"
-        >Preview</Link>
-      </td>
+
       <td className="whitespace-nowrap px-4 py-2 text-xs font-light text-gray-900">
         <div
           onClick={showConfirmation}
