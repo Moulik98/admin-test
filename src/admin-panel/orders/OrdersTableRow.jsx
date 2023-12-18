@@ -92,7 +92,7 @@ const OrdersTableRow = ({ data, onDelete }) => {
                     </div> */}
                     {
                         viewModal && <ViewModal
-                            id={_id}
+                            id={user_order_id}
 
                             visible={viewModal}
                             onClose={handleClose}
