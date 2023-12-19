@@ -25,7 +25,7 @@ const Menus = [
     link: "designation-list",
     subMenus: [
       {
-        title: "Manage Staff",
+        title: "Manage Sub-admin",
         src: "parent",
         link: "/designation-list",
       },
