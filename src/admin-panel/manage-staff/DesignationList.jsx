@@ -69,7 +69,7 @@ const DesignationList = () => {
               />
             </svg>
           </Link>
-          <p className="text-2xl">Staff List</p>
+          <p className="text-2xl">Sub-admin List</p>
         </div>
       </div>
 
@@ -95,14 +95,14 @@ const DesignationList = () => {
                   />
                 </svg>
 
-                <p className="text-xs">Add Staff Members</p>
+                <p className="text-xs">Add Sub-admins</p>
 
               </div>
             </Link>
           </div>
         </div>
         <form onSubmit={e => e.preventDefault()} className="flex items-center">
-          <label className="mr-2">Search Staff</label>
+          <label className="mr-2">Search Sub-admin</label>
           <div className="flex flex-col relative">
             <div className="flex items-center p-1 gap-x-1 rounded-lg border border-solid border-[#9D9D9D]">
               <svg
