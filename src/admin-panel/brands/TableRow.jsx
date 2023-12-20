@@ -73,8 +73,8 @@ const TableRow = ({ data, onDelete }) => {
       <td className="px-4 py-2">
       <Description description={`${trademark_office} ${trademark_reg_no}`} />
       </td>
-      <td className="px-4 py-2">{seller?.fullname}</td>
-      <td className="px-4 py-2">{cm_data?.name}</td>
+      <td className="px-4 py-2">{seller?.fullname}({seller?.seller_code})</td>
+      <td className="px-4 py-2">{cm_data?.name}({cm_data?.emp_id})</td>
       <td className="px-4 py-2">{mm_data?.name}</td>
       <td className="px-4 py-2"><Description description={brand_desc} /></td>
       <td className="text-center px-4 py-2">
