@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { User } from "../user/User";
 import TableRow from "./TableRow";
-import { Link } from "react-router-dom";
 import Pagination from "../../Pagination"; // Import the Pagination component
 import { getToken } from "../../hook/getToken";
 
@@ -18,7 +17,7 @@ export const Brands = () => {
     query = searchQuery
   ) => {
     try {
-      const token = getToken()
+      const token = getToken();
       const url = `${
         process.env.REACT_APP_URL
       }/v1/brand-registration/get-registration-data/admin?page=${page}&limit=${limit}&search=${encodeURIComponent(
@@ -98,9 +97,7 @@ export const Brands = () => {
         </form>
       </div>
       <section>
-        <div
-          className="max-w-[76rem] flex flex-col mt-10 shadow-[0px_0px_16.9227px_rgba(0,0,0,0.1)] rounded-lg"
-        >
+        <div className="max-w-[76rem] flex flex-col mt-10 shadow-[0px_0px_16.9227px_rgba(0,0,0,0.1)] rounded-lg">
           <div className="p-5 border-b border-solid border-gray-300">
             <h2 className="text-base font-semibold text-[#143250]">
               Allow Verification To Brand Registration :
