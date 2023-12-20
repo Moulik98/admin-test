@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import AttachmentModal from "./AttachmentModal";
+import { getToken } from "../../hook/getToken";
 const TableRow = ({ data, onDelete, index }) => {
   const { fullname, email, isVerify, store_name, _id, seller_code } = data;
   const [viewAttachment, setViewAttachment] = useState(false);
@@ -36,7 +37,7 @@ const TableRow = ({ data, onDelete, index }) => {
   };
   async function makeDeleteRequest(id) {
     try {
-      const token = localStorage.getItem("access_token"); // Replace with your actual bearer token
+      const token = getToken()
       const url = `${process.env.REACT_APP_URL}/v1/verifySeller/deleteData`;
 
       const payload = {
@@ -90,10 +91,11 @@ const TableRow = ({ data, onDelete, index }) => {
         className="whitespace-nowrap px-4 py-2 text-xs font-medium text-gray-900"
       >
         <div
-          className={`flex justify-center items-center rounded-full py-1 px-2 text-xs text-white ${isVerify ? "bg-indigo-500" : "bg-indigo-900"
-            }`}
+          className={`flex justify-center items-center rounded-full py-1 px-2 text-xs text-white ${
+            isVerify === "approved" ? "bg-indigo-500" : "bg-indigo-900"
+          }`}
         >
-          {`${isVerify ? "Approved" : "Declined"}`}
+          {isVerify}
         </div>
       </td>
       <td className="px-4 py-2 text-xs">
