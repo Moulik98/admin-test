@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AttachmentModal from "./AttachmentModal";
 import { getToken } from "../../hook/getToken";
 const TableRow = ({ data, onDelete, index }) => {
-  const { fullname, email, isVerify, store_name, _id, seller_code } = data;
+  const { fullname, email, isVerify, store_name, _id, seller_code,cm_name,cm_code } = data;
   const [viewAttachment, setViewAttachment] = useState(false);
 
   const [showDeletePopup, setShowDeletePopup] = useState(false);
@@ -86,6 +86,8 @@ const TableRow = ({ data, onDelete, index }) => {
 
       <td className="px-4 py-2 text-xs">{email}</td>
       <td className="px-4 py-2 text-xs">{store_name}</td>
+      <td className="px-4 py-2 text-xs">{cm_name}</td>
+      <td className="px-4 py-2 text-xs">{cm_code}</td>
       <td
         scope="row"
         className="whitespace-nowrap px-4 py-2 text-xs font-medium text-gray-900"
