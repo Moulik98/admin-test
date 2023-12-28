@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ParentModal } from "./ParentModal";
 import Description from "../../Description";
+import { getToken } from "../../hook/getToken";
 const CategoriesRow = ({ srNo,img, parentName, categoriesId, description, id , status }) => {
   // State for view modal
   const [viewModal, setViewModal] = useState(false)
@@ -18,7 +19,7 @@ const CategoriesRow = ({ srNo,img, parentName, categoriesId, description, id , s
 
     // Update the selected status state
     setSelectedStatus(selectedOption);
-    const token = localStorage.getItem('access_token')
+    const token = getToken()
 
     // Send a request to the API with the selected option
     fetch(`${process.env.REACT_APP_URL}/v1/categories/status-update/${id}`, {
