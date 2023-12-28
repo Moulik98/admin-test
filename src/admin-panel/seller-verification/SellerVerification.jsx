@@ -22,7 +22,7 @@ const SellerVerification = () => {
 
       const data = await response.json();
       console.log(data);
-      SetVerificationList(data);
+      SetVerificationList(data.data);
     } catch (error) {
       console.log(error);
     }
@@ -32,14 +32,13 @@ const SellerVerification = () => {
     fetchSellerVerificationList();
   }, []);
 
+  console.log("Veriied seller list",verificationList);
+
   // Handle change in search
   const handleInputChange = (event) => {
     setSearchQuery(event.target.value);
-    if (event.target.value === "") {
-      setShowDropDown(false);
-    } else {
-      setShowDropDown(true);
-    }
+    
+
   };
 
   useEffect(() => {
@@ -52,14 +51,15 @@ const SellerVerification = () => {
         } else {
           // Fetch data based on the search query
           const response = await fetch(
-            `${process.env.REACT_APP_URL}/v1/verifySeller/search?query=${searchQuery}`
+            `${process.env.REACT_APP_URL}/v1/verifySeller/getData?search=${searchQuery}`
           );
 
           if (response.ok) {
             const data = await response.json();
 
             // Assuming the API returns an array of category objects
-            setSearchResults(data);
+            setSearchResults(data.data);
+            SetVerificationList(data.data)
             console.log("Search Results>>>", searchResults);
           }
         }
@@ -72,34 +72,6 @@ const SellerVerification = () => {
     fetchData();
   }, [searchQuery]);
 
-  const handleSelect = async (sellerId) => {
-    try {
-      console.log("seller id", sellerId);
-      const token = localStorage.getItem("access_token");
-      const response = await fetch(
-        `${process.env.REACT_APP_URL}/v1/verifySeller/viewAttachments/${sellerId}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Data >>", data);
-
-        // Ensure that data is an object
-
-        // Log the entire data object
-
-        SetVerificationList(data); // Wrap the object in an array if needed
-        setShowDropDown(false);
-      }
-    } catch (error) {
-      console.error("Error fetching data", error);
-    }
-  };
 
   const handleRefresh = () => {
     fetchSellerVerificationList();
@@ -143,26 +115,7 @@ const SellerVerification = () => {
                 }}
                 type="text"
               />
-              {/* Dropdown */}
-              {showDropdown && searchResults.length > 0 && (
-                <div className="relative">
-                  <div className="z-10 absolute top-full max-h-60 -left-60 w-60 mt-6 bg-white border border-solid border-[#9D9D9D] rounded-md shadow-md overflow-y-scroll search-scrollbar">
-                    <ul>
-                      {searchResults.map((result) => (
-                        <li
-                          key={result._id}
-                          onClick={() => {
-                            handleSelect(result._id);
-                          }}
-                          className="p-2 hover:bg-gray-300 font-light text-xs"
-                        >
-                          {result?.fullname}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              )}
+           
             </div>
           </form>
         </div>
@@ -199,6 +152,12 @@ const SellerVerification = () => {
                     </th>
                     <th scope="col" class=" px-4 py-3">
                       Store Name
+                    </th>
+                    <th scope="col" class=" px-4 py-3">
+                      CM Name
+                    </th>
+                    <th scope="col" class=" px-4 py-3">
+                      CM ID
                     </th>
                     <th scope="col" class="text-center px-4 py-3 ">
                       Status
