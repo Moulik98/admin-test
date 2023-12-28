@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const Description = ({ description }) => {
     const [expanded, setExpanded] = useState(false);
-    const limit = 50;
+    const limit = 30;
     const slicedContent = description ? description.slice(0, limit) : '';
     const displayContent = expanded ? description : slicedContent;
 
