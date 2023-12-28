@@ -1,0 +1,49 @@
+/* Custom List Styles */
+.customList ul {
+    list-style-type: disc;
+    list-style-position: inside;
+  }
+  
+  .customList ol {
+    list-style-type: decimal;
+    list-style-position: inside;
+  }
+  
+  .customList h1 {
+    font-size: 2em; /* Adjust this value as needed */
+  }
+  
+  .customList h2 {
+    font-size: 1.5em; /* Adjust this value as needed */
+  }
+  
+  .customList h3 {
+    font-size: 1.17em; /* Adjust this value as needed */
+  }
+  
+  .customList h4 {
+    font-size: 1em; /* Adjust this value as needed */
+  }
+  
+  .customList h5 {
+    font-size: 0.83em; /* Adjust this value as needed */
+  }
+  
+  .customList h6 {
+    font-size: 0.67em; /* Adjust this value as needed */
+  }
+  
+  /* Dark Overlay Styles */
+  .dark-overlay h1,
+  .dark-overlay h2,
+  .dark-overlay h3,
+  .dark-overlay h4,
+  .dark-overlay h5,
+  .dark-overlay h6,
+  .dark-overlay p,
+  .dark-overlay ul,
+  .dark-overlay ol {
+    color: white;
+    /* Additional styles for dark overlay elements can be added here */
+  }
+  
