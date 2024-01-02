@@ -14,7 +14,7 @@ import GridFiveImage from './GridFiveImage'
 import GridTwoImage from './GridTwoImage'
 import LeftRightImageWithDescription from './LeftRightImageWithDescription'
 import ProductDescription from './ProductDescription'
-
+import BigVideo from './BigVideo';
 const componentRegistry = {
     ImageHeaderWithText,
     SingleImageSidebar,
@@ -24,13 +24,14 @@ const componentRegistry = {
     ImageSlider,
     BGImageDarkTextOverlay,
     BGImageLightTextOverlay,
-    // BigBanner,
-    // BigHeadingAndDescription,
-    // CompanyLogo,
+    BigBanner,
+    BigHeadingAndDescription,
+    CompanyLogo,
     // GridFiveImage,
     // GridTwoImage,
     // LeftRightImageWithDescription,
     // ProductDescription
+    // BigVideo
     // Add other components as needed
 };
 
