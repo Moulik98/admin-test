@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./products.css";
 import { getToken } from "../../hook/getToken";
+import Description from "../../Description";
 
 const AllProductRow = ({ variationId, slNo, name, img, sellerName, parentCategory, subCategory, childCategory, country, award, approved, id, review, handleEdit, action, selectedOptions, }) => {
   console.log("All product list >>>>", name)
@@ -60,8 +61,8 @@ const AllProductRow = ({ variationId, slNo, name, img, sellerName, parentCategor
       <td className="whitespace-nowrap px-3 py-2 text-xs font-light text-gray-900">
         <img className="w-12 h-12" src={img} />
       </td>
-      <td className="whitespace-nowrap px-4 py-2 text-xs font-light text-gray-900">
-        {name}
+      <td className="px-4 py-2 text-xs font-light text-gray-900">
+        <Description description={name}/>
       </td>
       <td className="whitespace-nowrap px-4 py-2 text-xs font-light text-gray-900">
         {sellerName}
