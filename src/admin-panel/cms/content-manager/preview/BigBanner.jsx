@@ -7,7 +7,7 @@ const BigBanner = ({ data }) => {
     <div className=''>
       <div className='w-full'>
         <ShowImage
-          style={`w-full h-fit`}
+          style={`w-full `}
           alt={`left-image`}
           image={image}
         />

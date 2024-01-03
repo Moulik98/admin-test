@@ -7,7 +7,7 @@ const CompanyLogo = ({ data }) => {
     return (
         <div className='flex flex-col '>
             <ShowImage
-                style={`w-full h-fit`}
+                style={`w-full`}
                 alt={`company-logo`}
                 image={image}
             />
