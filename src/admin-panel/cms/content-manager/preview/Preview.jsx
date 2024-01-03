@@ -74,7 +74,7 @@ const Preview = () => {
 
     return (
         <main>
-            <div className='max-w-6xl mx-auto flex flex-col text-left pr-5 min-h-screen'>
+            <div className=' flex flex-col text-left pr-5 min-h-screen'>
                 <section className=' bg-white w-full h-fit z-50'>
                     <div className='w-full flex justify-between items-center py-5'>
                         <p className='text-2xl text-gray-900 font-semibold'>A+ Content Preview</p>
@@ -90,9 +90,9 @@ const Preview = () => {
                         <button className={`py-2 px-4 rounded-md uppercase ${status[contentDetails?.status]}`}>{contentDetails?.status}</button>
                     </div>
                 </section>
-                <section>
+                <section className='max-w-6xl mx-auto '>
 
-                    <div className='mt-5 space-y-10'>
+                    <div className='mt-5 space-y-3'>
                         {data?.length > 0 ?
                             data?.map((item, index) => {
                                 const ComponentToRender = componentRegistry[item.component];
