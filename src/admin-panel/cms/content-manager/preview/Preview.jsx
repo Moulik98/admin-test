@@ -74,7 +74,7 @@ const Preview = () => {
 
     return (
         <main>
-            <div className='flex flex-col text-left pr-5 min-h-screen'>
+            <div className='max-w-6xl mx-auto flex flex-col text-left pr-5 min-h-screen'>
                 <section className=' bg-white w-full h-fit z-50'>
                     <div className='w-full flex justify-between items-center py-5'>
                         <p className='text-2xl text-gray-900 font-semibold'>A+ Content Preview</p>
