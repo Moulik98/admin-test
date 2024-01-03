@@ -27,11 +27,11 @@ const componentRegistry = {
     BigBanner,
     BigHeadingAndDescription,
     CompanyLogo,
-    // GridFiveImage,
-    // GridTwoImage,
-    // LeftRightImageWithDescription,
-    // ProductDescription
-    // BigVideo
+    GridFiveImage,
+    GridTwoImage,
+    LeftRightImageWithDescription,
+    ProductDescription,
+    BigVideo
     // Add other components as needed
 };
 
