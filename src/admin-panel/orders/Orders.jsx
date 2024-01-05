@@ -25,7 +25,7 @@ const status = [
     },
     {
         fieldName: "payment_status",
-        name: "pending",
+        name: "due",
     },
 ];
 const Orders = () => {
@@ -70,21 +70,31 @@ const Orders = () => {
     const [amountOption, setAmmountOption] = useState({});
     // Add this function to handle date changes
     const handleDateChange = (e, dateType) => {
+        setDateOption(e.target.value)
         const dateValue = e.target.value;
+        const orderStatusFilter = dateValue === "asc" ? ["order_placed"] : [];
         const newFilterValues = {
             ...filterValues,
             [dateType]: dateValue,
+            order_status: orderStatusFilter,
         };
         setFilterValues(newFilterValues);
 
         // Call the function to make the API request with updated filter values
-        fetchOrderData(newFilterValues);
+        fetchOrderData(filterValues);
     };
+
+    
 
     const handleDescChange = (e) => {
         setAmmountOption(e.target.value);
-        console.log(e.target.value);
-        fetchOrderData({ sort_amount: e.target.value });
+        const sortOrder = e.target.value;
+        
+        // If the selected value is "desc" (High), set the order status filter to exclude "order_placed"
+        // For any other value (Low), set the order status filter to "order_placed"
+        const orderStatusFilter = sortOrder === "desc" ? [] : ["order_placed"];
+    
+        fetchOrderData({ sort_amount: sortOrder, order_status: orderStatusFilter });
     };
 
     // state for filter
@@ -161,7 +171,7 @@ const Orders = () => {
                                     value={dateOption}
                                     onChange={handleDateChange}
                                 >
-                                    <option selected>Date</option>
+                                    <option selected>All</option>
                                     <option value="desc">Old</option>
                                     <option value="asc">New</option>
                                 </select>
