@@ -8,14 +8,14 @@ const GridTwoImage = ({ data }) => {
                 <div className=" border  rounded-md w-full md:w-1/2">
 
                     <ShowImage
-                        style={`w-full h-fit`}
+                        style={`w-full `}
                         alt={`left-image`}
                         image={image}
                     />
                 </div>
                 <div className="border rounded-md w-full md:w-1/2">
                     <ShowImage
-                        style={`w-full h-fit`}
+                        style={`w-full `}
                         alt={`left-image`}
                         image={image2}
                     />
